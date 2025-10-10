@@ -18,6 +18,17 @@
       "Stomp",
       "Tail Whip",
       "Fury Attack"
+    ],
+    "learnableMoves": [
+      "Horn Attack",
+      "Stomp",
+      "Tail Whip",
+      "Fury Attack",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam"
     ]
   },
   {
@@ -36,6 +47,15 @@
     "startingMoves": [
       "Comet Punch",
       "Rage"
+    ],
+    "learnableMoves": [
+      "Comet Punch",
+      "Rage",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -54,6 +74,15 @@
     "startingMoves": [
       "Leer",
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Leer",
+      "Tackle",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -72,6 +101,15 @@
     "startingMoves": [
       "Pound",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Growl",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -91,6 +129,15 @@
     "startingMoves": [
       "Peck",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Growl",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -109,6 +156,15 @@
     "startingMoves": [
       "Tackle",
       "Screech"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Screech",
+      "Toxic",
+      "Take Down",
+      "Rage",
+      "Thunderbolt",
+      "Thunder"
     ]
   },
   {
@@ -130,6 +186,17 @@
       "Horn Attack",
       "Poison Sting",
       "Thrash"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Horn Attack",
+      "Poison Sting",
+      "Thrash",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam"
     ]
   },
   {
@@ -150,6 +217,16 @@
       "Confusion",
       "Disable",
       "Headbutt"
+    ],
+    "learnableMoves": [
+      "Confusion",
+      "Disable",
+      "Headbutt",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -170,6 +247,16 @@
       "Tackle",
       "Growl",
       "Leech Seed"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Growl",
+      "Leech Seed",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -189,6 +276,15 @@
     "startingMoves": [
       "Barrage",
       "Hypnosis"
+    ],
+    "learnableMoves": [
+      "Barrage",
+      "Hypnosis",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam",
+      "Rage"
     ]
   },
   {
@@ -207,6 +303,15 @@
     "startingMoves": [
       "Wrap",
       "Supersonic"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Supersonic",
+      "Mega Punch",
+      "Swords Dance",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -226,6 +331,15 @@
     "startingMoves": [
       "Barrage",
       "Hypnosis"
+    ],
+    "learnableMoves": [
+      "Barrage",
+      "Hypnosis",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage",
+      "Psychic M"
     ]
   },
   {
@@ -244,6 +358,15 @@
     "startingMoves": [
       "Pound",
       "Disable"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Disable",
+      "Toxic",
+      "Body Slam",
+      "Rage",
+      "Mega Drain",
+      "Thunderbolt"
     ]
   },
   {
@@ -264,6 +387,16 @@
       "Lick",
       "Confuse Ray",
       "Night Shade"
+    ],
+    "learnableMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -282,6 +415,15 @@
     "startingMoves": [
       "Growl",
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Growl",
+      "Tackle",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Blizzard"
     ]
   },
   {
@@ -303,6 +445,16 @@
       "Scratch",
       "Tail Whip",
       "Body Slam"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Scratch",
+      "Tail Whip",
+      "Body Slam",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Horn Drill"
     ]
   },
   {
@@ -321,6 +473,15 @@
     "startingMoves": [
       "Bone Club",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Bone Club",
+      "Growl",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -339,6 +500,14 @@
     },
     "startingMoves": [
       "Horn Attack"
+    ],
+    "learnableMoves": [
+      "Horn Attack",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -358,6 +527,15 @@
     "startingMoves": [
       "Water Gun",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Water Gun",
+      "Growl",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -378,6 +556,16 @@
       "Ember",
       "Leer",
       "Take Down"
+    ],
+    "learnableMoves": [
+      "Roar",
+      "Ember",
+      "Leer",
+      "Take Down",
+      "Toxic",
+      "Body Slam",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -395,6 +583,14 @@
     },
     "startingMoves": [
       "Pound"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Mega Punch",
+      "Razor Wind",
+      "Swords Dance",
+      "Whirlwind",
+      "Mega Kick"
     ]
   },
   {
@@ -416,6 +612,17 @@
       "Dragon Rage",
       "Leer",
       "Hydro Pump"
+    ],
+    "learnableMoves": [
+      "Bite",
+      "Dragon Rage",
+      "Leer",
+      "Hydro Pump",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -434,6 +641,15 @@
     "startingMoves": [
       "Tackle",
       "Withdraw"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Withdraw",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam",
+      "Water Gun"
     ]
   },
   {
@@ -452,6 +668,14 @@
     },
     "startingMoves": [
       "Acid"
+    ],
+    "learnableMoves": [
+      "Acid",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -472,6 +696,16 @@
       "Lick",
       "Confuse Ray",
       "Night Shade"
+    ],
+    "learnableMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade",
+      "Toxic",
+      "Rage",
+      "Mega Drain",
+      "Thunderbolt",
+      "Thunder"
     ]
   },
   {
@@ -490,6 +724,14 @@
     },
     "startingMoves": [
       "Quick Attack"
+    ],
+    "learnableMoves": [
+      "Quick Attack",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -507,6 +749,14 @@
     },
     "startingMoves": [
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam",
+      "Water Gun"
     ]
   },
   {
@@ -527,6 +777,17 @@
       "Tail Whip",
       "Bubble",
       "Water Gun"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Bubble",
+      "Water Gun",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -544,6 +805,14 @@
     },
     "startingMoves": [
       "Vicegrip"
+    ],
+    "learnableMoves": [
+      "Vicegrip",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -562,6 +831,15 @@
     "startingMoves": [
       "Constrict",
       "Bind"
+    ],
+    "learnableMoves": [
+      "Constrict",
+      "Bind",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -580,6 +858,15 @@
     "startingMoves": [
       "Bite",
       "Roar"
+    ],
+    "learnableMoves": [
+      "Bite",
+      "Roar",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -599,6 +886,15 @@
     "startingMoves": [
       "Tackle",
       "Screech"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Screech",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -619,6 +915,16 @@
       "Peck",
       "Growl",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Growl",
+      "Leer",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -637,6 +943,14 @@
     },
     "startingMoves": [
       "Gust"
+    ],
+    "learnableMoves": [
+      "Gust",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -655,6 +969,14 @@
     },
     "startingMoves": [
       "Confusion"
+    ],
+    "learnableMoves": [
+      "Confusion",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -674,6 +996,16 @@
       "Teleport",
       "Confusion",
       "Disable"
+    ],
+    "learnableMoves": [
+      "Teleport",
+      "Confusion",
+      "Disable",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -693,6 +1025,15 @@
     "startingMoves": [
       "Tackle",
       "Defense Curl"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Defense Curl",
+      "Mega Punch",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -711,6 +1052,15 @@
     "startingMoves": [
       "Pound",
       "Doubleslap"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Doubleslap",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -730,6 +1080,16 @@
       "Karate Chop",
       "Low Kick",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Karate Chop",
+      "Low Kick",
+      "Leer",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -748,6 +1108,15 @@
     "startingMoves": [
       "Confusion",
       "Barrier"
+    ],
+    "learnableMoves": [
+      "Confusion",
+      "Barrier",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -766,6 +1135,15 @@
     "startingMoves": [
       "Double Kick",
       "Meditate"
+    ],
+    "learnableMoves": [
+      "Double Kick",
+      "Meditate",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -784,6 +1162,15 @@
     "startingMoves": [
       "Comet Punch",
       "Agility"
+    ],
+    "learnableMoves": [
+      "Comet Punch",
+      "Agility",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -803,6 +1190,16 @@
       "Wrap",
       "Leer",
       "Poison Sting"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Leer",
+      "Poison Sting",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -823,6 +1220,16 @@
       "Scratch",
       "Stun Spore",
       "Leech Life"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Stun Spore",
+      "Leech Life",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -840,6 +1247,14 @@
     },
     "startingMoves": [
       "Scratch"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -858,6 +1273,15 @@
     "startingMoves": [
       "Pound",
       "Hypnosis"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Hypnosis",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -877,6 +1301,15 @@
     "startingMoves": [
       "Tackle",
       "Defense Curl"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Defense Curl",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -894,6 +1327,14 @@
     },
     "startingMoves": [
       "Ember"
+    ],
+    "learnableMoves": [
+      "Ember",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -912,6 +1353,15 @@
     "startingMoves": [
       "Quick Attack",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Quick Attack",
+      "Leer",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -931,6 +1381,16 @@
       "Tackle",
       "Sonicboom",
       "Thundershock"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sonicboom",
+      "Thundershock",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam",
+      "Rage"
     ]
   },
   {
@@ -949,6 +1409,15 @@
     "startingMoves": [
       "Tackle",
       "Smog"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Smog",
+      "Toxic",
+      "Rage",
+      "Thunderbolt",
+      "Thunder",
+      "Mimic"
     ]
   },
   {
@@ -967,6 +1436,15 @@
     "startingMoves": [
       "Scratch",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Leer",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -984,6 +1462,14 @@
     },
     "startingMoves": [
       "Headbutt"
+    ],
+    "learnableMoves": [
+      "Headbutt",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1001,6 +1487,14 @@
     },
     "startingMoves": [
       "Scratch"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -1018,6 +1512,14 @@
     },
     "startingMoves": [
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1037,6 +1539,15 @@
     "startingMoves": [
       "Peck",
       "Sand Attack"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Sand Attack",
+      "Razor Wind",
+      "Swords Dance",
+      "Whirlwind",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -1056,6 +1567,15 @@
     "startingMoves": [
       "Tackle",
       "Disable"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Disable",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage",
+      "Mega Drain"
     ]
   },
   {
@@ -1077,6 +1597,17 @@
       "Leer",
       "Thunder Wave",
       "Agility"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Leer",
+      "Thunder Wave",
+      "Agility",
+      "Razor Wind",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1095,6 +1626,14 @@
     },
     "startingMoves": [
       "Peck"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Whirlwind",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1112,6 +1651,14 @@
     },
     "startingMoves": [
       "Bubble"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1131,6 +1678,15 @@
     "startingMoves": [
       "Pound",
       "Lovely Kiss"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Lovely Kiss",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1150,6 +1706,15 @@
     "startingMoves": [
       "Peck",
       "Fire Spin"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Fire Spin",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1169,6 +1734,15 @@
     "startingMoves": [
       "Peck",
       "Ice Beam"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Ice Beam",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1188,6 +1762,15 @@
     "startingMoves": [
       "Thundershock",
       "Drill Peck"
+    ],
+    "learnableMoves": [
+      "Thundershock",
+      "Drill Peck",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1204,6 +1787,9 @@
       "special": 48
     },
     "startingMoves": [
+      "Transform"
+    ],
+    "learnableMoves": [
       "Transform"
     ]
   },
@@ -1223,6 +1809,15 @@
     "startingMoves": [
       "Scratch",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1241,6 +1836,15 @@
     "startingMoves": [
       "Bubble",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Leer",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1259,6 +1863,15 @@
     "startingMoves": [
       "Ember",
       "Tail Whip"
+    ],
+    "learnableMoves": [
+      "Ember",
+      "Tail Whip",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -1279,6 +1892,17 @@
       "Tail Whip",
       "Quick Attack",
       "Roar"
+    ],
+    "learnableMoves": [
+      "Ember",
+      "Tail Whip",
+      "Quick Attack",
+      "Roar",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -1297,6 +1921,15 @@
     "startingMoves": [
       "Thundershock",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Thundershock",
+      "Growl",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1316,6 +1949,16 @@
       "Thundershock",
       "Growl",
       "Thunder Wave"
+    ],
+    "learnableMoves": [
+      "Thundershock",
+      "Growl",
+      "Thunder Wave",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1334,6 +1977,15 @@
     "startingMoves": [
       "Wrap",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Leer",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1353,6 +2005,16 @@
       "Wrap",
       "Leer",
       "Thunder Wave"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Leer",
+      "Thunder Wave",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1372,6 +2034,15 @@
     "startingMoves": [
       "Scratch",
       "Harden"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Harden",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1392,6 +2063,16 @@
       "Scratch",
       "Harden",
       "Absorb"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Harden",
+      "Absorb",
+      "Razor Wind",
+      "Swords Dance",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -1409,6 +2090,14 @@
     },
     "startingMoves": [
       "Bubble"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam",
+      "Water Gun"
     ]
   },
   {
@@ -1427,6 +2116,15 @@
     "startingMoves": [
       "Bubble",
       "Smokescreen"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Smokescreen",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam",
+      "Water Gun"
     ]
   },
   {
@@ -1444,6 +2142,14 @@
     },
     "startingMoves": [
       "Scratch"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1462,6 +2168,15 @@
     "startingMoves": [
       "Scratch",
       "Sand Attack"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Sand Attack",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1481,6 +2196,15 @@
     "startingMoves": [
       "Water Gun",
       "Withdraw"
+    ],
+    "learnableMoves": [
+      "Water Gun",
+      "Withdraw",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1501,6 +2225,16 @@
       "Water Gun",
       "Withdraw",
       "Horn Attack"
+    ],
+    "learnableMoves": [
+      "Water Gun",
+      "Withdraw",
+      "Horn Attack",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1518,6 +2252,14 @@
     },
     "startingMoves": [
       "Sing"
+    ],
+    "learnableMoves": [
+      "Sing",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1538,6 +2280,17 @@
       "Disable",
       "Defense Curl",
       "Doubleslap"
+    ],
+    "learnableMoves": [
+      "Sing",
+      "Disable",
+      "Defense Curl",
+      "Doubleslap",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1556,6 +2309,15 @@
     "startingMoves": [
       "Tackle",
       "Sand Attack"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -1576,6 +2338,17 @@
       "Sand Attack",
       "Quick Attack",
       "Ember"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Ember",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -1596,6 +2369,17 @@
       "Sand Attack",
       "Quick Attack",
       "Thundershock"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Thundershock",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -1616,6 +2400,17 @@
       "Sand Attack",
       "Quick Attack",
       "Water Gun"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Water Gun",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -1633,6 +2428,14 @@
     },
     "startingMoves": [
       "Karate Chop"
+    ],
+    "learnableMoves": [
+      "Karate Chop",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1651,6 +2454,14 @@
     },
     "startingMoves": [
       "Leech Life"
+    ],
+    "learnableMoves": [
+      "Leech Life",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1669,6 +2480,15 @@
     "startingMoves": [
       "Wrap",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Wrap",
+      "Leer",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -1687,6 +2507,14 @@
     },
     "startingMoves": [
       "Scratch"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1706,6 +2534,16 @@
       "Bubble",
       "Hypnosis",
       "Water Gun"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Hypnosis",
+      "Water Gun",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1727,6 +2565,16 @@
       "Water Gun",
       "Doubleslap",
       "Body Slam"
+    ],
+    "learnableMoves": [
+      "Hypnosis",
+      "Water Gun",
+      "Doubleslap",
+      "Body Slam",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Take Down"
     ]
   },
   {
@@ -1744,6 +2592,10 @@
       "special": 20
     },
     "startingMoves": [
+      "Poison Sting",
+      "String Shot"
+    ],
+    "learnableMoves": [
       "Poison Sting",
       "String Shot"
     ]
@@ -1764,6 +2616,9 @@
     },
     "startingMoves": [
       "Harden"
+    ],
+    "learnableMoves": [
+      "Harden"
     ]
   },
   {
@@ -1782,6 +2637,14 @@
     },
     "startingMoves": [
       "Fury Attack"
+    ],
+    "learnableMoves": [
+      "Fury Attack",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -1802,6 +2665,16 @@
       "Peck",
       "Growl",
       "Fury Attack"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Growl",
+      "Fury Attack",
+      "Whirlwind",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1822,6 +2695,17 @@
       "Leer",
       "Karate Chop",
       "Fury Swipes"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Leer",
+      "Karate Chop",
+      "Fury Swipes",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1841,6 +2725,16 @@
       "Scratch",
       "Growl",
       "Dig"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Dig",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Hyper Beam"
     ]
   },
   {
@@ -1862,6 +2756,17 @@
       "Disable",
       "Poisonpowder",
       "Leech Life"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Disable",
+      "Poisonpowder",
+      "Leech Life",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1882,6 +2787,16 @@
       "Headbutt",
       "Growl",
       "Aurora Beam"
+    ],
+    "learnableMoves": [
+      "Headbutt",
+      "Growl",
+      "Aurora Beam",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1898,6 +2813,10 @@
       "special": 20
     },
     "startingMoves": [
+      "Tackle",
+      "String Shot"
+    ],
+    "learnableMoves": [
       "Tackle",
       "String Shot"
     ]
@@ -1917,6 +2836,9 @@
     },
     "startingMoves": [
       "Harden"
+    ],
+    "learnableMoves": [
+      "Harden"
     ]
   },
   {
@@ -1935,6 +2857,14 @@
     },
     "startingMoves": [
       "Confusion"
+    ],
+    "learnableMoves": [
+      "Confusion",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -1954,6 +2884,16 @@
       "Karate Chop",
       "Low Kick",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Karate Chop",
+      "Low Kick",
+      "Leer",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1973,6 +2913,16 @@
       "Scratch",
       "Tail Whip",
       "Disable"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Tail Whip",
+      "Disable",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -1993,6 +2943,17 @@
       "Hypnosis",
       "Disable",
       "Confusion"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Hypnosis",
+      "Disable",
+      "Confusion",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2013,6 +2974,16 @@
       "Leech Life",
       "Screech",
       "Bite"
+    ],
+    "learnableMoves": [
+      "Leech Life",
+      "Screech",
+      "Bite",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2033,6 +3004,17 @@
       "Disable",
       "Swift",
       "Psychic M"
+    ],
+    "learnableMoves": [
+      "Confusion",
+      "Disable",
+      "Swift",
+      "Psychic M",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2052,6 +3034,16 @@
       "Headbutt",
       "Amnesia",
       "Rest"
+    ],
+    "learnableMoves": [
+      "Headbutt",
+      "Amnesia",
+      "Rest",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2068,6 +3060,9 @@
       "special": 20
     },
     "startingMoves": [
+      "Splash"
+    ],
+    "learnableMoves": [
       "Splash"
     ]
   },
@@ -2088,6 +3083,16 @@
       "Pound",
       "Disable",
       "Poison Gas"
+    ],
+    "learnableMoves": [
+      "Pound",
+      "Disable",
+      "Poison Gas",
+      "Toxic",
+      "Body Slam",
+      "Hyper Beam",
+      "Rage",
+      "Mega Drain"
     ]
   },
   {
@@ -2107,6 +3112,16 @@
       "Bubble",
       "Leer",
       "Vicegrip"
+    ],
+    "learnableMoves": [
+      "Bubble",
+      "Leer",
+      "Vicegrip",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2128,6 +3143,17 @@
       "Supersonic",
       "Clamp",
       "Aurora Beam"
+    ],
+    "learnableMoves": [
+      "Withdraw",
+      "Supersonic",
+      "Clamp",
+      "Aurora Beam",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam",
+      "Water Gun"
     ]
   },
   {
@@ -2147,6 +3173,16 @@
       "Tackle",
       "Screech",
       "Sonicboom"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Screech",
+      "Sonicboom",
+      "Toxic",
+      "Take Down",
+      "Hyper Beam",
+      "Rage",
+      "Thunderbolt"
     ]
   },
   {
@@ -2167,6 +3203,17 @@
       "Doubleslap",
       "Minimize",
       "Metronome"
+    ],
+    "learnableMoves": [
+      "Sing",
+      "Doubleslap",
+      "Minimize",
+      "Metronome",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2186,6 +3233,16 @@
       "Tackle",
       "Smog",
       "Sludge"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Smog",
+      "Sludge",
+      "Toxic",
+      "Hyper Beam",
+      "Rage",
+      "Thunderbolt",
+      "Thunder"
     ]
   },
   {
@@ -2206,6 +3263,17 @@
       "Growl",
       "Bite",
       "Screech"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Bite",
+      "Screech",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2226,6 +3294,17 @@
       "Growl",
       "Leer",
       "Focus Energy"
+    ],
+    "learnableMoves": [
+      "Bone Club",
+      "Growl",
+      "Leer",
+      "Focus Energy",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2246,6 +3325,16 @@
       "Lick",
       "Confuse Ray",
       "Night Shade"
+    ],
+    "learnableMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade",
+      "Toxic",
+      "Rage",
+      "Mega Drain",
+      "Thunderbolt",
+      "Thunder"
     ]
   },
   {
@@ -2263,6 +3352,14 @@
     },
     "startingMoves": [
       "Teleport"
+    ],
+    "learnableMoves": [
+      "Teleport",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2282,6 +3379,16 @@
       "Teleport",
       "Confusion",
       "Disable"
+    ],
+    "learnableMoves": [
+      "Teleport",
+      "Confusion",
+      "Disable",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2301,6 +3408,15 @@
     "startingMoves": [
       "Gust",
       "Sand Attack"
+    ],
+    "learnableMoves": [
+      "Gust",
+      "Sand Attack",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2321,6 +3437,16 @@
       "Gust",
       "Sand Attack",
       "Quick Attack"
+    ],
+    "learnableMoves": [
+      "Gust",
+      "Sand Attack",
+      "Quick Attack",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2341,6 +3467,15 @@
       "Tackle",
       "Water Gun",
       "Harden"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Water Gun",
+      "Harden",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2360,6 +3495,15 @@
     "startingMoves": [
       "Tackle",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Growl",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2381,6 +3525,17 @@
       "Growl",
       "Leech Seed",
       "Vine Whip"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Growl",
+      "Leech Seed",
+      "Vine Whip",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2401,6 +3556,16 @@
       "Acid",
       "Supersonic",
       "Wrap"
+    ],
+    "learnableMoves": [
+      "Acid",
+      "Supersonic",
+      "Wrap",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2419,6 +3584,15 @@
     "startingMoves": [
       "Peck",
       "Tail Whip"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Tail Whip",
+      "Toxic",
+      "Horn Drill",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2438,6 +3612,16 @@
       "Peck",
       "Tail Whip",
       "Supersonic"
+    ],
+    "learnableMoves": [
+      "Peck",
+      "Tail Whip",
+      "Supersonic",
+      "Toxic",
+      "Horn Drill",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2455,6 +3639,14 @@
     },
     "startingMoves": [
       "Ember"
+    ],
+    "learnableMoves": [
+      "Ember",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2475,6 +3667,17 @@
       "Tail Whip",
       "Stomp",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Ember",
+      "Tail Whip",
+      "Stomp",
+      "Growl",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2493,6 +3696,15 @@
     "startingMoves": [
       "Tackle",
       "Tail Whip"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2512,6 +3724,16 @@
       "Tackle",
       "Tail Whip",
       "Quick Attack"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Quick Attack",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge",
+      "Bubblebeam"
     ]
   },
   {
@@ -2531,6 +3753,16 @@
       "Leer",
       "Tackle",
       "Horn Attack"
+    ],
+    "learnableMoves": [
+      "Leer",
+      "Tackle",
+      "Horn Attack",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2550,6 +3782,16 @@
       "Growl",
       "Tackle",
       "Scratch"
+    ],
+    "learnableMoves": [
+      "Growl",
+      "Tackle",
+      "Scratch",
+      "Toxic",
+      "Horn Drill",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2568,6 +3810,14 @@
     },
     "startingMoves": [
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Mega Punch",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2587,6 +3837,16 @@
       "Tackle",
       "Sharpen",
       "Conversion"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Sharpen",
+      "Conversion",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Ice Beam",
+      "Blizzard"
     ]
   },
   {
@@ -2606,6 +3866,15 @@
     "startingMoves": [
       "Wing Attack",
       "Agility"
+    ],
+    "learnableMoves": [
+      "Wing Attack",
+      "Agility",
+      "Razor Wind",
+      "Whirlwind",
+      "Toxic",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2623,6 +3892,14 @@
     },
     "startingMoves": [
       "Tackle"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage",
+      "Thunderbolt"
     ]
   },
   {
@@ -2641,6 +3918,15 @@
     "startingMoves": [
       "Scratch",
       "Growl"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Mega Punch",
+      "Swords Dance",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -2659,6 +3945,15 @@
     "startingMoves": [
       "Tackle",
       "Tail Whip"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2678,6 +3973,16 @@
       "Scratch",
       "Growl",
       "Ember"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Ember",
+      "Mega Punch",
+      "Swords Dance",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -2697,6 +4002,16 @@
       "Tackle",
       "Tail Whip",
       "Bubble"
+    ],
+    "learnableMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Bubble",
+      "Mega Punch",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam",
+      "Take Down"
     ]
   },
   {
@@ -2718,6 +4033,17 @@
       "Growl",
       "Ember",
       "Leer"
+    ],
+    "learnableMoves": [
+      "Scratch",
+      "Growl",
+      "Ember",
+      "Leer",
+      "Mega Punch",
+      "Swords Dance",
+      "Mega Kick",
+      "Toxic",
+      "Body Slam"
     ]
   },
   {
@@ -2736,6 +4062,14 @@
     },
     "startingMoves": [
       "Absorb"
+    ],
+    "learnableMoves": [
+      "Absorb",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -2756,6 +4090,16 @@
       "Absorb",
       "Poisonpowder",
       "Stun Spore"
+    ],
+    "learnableMoves": [
+      "Absorb",
+      "Poisonpowder",
+      "Stun Spore",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -2777,6 +4121,17 @@
       "Sleep Powder",
       "Acid",
       "Petal Dance"
+    ],
+    "learnableMoves": [
+      "Stun Spore",
+      "Sleep Powder",
+      "Acid",
+      "Petal Dance",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   },
   {
@@ -2796,6 +4151,15 @@
     "startingMoves": [
       "Vine Whip",
       "Growth"
+    ],
+    "learnableMoves": [
+      "Vine Whip",
+      "Growth",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -2816,6 +4180,16 @@
       "Vine Whip",
       "Growth",
       "Wrap"
+    ],
+    "learnableMoves": [
+      "Vine Whip",
+      "Growth",
+      "Wrap",
+      "Swords Dance",
+      "Toxic",
+      "Take Down",
+      "Double Edge",
+      "Rage"
     ]
   },
   {
@@ -2837,6 +4211,17 @@
       "Stun Spore",
       "Acid",
       "Razor Leaf"
+    ],
+    "learnableMoves": [
+      "Sleep Powder",
+      "Stun Spore",
+      "Acid",
+      "Razor Leaf",
+      "Swords Dance",
+      "Toxic",
+      "Body Slam",
+      "Take Down",
+      "Double Edge"
     ]
   }
 ]

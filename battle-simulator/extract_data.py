@@ -51,6 +51,31 @@ def extract_pokemon_names():
                 names.append(match.group(1))
     return names
 
+def extract_learnset(idx, pokemon_names):
+    """Extract all learnable moves for a Pokemon from evos_moves.asm"""
+    # Find the Pokemon's learnset section
+    with open('data/pokemon/evos_moves.asm', 'r') as f:
+        content = f.read()
+
+    # Get Pokemon name and convert to the format used in evos_moves.asm
+    name = pokemon_names[idx - 1]
+    evos_name = name.replace('♂', 'M').replace('♀', 'F').replace("'", '').replace(' ', '').replace('-', '').replace('.', '')
+
+    # Find the section for this Pokemon
+    pattern = rf'{evos_name}EvosMoves:.*?; Learnset\n(.*?)\n\tdb 0'
+    match = re.search(pattern, content, re.DOTALL)
+
+    learnable_moves = []
+    if match:
+        learnset_section = match.group(1)
+        # Extract all moves from the learnset
+        move_matches = re.findall(r'db\s+\d+,\s+(\w+)', learnset_section)
+        for move in move_matches:
+            if move != 'NO_MOVE':
+                learnable_moves.append(move.replace('_', ' ').title())
+
+    return learnable_moves
+
 def extract_pokemon_stats():
     """Extract Pokemon base stats from individual files"""
     pokemon_data = {}
@@ -100,7 +125,7 @@ def extract_pokemon_stats():
             if type1 != type2:
                 types.append(type2)
 
-            # Extract starting moves
+            # Extract starting moves (level 1)
             moves_match = re.search(r'db\s+([\w,\s]+);\s*level 1 learnset', content)
             starting_moves = []
             if moves_match:
@@ -109,6 +134,24 @@ def extract_pokemon_stats():
                     move = move.strip()
                     if move and move != 'NO_MOVE':
                         starting_moves.append(move.replace('_', ' ').title())
+
+            # Extract all learnable moves from level-up and TMs
+            learnable_moves = extract_learnset(idx, pokemon_names)
+
+            # Add TM/HM moves
+            tm_pattern = r'tmhm\s+([\w,\s]+)'
+            tm_match = re.search(tm_pattern, content)
+            tm_moves = []
+            if tm_match:
+                tm_list = tm_match.group(1).split(',')
+                for move in tm_list:
+                    move = move.strip()
+                    if move and move not in ['\\', ';']:
+                        move_name = move.replace('_', ' ').title()
+                        if move_name not in learnable_moves:
+                            tm_moves.append(move_name)
+
+            all_moves = starting_moves + learnable_moves + tm_moves
 
             pokemon_data[dex_num] = {
                 'id': dex_num,
@@ -121,7 +164,8 @@ def extract_pokemon_stats():
                     'speed': speed,
                     'special': special
                 },
-                'startingMoves': starting_moves[:4]  # Limit to 4 moves
+                'startingMoves': starting_moves[:4],  # Default starting moves
+                'learnableMoves': list(dict.fromkeys(all_moves))  # All unique moves this Pokemon can learn
             }
 
     return pokemon_data

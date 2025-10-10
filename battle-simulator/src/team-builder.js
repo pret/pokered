@@ -28,7 +28,13 @@ class TeamBuilder {
             return false;
         }
 
-        this.currentTeam.push(pokemon);
+        // Create a Pokemon with default moves that can be customized
+        const pokemonWithMoves = {
+            ...pokemon,
+            selectedMoves: pokemon.startingMoves.slice(0, 4)  // Start with default moves
+        };
+
+        this.currentTeam.push(pokemonWithMoves);
         this.renderCurrentTeam();
         return true;
     }
@@ -65,7 +71,10 @@ class TeamBuilder {
         const team = {
             id: Date.now(),
             name: teamName,
-            pokemon: this.currentTeam.map(p => p.id),
+            pokemon: this.currentTeam.map(p => ({
+                id: p.id,
+                selectedMoves: p.selectedMoves || p.startingMoves.slice(0, 4)
+            })),
             createdAt: new Date().toISOString()
         };
 
@@ -91,7 +100,14 @@ class TeamBuilder {
         const team = this.savedTeams.find(t => t.id === teamId);
         if (!team) return false;
 
-        this.currentTeam = team.pokemon.map(id => dataLoader.getPokemon(id));
+        // Load Pokemon with their custom moves
+        this.currentTeam = team.pokemon.map(p => {
+            const pokemon = dataLoader.getPokemon(p.id);
+            return {
+                ...pokemon,
+                selectedMoves: p.selectedMoves || pokemon.startingMoves.slice(0, 4)
+            };
+        });
         this.currentTeamName = team.name;
         document.getElementById('teamName').value = team.name;
         this.selectedTeam = team;
@@ -115,9 +131,9 @@ class TeamBuilder {
         const pokemonList = document.getElementById('pokemonList');
         pokemonList.innerHTML = '';
 
-        const filtered = dataLoader.getAllPokemon().filter(p =>
-            p.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        const filtered = dataLoader.getAllPokemon()
+            .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
+            .sort((a, b) => a.id - b.id);
 
         filtered.forEach(pokemon => {
             const card = document.createElement('div');
@@ -142,6 +158,88 @@ class TeamBuilder {
         });
     }
 
+    showMoveSelection(index) {
+        const pokemon = this.currentTeam[index];
+        const moves = pokemon.learnableMoves || pokemon.startingMoves;
+
+        if (!moves || moves.length === 0) {
+            alert('No moves available for this Pokemon!');
+            return;
+        }
+
+        const currentMoves = pokemon.selectedMoves || pokemon.startingMoves.slice(0, 4);
+
+        let html = `
+            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+                <div style="background: white; padding: 2rem; border-radius: 12px; max-width: 600px; max-height: 80vh; overflow-y: auto;">
+                    <h3>Select Moves for ${pokemon.name}</h3>
+                    <p>Select up to 4 moves (currently selected: <span id="selectedCount">${currentMoves.length}</span>)</p>
+                    <div style="margin: 1rem 0;">
+        `;
+
+        moves.forEach(move => {
+            const moveData = dataLoader.getMove(move);
+            const isSelected = currentMoves.includes(move);
+            html += `
+                <label style="display: block; padding: 0.5rem; margin: 0.25rem 0; background: ${isSelected ? '#e8f8f5' : '#f8f9fa'}; border-radius: 4px; cursor: pointer;">
+                    <input type="checkbox" name="move" value="${move}" ${isSelected ? 'checked' : ''}
+                        style="margin-right: 0.5rem;">
+                    ${move} ${moveData ? `<span class="type-badge ${moveData.type}" style="margin-left: 0.5rem;">${moveData.type}</span> PWR:${moveData.power} ACC:${moveData.accuracy}` : ''}
+                </label>
+            `;
+        });
+
+        html += `
+                    </div>
+                    <div style="display: flex; gap: 1rem;">
+                        <button id="confirmMoves" class="btn-success">Confirm</button>
+                        <button id="cancelMoves" class="btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const modal = document.createElement('div');
+        modal.id = 'moveSelectionModal';
+        modal.innerHTML = html;
+        document.body.appendChild(modal);
+
+        // Handle checkbox selection
+        const checkboxes = modal.querySelectorAll('input[type="checkbox"]');
+        const selectedCountSpan = modal.querySelector('#selectedCount');
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                const checked = modal.querySelectorAll('input[type="checkbox"]:checked');
+                selectedCountSpan.textContent = checked.length;
+
+                if (checked.length > 4) {
+                    cb.checked = false;
+                    selectedCountSpan.textContent = '4';
+                    alert('You can only select up to 4 moves!');
+                }
+            });
+        });
+
+        modal.querySelector('#confirmMoves').addEventListener('click', () => {
+            const selected = Array.from(modal.querySelectorAll('input[type="checkbox"]:checked'))
+                .map(cb => cb.value);
+
+            if (selected.length === 0) {
+                alert('Please select at least one move!');
+                return;
+            }
+
+            pokemon.selectedMoves = selected;
+            modal.remove();
+            this.renderCurrentTeam();
+        });
+
+        modal.querySelector('#cancelMoves').addEventListener('click', () => {
+            modal.remove();
+        });
+    }
+
     renderCurrentTeam() {
         const currentTeamDiv = document.getElementById('currentTeam');
         currentTeamDiv.innerHTML = '';
@@ -154,15 +252,33 @@ class TeamBuilder {
         this.currentTeam.forEach((pokemon, index) => {
             const slot = document.createElement('div');
             slot.className = 'team-slot';
+            slot.style.flexDirection = 'column';
+            slot.style.alignItems = 'flex-start';
+
+            const selectedMoves = pokemon.selectedMoves || pokemon.startingMoves.slice(0, 4);
+
             slot.innerHTML = `
-                <span class="team-slot-pokemon">
-                    ${index + 1}. ${pokemon.name}
-                    ${pokemon.types.map(type =>
-                        `<span class="type-badge ${type}" style="margin-left: 0.5rem;">${type}</span>`
-                    ).join('')}
-                </span>
-                <button class="remove-btn" data-index="${index}">Remove</button>
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                    <span class="team-slot-pokemon">
+                        ${index + 1}. ${pokemon.name}
+                        ${pokemon.types.map(type =>
+                            `<span class="type-badge ${type}" style="margin-left: 0.5rem;">${type}</span>`
+                        ).join('')}
+                    </span>
+                    <div>
+                        <button class="edit-moves-btn" data-index="${index}" style="background: #3498db; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; margin-right: 0.5rem; font-family: 'Courier New', monospace;">Moves</button>
+                        <button class="remove-btn" data-index="${index}">Remove</button>
+                    </div>
+                </div>
+                <div style="font-size: 0.85rem; color: #666; margin-top: 0.5rem;">
+                    Moves: ${selectedMoves.join(', ')}
+                </div>
             `;
+
+            slot.querySelector('.edit-moves-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.showMoveSelection(index);
+            });
 
             slot.querySelector('.remove-btn').addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -239,7 +355,13 @@ class TeamBuilder {
         const team = this.savedTeams.find(t => t.id === parseInt(teamId));
         if (!team) return null;
 
-        return team.pokemon.map(id => dataLoader.getPokemon(id));
+        return team.pokemon.map(p => {
+            const pokemon = dataLoader.getPokemon(p.id);
+            return {
+                ...pokemon,
+                selectedMoves: p.selectedMoves || pokemon.startingMoves.slice(0, 4)
+            };
+        });
     }
 
     init() {

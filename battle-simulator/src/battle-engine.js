@@ -35,21 +35,21 @@ class BattlePokemon {
     }
 
     assignMoves(pokemon) {
-        // Start with the Pokemon's starting moves
+        // Use selected moves if available (from team builder)
+        if (pokemon.selectedMoves && pokemon.selectedMoves.length > 0) {
+            return pokemon.selectedMoves.slice(0, 4);
+        }
+
+        // Otherwise use starting moves
         const moves = [...pokemon.startingMoves];
 
-        // If fewer than 4 moves, add random compatible moves
-        const availableMoves = Object.keys(dataLoader.moves);
-        while (moves.length < 4 && availableMoves.length > 0) {
-            const randomMove = availableMoves[Math.floor(Math.random() * availableMoves.length)];
-            const move = dataLoader.moves[randomMove];
-
-            // Only add if not already in moveset and has power
-            if (!moves.includes(move.name) && move.power > 0) {
-                moves.push(move.name);
+        // If fewer than 4 moves, add from learnable moves
+        if (pokemon.learnableMoves && moves.length < 4) {
+            const availableMoves = pokemon.learnableMoves.filter(m => !moves.includes(m) && dataLoader.getMove(m)?.power > 0);
+            while (moves.length < 4 && availableMoves.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableMoves.length);
+                moves.push(availableMoves.splice(randomIndex, 1)[0]);
             }
-
-            if (moves.length >= 10) break; // Safety limit
         }
 
         return moves.slice(0, 4);
@@ -117,38 +117,76 @@ class BattleEngine {
 
         this.turn++;
 
-        const move = this.playerActive.moves[moveIndex];
-        const result = this.executeMove(this.playerActive, this.opponentActive, move);
+        const playerMove = this.playerActive.moves[moveIndex];
 
-        // Check if opponent fainted
-        if (this.opponentActive.isFainted()) {
-            this.log(`${this.opponentActive.name} fainted!`);
-            return this.handleFaint('opponent');
+        // AI chooses a move
+        const opponentMoveIndex = Math.floor(Math.random() * this.opponentActive.moves.length);
+        const opponentMove = this.opponentActive.moves[opponentMoveIndex];
+
+        // Determine turn order based on speed (with random tiebreaker)
+        const playerSpeed = this.playerActive.speed;
+        const opponentSpeed = this.opponentActive.speed;
+
+        let firstAttacker, firstMove, secondAttacker, secondMove;
+
+        if (playerSpeed > opponentSpeed) {
+            firstAttacker = this.playerActive;
+            firstMove = playerMove;
+            secondAttacker = this.opponentActive;
+            secondMove = opponentMove;
+        } else if (opponentSpeed > playerSpeed) {
+            firstAttacker = this.opponentActive;
+            firstMove = opponentMove;
+            secondAttacker = this.playerActive;
+            secondMove = playerMove;
+        } else {
+            // Speed tie - 50/50 chance
+            if (Math.random() < 0.5) {
+                firstAttacker = this.playerActive;
+                firstMove = playerMove;
+                secondAttacker = this.opponentActive;
+                secondMove = opponentMove;
+            } else {
+                firstAttacker = this.opponentActive;
+                firstMove = opponentMove;
+                secondAttacker = this.playerActive;
+                secondMove = playerMove;
+            }
         }
 
-        // Opponent's turn
+        // First attacker goes
+        const firstTarget = firstAttacker === this.playerActive ? this.opponentActive : this.playerActive;
+        this.executeMove(firstAttacker, firstTarget, firstMove);
+
+        // Check if first attack ended the battle
+        if (firstTarget.isFainted()) {
+            this.log(`${firstTarget.name} fainted!`);
+            const faintSide = firstTarget === this.playerActive ? 'player' : 'opponent';
+            return this.handleFaint(faintSide);
+        }
+
+        // Second attacker goes (if battle still ongoing)
         if (!this.battleEnded) {
-            setTimeout(() => this.opponentAttack(), 1000);
+            const secondTarget = secondAttacker === this.playerActive ? this.opponentActive : this.playerActive;
+            setTimeout(() => {
+                this.executeMove(secondAttacker, secondTarget, secondMove);
+
+                // Check if second attack ended the battle
+                if (secondTarget.isFainted()) {
+                    this.log(`${secondTarget.name} fainted!`);
+                    const faintSide = secondTarget === this.playerActive ? 'player' : 'opponent';
+                    this.handleFaint(faintSide);
+                }
+            }, 1000);
         }
 
-        return result;
+        return { turnComplete: true };
     }
 
     opponentAttack() {
-        if (this.battleEnded) return null;
-
-        // Simple AI: choose random move
-        const moveIndex = Math.floor(Math.random() * this.opponentActive.moves.length);
-        const move = this.opponentActive.moves[moveIndex];
-        const result = this.executeMove(this.opponentActive, this.playerActive, move);
-
-        // Check if player fainted
-        if (this.playerActive.isFainted()) {
-            this.log(`${this.playerActive.name} fainted!`);
-            return this.handleFaint('player');
-        }
-
-        return result;
+        // This method is no longer used as attacks happen together in playerAttack
+        // Keeping it for compatibility
+        return null;
     }
 
     executeMove(attacker, defender, moveName) {
