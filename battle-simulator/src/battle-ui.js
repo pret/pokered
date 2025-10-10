@@ -139,20 +139,33 @@ class BattleUI {
     }
 
     executePlayerMove(moveIndex) {
-        this.showMainMenu();
+        // Disable menu during attacks
+        const mainMenu = document.getElementById('mainMenu');
+        mainMenu.style.pointerEvents = 'none';
+        mainMenu.style.opacity = '0.5';
 
         const result = battleEngine.playerAttack(moveIndex);
 
-        // Update display after a short delay
+        // Update display after first attack
         setTimeout(() => {
             this.updateBattleDisplay();
             this.renderBattleLog();
+        }, 500);
+
+        // Wait for both attacks to complete before re-enabling menu
+        setTimeout(() => {
+            this.updateBattleDisplay();
+            this.renderBattleLog();
+
+            // Re-enable menu
+            mainMenu.style.pointerEvents = 'auto';
+            mainMenu.style.opacity = '1';
 
             // Check if battle ended
             if (battleEngine.battleEnded) {
                 this.handleBattleEnd();
             }
-        }, 500);
+        }, 1500);
     }
 
     executePokemonSwitch(teamIndex) {

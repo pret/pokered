@@ -199,43 +199,268 @@ class BattleEngine {
 
         this.log(`${attacker.name} used ${moveName}!`);
 
-        // Check if move hits (accuracy check)
-        const hitRoll = Math.random() * 100;
-        if (hitRoll > moveData.accuracy) {
-            this.log(`${attacker.name}'s attack missed!`);
-            return { success: false, miss: true };
+        // Check if move hits (accuracy check) - but SWIFT never misses
+        if (moveData.effect !== 'SWIFT_EFFECT') {
+            const hitRoll = Math.random() * 100;
+            if (hitRoll > moveData.accuracy) {
+                this.log(`${attacker.name}'s attack missed!`);
+                return { success: false, miss: true };
+            }
         }
 
-        // Calculate damage
-        if (moveData.power > 0) {
-            const damage = this.calculateDamage(attacker, defender, moveData);
-            defender.takeDamage(damage);
+        // Apply move effects
+        return this.applyMoveEffect(attacker, defender, moveData);
+    }
 
-            // Determine effectiveness
-            const effectiveness = dataLoader.getTypeEffectiveness(
-                moveData.type,
-                defender.types
-            );
+    applyMoveEffect(attacker, defender, move) {
+        const effect = move.effect;
 
-            if (effectiveness > 1) {
-                this.log(`It's super effective!`);
-            } else if (effectiveness < 1 && effectiveness > 0) {
-                this.log(`It's not very effective...`);
-            } else if (effectiveness === 0) {
-                this.log(`It doesn't affect ${defender.name}...`);
+        // Handle damage-dealing moves first
+        if (move.power > 0) {
+            const result = this.applyDamage(attacker, defender, move);
+
+            // Apply additional effect after damage
+            if (result.success && !defender.isFainted()) {
+                this.applySecondaryEffect(attacker, defender, move);
             }
 
-            return {
-                success: true,
-                damage: damage,
-                effectiveness: effectiveness,
-                defender: defender
-            };
-        } else {
-            // Status move or other effect
-            this.log(`${moveName} has an effect!`);
-            return { success: true, status: true };
+            return result;
         }
+
+        // Handle status moves
+        switch (effect) {
+            case 'ATTACK_UP1_EFFECT':
+            case 'ATTACK_UP2_EFFECT':
+                return this.modifyStat(attacker, 'attack', effect.includes('UP2') ? 2 : 1, true);
+
+            case 'DEFENSE_UP1_EFFECT':
+            case 'DEFENSE_UP2_EFFECT':
+                return this.modifyStat(attacker, 'defense', effect.includes('UP2') ? 2 : 1, true);
+
+            case 'SPEED_UP1_EFFECT':
+            case 'SPEED_UP2_EFFECT':
+                return this.modifyStat(attacker, 'speed', effect.includes('UP2') ? 2 : 1, true);
+
+            case 'SPECIAL_UP1_EFFECT':
+            case 'SPECIAL_UP2_EFFECT':
+                return this.modifyStat(attacker, 'special', effect.includes('UP2') ? 2 : 1, true);
+
+            case 'ATTACK_DOWN1_EFFECT':
+            case 'ATTACK_DOWN2_EFFECT':
+                return this.modifyStat(defender, 'attack', effect.includes('DOWN2') ? -2 : -1, false);
+
+            case 'DEFENSE_DOWN1_EFFECT':
+            case 'DEFENSE_DOWN2_EFFECT':
+                return this.modifyStat(defender, 'defense', effect.includes('DOWN2') ? -2 : -1, false);
+
+            case 'SPEED_DOWN1_EFFECT':
+            case 'SPEED_DOWN2_EFFECT':
+                return this.modifyStat(defender, 'speed', effect.includes('DOWN2') ? -2 : -1, false);
+
+            case 'SPECIAL_DOWN1_EFFECT':
+            case 'SPECIAL_DOWN2_EFFECT':
+                return this.modifyStat(defender, 'special', effect.includes('DOWN2') ? -2 : -1, false);
+
+            case 'SLEEP_EFFECT':
+                defender.status = 'asleep';
+                this.log(`${defender.name} fell asleep!`);
+                return { success: true };
+
+            case 'POISON_EFFECT':
+                defender.status = 'poisoned';
+                this.log(`${defender.name} was poisoned!`);
+                return { success: true };
+
+            case 'PARALYZE_EFFECT':
+                defender.status = 'paralyzed';
+                this.log(`${defender.name} was paralyzed!`);
+                return { success: true };
+
+            case 'CONFUSION_EFFECT':
+                defender.volatile.confused = true;
+                this.log(`${defender.name} became confused!`);
+                return { success: true };
+
+            case 'HEAL_EFFECT':
+                const healAmount = Math.floor(attacker.maxHP / 2);
+                attacker.heal(healAmount);
+                this.log(`${attacker.name} recovered HP!`);
+                return { success: true };
+
+            default:
+                return { success: true };
+        }
+    }
+
+    applyDamage(attacker, defender, move) {
+        let totalDamage = 0;
+
+        // Multi-hit moves
+        let hits = 1;
+        if (move.effect === 'TWO_TO_FIVE_ATTACKS_EFFECT') {
+            // 2-5 hits
+            const rand = Math.random();
+            if (rand < 0.375) hits = 2;
+            else if (rand < 0.750) hits = 3;
+            else if (rand < 0.875) hits = 4;
+            else hits = 5;
+        } else if (move.effect === 'ATTACK_TWICE_EFFECT') {
+            hits = 2;
+        } else if (move.effect === 'TWINEEDLE_EFFECT') {
+            hits = 2;
+        }
+
+        for (let i = 0; i < hits; i++) {
+            let damage = 0;
+
+            // Special damage calculations for specific effects
+            if (move.effect === 'SPECIAL_DAMAGE_EFFECT') {
+                // Moves like Seismic Toss, Dragon Rage
+                if (move.name.includes('Seismic Toss') || move.name.includes('Night Shade')) {
+                    damage = attacker.level;
+                } else if (move.name.includes('Dragon Rage')) {
+                    damage = 40;
+                } else if (move.name.includes('Sonic Boom')) {
+                    damage = 20;
+                } else {
+                    damage = attacker.level;
+                }
+            } else if (move.effect === 'SUPER_FANG_EFFECT') {
+                damage = Math.floor(defender.currentHP / 2);
+            } else if (move.effect === 'OHKO_EFFECT') {
+                // One-hit KO moves
+                if (attacker.level >= defender.level) {
+                    damage = defender.currentHP;
+                    this.log(`It's a one-hit KO!`);
+                } else {
+                    this.log(`But it failed!`);
+                    return { success: false };
+                }
+            } else {
+                // Normal damage calculation
+                damage = this.calculateDamage(attacker, defender, move);
+            }
+
+            defender.takeDamage(damage);
+            totalDamage += damage;
+
+            // Break if defender fainted
+            if (defender.isFainted()) break;
+        }
+
+        // Log hit count for multi-hit moves
+        if (hits > 1) {
+            this.log(`Hit ${hits} time(s)!`);
+        }
+
+        // Type effectiveness message
+        const effectiveness = dataLoader.getTypeEffectiveness(move.type, defender.types);
+        if (effectiveness > 1) {
+            this.log(`It's super effective!`);
+        } else if (effectiveness < 1 && effectiveness > 0) {
+            this.log(`It's not very effective...`);
+        } else if (effectiveness === 0) {
+            this.log(`It doesn't affect ${defender.name}...`);
+        }
+
+        // Recoil damage
+        if (move.effect === 'RECOIL_EFFECT') {
+            const recoil = Math.floor(totalDamage / 4);
+            attacker.takeDamage(recoil);
+            this.log(`${attacker.name} took recoil damage!`);
+        } else if (move.effect === 'EXPLODE_EFFECT') {
+            attacker.currentHP = 0;
+            this.log(`${attacker.name} fainted from the explosion!`);
+        } else if (move.effect === 'JUMP_KICK_EFFECT') {
+            if (totalDamage === 0) {
+                const crashDamage = Math.floor(attacker.maxHP / 8);
+                attacker.takeDamage(crashDamage);
+                this.log(`${attacker.name} kept going and crashed!`);
+            }
+        }
+
+        // Drain HP
+        if (move.effect === 'DRAIN_HP_EFFECT' || move.effect === 'DREAM_EATER_EFFECT') {
+            const drain = Math.floor(totalDamage / 2);
+            attacker.heal(drain);
+            this.log(`${attacker.name} drained HP!`);
+        }
+
+        // Twineedle poison effect
+        if (move.effect === 'TWINEEDLE_EFFECT' && !defender.isFainted()) {
+            if (Math.random() < 0.2) {
+                defender.status = 'poisoned';
+                this.log(`${defender.name} was poisoned!`);
+            }
+        }
+
+        return { success: true, damage: totalDamage, effectiveness: effectiveness };
+    }
+
+    applySecondaryEffect(attacker, defender, move) {
+        const effect = move.effect;
+        const chance = 0.3; // 30% for side effects (10% for some)
+
+        // Side effects (have a chance to occur)
+        if (effect.includes('SIDE_EFFECT')) {
+            if (Math.random() > chance) return;
+
+            if (effect.includes('BURN')) {
+                defender.status = 'burned';
+                this.log(`${defender.name} was burned!`);
+            } else if (effect.includes('FREEZE')) {
+                defender.status = 'frozen';
+                this.log(`${defender.name} was frozen solid!`);
+            } else if (effect.includes('PARALYZE')) {
+                defender.status = 'paralyzed';
+                this.log(`${defender.name} was paralyzed!`);
+            } else if (effect.includes('POISON')) {
+                defender.status = 'poisoned';
+                this.log(`${defender.name} was poisoned!`);
+            } else if (effect.includes('FLINCH')) {
+                defender.volatile.flinch = true;
+            } else if (effect.includes('CONFUSION')) {
+                defender.volatile.confused = true;
+                this.log(`${defender.name} became confused!`);
+            } else if (effect.includes('ATTACK_DOWN')) {
+                this.modifyStat(defender, 'attack', -1, false);
+            } else if (effect.includes('DEFENSE_DOWN')) {
+                this.modifyStat(defender, 'defense', -1, false);
+            } else if (effect.includes('SPEED_DOWN')) {
+                this.modifyStat(defender, 'speed', -1, false);
+            } else if (effect.includes('SPECIAL_DOWN')) {
+                this.modifyStat(defender, 'special', -1, false);
+            }
+        }
+    }
+
+    modifyStat(pokemon, stat, stages, isIncrease) {
+        const statName = stat.charAt(0).toUpperCase() + stat.slice(1);
+
+        if (!pokemon.statStages) {
+            pokemon.statStages = { attack: 0, defense: 0, speed: 0, special: 0 };
+        }
+
+        const oldStage = pokemon.statStages[stat] || 0;
+        const newStage = Math.max(-6, Math.min(6, oldStage + stages));
+        pokemon.statStages[stat] = newStage;
+
+        // Apply the stat modifier to the actual stat
+        const multiplier = newStage >= 0
+            ? (2 + newStage) / 2
+            : 2 / (2 - newStage);
+
+        const baseStat = pokemon.species.stats[stat];
+        const calculatedStat = pokemon.calculateStat(baseStat, pokemon.level, false);
+        pokemon[stat] = Math.floor(calculatedStat * multiplier);
+
+        if (stages > 0) {
+            this.log(`${pokemon.name}'s ${statName} rose!`);
+        } else {
+            this.log(`${pokemon.name}'s ${statName} fell!`);
+        }
+
+        return { success: true };
     }
 
     calculateDamage(attacker, defender, move) {
