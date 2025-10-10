@@ -1,0 +1,2842 @@
+[
+  {
+    "id": 112,
+    "name": "RHYDON",
+    "types": [
+      "Ground",
+      "Rock"
+    ],
+    "stats": {
+      "hp": 105,
+      "attack": 130,
+      "defense": 120,
+      "speed": 40,
+      "special": 45
+    },
+    "startingMoves": [
+      "Horn Attack",
+      "Stomp",
+      "Tail Whip",
+      "Fury Attack"
+    ]
+  },
+  {
+    "id": 115,
+    "name": "KANGASKHAN",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 105,
+      "attack": 95,
+      "defense": 80,
+      "speed": 90,
+      "special": 40
+    },
+    "startingMoves": [
+      "Comet Punch",
+      "Rage"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "NIDORAN\u2642",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 46,
+      "attack": 57,
+      "defense": 40,
+      "speed": 50,
+      "special": 40
+    },
+    "startingMoves": [
+      "Leer",
+      "Tackle"
+    ]
+  },
+  {
+    "id": 35,
+    "name": "CLEFAIRY",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 45,
+      "defense": 48,
+      "speed": 35,
+      "special": 60
+    },
+    "startingMoves": [
+      "Pound",
+      "Growl"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "SPEAROW",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 60,
+      "defense": 30,
+      "speed": 70,
+      "special": 31
+    },
+    "startingMoves": [
+      "Peck",
+      "Growl"
+    ]
+  },
+  {
+    "id": 100,
+    "name": "VOLTORB",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 30,
+      "defense": 50,
+      "speed": 100,
+      "special": 55
+    },
+    "startingMoves": [
+      "Tackle",
+      "Screech"
+    ]
+  },
+  {
+    "id": 34,
+    "name": "NIDOKING",
+    "types": [
+      "Poison",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 81,
+      "attack": 92,
+      "defense": 77,
+      "speed": 85,
+      "special": 75
+    },
+    "startingMoves": [
+      "Tackle",
+      "Horn Attack",
+      "Poison Sting",
+      "Thrash"
+    ]
+  },
+  {
+    "id": 80,
+    "name": "SLOWBRO",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 95,
+      "attack": 75,
+      "defense": 110,
+      "speed": 30,
+      "special": 80
+    },
+    "startingMoves": [
+      "Confusion",
+      "Disable",
+      "Headbutt"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "IVYSAUR",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 62,
+      "defense": 63,
+      "speed": 60,
+      "special": 80
+    },
+    "startingMoves": [
+      "Tackle",
+      "Growl",
+      "Leech Seed"
+    ]
+  },
+  {
+    "id": 103,
+    "name": "EXEGGUTOR",
+    "types": [
+      "Grass",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 95,
+      "attack": 95,
+      "defense": 85,
+      "speed": 55,
+      "special": 125
+    },
+    "startingMoves": [
+      "Barrage",
+      "Hypnosis"
+    ]
+  },
+  {
+    "id": 108,
+    "name": "LICKITUNG",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 55,
+      "defense": 75,
+      "speed": 30,
+      "special": 60
+    },
+    "startingMoves": [
+      "Wrap",
+      "Supersonic"
+    ]
+  },
+  {
+    "id": 102,
+    "name": "EXEGGCUTE",
+    "types": [
+      "Grass",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 40,
+      "defense": 80,
+      "speed": 40,
+      "special": 60
+    },
+    "startingMoves": [
+      "Barrage",
+      "Hypnosis"
+    ]
+  },
+  {
+    "id": 88,
+    "name": "GRIMER",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 80,
+      "defense": 50,
+      "speed": 25,
+      "special": 40
+    },
+    "startingMoves": [
+      "Pound",
+      "Disable"
+    ]
+  },
+  {
+    "id": 94,
+    "name": "GENGAR",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 65,
+      "defense": 60,
+      "speed": 110,
+      "special": 130
+    },
+    "startingMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "NIDORAN\u2640",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 47,
+      "defense": 52,
+      "speed": 41,
+      "special": 40
+    },
+    "startingMoves": [
+      "Growl",
+      "Tackle"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "NIDOQUEEN",
+    "types": [
+      "Poison",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 82,
+      "defense": 87,
+      "speed": 76,
+      "special": 75
+    },
+    "startingMoves": [
+      "Tackle",
+      "Scratch",
+      "Tail Whip",
+      "Body Slam"
+    ]
+  },
+  {
+    "id": 104,
+    "name": "CUBONE",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 50,
+      "defense": 95,
+      "speed": 35,
+      "special": 40
+    },
+    "startingMoves": [
+      "Bone Club",
+      "Growl"
+    ]
+  },
+  {
+    "id": 111,
+    "name": "RHYHORN",
+    "types": [
+      "Ground",
+      "Rock"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 85,
+      "defense": 95,
+      "speed": 25,
+      "special": 30
+    },
+    "startingMoves": [
+      "Horn Attack"
+    ]
+  },
+  {
+    "id": 131,
+    "name": "LAPRAS",
+    "types": [
+      "Water",
+      "Ice"
+    ],
+    "stats": {
+      "hp": 130,
+      "attack": 85,
+      "defense": 80,
+      "speed": 60,
+      "special": 95
+    },
+    "startingMoves": [
+      "Water Gun",
+      "Growl"
+    ]
+  },
+  {
+    "id": 59,
+    "name": "ARCANINE",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 110,
+      "defense": 80,
+      "speed": 95,
+      "special": 80
+    },
+    "startingMoves": [
+      "Roar",
+      "Ember",
+      "Leer",
+      "Take Down"
+    ]
+  },
+  {
+    "id": 151,
+    "name": "MEW",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 100,
+      "attack": 100,
+      "defense": 100,
+      "speed": 100,
+      "special": 100
+    },
+    "startingMoves": [
+      "Pound"
+    ]
+  },
+  {
+    "id": 130,
+    "name": "GYARADOS",
+    "types": [
+      "Water",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 95,
+      "attack": 125,
+      "defense": 79,
+      "speed": 81,
+      "special": 100
+    },
+    "startingMoves": [
+      "Bite",
+      "Dragon Rage",
+      "Leer",
+      "Hydro Pump"
+    ]
+  },
+  {
+    "id": 90,
+    "name": "SHELLDER",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 65,
+      "defense": 100,
+      "speed": 40,
+      "special": 45
+    },
+    "startingMoves": [
+      "Tackle",
+      "Withdraw"
+    ]
+  },
+  {
+    "id": 72,
+    "name": "TENTACOOL",
+    "types": [
+      "Water",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 40,
+      "defense": 35,
+      "speed": 70,
+      "special": 100
+    },
+    "startingMoves": [
+      "Acid"
+    ]
+  },
+  {
+    "id": 92,
+    "name": "GASTLY",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 35,
+      "defense": 30,
+      "speed": 80,
+      "special": 100
+    },
+    "startingMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade"
+    ]
+  },
+  {
+    "id": 123,
+    "name": "SCYTHER",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 110,
+      "defense": 80,
+      "speed": 105,
+      "special": 55
+    },
+    "startingMoves": [
+      "Quick Attack"
+    ]
+  },
+  {
+    "id": 120,
+    "name": "STARYU",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 45,
+      "defense": 55,
+      "speed": 85,
+      "special": 70
+    },
+    "startingMoves": [
+      "Tackle"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "BLASTOISE",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 79,
+      "attack": 83,
+      "defense": 100,
+      "speed": 78,
+      "special": 85
+    },
+    "startingMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Bubble",
+      "Water Gun"
+    ]
+  },
+  {
+    "id": 127,
+    "name": "PINSIR",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 125,
+      "defense": 100,
+      "speed": 85,
+      "special": 55
+    },
+    "startingMoves": [
+      "Vicegrip"
+    ]
+  },
+  {
+    "id": 114,
+    "name": "TANGELA",
+    "types": [
+      "Grass"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 55,
+      "defense": 115,
+      "speed": 60,
+      "special": 100
+    },
+    "startingMoves": [
+      "Constrict",
+      "Bind"
+    ]
+  },
+  {
+    "id": 58,
+    "name": "GROWLITHE",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 70,
+      "defense": 45,
+      "speed": 60,
+      "special": 50
+    },
+    "startingMoves": [
+      "Bite",
+      "Roar"
+    ]
+  },
+  {
+    "id": 95,
+    "name": "ONIX",
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 45,
+      "defense": 160,
+      "speed": 70,
+      "special": 30
+    },
+    "startingMoves": [
+      "Tackle",
+      "Screech"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "FEAROW",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 65,
+      "speed": 100,
+      "special": 61
+    },
+    "startingMoves": [
+      "Peck",
+      "Growl",
+      "Leer"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "PIDGEY",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 40,
+      "speed": 56,
+      "special": 35
+    },
+    "startingMoves": [
+      "Gust"
+    ]
+  },
+  {
+    "id": 79,
+    "name": "SLOWPOKE",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 65,
+      "defense": 65,
+      "speed": 15,
+      "special": 40
+    },
+    "startingMoves": [
+      "Confusion"
+    ]
+  },
+  {
+    "id": 64,
+    "name": "KADABRA",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 35,
+      "defense": 30,
+      "speed": 105,
+      "special": 120
+    },
+    "startingMoves": [
+      "Teleport",
+      "Confusion",
+      "Disable"
+    ]
+  },
+  {
+    "id": 75,
+    "name": "GRAVELER",
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 95,
+      "defense": 115,
+      "speed": 35,
+      "special": 45
+    },
+    "startingMoves": [
+      "Tackle",
+      "Defense Curl"
+    ]
+  },
+  {
+    "id": 113,
+    "name": "CHANSEY",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 250,
+      "attack": 5,
+      "defense": 5,
+      "speed": 50,
+      "special": 105
+    },
+    "startingMoves": [
+      "Pound",
+      "Doubleslap"
+    ]
+  },
+  {
+    "id": 67,
+    "name": "MACHOKE",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 100,
+      "defense": 70,
+      "speed": 45,
+      "special": 50
+    },
+    "startingMoves": [
+      "Karate Chop",
+      "Low Kick",
+      "Leer"
+    ]
+  },
+  {
+    "id": 122,
+    "name": "MR.MIME",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 65,
+      "speed": 90,
+      "special": 100
+    },
+    "startingMoves": [
+      "Confusion",
+      "Barrier"
+    ]
+  },
+  {
+    "id": 106,
+    "name": "HITMONLEE",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 120,
+      "defense": 53,
+      "speed": 87,
+      "special": 35
+    },
+    "startingMoves": [
+      "Double Kick",
+      "Meditate"
+    ]
+  },
+  {
+    "id": 107,
+    "name": "HITMONCHAN",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 105,
+      "defense": 79,
+      "speed": 76,
+      "special": 35
+    },
+    "startingMoves": [
+      "Comet Punch",
+      "Agility"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "ARBOK",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 85,
+      "defense": 69,
+      "speed": 80,
+      "special": 65
+    },
+    "startingMoves": [
+      "Wrap",
+      "Leer",
+      "Poison Sting"
+    ]
+  },
+  {
+    "id": 47,
+    "name": "PARASECT",
+    "types": [
+      "Bug",
+      "Grass"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 95,
+      "defense": 80,
+      "speed": 30,
+      "special": 80
+    },
+    "startingMoves": [
+      "Scratch",
+      "Stun Spore",
+      "Leech Life"
+    ]
+  },
+  {
+    "id": 54,
+    "name": "PSYDUCK",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 52,
+      "defense": 48,
+      "speed": 55,
+      "special": 50
+    },
+    "startingMoves": [
+      "Scratch"
+    ]
+  },
+  {
+    "id": 96,
+    "name": "DROWZEE",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 48,
+      "defense": 45,
+      "speed": 42,
+      "special": 90
+    },
+    "startingMoves": [
+      "Pound",
+      "Hypnosis"
+    ]
+  },
+  {
+    "id": 76,
+    "name": "GOLEM",
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 110,
+      "defense": 130,
+      "speed": 45,
+      "special": 55
+    },
+    "startingMoves": [
+      "Tackle",
+      "Defense Curl"
+    ]
+  },
+  {
+    "id": 126,
+    "name": "MAGMAR",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 95,
+      "defense": 57,
+      "speed": 93,
+      "special": 85
+    },
+    "startingMoves": [
+      "Ember"
+    ]
+  },
+  {
+    "id": 125,
+    "name": "ELECTABUZZ",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 83,
+      "defense": 57,
+      "speed": 105,
+      "special": 85
+    },
+    "startingMoves": [
+      "Quick Attack",
+      "Leer"
+    ]
+  },
+  {
+    "id": 82,
+    "name": "MAGNETON",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 60,
+      "defense": 95,
+      "speed": 70,
+      "special": 120
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sonicboom",
+      "Thundershock"
+    ]
+  },
+  {
+    "id": 109,
+    "name": "KOFFING",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 65,
+      "defense": 95,
+      "speed": 35,
+      "special": 60
+    },
+    "startingMoves": [
+      "Tackle",
+      "Smog"
+    ]
+  },
+  {
+    "id": 56,
+    "name": "MANKEY",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 80,
+      "defense": 35,
+      "speed": 70,
+      "special": 35
+    },
+    "startingMoves": [
+      "Scratch",
+      "Leer"
+    ]
+  },
+  {
+    "id": 86,
+    "name": "SEEL",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 45,
+      "defense": 55,
+      "speed": 45,
+      "special": 70
+    },
+    "startingMoves": [
+      "Headbutt"
+    ]
+  },
+  {
+    "id": 50,
+    "name": "DIGLETT",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 10,
+      "attack": 55,
+      "defense": 25,
+      "speed": 95,
+      "special": 45
+    },
+    "startingMoves": [
+      "Scratch"
+    ]
+  },
+  {
+    "id": 128,
+    "name": "TAUROS",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 75,
+      "attack": 100,
+      "defense": 95,
+      "speed": 110,
+      "special": 70
+    },
+    "startingMoves": [
+      "Tackle"
+    ]
+  },
+  {
+    "id": 83,
+    "name": "FARFETCH'D",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 52,
+      "attack": 65,
+      "defense": 55,
+      "speed": 60,
+      "special": 58
+    },
+    "startingMoves": [
+      "Peck",
+      "Sand Attack"
+    ]
+  },
+  {
+    "id": 48,
+    "name": "VENONAT",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 55,
+      "defense": 50,
+      "speed": 45,
+      "special": 40
+    },
+    "startingMoves": [
+      "Tackle",
+      "Disable"
+    ]
+  },
+  {
+    "id": 149,
+    "name": "DRAGONITE",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 91,
+      "attack": 134,
+      "defense": 95,
+      "speed": 80,
+      "special": 100
+    },
+    "startingMoves": [
+      "Wrap",
+      "Leer",
+      "Thunder Wave",
+      "Agility"
+    ]
+  },
+  {
+    "id": 84,
+    "name": "DODUO",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 85,
+      "defense": 45,
+      "speed": 75,
+      "special": 35
+    },
+    "startingMoves": [
+      "Peck"
+    ]
+  },
+  {
+    "id": 60,
+    "name": "POLIWAG",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 50,
+      "defense": 40,
+      "speed": 90,
+      "special": 40
+    },
+    "startingMoves": [
+      "Bubble"
+    ]
+  },
+  {
+    "id": 124,
+    "name": "JYNX",
+    "types": [
+      "Ice",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 50,
+      "defense": 35,
+      "speed": 95,
+      "special": 95
+    },
+    "startingMoves": [
+      "Pound",
+      "Lovely Kiss"
+    ]
+  },
+  {
+    "id": 146,
+    "name": "MOLTRES",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 100,
+      "defense": 90,
+      "speed": 90,
+      "special": 125
+    },
+    "startingMoves": [
+      "Peck",
+      "Fire Spin"
+    ]
+  },
+  {
+    "id": 144,
+    "name": "ARTICUNO",
+    "types": [
+      "Ice",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 85,
+      "defense": 100,
+      "speed": 85,
+      "special": 125
+    },
+    "startingMoves": [
+      "Peck",
+      "Ice Beam"
+    ]
+  },
+  {
+    "id": 145,
+    "name": "ZAPDOS",
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 90,
+      "defense": 85,
+      "speed": 100,
+      "special": 125
+    },
+    "startingMoves": [
+      "Thundershock",
+      "Drill Peck"
+    ]
+  },
+  {
+    "id": 132,
+    "name": "DITTO",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 48,
+      "attack": 48,
+      "defense": 48,
+      "speed": 48,
+      "special": 48
+    },
+    "startingMoves": [
+      "Transform"
+    ]
+  },
+  {
+    "id": 52,
+    "name": "MEOWTH",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 35,
+      "speed": 90,
+      "special": 40
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl"
+    ]
+  },
+  {
+    "id": 98,
+    "name": "KRABBY",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 105,
+      "defense": 90,
+      "speed": 50,
+      "special": 25
+    },
+    "startingMoves": [
+      "Bubble",
+      "Leer"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "VULPIX",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 38,
+      "attack": 41,
+      "defense": 40,
+      "speed": 65,
+      "special": 65
+    },
+    "startingMoves": [
+      "Ember",
+      "Tail Whip"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "NINETALES",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 73,
+      "attack": 76,
+      "defense": 75,
+      "speed": 100,
+      "special": 100
+    },
+    "startingMoves": [
+      "Ember",
+      "Tail Whip",
+      "Quick Attack",
+      "Roar"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "PIKACHU",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 55,
+      "defense": 30,
+      "speed": 90,
+      "special": 50
+    },
+    "startingMoves": [
+      "Thundershock",
+      "Growl"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "RAICHU",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 90,
+      "defense": 55,
+      "speed": 100,
+      "special": 90
+    },
+    "startingMoves": [
+      "Thundershock",
+      "Growl",
+      "Thunder Wave"
+    ]
+  },
+  {
+    "id": 147,
+    "name": "DRATINI",
+    "types": [
+      "Dragon"
+    ],
+    "stats": {
+      "hp": 41,
+      "attack": 64,
+      "defense": 45,
+      "speed": 50,
+      "special": 50
+    },
+    "startingMoves": [
+      "Wrap",
+      "Leer"
+    ]
+  },
+  {
+    "id": 148,
+    "name": "DRAGONAIR",
+    "types": [
+      "Dragon"
+    ],
+    "stats": {
+      "hp": 61,
+      "attack": 84,
+      "defense": 65,
+      "speed": 70,
+      "special": 70
+    },
+    "startingMoves": [
+      "Wrap",
+      "Leer",
+      "Thunder Wave"
+    ]
+  },
+  {
+    "id": 140,
+    "name": "KABUTO",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 80,
+      "defense": 90,
+      "speed": 55,
+      "special": 45
+    },
+    "startingMoves": [
+      "Scratch",
+      "Harden"
+    ]
+  },
+  {
+    "id": 141,
+    "name": "KABUTOPS",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 115,
+      "defense": 105,
+      "speed": 80,
+      "special": 70
+    },
+    "startingMoves": [
+      "Scratch",
+      "Harden",
+      "Absorb"
+    ]
+  },
+  {
+    "id": 116,
+    "name": "HORSEA",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 40,
+      "defense": 70,
+      "speed": 60,
+      "special": 70
+    },
+    "startingMoves": [
+      "Bubble"
+    ]
+  },
+  {
+    "id": 117,
+    "name": "SEADRA",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 65,
+      "defense": 95,
+      "speed": 85,
+      "special": 95
+    },
+    "startingMoves": [
+      "Bubble",
+      "Smokescreen"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "SANDSHREW",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 75,
+      "defense": 85,
+      "speed": 40,
+      "special": 30
+    },
+    "startingMoves": [
+      "Scratch"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "SANDSLASH",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 75,
+      "attack": 100,
+      "defense": 110,
+      "speed": 65,
+      "special": 55
+    },
+    "startingMoves": [
+      "Scratch",
+      "Sand Attack"
+    ]
+  },
+  {
+    "id": 138,
+    "name": "OMANYTE",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 40,
+      "defense": 100,
+      "speed": 35,
+      "special": 90
+    },
+    "startingMoves": [
+      "Water Gun",
+      "Withdraw"
+    ]
+  },
+  {
+    "id": 139,
+    "name": "OMASTAR",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 60,
+      "defense": 125,
+      "speed": 55,
+      "special": 115
+    },
+    "startingMoves": [
+      "Water Gun",
+      "Withdraw",
+      "Horn Attack"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "JIGGLYPUFF",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 115,
+      "attack": 45,
+      "defense": 20,
+      "speed": 20,
+      "special": 25
+    },
+    "startingMoves": [
+      "Sing"
+    ]
+  },
+  {
+    "id": 40,
+    "name": "WIGGLYTUFF",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 140,
+      "attack": 70,
+      "defense": 45,
+      "speed": 45,
+      "special": 50
+    },
+    "startingMoves": [
+      "Sing",
+      "Disable",
+      "Defense Curl",
+      "Doubleslap"
+    ]
+  },
+  {
+    "id": 133,
+    "name": "EEVEE",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 55,
+      "defense": 50,
+      "speed": 55,
+      "special": 65
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sand Attack"
+    ]
+  },
+  {
+    "id": 136,
+    "name": "FLAREON",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 130,
+      "defense": 60,
+      "speed": 65,
+      "special": 110
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Ember"
+    ]
+  },
+  {
+    "id": 135,
+    "name": "JOLTEON",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 65,
+      "defense": 60,
+      "speed": 130,
+      "special": 110
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Thundershock"
+    ]
+  },
+  {
+    "id": 134,
+    "name": "VAPOREON",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 130,
+      "attack": 65,
+      "defense": 60,
+      "speed": 65,
+      "special": 110
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sand Attack",
+      "Quick Attack",
+      "Water Gun"
+    ]
+  },
+  {
+    "id": 66,
+    "name": "MACHOP",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 80,
+      "defense": 50,
+      "speed": 35,
+      "special": 35
+    },
+    "startingMoves": [
+      "Karate Chop"
+    ]
+  },
+  {
+    "id": 41,
+    "name": "ZUBAT",
+    "types": [
+      "Poison",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 45,
+      "defense": 35,
+      "speed": 55,
+      "special": 40
+    },
+    "startingMoves": [
+      "Leech Life"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "EKANS",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 60,
+      "defense": 44,
+      "speed": 55,
+      "special": 40
+    },
+    "startingMoves": [
+      "Wrap",
+      "Leer"
+    ]
+  },
+  {
+    "id": 46,
+    "name": "PARAS",
+    "types": [
+      "Bug",
+      "Grass"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 70,
+      "defense": 55,
+      "speed": 25,
+      "special": 55
+    },
+    "startingMoves": [
+      "Scratch"
+    ]
+  },
+  {
+    "id": 61,
+    "name": "POLIWHIRL",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 65,
+      "defense": 65,
+      "speed": 90,
+      "special": 50
+    },
+    "startingMoves": [
+      "Bubble",
+      "Hypnosis",
+      "Water Gun"
+    ]
+  },
+  {
+    "id": 62,
+    "name": "POLIWRATH",
+    "types": [
+      "Water",
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 85,
+      "defense": 95,
+      "speed": 70,
+      "special": 70
+    },
+    "startingMoves": [
+      "Hypnosis",
+      "Water Gun",
+      "Doubleslap",
+      "Body Slam"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "WEEDLE",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 35,
+      "defense": 30,
+      "speed": 50,
+      "special": 20
+    },
+    "startingMoves": [
+      "Poison Sting",
+      "String Shot"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "KAKUNA",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 25,
+      "defense": 50,
+      "speed": 35,
+      "special": 25
+    },
+    "startingMoves": [
+      "Harden"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "BEEDRILL",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 80,
+      "defense": 40,
+      "speed": 75,
+      "special": 45
+    },
+    "startingMoves": [
+      "Fury Attack"
+    ]
+  },
+  {
+    "id": 85,
+    "name": "DODRIO",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 110,
+      "defense": 70,
+      "speed": 100,
+      "special": 60
+    },
+    "startingMoves": [
+      "Peck",
+      "Growl",
+      "Fury Attack"
+    ]
+  },
+  {
+    "id": 57,
+    "name": "PRIMEAPE",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 105,
+      "defense": 60,
+      "speed": 95,
+      "special": 60
+    },
+    "startingMoves": [
+      "Scratch",
+      "Leer",
+      "Karate Chop",
+      "Fury Swipes"
+    ]
+  },
+  {
+    "id": 51,
+    "name": "DUGTRIO",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 35,
+      "attack": 80,
+      "defense": 50,
+      "speed": 120,
+      "special": 70
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl",
+      "Dig"
+    ]
+  },
+  {
+    "id": 49,
+    "name": "VENOMOTH",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 65,
+      "defense": 60,
+      "speed": 90,
+      "special": 90
+    },
+    "startingMoves": [
+      "Tackle",
+      "Disable",
+      "Poisonpowder",
+      "Leech Life"
+    ]
+  },
+  {
+    "id": 87,
+    "name": "DEWGONG",
+    "types": [
+      "Water",
+      "Ice"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 70,
+      "defense": 80,
+      "speed": 70,
+      "special": 95
+    },
+    "startingMoves": [
+      "Headbutt",
+      "Growl",
+      "Aurora Beam"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "CATERPIE",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 30,
+      "defense": 35,
+      "speed": 45,
+      "special": 20
+    },
+    "startingMoves": [
+      "Tackle",
+      "String Shot"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "METAPOD",
+    "types": [
+      "Bug"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 20,
+      "defense": 55,
+      "speed": 30,
+      "special": 25
+    },
+    "startingMoves": [
+      "Harden"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "BUTTERFREE",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 45,
+      "defense": 50,
+      "speed": 70,
+      "special": 80
+    },
+    "startingMoves": [
+      "Confusion"
+    ]
+  },
+  {
+    "id": 68,
+    "name": "MACHAMP",
+    "types": [
+      "Fighting"
+    ],
+    "stats": {
+      "hp": 90,
+      "attack": 130,
+      "defense": 80,
+      "speed": 55,
+      "special": 65
+    },
+    "startingMoves": [
+      "Karate Chop",
+      "Low Kick",
+      "Leer"
+    ]
+  },
+  {
+    "id": 55,
+    "name": "GOLDUCK",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 82,
+      "defense": 78,
+      "speed": 85,
+      "special": 80
+    },
+    "startingMoves": [
+      "Scratch",
+      "Tail Whip",
+      "Disable"
+    ]
+  },
+  {
+    "id": 97,
+    "name": "HYPNO",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 85,
+      "attack": 73,
+      "defense": 70,
+      "speed": 67,
+      "special": 115
+    },
+    "startingMoves": [
+      "Pound",
+      "Hypnosis",
+      "Disable",
+      "Confusion"
+    ]
+  },
+  {
+    "id": 42,
+    "name": "GOLBAT",
+    "types": [
+      "Poison",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 75,
+      "attack": 80,
+      "defense": 70,
+      "speed": 90,
+      "special": 75
+    },
+    "startingMoves": [
+      "Leech Life",
+      "Screech",
+      "Bite"
+    ]
+  },
+  {
+    "id": 150,
+    "name": "MEWTWO",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 106,
+      "attack": 110,
+      "defense": 90,
+      "speed": 130,
+      "special": 154
+    },
+    "startingMoves": [
+      "Confusion",
+      "Disable",
+      "Swift",
+      "Psychic M"
+    ]
+  },
+  {
+    "id": 143,
+    "name": "SNORLAX",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 160,
+      "attack": 110,
+      "defense": 65,
+      "speed": 30,
+      "special": 65
+    },
+    "startingMoves": [
+      "Headbutt",
+      "Amnesia",
+      "Rest"
+    ]
+  },
+  {
+    "id": 129,
+    "name": "MAGIKARP",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 20,
+      "attack": 10,
+      "defense": 55,
+      "speed": 80,
+      "special": 20
+    },
+    "startingMoves": [
+      "Splash"
+    ]
+  },
+  {
+    "id": 89,
+    "name": "MUK",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 105,
+      "attack": 105,
+      "defense": 75,
+      "speed": 50,
+      "special": 65
+    },
+    "startingMoves": [
+      "Pound",
+      "Disable",
+      "Poison Gas"
+    ]
+  },
+  {
+    "id": 99,
+    "name": "KINGLER",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 130,
+      "defense": 115,
+      "speed": 75,
+      "special": 50
+    },
+    "startingMoves": [
+      "Bubble",
+      "Leer",
+      "Vicegrip"
+    ]
+  },
+  {
+    "id": 91,
+    "name": "CLOYSTER",
+    "types": [
+      "Water",
+      "Ice"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 95,
+      "defense": 180,
+      "speed": 70,
+      "special": 85
+    },
+    "startingMoves": [
+      "Withdraw",
+      "Supersonic",
+      "Clamp",
+      "Aurora Beam"
+    ]
+  },
+  {
+    "id": 101,
+    "name": "ELECTRODE",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 50,
+      "defense": 70,
+      "speed": 140,
+      "special": 80
+    },
+    "startingMoves": [
+      "Tackle",
+      "Screech",
+      "Sonicboom"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "CLEFABLE",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 95,
+      "attack": 70,
+      "defense": 73,
+      "speed": 60,
+      "special": 85
+    },
+    "startingMoves": [
+      "Sing",
+      "Doubleslap",
+      "Minimize",
+      "Metronome"
+    ]
+  },
+  {
+    "id": 110,
+    "name": "WEEZING",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 120,
+      "speed": 60,
+      "special": 85
+    },
+    "startingMoves": [
+      "Tackle",
+      "Smog",
+      "Sludge"
+    ]
+  },
+  {
+    "id": 53,
+    "name": "PERSIAN",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 70,
+      "defense": 60,
+      "speed": 115,
+      "special": 65
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl",
+      "Bite",
+      "Screech"
+    ]
+  },
+  {
+    "id": 105,
+    "name": "MAROWAK",
+    "types": [
+      "Ground"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 80,
+      "defense": 110,
+      "speed": 45,
+      "special": 50
+    },
+    "startingMoves": [
+      "Bone Club",
+      "Growl",
+      "Leer",
+      "Focus Energy"
+    ]
+  },
+  {
+    "id": 93,
+    "name": "HAUNTER",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 50,
+      "defense": 45,
+      "speed": 95,
+      "special": 115
+    },
+    "startingMoves": [
+      "Lick",
+      "Confuse Ray",
+      "Night Shade"
+    ]
+  },
+  {
+    "id": 63,
+    "name": "ABRA",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 25,
+      "attack": 20,
+      "defense": 15,
+      "speed": 90,
+      "special": 105
+    },
+    "startingMoves": [
+      "Teleport"
+    ]
+  },
+  {
+    "id": 65,
+    "name": "ALAKAZAM",
+    "types": [
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 50,
+      "defense": 45,
+      "speed": 120,
+      "special": 135
+    },
+    "startingMoves": [
+      "Teleport",
+      "Confusion",
+      "Disable"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "PIDGEOTTO",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 63,
+      "attack": 60,
+      "defense": 55,
+      "speed": 71,
+      "special": 50
+    },
+    "startingMoves": [
+      "Gust",
+      "Sand Attack"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "PIDGEOT",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 83,
+      "attack": 80,
+      "defense": 75,
+      "speed": 91,
+      "special": 70
+    },
+    "startingMoves": [
+      "Gust",
+      "Sand Attack",
+      "Quick Attack"
+    ]
+  },
+  {
+    "id": 121,
+    "name": "STARMIE",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 75,
+      "defense": 85,
+      "speed": 115,
+      "special": 100
+    },
+    "startingMoves": [
+      "Tackle",
+      "Water Gun",
+      "Harden"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "BULBASAUR",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 49,
+      "defense": 49,
+      "speed": 45,
+      "special": 65
+    },
+    "startingMoves": [
+      "Tackle",
+      "Growl"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "VENUSAUR",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 82,
+      "defense": 83,
+      "speed": 80,
+      "special": 100
+    },
+    "startingMoves": [
+      "Tackle",
+      "Growl",
+      "Leech Seed",
+      "Vine Whip"
+    ]
+  },
+  {
+    "id": 73,
+    "name": "TENTACRUEL",
+    "types": [
+      "Water",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 70,
+      "defense": 65,
+      "speed": 100,
+      "special": 120
+    },
+    "startingMoves": [
+      "Acid",
+      "Supersonic",
+      "Wrap"
+    ]
+  },
+  {
+    "id": 118,
+    "name": "GOLDEEN",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 67,
+      "defense": 60,
+      "speed": 63,
+      "special": 50
+    },
+    "startingMoves": [
+      "Peck",
+      "Tail Whip"
+    ]
+  },
+  {
+    "id": 119,
+    "name": "SEAKING",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 92,
+      "defense": 65,
+      "speed": 68,
+      "special": 80
+    },
+    "startingMoves": [
+      "Peck",
+      "Tail Whip",
+      "Supersonic"
+    ]
+  },
+  {
+    "id": 77,
+    "name": "PONYTA",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 85,
+      "defense": 55,
+      "speed": 90,
+      "special": 65
+    },
+    "startingMoves": [
+      "Ember"
+    ]
+  },
+  {
+    "id": 78,
+    "name": "RAPIDASH",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 100,
+      "defense": 70,
+      "speed": 105,
+      "special": 80
+    },
+    "startingMoves": [
+      "Ember",
+      "Tail Whip",
+      "Stomp",
+      "Growl"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "RATTATA",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 30,
+      "attack": 56,
+      "defense": 35,
+      "speed": 72,
+      "special": 25
+    },
+    "startingMoves": [
+      "Tackle",
+      "Tail Whip"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "RATICATE",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 55,
+      "attack": 81,
+      "defense": 60,
+      "speed": 97,
+      "special": 50
+    },
+    "startingMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Quick Attack"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "NIDORINO",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 61,
+      "attack": 72,
+      "defense": 57,
+      "speed": 65,
+      "special": 55
+    },
+    "startingMoves": [
+      "Leer",
+      "Tackle",
+      "Horn Attack"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "NIDORINA",
+    "types": [
+      "Poison"
+    ],
+    "stats": {
+      "hp": 70,
+      "attack": 62,
+      "defense": 67,
+      "speed": 56,
+      "special": 55
+    },
+    "startingMoves": [
+      "Growl",
+      "Tackle",
+      "Scratch"
+    ]
+  },
+  {
+    "id": 74,
+    "name": "GEODUDE",
+    "types": [
+      "Rock",
+      "Ground"
+    ],
+    "stats": {
+      "hp": 40,
+      "attack": 80,
+      "defense": 100,
+      "speed": 20,
+      "special": 30
+    },
+    "startingMoves": [
+      "Tackle"
+    ]
+  },
+  {
+    "id": 137,
+    "name": "PORYGON",
+    "types": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 60,
+      "defense": 70,
+      "speed": 40,
+      "special": 75
+    },
+    "startingMoves": [
+      "Tackle",
+      "Sharpen",
+      "Conversion"
+    ]
+  },
+  {
+    "id": 142,
+    "name": "AERODACTYL",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 105,
+      "defense": 65,
+      "speed": 130,
+      "special": 60
+    },
+    "startingMoves": [
+      "Wing Attack",
+      "Agility"
+    ]
+  },
+  {
+    "id": 81,
+    "name": "MAGNEMITE",
+    "types": [
+      "Electric"
+    ],
+    "stats": {
+      "hp": 25,
+      "attack": 35,
+      "defense": 70,
+      "speed": 45,
+      "special": 95
+    },
+    "startingMoves": [
+      "Tackle"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "CHARMANDER",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 39,
+      "attack": 52,
+      "defense": 43,
+      "speed": 65,
+      "special": 50
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "SQUIRTLE",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 44,
+      "attack": 48,
+      "defense": 65,
+      "speed": 43,
+      "special": 50
+    },
+    "startingMoves": [
+      "Tackle",
+      "Tail Whip"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "CHARMELEON",
+    "types": [
+      "Fire"
+    ],
+    "stats": {
+      "hp": 58,
+      "attack": 64,
+      "defense": 58,
+      "speed": 80,
+      "special": 65
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl",
+      "Ember"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "WARTORTLE",
+    "types": [
+      "Water"
+    ],
+    "stats": {
+      "hp": 59,
+      "attack": 63,
+      "defense": 80,
+      "speed": 58,
+      "special": 65
+    },
+    "startingMoves": [
+      "Tackle",
+      "Tail Whip",
+      "Bubble"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "CHARIZARD",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "stats": {
+      "hp": 78,
+      "attack": 84,
+      "defense": 78,
+      "speed": 100,
+      "special": 85
+    },
+    "startingMoves": [
+      "Scratch",
+      "Growl",
+      "Ember",
+      "Leer"
+    ]
+  },
+  {
+    "id": 43,
+    "name": "ODDISH",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 45,
+      "attack": 50,
+      "defense": 55,
+      "speed": 30,
+      "special": 75
+    },
+    "startingMoves": [
+      "Absorb"
+    ]
+  },
+  {
+    "id": 44,
+    "name": "GLOOM",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 60,
+      "attack": 65,
+      "defense": 70,
+      "speed": 40,
+      "special": 85
+    },
+    "startingMoves": [
+      "Absorb",
+      "Poisonpowder",
+      "Stun Spore"
+    ]
+  },
+  {
+    "id": 45,
+    "name": "VILEPLUME",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 75,
+      "attack": 80,
+      "defense": 85,
+      "speed": 50,
+      "special": 100
+    },
+    "startingMoves": [
+      "Stun Spore",
+      "Sleep Powder",
+      "Acid",
+      "Petal Dance"
+    ]
+  },
+  {
+    "id": 69,
+    "name": "BELLSPROUT",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 50,
+      "attack": 75,
+      "defense": 35,
+      "speed": 40,
+      "special": 70
+    },
+    "startingMoves": [
+      "Vine Whip",
+      "Growth"
+    ]
+  },
+  {
+    "id": 70,
+    "name": "WEEPINBELL",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 65,
+      "attack": 90,
+      "defense": 50,
+      "speed": 55,
+      "special": 85
+    },
+    "startingMoves": [
+      "Vine Whip",
+      "Growth",
+      "Wrap"
+    ]
+  },
+  {
+    "id": 71,
+    "name": "VICTREEBEL",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "stats": {
+      "hp": 80,
+      "attack": 105,
+      "defense": 65,
+      "speed": 70,
+      "special": 100
+    },
+    "startingMoves": [
+      "Sleep Powder",
+      "Stun Spore",
+      "Acid",
+      "Razor Leaf"
+    ]
+  }
+]

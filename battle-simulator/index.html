@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Gen 1 Battle Simulator</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="nav">
+            <h1>Pokemon Gen 1 Battle Simulator</h1>
+            <div class="nav-buttons">
+                <button id="teamBuilderBtn" class="nav-btn active">Team Builder</button>
+                <button id="battleBtn" class="nav-btn">Battle</button>
+            </div>
+        </nav>
+
+        <!-- Team Builder Section -->
+        <section id="teamBuilderSection" class="section active">
+            <div class="container">
+                <div class="team-builder">
+                    <div class="left-panel">
+                        <h2>Your Teams</h2>
+                        <div class="saved-teams">
+                            <div id="teamsList"></div>
+                            <button id="newTeamBtn" class="btn-primary">New Team</button>
+                        </div>
+
+                        <div class="current-team-panel">
+                            <h3>Current Team</h3>
+                            <input type="text" id="teamName" placeholder="Team Name" class="input-field">
+                            <div id="currentTeam" class="current-team"></div>
+                            <div class="team-actions">
+                                <button id="saveTeamBtn" class="btn-success">Save Team</button>
+                                <button id="clearTeamBtn" class="btn-danger">Clear Team</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-panel">
+                        <h2>Pokemon Selection</h2>
+                        <input type="text" id="pokemonSearch" placeholder="Search Pokemon..." class="search-input">
+                        <div id="pokemonList" class="pokemon-list"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Battle Section -->
+        <section id="battleSection" class="section">
+            <div class="container">
+                <div class="battle-setup" id="battleSetup">
+                    <h2>Battle Setup</h2>
+                    <div class="setup-panel">
+                        <div class="player-setup">
+                            <h3>Your Team</h3>
+                            <select id="playerTeamSelect" class="select-field">
+                                <option value="">Select a team...</option>
+                            </select>
+                        </div>
+
+                        <div class="opponent-setup">
+                            <h3>Opponent</h3>
+                            <div class="opponent-options">
+                                <button id="battleAIBtn" class="btn-primary">Battle AI</button>
+                                <button id="battleRandomBtn" class="btn-primary">Random Team Battle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="battle-screen" id="battleScreen" style="display: none;">
+                    <div class="battle-field">
+                        <!-- Opponent Pokemon -->
+                        <div class="pokemon-display opponent">
+                            <div class="pokemon-info">
+                                <div class="pokemon-name-hp">
+                                    <h3 id="opponentName">???</h3>
+                                    <div class="hp-bar">
+                                        <div class="hp-fill" id="opponentHP" style="width: 100%"></div>
+                                    </div>
+                                    <div class="hp-text">
+                                        <span id="opponentHPText">HP: 100/100</span>
+                                        <span id="opponentLevel">Lv. 50</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pokemon-sprite" id="opponentSprite">
+                                <div class="sprite-placeholder">?</div>
+                            </div>
+                        </div>
+
+                        <!-- Player Pokemon -->
+                        <div class="pokemon-display player">
+                            <div class="pokemon-sprite" id="playerSprite">
+                                <div class="sprite-placeholder">P</div>
+                            </div>
+                            <div class="pokemon-info">
+                                <div class="pokemon-name-hp">
+                                    <h3 id="playerName">???</h3>
+                                    <div class="hp-bar">
+                                        <div class="hp-fill" id="playerHP" style="width: 100%"></div>
+                                    </div>
+                                    <div class="hp-text">
+                                        <span id="playerHPText">HP: 100/100</span>
+                                        <span id="playerLevel">Lv. 50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Battle Controls -->
+                    <div class="battle-controls">
+                        <div class="battle-log">
+                            <div id="battleLog"></div>
+                        </div>
+
+                        <div class="battle-menu" id="battleMenu">
+                            <div class="menu-section" id="mainMenu">
+                                <button class="menu-btn fight-btn">Fight</button>
+                                <button class="menu-btn" id="switchBtn">Switch</button>
+                            </div>
+
+                            <div class="menu-section" id="moveMenu" style="display: none;">
+                                <div id="movesList" class="moves-grid"></div>
+                                <button class="menu-btn back-btn">Back</button>
+                            </div>
+
+                            <div class="menu-section" id="switchMenu" style="display: none;">
+                                <div id="teamSwitchList"></div>
+                                <button class="menu-btn back-btn">Back</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="endBattleBtn" class="btn-danger end-battle-btn">End Battle</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="src/data-loader.js"></script>
+    <script src="src/battle-engine.js"></script>
+    <script src="src/team-builder.js"></script>
+    <script src="src/battle-ui.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>
