@@ -29,3 +29,6 @@
 *.sn*
 *.sa*
 *.sg1
+
+# macOS system files
+.DS_Store
