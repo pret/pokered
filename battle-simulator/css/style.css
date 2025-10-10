@@ -439,6 +439,17 @@ body {
     border-left-color: #f39c12;
 }
 
+.turn-label {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
 .battle-menu {
     background: #f8f9fa;
     padding: 1.5rem;

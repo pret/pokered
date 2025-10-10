@@ -189,7 +189,8 @@ class BattleUI {
                 logClass += ' status';
             }
 
-            return `<div class="${logClass}">${log.message}</div>`;
+            const turnLabel = log.turn > 0 ? `<span class="turn-label">Turn ${log.turn}</span> ` : '';
+            return `<div class="${logClass}">${turnLabel}${log.message}</div>`;
         }).join('');
 
         // Scroll to bottom

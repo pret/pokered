@@ -115,6 +115,8 @@ class BattleEngine {
     playerAttack(moveIndex) {
         if (this.battleEnded) return null;
 
+        this.turn++;
+
         const move = this.playerActive.moves[moveIndex];
         const result = this.executeMove(this.playerActive, this.opponentActive, move);
 
@@ -146,7 +148,6 @@ class BattleEngine {
             return this.handleFaint('player');
         }
 
-        this.turn++;
         return result;
     }
 
