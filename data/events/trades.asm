@@ -13,7 +13,8 @@ TradeMons:
 	; Red/Green. Japanese Blue changed _AfterTrade2Text to say your Pokémon
 	; "went and evolved" and also changed the trades to match. English
 	; Red/Blue uses the original JP Red/Green trades but with the JP Blue
-	; post-trade text.
+	; post-trade text. English Yellow changed _AfterTrade2Text to
+	; not mention evolution.
 	npctrade NIDORINO,   NIDORINA,  TRADE_DIALOGSET_CASUAL,    "TERRY"
 	npctrade ABRA,       MR_MIME,   TRADE_DIALOGSET_CASUAL,    "MARCEL"
 	npctrade BUTTERFREE, BEEDRILL,  TRADE_DIALOGSET_HAPPY,     "CHIKUCHIKU" ; unused
