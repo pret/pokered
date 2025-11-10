@@ -24,7 +24,7 @@ ClearBgMap::
 
 ; fills a VRAM background map with tile index in register l
 ; INPUT: h - high byte of background tile map address in VRAM
-FillBgMap: ; Unreferenced
+FillBgMap:: ; unreferenced
 	ld a, l
 
 FillBgMapCommon:
@@ -107,10 +107,10 @@ RedrawRowOrColumn::
 	ld a, e
 	inc a
 ; the following 6 lines wrap us from the right edge to the left edge if necessary
-	and TILEMAP_WIDTH - 1
+	and %11111
 	ld b, a
 	ld a, e
-	and ~(TILEMAP_WIDTH - 1)
+	and %11100000
 	or b
 	ld e, a
 	dec c

@@ -609,7 +609,7 @@ TownMapSpriteBlinkingAnimation::
 	xor a
 	jr .done
 .hideSprites
-	ld hl, wShadowOAM
+	ld hl, wShadowOAMSprite00YCoord
 	ld b, OAM_COUNT - 4
 	ld de, OBJ_SIZE
 .hideSpritesLoop

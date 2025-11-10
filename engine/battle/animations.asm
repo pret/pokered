@@ -1723,7 +1723,7 @@ AnimationMinimizeMon:
 	ld hl, wTempPic
 	push hl
 	xor a
-	ld bc, 7 * 7 tiles
+	ld bc, (7 * 7) tiles
 	call FillMemory
 	pop hl
 	ld de, 7 * 3 tiles + 4 tiles + 4

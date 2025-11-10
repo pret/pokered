@@ -677,7 +677,7 @@ SwitchPartyMon_ClearGfx:
 	dec c
 	jr nz, .clearMonBGLoop
 	pop af
-	ld hl, wShadowOAM
+	ld hl, wShadowOAMSprite00YCoord
 	ld bc, OBJ_SIZE * 4
 	call AddNTimes
 	ld de, OBJ_SIZE

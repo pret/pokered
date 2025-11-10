@@ -106,7 +106,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 SlidePlayerHeadLeft:
 	push bc
 	ld hl, wShadowOAMSprite00XCoord
-	ld c, $15 ; number of OAM entries
+	ld c, 7 * 3 ; number of OAM entries
 	ld de, OBJ_SIZE
 .loop
 	dec [hl] ; decrement X
