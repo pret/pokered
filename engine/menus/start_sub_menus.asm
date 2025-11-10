@@ -683,7 +683,7 @@ SwitchPartyMon_ClearGfx:
 	ld de, OBJ_SIZE
 	ld c, e
 .clearMonOAMLoop
-	ld [hl], $a0
+	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec c
 	jr nz, .clearMonOAMLoop

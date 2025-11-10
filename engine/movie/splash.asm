@@ -64,7 +64,7 @@ AnimateShootingStar:
 	ld c, 4
 	ld de, OBJ_SIZE
 .clearOAMLoop
-	ld [hl], 160
+	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec c
 	jr nz, .clearOAMLoop

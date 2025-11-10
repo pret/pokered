@@ -9,8 +9,8 @@ ClearSprites::
 	ret
 
 HideSprites::
-	ld a, 160
-	ld hl, wShadowOAM
+	ld a, SCREEN_HEIGHT_PX + OAM_Y_OFS
+	ld hl, wShadowOAMSprite00YCoord
 	ld de, OBJ_SIZE
 	ld b, OAM_COUNT
 .loop

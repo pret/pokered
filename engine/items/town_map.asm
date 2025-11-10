@@ -613,7 +613,7 @@ TownMapSpriteBlinkingAnimation::
 	ld b, OAM_COUNT - 4
 	ld de, OBJ_SIZE
 .hideSpritesLoop
-	ld [hl], $a0
+	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec b
 	jr nz, .hideSpritesLoop

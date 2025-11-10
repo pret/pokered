@@ -1318,7 +1318,7 @@ AdjustOAMBlockXPos2:
 	jr c, .skipPuttingEntryOffScreen
 ; put off-screen if X >= 168
 	dec hl
-	ld a, 160
+	ld a, SCREEN_HEIGHT_PX + OAM_Y_OFS
 	ld [hli], a
 .skipPuttingEntryOffScreen
 	ld [hl], a
@@ -2379,7 +2379,7 @@ FallingObjects_UpdateOAMEntry:
 	inc a
 	cp 112
 	jr c, .next
-	ld a, 160 ; if Y >= 112, put it off-screen
+	ld a, SCREEN_HEIGHT_PX + OAM_Y_OFS ; if Y >= 112, put it off-screen
 .next
 	ld [hli], a ; Y
 	ld a, [wFallingObjectMovementByte]
