@@ -11,7 +11,7 @@ HallOfFamePC:
 	ld bc, ($20 tiles) / 2
 	call ZeroMemory
 	ld hl, vChars2 tile $7e
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	ld a, $ff ; solid black
 	call FillMemory
 	hlcoord 0, 0

@@ -511,7 +511,7 @@ DrawTrainerInfo:
 	ld de, 13 tiles
 	add hl, de ; hl = colon tile pattern
 	ld de, vChars1 tile $56
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	ld a, BANK(TextBoxGraphics)
 	push bc
 	call FarCopyData2

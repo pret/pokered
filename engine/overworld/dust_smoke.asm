@@ -70,7 +70,7 @@ LoadSmokeTileFourTimes::
 	push hl
 	call LoadSmokeTile
 	pop hl
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	add hl, bc
 	pop bc
 	dec c

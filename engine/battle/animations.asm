@@ -1726,7 +1726,7 @@ AnimationMinimizeMon:
 	ld bc, (7 * 7) tiles
 	call FillMemory
 	pop hl
-	ld de, 7 * 3 tiles + 4 tiles + 4
+	ld de, (7 * 3 + 4) tiles + TILE_SIZE / 4
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
@@ -1971,7 +1971,7 @@ AnimationSubstitute:
 	jp AnimationShowMonPic
 
 CopyMonsterSpriteData:
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	ld a, BANK(MonsterSprite)
 	jp FarCopyData2
 
