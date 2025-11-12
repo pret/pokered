@@ -1,4 +1,4 @@
-MACRO validate_coords
+MACRO? validate_coords
 	IF _NARG >= 4
 		IF \1 >= \3
 			fail "x coord out of range"
@@ -11,19 +11,19 @@ MACRO validate_coords
 	ENDC
 ENDM
 
-MACRO hlcoord
+MACRO? hlcoord
 	coord hl, \#
 ENDM
 
-MACRO bccoord
+MACRO? bccoord
 	coord bc, \#
 ENDM
 
-MACRO decoord
+MACRO? decoord
 	coord de, \#
 ENDM
 
-MACRO coord
+MACRO? coord
 ; register, x, y[, origin]
 	validate_coords \2, \3
 	IF _NARG >= 4
@@ -33,19 +33,19 @@ MACRO coord
 	ENDC
 ENDM
 
-MACRO hlbgcoord
+MACRO? hlbgcoord
 	bgcoord hl, \#
 ENDM
 
-MACRO bcbgcoord
+MACRO? bcbgcoord
 	bgcoord bc, \#
 ENDM
 
-MACRO debgcoord
+MACRO? debgcoord
 	bgcoord de, \#
 ENDM
 
-MACRO bgcoord
+MACRO? bgcoord
 ; register, x, y[, origin]
 	validate_coords \2, \3, TILEMAP_WIDTH, TILEMAP_HEIGHT
 	IF _NARG >= 4
@@ -55,30 +55,30 @@ MACRO bgcoord
 	ENDC
 ENDM
 
-MACRO hlowcoord
+MACRO? hlowcoord
 	owcoord hl, \#
 ENDM
 
-MACRO bcowcoord
+MACRO? bcowcoord
 	owcoord bc, \#
 ENDM
 
-MACRO deowcoord
+MACRO? deowcoord
 	owcoord de, \#
 ENDM
 
-MACRO owcoord
+MACRO? owcoord
 ; register, x, y, map width
 	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
 ENDM
 
-MACRO event_displacement
+MACRO? event_displacement
 ; map width, x blocks, y blocks
 	dw (wOverworldMap + 7 + (\1) + ((\1) + 6) * ((\3) >> 1) + ((\2) >> 1))
 	db \3, \2
 ENDM
 
-MACRO dwcoord
+MACRO? dwcoord
 ; x, y
 	validate_coords \1, \2
 	IF _NARG >= 3
@@ -88,7 +88,7 @@ MACRO dwcoord
 	ENDC
 ENDM
 
-MACRO ldcoord_a
+MACRO? ldcoord_a
 ; x, y[, origin]
 	validate_coords \1, \2
 	IF _NARG >= 3
@@ -98,7 +98,7 @@ MACRO ldcoord_a
 	ENDC
 ENDM
 
-MACRO lda_coord
+MACRO? lda_coord
 ; x, y[, origin]
 	validate_coords \1, \2
 	IF _NARG >= 3
@@ -108,7 +108,7 @@ MACRO lda_coord
 	ENDC
 ENDM
 
-MACRO dbmapcoord
+MACRO? dbmapcoord
 ; x, y
 	db \2, \1
 ENDM

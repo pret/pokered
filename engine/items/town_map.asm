@@ -57,7 +57,7 @@ DisplayTownMap:
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .copyMapName
 	hlcoord 1, 0
 	ld de, wNameBuffer
@@ -166,7 +166,7 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList
 	decoord 18, 0
 .townMapFlyLoop
-	ld a, " "
+	ld a, ' '
 	ld [de], a
 	push hl
 	push hl
@@ -183,9 +183,9 @@ LoadTownMap_Fly::
 	ld c, 15
 	call DelayFrames
 	hlcoord 18, 0
-	ld [hl], "▲"
+	ld [hl], '▲'
 	hlcoord 19, 0
-	ld [hl], "▼"
+	ld [hl], '▼'
 	pop hl
 .inputLoop
 	push hl
@@ -363,7 +363,7 @@ DrawPlayerOrBirdSprite:
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .loop
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
