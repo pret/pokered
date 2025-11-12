@@ -357,7 +357,7 @@ DrawPlayerCharacter:
 ClearBothBGMaps:
 	ld hl, vBGMap0
 	ld bc, 2 * TILEMAP_AREA
-	ld a, " "
+	ld a, ' '
 	jp FillMemory
 
 LoadTitleMonSprite:

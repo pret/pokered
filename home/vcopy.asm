@@ -19,7 +19,7 @@ GetRowColAddressBgMap::
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
 ClearBgMap::
-	ld a, " "
+	ld a, ' '
 	jr .next
 	ld a, l
 .next

@@ -150,7 +150,7 @@ Trade_Delay80:
 Trade_ClearTileMap:
 	hlcoord 0, 0
 	ld bc, SCREEN_AREA
-	ld a, " "
+	ld a, ' '
 	jp FillMemory
 
 LoadTradingGFXAndMonNames:
@@ -168,7 +168,7 @@ LoadTradingGFXAndMonNames:
 	call FarCopyData2
 	ld hl, vBGMap0
 	ld bc, 2 * TILEMAP_AREA
-	ld a, " "
+	ld a, ' '
 	call FillMemory
 	call ClearSprites
 	ld a, $ff

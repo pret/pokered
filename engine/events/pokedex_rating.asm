@@ -42,7 +42,7 @@ DisplayDexRating:
 	inc de
 .copyRatingTextLoop
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr z, .doneCopying
 	ld [de], a
 	inc de

@@ -240,7 +240,7 @@ PrintSafariZoneSteps::
 	cp 10
 	jr nc, .tenOrMore
 	hlcoord 5, 3
-	ld a, " "
+	ld a, ' '
 	ld [hl], a
 .tenOrMore
 	hlcoord 6, 3
