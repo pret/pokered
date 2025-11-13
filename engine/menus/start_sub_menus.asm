@@ -511,7 +511,7 @@ DrawTrainerInfo:
 	ld de, 13 tiles
 	add hl, de ; hl = colon tile pattern
 	ld de, vChars1 tile $56
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	ld a, BANK(TextBoxGraphics)
 	push bc
 	call FarCopyData2
@@ -677,13 +677,13 @@ SwitchPartyMon_ClearGfx:
 	dec c
 	jr nz, .clearMonBGLoop
 	pop af
-	ld hl, wShadowOAM
-	ld bc, $10
+	ld hl, wShadowOAMSprite00YCoord
+	ld bc, OBJ_SIZE * 4
 	call AddNTimes
-	ld de, $4
+	ld de, OBJ_SIZE
 	ld c, e
 .clearMonOAMLoop
-	ld [hl], $a0
+	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec c
 	jr nz, .clearMonOAMLoop

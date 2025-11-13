@@ -611,7 +611,7 @@ CopySGBBorderTiles:
 	ld b, 128
 .tileLoop
 ; Copy bit planes 1 and 2 of the tile data.
-	ld c, 16
+	ld c, TILE_SIZE
 .copyLoop
 	ld a, [hli]
 	ld [de], a

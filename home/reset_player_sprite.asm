@@ -15,6 +15,7 @@ ResetPlayerSpriteData::
 
 ; overwrites sprite data with zeroes
 ResetPlayerSpriteData_ClearSpriteData::
-	ld bc, $10
+	ld bc, SPRITESTATEDATA1_LENGTH
+	ASSERT SPRITESTATEDATA2_LENGTH == SPRITESTATEDATA1_LENGTH
 	xor a
 	jp FillMemory
