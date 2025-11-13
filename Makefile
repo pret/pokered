@@ -50,7 +50,17 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all red blue blue_debug clean tidy compare tools
+.PHONY: \
+	all \
+	red \
+	blue \
+	blue_debug \
+	red_vc \
+	blue_vc \
+	clean \
+	tidy \
+	compare \
+	tools
 
 all: $(roms)
 red:        pokered.gbc
