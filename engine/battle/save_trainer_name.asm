@@ -14,7 +14,7 @@ SaveTrainerName::
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .CopyCharacter
 	ret
 

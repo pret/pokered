@@ -51,7 +51,7 @@ RedrawPartyMenu_::
 	dec hl
 	dec hl
 	dec hl
-	ld a, "▷" ; unfilled right arrow menu cursor
+	ld a, '▷' ; unfilled right arrow menu cursor
 	ld [hli], a ; place the cursor
 	inc hl
 	inc hl

@@ -1,6 +1,6 @@
 ; Used in wram.asm
 
-MACRO flag_array
+MACRO? flag_array
 	ds ((\1) + 7) / 8
 ENDM
 

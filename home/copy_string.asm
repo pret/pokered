@@ -8,6 +8,6 @@ CopyString::
 	ld a, [de]
 	inc de
 	ld [hli], a
-	cp "@"
+	cp '@'
 	jr nz, CopyString
 	ret

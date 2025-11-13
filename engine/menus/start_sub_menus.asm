@@ -289,7 +289,7 @@ ErasePartyMenuCursors::
 	ld bc, 2 * SCREEN_WIDTH ; menu cursor positions are 2 rows apart
 	ld a, 6 ; 6 menu cursor positions
 .loop
-	ld [hl], " "
+	ld [hl], ' '
 	add hl, bc
 	dec a
 	jr nz, .loop
@@ -329,7 +329,7 @@ StartMenu_Item::
 	jp RedisplayStartMenu
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)
-	ld a, " "
+	ld a, ' '
 	ldcoord_a 5, 4
 	ldcoord_a 5, 6
 	ldcoord_a 5, 8
@@ -481,7 +481,7 @@ DrawTrainerInfo:
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
 	hlcoord 0, 2
-	ld a, " "
+	ld a, ' '
 	call TrainerInfo_DrawVerticalLine
 	hlcoord 1, 2
 	call TrainerInfo_DrawVerticalLine
@@ -671,7 +671,7 @@ SwitchPartyMon_ClearGfx:
 	ld bc, SCREEN_WIDTH * 2
 	call AddNTimes
 	ld c, SCREEN_WIDTH * 2
-	ld a, " "
+	ld a, ' '
 .clearMonBGLoop ; clear the mon's row in the party menu
 	ld [hli], a
 	dec c

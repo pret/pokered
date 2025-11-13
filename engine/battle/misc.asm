@@ -17,7 +17,7 @@ FormatMovesString:
 	ld hl, wNameBuffer
 .copyNameLoop
 	ld a, [hli]
-	cp "@"
+	cp '@'
 	jr z, .doneCopyingName
 	ld [de], a
 	inc de
@@ -26,7 +26,7 @@ FormatMovesString:
 	ld a, b
 	ld [wNumMovesMinusOne], a
 	inc b
-	ld a, "<NEXT>"
+	ld a, '<NEXT>'
 	ld [de], a
 	inc de
 	pop hl
@@ -35,19 +35,19 @@ FormatMovesString:
 	jr z, .done
 	jr .printMoveNameLoop
 .printDashLoop
-	ld a, "-"
+	ld a, '-'
 	ld [de], a
 	inc de
 	inc b
 	ld a, b
 	cp NUM_MOVES
 	jr z, .done
-	ld a, "<NEXT>"
+	ld a, '<NEXT>'
 	ld [de], a
 	inc de
 	jr .printDashLoop
 .done
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 	ret
 

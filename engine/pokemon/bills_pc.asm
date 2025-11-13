@@ -157,11 +157,11 @@ BillsPCMenu:
 ; two digit box num
 	sub 9
 	hlcoord 17, 16
-	ld [hl], "1"
-	add "0"
+	ld [hl], '1'
+	add '0'
 	jr .next
 .singleDigitBoxNum
-	add "1"
+	add '1'
 .next
 	ldcoord_a 18, 16
 	hlcoord 10, 16
@@ -240,15 +240,15 @@ BillsPCDeposit:
 	cp 9
 	jr c, .singleDigitBoxNum
 	sub 9
-	ld [hl], "1"
+	ld [hl], '1'
 	inc hl
-	add "0"
+	add '0'
 	jr .next
 .singleDigitBoxNum
-	add "1"
+	add '1'
 .next
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 	ld hl, MonWasStoredText
 	call PrintText
 	jp BillsPCMenu

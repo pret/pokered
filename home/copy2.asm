@@ -161,7 +161,7 @@ CopyVideoDataDouble::
 
 ClearScreenArea::
 ; Clear tilemap area cxb at hl.
-	ld a, " "
+	ld a, ' '
 	ld de, SCREEN_WIDTH
 .loopRows
 	push hl
@@ -218,7 +218,7 @@ ClearScreen::
 	ld bc, SCREEN_AREA
 	inc b
 	hlcoord 0, 0
-	ld a, " "
+	ld a, ' '
 .loop
 	ld [hli], a
 	dec c
