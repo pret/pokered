@@ -473,8 +473,9 @@ ROM0 bank #0:
 	         $1cc1 = TextCommandJumpTable
 	         $1cdd = GetRowColAddressBgMap
 	         $1cf0 = ClearBgMap
-	         $1cf5 = ClearBgMap.next
-	         $1cf9 = ClearBgMap.loop
+	         $1cf4 = FillBgMap
+	         $1cf5 = FillBgMapCommon
+	         $1cf9 = FillBgMapCommon.loop
 	         $1d01 = RedrawRowOrColumn
 	         $1d0c = RedrawRowOrColumn.redrawColumn
 	         $1d17 = RedrawRowOrColumn.loop1
@@ -1197,6 +1198,7 @@ ROMX bank #1:
 	         $4361 = DisplayTitleScreen.pokemonLogoLastTileRowLoop
 	         $4377 = DisplayTitleScreen.tileScreenCopyrightTilesLoop
 	         $437f = DisplayTitleScreen.tileScreenCopyrightTiles
+	         $438f = DisplayTitleScreen.tileScreenCopyrightTilesEnd
 	         $438f = DisplayTitleScreen.next
 	         $43c6 = DisplayTitleScreen.bouncePokemonLogoLoop
 	         $43d4 = DisplayTitleScreen.skipPlayingSound

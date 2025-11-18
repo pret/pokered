@@ -448,8 +448,9 @@
 00:1cc1 TextCommandJumpTable
 00:1cdd GetRowColAddressBgMap
 00:1cf0 ClearBgMap
-00:1cf5 ClearBgMap.next
-00:1cf9 ClearBgMap.loop
+00:1cf4 FillBgMap
+00:1cf5 FillBgMapCommon
+00:1cf9 FillBgMapCommon.loop
 00:1d01 RedrawRowOrColumn
 00:1d0c RedrawRowOrColumn.redrawColumn
 00:1d17 RedrawRowOrColumn.loop1
@@ -1169,6 +1170,7 @@
 01:4377 DisplayTitleScreen.tileScreenCopyrightTilesLoop
 01:437f DisplayTitleScreen.tileScreenCopyrightTiles
 01:438f DisplayTitleScreen.next
+01:438f DisplayTitleScreen.tileScreenCopyrightTilesEnd
 01:43c6 DisplayTitleScreen.bouncePokemonLogoLoop
 01:43d4 DisplayTitleScreen.skipPlayingSound
 01:43db DisplayTitleScreen.TitleScreenPokemonLogoYScrolls
