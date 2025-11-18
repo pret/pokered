@@ -148,16 +148,16 @@ PrepareOAMData::
 	ldh a, [hOAMBufferOffset]
 	ld l, a
 	ld h, HIGH(wShadowOAM)
-	ld de, $4
-	ld b, $a0
+	ld de, OBJ_SIZE
+	ld b, SCREEN_HEIGHT_PX + OAM_Y_OFS
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
-	ld a, $a0
+	ld a, LOW(wShadowOAMEnd)
 	jr z, .clear
 
 ; Don't clear the last 4 entries because they are used for the shadow in the
 ; jumping down ledge animation and the rod in the fishing animation.
-	ld a, $90
+	ld a, LOW(wShadowOAMSprite36)
 
 .clear
 	cp l

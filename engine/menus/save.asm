@@ -225,15 +225,15 @@ SaveMainData:
 	ld de, sSpriteData
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
-	ld hl, wBoxDataStart
 
 ; this part is redundant, SaveCurrentBoxData is always called next
+	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
+
 	ldh a, [hTileAnimations]
 	ld [sTileAnimations], a
-
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call CalcCheckSum
