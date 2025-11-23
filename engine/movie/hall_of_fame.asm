@@ -7,8 +7,8 @@ AnimateHallOfFame:
 	call LoadTextBoxTilePatterns
 	call DisableLCD
 	ld hl, vBGMap0
-	ld bc, $800
-	ld a, " "
+	ld bc, 2 * TILEMAP_AREA
+	ld a, ' '
 	call FillMemory
 	call EnableLCD
 	ld hl, rLCDC

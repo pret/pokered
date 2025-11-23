@@ -16,30 +16,30 @@ MansionB1FCheckReplaceSwitchDoorBlocks:
 	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .switchTurnedOn
 	ld a, $e
-	ld bc, $80d
+	lb bc, 8, 13
 	call Mansion2ReplaceBlock
 	ld a, $e
-	ld bc, $b06
+	lb bc, 11, 6
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	ld bc, $304
+	lb bc, 3, 4
 	call Mansion2ReplaceBlock
 	ld a, $54
-	ld bc, $808
+	lb bc, 8, 8
 	call Mansion2ReplaceBlock
 	ret
 .switchTurnedOn
 	ld a, $2d
-	ld bc, $80d
+	lb bc, 8, 13
 	call Mansion2ReplaceBlock
 	ld a, $5f
-	ld bc, $b06
+	lb bc, 11, 6
 	call Mansion2ReplaceBlock
 	ld a, $e
-	ld bc, $304
+	lb bc, 3, 4
 	call Mansion2ReplaceBlock
 	ld a, $e
-	ld bc, $808
+	lb bc, 8, 8
 	call Mansion2ReplaceBlock
 	ret
 

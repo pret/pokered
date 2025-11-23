@@ -1,5 +1,5 @@
 #define PROGRAM_NAME "make_patch"
-#define USAGE_OPTS "values.sym patched.gbc original.gbc vc.patch.template vc.patch"
+#define USAGE_OPTS "[--ignore addr:size] values.sym patched.gbc original.gbc vc.patch.template vc.patch"
 
 #include "common.h"
 
@@ -127,7 +127,7 @@ struct Symbol *parse_symbols(const char *filename) {
 		if (c == EOF || c == '\n' || c == '\r' || c == ';' || (state == SYM_NAME && (c == ' ' || c == '\t'))) {
 			if (state == SYM_NAME) {
 				// The symbol name has ended; append the buffered symbol
-				buffer_append(buffer, &(char []){'\0'});
+				buffer_append(buffer, &(char){'\0'});
 				symbol_append(&symbols, buffer->data, bank, address);
 			}
 			// Skip to the next line, ignoring anything after the symbol value and name
@@ -143,7 +143,7 @@ struct Symbol *parse_symbols(const char *filename) {
 				// The symbol value or name has started; buffer its contents
 				if (++state == SYM_NAME) {
 					// The symbol name has started; parse the buffered value
-					buffer_append(buffer, &(char []){'\0'});
+					buffer_append(buffer, &(char){'\0'});
 					parse_symbol_value(buffer->data, &bank, &address);
 				}
 				buffer->size = 0;
@@ -349,7 +349,15 @@ void skip_to_next_line(FILE *restrict input, FILE *restrict output) {
 	}
 }
 
-struct Buffer *process_template(const char *template_filename, const char *patch_filename, FILE *restrict new_rom, FILE *restrict orig_rom, const struct Symbol *symbols) {
+struct Buffer *process_template(
+	const char *template_filename,
+	const char *patch_filename,
+	FILE *restrict new_rom,
+	FILE *restrict orig_rom,
+	const struct Symbol *symbols,
+	unsigned int ignore_addr,
+	unsigned int ignore_size
+) {
 	FILE *input = xfopen(template_filename, 'r');
 	FILE *output = xfopen(patch_filename, 'w');
 
@@ -358,6 +366,11 @@ struct Buffer *process_template(const char *template_filename, const char *patch
 
 	// The ROM checksum will always differ
 	buffer_append(patches, &(struct Patch){0x14e, 2});
+	// The ignored data will always differ
+	unsigned int rom_size = (unsigned int)xfsize("", orig_rom);
+	if (ignore_size > 0 && ignore_size <= rom_size && ignore_addr <= rom_size - ignore_size) {
+		buffer_append(patches, &(struct Patch){ignore_addr, ignore_size});
+	}
 
 	// Fill in the template
 	const struct Symbol *current_hook = NULL;
@@ -375,7 +388,7 @@ struct Buffer *process_template(const char *template_filename, const char *patch
 			for (c = getc(input); c != EOF && c != '}'; c = getc(input)) {
 				buffer_append(buffer, &c);
 			}
-			buffer_append(buffer, &(char []){'\0'});
+			buffer_append(buffer, &(char){'\0'});
 			// Interpret the command in the context of the current patch
 			interpret_command(buffer->data, current_hook, symbols, patches, new_rom, orig_rom, output);
 			break;
@@ -404,7 +417,7 @@ struct Buffer *process_template(const char *template_filename, const char *patch
 					buffer_append(buffer, &c);
 				}
 			}
-			buffer_append(buffer, &(char []){'\0'});
+			buffer_append(buffer, &(char){'\0'});
 			// The current patch should have a corresponding ".VC_" label
 			current_hook = symbol_find_cat(symbols, ".VC_", buffer->data);
 			skip_to_next_line(input, output);
@@ -458,19 +471,53 @@ bool verify_completeness(FILE *restrict orig_rom, FILE *restrict new_rom, struct
 	}
 }
 
+void parse_args(int argc, char *argv[], unsigned int *ignore_addr, unsigned int *ignore_size) {
+	struct option long_options[] = {
+		{"ignore", required_argument, 0, 'i'},
+		{"help", no_argument, 0, 'h'},
+		{0}
+	};
+	for (int opt; (opt = getopt_long(argc, argv, "h", long_options)) != -1;) {
+		switch (opt) {
+		case 'i': {
+			char *colon = strchr(optarg, ':');
+			if (colon) {
+				*colon++ = '\0';
+				*ignore_addr = strtoul(optarg, NULL, 0);
+				*ignore_size = strtoul(colon, NULL, 0);
+			} else {
+				error_exit("Error: Invalid argument for '--ignore': \"%s\"\n", optarg);
+			}
+			break;
+		}
+		case 'h':
+			usage_exit(0);
+			break;
+		default:
+			usage_exit(1);
+		}
+	}
+}
+
 int main(int argc, char *argv[]) {
-	if (argc != 6) {
+	unsigned int ignore_addr = 0, ignore_size = 0;
+
+	parse_args(argc, argv, &ignore_addr, &ignore_size);
+
+	argc -= optind;
+	argv += optind;
+	if (argc != 5) {
 		usage_exit(1);
 	}
 
-	struct Symbol *symbols = parse_symbols(argv[1]);
+	struct Symbol *symbols = parse_symbols(argv[0]);
 
-	FILE *new_rom = xfopen(argv[2], 'r');
-	FILE *orig_rom = xfopen(argv[3], 'r');
-	struct Buffer *patches = process_template(argv[4], argv[5], new_rom, orig_rom, symbols);
+	FILE *new_rom = xfopen(argv[1], 'r');
+	FILE *orig_rom = xfopen(argv[2], 'r');
+	struct Buffer *patches = process_template(argv[3], argv[4], new_rom, orig_rom, symbols, ignore_addr, ignore_size);
 
 	if (!verify_completeness(orig_rom, new_rom, patches)) {
-		fprintf(stderr, PROGRAM_NAME ": Warning: Not all ROM differences are defined by \"%s\"\n", argv[5]);
+		fprintf(stderr, PROGRAM_NAME ": Warning: Not all ROM differences are defined by \"%s\"\n", argv[4]);
 	}
 
 	symbol_free(symbols);

@@ -84,7 +84,7 @@ ENDM
 	dict  TX_SCRIPT_PRIZE_VENDOR,            TextScript_GameCornerPrizeMenu
 	dict2 TX_SCRIPT_CABLE_CLUB_RECEPTIONIST, callfar CableClubNPC
 
-	call PrintText_NoCreatingTextBox ; display the text
+	call PrintText_NoCreatingTextBox
 	ld a, [wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz, HoldTextDisplayOpen
@@ -93,7 +93,7 @@ AfterDisplayingTextID::
 	ld a, [wEnteringCableClub]
 	and a
 	jr nz, HoldTextDisplayOpen
-	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
+	call WaitForTextScrollButtonPress
 
 ; loop to hold the dialogue box open as long as the player keeps holding down the A button
 HoldTextDisplayOpen::
@@ -113,8 +113,8 @@ CloseTextDisplay::
 	ldh [hAutoBGTransferEnabled], a ; disable continuous WRAM to VRAM transfer each V-blank
 ; loop to make sprites face the directions they originally faced before the dialogue
 	ld hl, wSprite01StateData2OrigFacingDirection
-	ld c, $0f
-	ld de, $10
+	ld c, NUM_SPRITESTATEDATA_STRUCTS - 1
+	ld de, SPRITESTATEDATA1_LENGTH
 .restoreSpriteFacingDirectionLoop
 	ld a, [hl] ; x#SPRITESTATEDATA2_ORIGFACINGDIRECTION
 	dec h

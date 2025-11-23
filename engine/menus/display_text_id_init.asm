@@ -43,8 +43,8 @@ DisplayTextIDInit::
 ; this is done because when you talk to an NPC, they turn to look your way
 ; the original direction they were facing must be restored after the dialogue is over
 	ld hl, wSprite01StateData1FacingDirection
-	ld c, $0f
-	ld de, $10
+	ld c, NUM_SPRITESTATEDATA_STRUCTS - 1
+	ld de, SPRITESTATEDATA1_LENGTH
 .spriteFacingDirectionCopyLoop
 	ld a, [hl] ; x#SPRITESTATEDATA1_FACINGDIRECTION
 	inc h
@@ -56,7 +56,8 @@ DisplayTextIDInit::
 ; loop to force all the sprites in the middle of animation to stand still
 ; (so that they don't like they're frozen mid-step during the dialogue)
 	ld hl, wSpritePlayerStateData1ImageIndex
-	ld de, $10
+	ld de, SPRITESTATEDATA1_LENGTH
+	ASSERT NUM_SPRITESTATEDATA_STRUCTS == SPRITESTATEDATA1_LENGTH
 	ld c, e
 .spriteStandStillLoop
 	ld a, [hl]
@@ -69,7 +70,7 @@ DisplayTextIDInit::
 	add hl, de
 	dec c
 	jr nz, .spriteStandStillLoop
-	ld b, $9c ; window background address
+	ld b, HIGH(vBGMap1)
 	call CopyScreenTileBufferToVRAM ; transfer background in WRAM to VRAM
 	xor a
 	ldh [hWY], a ; put the window on the screen

@@ -683,22 +683,22 @@ AICheckIfHPBelowFraction:
 	ret
 
 AIUseXAttack:
-	ld b, $A
+	ld b, ATTACK_UP1_EFFECT
 	ld a, X_ATTACK
 	jr AIIncreaseStat
 
 AIUseXDefend:
-	ld b, $B
+	ld b, DEFENSE_UP1_EFFECT
 	ld a, X_DEFEND
 	jr AIIncreaseStat
 
 AIUseXSpeed:
-	ld b, $C
+	ld b, SPEED_UP1_EFFECT
 	ld a, X_SPEED
 	jr AIIncreaseStat
 
 AIUseXSpecial:
-	ld b, $D
+	ld b, SPECIAL_UP1_EFFECT
 	ld a, X_SPECIAL
 	; fallthrough
 

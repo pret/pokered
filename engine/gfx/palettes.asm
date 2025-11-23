@@ -338,30 +338,30 @@ SendSGBPacket:
 	ld a, 1
 	ldh [hDisableJoypadPolling], a
 ; send RESET signal (P14=LOW, P15=LOW)
-	xor a
+	xor a ; JOYP_SGB_START
 	ldh [rJOYP], a
 ; set P14=HIGH, P15=HIGH
-	ld a, $30
+	ld a, JOYP_SGB_FINISH
 	ldh [rJOYP], a
 ;load length of packets (16 bytes)
-	ld b, $10
+	ld b, 16
 .nextByte
 ;set bit counter (8 bits per byte)
-	ld e, $08
+	ld e, 8
 ; get next byte in the packet
 	ld a, [hli]
 	ld d, a
 .nextBit0
 	bit 0, d
 ; if 0th bit is not zero set P14=HIGH, P15=LOW (send bit 1)
-	ld a, $10
+	ld a, JOYP_SGB_ONE
 	jr nz, .next0
 ; else (if 0th bit is zero) set P14=LOW, P15=HIGH (send bit 0)
-	ld a, $20
+	ld a, JOYP_SGB_ZERO
 .next0
 	ldh [rJOYP], a
 ; must set P14=HIGH,P15=HIGH between each "pulse"
-	ld a, $30
+	ld a, JOYP_SGB_FINISH
 	ldh [rJOYP], a
 ; rotation will put next bit in 0th position (so  we can always use command
 ; "bit 0, d" to fetch the bit that has to be sent)
@@ -371,11 +371,11 @@ SendSGBPacket:
 	jr nz, .nextBit0
 	dec b
 	jr nz, .nextByte
-; send bit 1 as a "stop bit" (end of parameter data)
-	ld a, $20
+; send bit 0 as a "stop bit" (end of parameter data)
+	ld a, JOYP_SGB_ZERO
 	ldh [rJOYP], a
 ; set P14=HIGH,P15=HIGH
-	ld a, $30
+	ld a, JOYP_SGB_FINISH
 	ldh [rJOYP], a
 	xor a
 	ldh [hDisableJoypadPolling], a
@@ -462,20 +462,20 @@ CheckSGB:
 	ei
 	call Wait7000
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	and JOYP_SGB_MLT_REQ
+	cp JOYP_SGB_MLT_REQ
 	jr nz, .isSGB
-	ld a, $20
+	ld a, JOYP_SGB_ZERO
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
 	call Wait7000
 	call Wait7000
-	ld a, $30
+	ld a, JOYP_SGB_FINISH
 	ldh [rJOYP], a
 	call Wait7000
 	call Wait7000
-	ld a, $10
+	ld a, JOYP_SGB_ONE
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
@@ -486,7 +486,7 @@ CheckSGB:
 	call Wait7000
 	vc_hook Unknown_network_reset
 	call Wait7000
-	ld a, $30
+	ld a, JOYP_SGB_FINISH
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
@@ -494,8 +494,8 @@ CheckSGB:
 	call Wait7000
 	call Wait7000
 	ldh a, [rJOYP]
-	and $3
-	cp $3
+	and JOYP_SGB_MLT_REQ
+	cp JOYP_SGB_MLT_REQ
 	jr nz, .isSGB
 	call SendMltReq1Packet
 	and a
@@ -523,15 +523,15 @@ CopyGfxToSuperNintendoVRAM:
 	call CopySGBBorderTiles
 	jr .next
 .notCopyingTileData
-	ld bc, $1000
+	ld bc, 256 tiles
 	call CopyData
 .next
 	ld hl, vBGMap0
-	ld de, $c
+	ld de, TILEMAP_WIDTH - SCREEN_WIDTH
 	ld a, $80
-	ld c, $d
+	ld c, (256 + SCREEN_WIDTH - 1) / SCREEN_WIDTH ; enough rows to fit 256 tiles
 .loop
-	ld b, $14
+	ld b, SCREEN_WIDTH
 .innerLoop
 	ld [hli], a
 	inc a
@@ -540,7 +540,7 @@ CopyGfxToSuperNintendoVRAM:
 	add hl, de
 	dec c
 	jr nz, .loop
-	ld a, $e3
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	pop hl
 	call SendSGBPacket
@@ -611,7 +611,7 @@ CopySGBBorderTiles:
 	ld b, 128
 .tileLoop
 ; Copy bit planes 1 and 2 of the tile data.
-	ld c, 16
+	ld c, TILE_SIZE
 .copyLoop
 	ld a, [hli]
 	ld [de], a

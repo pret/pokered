@@ -64,7 +64,6 @@ DEF HOF_MON           EQU $10
 DEF HOF_TEAM          EQU PARTY_LENGTH * HOF_MON
 DEF HOF_TEAM_CAPACITY EQU 50
 
-
 ; mon data locations
 ; Note that some values are not supported by all functions that use these values.
 	const_def
@@ -74,15 +73,14 @@ DEF HOF_TEAM_CAPACITY EQU 50
 	const DAYCARE_DATA      ; 3
 	const BATTLE_MON_DATA   ; 4
 
-
-; See data/pokemon/evos_moves.asm
-
 ; Evolution types
 	const_def 1
 	const EVOLVE_LEVEL ; 1
 	const EVOLVE_ITEM  ; 2
 	const EVOLVE_TRADE ; 3
 
+; evolution data (see data/pokemon/evos_moves.asm)
+DEF NUM_EVOS_IN_BUFFER EQU 3
 
 ; wMonHGrowthRate values
 ; GrowthRateTable indexes (see data/growth_rates.asm)

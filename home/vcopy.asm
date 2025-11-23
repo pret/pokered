@@ -19,10 +19,15 @@ GetRowColAddressBgMap::
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
 ClearBgMap::
-	ld a, " "
-	jr .next
+	ld a, ' '
+	jr FillBgMapCommon
+
+; fills a VRAM background map with tile index in register l
+; INPUT: h - high byte of background tile map address in VRAM
+FillBgMap:: ; unreferenced
 	ld a, l
-.next
+
+FillBgMapCommon:
 	ld de, TILEMAP_AREA
 	ld l, e
 .loop
@@ -69,8 +74,8 @@ RedrawRowOrColumn::
 .noCarry
 ; the following 4 lines wrap us from bottom to top if necessary
 	ld a, d
-	and $3
-	or $98
+	and HIGH(TILEMAP_AREA - 1)
+	or HIGH(vBGMap0)
 	ld d, a
 	dec c
 	jr nz, .loop1
@@ -86,7 +91,7 @@ RedrawRowOrColumn::
 	push de
 	call .DrawHalf ; draw upper half
 	pop de
-	ld a, TILEMAP_WIDTH ; width of VRAM background map
+	ld a, TILEMAP_WIDTH
 	add e
 	ld e, a
 	; fall through and draw lower half
@@ -102,10 +107,10 @@ RedrawRowOrColumn::
 	ld a, e
 	inc a
 ; the following 6 lines wrap us from the right edge to the left edge if necessary
-	and $1f
+	and %11111
 	ld b, a
 	ld a, e
-	and $e0
+	and %11100000
 	or b
 	ld e, a
 	dec c
@@ -134,13 +139,13 @@ AutoBgMapTransfer::
 	dec a
 	jr z, .transferMiddleThird
 .transferBottomThird
-	hlcoord 0, 12
+	hlcoord 0, 2 * SCREEN_HEIGHT / 3
 	ld sp, hl
 	ldh a, [hAutoBGTransferDest + 1]
 	ld h, a
 	ldh a, [hAutoBGTransferDest]
 	ld l, a
-	ld de, 12 * 32
+	ld de, 12 * TILEMAP_WIDTH
 	add hl, de
 	xor a ; TRANSFERTOP
 	jr .doTransfer
@@ -154,18 +159,18 @@ AutoBgMapTransfer::
 	ld a, TRANSFERMIDDLE
 	jr .doTransfer
 .transferMiddleThird
-	hlcoord 0, 6
+	hlcoord 0, SCREEN_HEIGHT / 3
 	ld sp, hl
 	ldh a, [hAutoBGTransferDest + 1]
 	ld h, a
 	ldh a, [hAutoBGTransferDest]
 	ld l, a
-	ld de, 6 * 32
+	ld de, 6 * TILEMAP_WIDTH
 	add hl, de
 	ld a, TRANSFERBOTTOM
 .doTransfer
 	ldh [hAutoBGTransferPortion], a ; store next portion
-	ld b, 6
+	ld b, SCREEN_HEIGHT / 3
 
 TransferBgRows::
 ; unrolled loop and using pop for speed
@@ -390,7 +395,7 @@ UpdateMovingBgTiles::
 ; water
 
 	ld hl, vTileset tile $14
-	ld c, $10
+	ld c, TILE_SIZE
 
 	ld a, [wMovingBGTilesCounter2]
 	inc a
@@ -435,7 +440,7 @@ UpdateMovingBgTiles::
 	ld hl, FlowerTile3
 .copy
 	ld de, vTileset tile $03
-	ld c, $10
+	ld c, TILE_SIZE
 .loop
 	ld a, [hli]
 	ld [de], a

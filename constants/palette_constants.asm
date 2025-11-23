@@ -1,14 +1,3 @@
-; monochrome palette color ids
-	const_def
-	const SHADE_WHITE ; %00
-	const SHADE_LIGHT ; %01
-	const SHADE_DARK  ; %10
-	const SHADE_BLACK ; %11
-DEF NUM_PAL_COLORS EQU const_value
-
-DEF PAL_COLOR_SIZE EQU 2
-DEF PALETTE_SIZE EQU NUM_PAL_COLORS * PAL_COLOR_SIZE
-
 ; pal/blk packets
 ; SetPalFunctions indexes (see engine/gfx/palettes.asm)
 	const_def

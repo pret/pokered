@@ -114,12 +114,12 @@ OverworldLoopLessDelay::
 	ld [wEnteringCableClub], a
 	jr z, .changeMap
 ; XXX can this code be reached?
-	predef LoadSAV
+	predef TryLoadSaveFile
 	ld a, [wCurMap]
 	ld [wDestinationMap], a
 	call PrepareForSpecialWarp
 	ld a, [wCurMap]
-	call SwitchToMapRomBank ; switch to the ROM bank of the current map
+	call SwitchToMapRomBank
 	ld hl, wCurMapTileset
 	set BIT_NO_PREVIOUS_MAP, [hl]
 .changeMap
@@ -506,7 +506,7 @@ WarpFound2::
 ; for maps that can have the 0xFF destination map, which means to return to the outside map
 ; not all these maps are necessarily indoors, though
 .indoorMaps
-	ldh a, [hWarpDestinationMap] ; destination map
+	ldh a, [hWarpDestinationMap]
 	cp LAST_MAP
 	jr z, .goBackOutside
 ; if not going back to the previous map
@@ -567,7 +567,7 @@ CheckMapConnections::
 	srl c
 	jr z, .savePointer1
 .pointerAdjustmentLoop1
-	ld a, [wWestConnectedMapWidth] ; width of connected map
+	ld a, [wWestConnectedMapWidth]
 	add MAP_BORDER * 2
 	ld e, a
 	ld d, 0
@@ -584,7 +584,7 @@ CheckMapConnections::
 
 .checkEastMap
 	ld b, a
-	ld a, [wCurrentMapWidth2] ; map width
+	ld a, [wCurrentMapWidth2]
 	cp b
 	jr nz, .checkNorthMap
 	ld a, [wEastConnectedMap]
@@ -1171,7 +1171,7 @@ IsSpriteInFrontOfPlayer2::
 	ld a, PLAYER_DIR_LEFT
 .doneCheckingDirection
 	ld [wPlayerDirection], a
-	ld a, [wNumSprites] ; number of sprites
+	ld a, [wNumSprites]
 	and a
 	ret z
 ; if there are sprites
@@ -1198,7 +1198,7 @@ IsSpriteInFrontOfPlayer2::
 .nextSprite
 	pop hl
 	ld a, l
-	add $10
+	add SPRITESTATEDATA1_LENGTH
 	ld l, a
 	inc e
 	dec d
@@ -1258,8 +1258,8 @@ CollisionCheckOnLand::
 ; function that checks if the tile in front of the player is passable
 ; clears carry if it is, sets carry if not
 CheckTilePassable::
-	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
+	predef GetTileAndCoordsInFrontOfPlayer
+	ld a, [wTileInFrontOfPlayer]
 	ld c, a
 	ld hl, wTilesetCollisionPtr ; pointer to list of passable tiles
 	ld a, [hli]
@@ -1282,7 +1282,7 @@ CheckTilePassable::
 ; sets carry if there is a collision and unsets carry if not
 CheckForJumpingAndTilePairCollisions::
 	push hl
-	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player
+	predef GetTileAndCoordsInFrontOfPlayer
 	push de
 	push bc
 	farcall HandleLedges ; check if the player is trying to jump a ledge
@@ -1315,7 +1315,7 @@ CheckForTilePairCollisions::
 	inc hl
 	jr .tilePairCollisionLoop
 .tilesetMatches
-	ld a, [wTilePlayerStandingOn] ; tile the player is on
+	ld a, [wTilePlayerStandingOn]
 	ld b, a
 	ld a, [hl]
 	cp b
@@ -1350,9 +1350,9 @@ INCLUDE "data/tilesets/pair_collision_tile_ids.asm"
 LoadCurrentMapView::
 	ldh a, [hLoadedROMBank]
 	push af
-	ld a, [wTilesetBank] ; tile data ROM bank
+	ld a, [wTilesetBank]
 	ldh [hLoadedROMBank], a
-	ld [rROMB], a ; switch to ROM bank that contains tile data
+	ld [rROMB], a
 	ld a, [wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
 	ld e, a
 	ld a, [wCurrentTileBlockMapViewPointer + 1]
@@ -1434,7 +1434,7 @@ LoadCurrentMapView::
 	jr nz, .rowLoop2
 	pop af
 	ldh [hLoadedROMBank], a
-	ld [rROMB], a ; restore previous ROM bank
+	ld [rROMB], a
 	ret
 
 AdvancePlayerSprite::
@@ -1442,7 +1442,7 @@ AdvancePlayerSprite::
 	ld b, a
 	ld a, [wSpritePlayerStateData1XStepVector]
 	ld c, a
-	ld hl, wWalkCounter ; walking animation counter
+	ld hl, wWalkCounter
 	dec [hl]
 	jr nz, .afterUpdateMapCoords
 ; if it's the end of the animation, update the player's map coordinates
@@ -1453,7 +1453,7 @@ AdvancePlayerSprite::
 	add c
 	ld [wXCoord], a
 .afterUpdateMapCoords
-	ld a, [wWalkCounter] ; walking animation counter
+	ld a, [wWalkCounter]
 	cp $07
 	jp nz, .scrollBackgroundAndSprites
 ; if this is the first iteration of the animation
@@ -1612,7 +1612,7 @@ AdvancePlayerSprite::
 ; shift all the sprites in the direction opposite of the player's motion
 ; so that the player appears to move relative to them
 	ld hl, wSprite01StateData1YPixels
-	ld a, [wNumSprites] ; number of sprites
+	ld a, [wNumSprites]
 	and a ; are there any sprites?
 	jr z, .done
 	ld e, a
@@ -2151,8 +2151,8 @@ LoadMapHeader::
 	jr nz, .zeroSpriteDataLoop
 ; disable SPRITESTATEDATA1_IMAGEINDEX (set to $ff) for sprites 01-15
 	ld hl, wSprite01StateData1ImageIndex
-	ld de, $10
-	ld c, $0f
+	ld de, SPRITESTATEDATA1_LENGTH
+	ld c, NUM_SPRITESTATEDATA_STRUCTS - 1
 .disableSpriteEntriesLoop
 	ld [hl], $ff
 	add hl, de
@@ -2296,7 +2296,7 @@ LoadMapData::
 	ldh a, [hLoadedROMBank]
 	push af
 	call DisableLCD
-	ld a, $98
+	ld a, HIGH(vBGMap0)
 	ld [wMapViewVRAMPointer + 1], a
 	xor a
 	ld [wMapViewVRAMPointer], a

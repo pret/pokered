@@ -53,8 +53,8 @@ CeruleanBadgeHouseMiddleAgedManText:
 	jp TextScriptEnd
 
 .BadgeItemList:
-	table_width 1
 	db NUM_BADGES ; #
+	table_width 1
 	db BOULDERBADGE
 	db CASCADEBADGE
 	db THUNDERBADGE
@@ -63,8 +63,8 @@ CeruleanBadgeHouseMiddleAgedManText:
 	db MARSHBADGE
 	db VOLCANOBADGE
 	db EARTHBADGE
+	assert_table_length NUM_BADGES
 	db -1 ; end
-	assert_table_length NUM_BADGES + 2
 
 .Text:
 	text_far _CeruleanBadgeHouseMiddleAgedManText

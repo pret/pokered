@@ -24,7 +24,7 @@ DisplayTownMap:
 	call CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
-	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
+	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
@@ -57,7 +57,7 @@ DisplayTownMap:
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .copyMapName
 	hlcoord 1, 0
 	ld de, wNameBuffer
@@ -149,7 +149,7 @@ LoadTownMap_Fly::
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 tile $6d
-	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8
+	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -166,7 +166,7 @@ LoadTownMap_Fly::
 	ld hl, wFlyLocationsList
 	decoord 18, 0
 .townMapFlyLoop
-	ld a, " "
+	ld a, ' '
 	ld [de], a
 	push hl
 	push hl
@@ -183,9 +183,9 @@ LoadTownMap_Fly::
 	ld c, 15
 	call DelayFrames
 	hlcoord 18, 0
-	ld [hl], "▲"
+	ld [hl], '▲'
 	hlcoord 19, 0
-	ld [hl], "▼"
+	ld [hl], '▼'
 	pop hl
 .inputLoop
 	push hl
@@ -363,7 +363,7 @@ DrawPlayerOrBirdSprite:
 	ld a, [hli]
 	ld [de], a
 	inc de
-	cp "@"
+	cp '@'
 	jr nz, .loop
 	ld hl, wShadowOAM
 	ld de, wShadowOAMBackup
@@ -609,11 +609,11 @@ TownMapSpriteBlinkingAnimation::
 	xor a
 	jr .done
 .hideSprites
-	ld hl, wShadowOAM
+	ld hl, wShadowOAMSprite00YCoord
 	ld b, OAM_COUNT - 4
-	ld de, $4
+	ld de, OBJ_SIZE
 .hideSpritesLoop
-	ld [hl], $a0
+	ld [hl], SCREEN_HEIGHT_PX + OAM_Y_OFS
 	add hl, de
 	dec b
 	jr nz, .hideSpritesLoop
