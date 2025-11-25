@@ -18905,9 +18905,9 @@ WRAM0 bank #0:
 	         $cd3d = wTitleMonSpecies
 	         $cd3d = wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	         $cd3d = wTempSCX
+	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wMoveDownSmallStarsOAMCount
 	         $cd3d = wStoppingWhichSlotMachineWheel
-	         $cd3d = wUnusedCreditsByte
 	         $cd3d = wFieldMoves
 	         $cd3d = wHoFTeamIndex
 	         $cd3d = wCoordIndex
@@ -18943,6 +18943,7 @@ WRAM0 bank #0:
 	         $cd3f = wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	         $cd3f = wPlayerSpinInPlaceAnimFrameDelayEndValue
 	         $cd3f = wSlotMachineWheel2Offset
+	         $cd3f = wHUDUnusedTopTile
 	         $cd3f = wFlyAnimBirdSpriteImageIndex
 	         $cd3f = wNameOfPlayerMonToBeTraded
 	         $cd3f = wDayCareTotalCost
@@ -18954,11 +18955,13 @@ WRAM0 bank #0:
 	         $cd40 = wOptionsCancelCursorX
 	         $cd40 = wTrainerScreenY
 	         $cd40 = wSlotMachineWheel3Offset
+	         $cd40 = wHUDCornerTile
 	         $cd40 = wPlayerSpinInPlaceAnimSoundID
 	         $cd40 = wHiddenObjectY
 	         $cd40 = wHoFMonOrPlayer
 	         $cd41 = wSlotMachineWheel1BottomTile
 	         $cd41 = wSlotMachineWinningSymbol
+	         $cd41 = wHUDTriangleTile
 	         $cd41 = wHoFTeamIndex2
 	         $cd41 = wNumFieldMoves
 	         $cd41 = wDayCarePerLevelCost
@@ -18967,6 +18970,7 @@ WRAM0 bank #0:
 	         $cd41 = wTrainerScreenX
 	         $cd41 = wHiddenItemOrCoinsIndex
 	         $cd42 = wSlotMachineWheel1MiddleTile
+	         $cd42 = wHUDGraphicsTilesEnd
 	         $cd42 = wHoFTeamNo
 	         $cd42 = wFieldMovesLeftmostXCoord
 	         $cd43 = wLastFieldMoveID

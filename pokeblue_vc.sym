@@ -18659,6 +18659,7 @@
 00:cd3f wDayCareTotalCost
 00:cd3f wFlyAnimBirdSpriteImageIndex
 00:cd3f wHUDGraphicsTiles
+00:cd3f wHUDUnusedTopTile
 00:cd3f wHiddenObjectIndex
 00:cd3f wHoFMonLevel
 00:cd3f wJigglypuffFacingDirections
@@ -18669,6 +18670,7 @@
 00:cd3f wSlotMachineWheel2Offset
 00:cd3f wTrainerFacingDirection
 00:cd3f wTrainerInfoTextBoxNextRowOffset
+00:cd40 wHUDCornerTile
 00:cd40 wHiddenObjectY
 00:cd40 wHoFMonOrPlayer
 00:cd40 wOptionsCancelCursorX
@@ -18676,6 +18678,7 @@
 00:cd40 wSlotMachineWheel3Offset
 00:cd40 wTrainerScreenY
 00:cd41 wDayCarePerLevelCost
+00:cd41 wHUDTriangleTile
 00:cd41 wHiddenItemOrCoinsIndex
 00:cd41 wHiddenObjectX
 00:cd41 wHoFTeamIndex2
@@ -18685,6 +18688,7 @@
 00:cd41 wTradedPlayerMonOT
 00:cd41 wTrainerScreenX
 00:cd42 wFieldMovesLeftmostXCoord
+00:cd42 wHUDGraphicsTilesEnd
 00:cd42 wHoFTeamNo
 00:cd42 wSlotMachineWheel1MiddleTile
 00:cd43 wLastFieldMoveID

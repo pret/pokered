@@ -18998,6 +18998,7 @@ WRAM0 bank #0:
 	         $cd3f = wPlayerSpinWhileMovingUpOrDownAnimFrameDelay
 	         $cd3f = wPlayerSpinInPlaceAnimFrameDelayEndValue
 	         $cd3f = wSlotMachineWheel2Offset
+	         $cd3f = wHUDUnusedTopTile
 	         $cd3f = wFlyAnimBirdSpriteImageIndex
 	         $cd3f = wNameOfPlayerMonToBeTraded
 	         $cd3f = wDayCareTotalCost
@@ -19009,11 +19010,13 @@ WRAM0 bank #0:
 	         $cd40 = wOptionsCancelCursorX
 	         $cd40 = wTrainerScreenY
 	         $cd40 = wSlotMachineWheel3Offset
+	         $cd40 = wHUDCornerTile
 	         $cd40 = wPlayerSpinInPlaceAnimSoundID
 	         $cd40 = wHiddenObjectY
 	         $cd40 = wHoFMonOrPlayer
 	         $cd41 = wSlotMachineWheel1BottomTile
 	         $cd41 = wSlotMachineWinningSymbol
+	         $cd41 = wHUDTriangleTile
 	         $cd41 = wHoFTeamIndex2
 	         $cd41 = wNumFieldMoves
 	         $cd41 = wDayCarePerLevelCost
@@ -19022,6 +19025,7 @@ WRAM0 bank #0:
 	         $cd41 = wTrainerScreenX
 	         $cd41 = wHiddenItemOrCoinsIndex
 	         $cd42 = wSlotMachineWheel1MiddleTile
+	         $cd42 = wHUDGraphicsTilesEnd
 	         $cd42 = wHoFTeamNo
 	         $cd42 = wFieldMovesLeftmostXCoord
 	         $cd43 = wLastFieldMoveID
@@ -20650,8 +20654,8 @@ HRAM bank #0:
 	         $ffdc = hOaksAideRewardItem
 	         $ffdc = hGymGateAnswer
 	         $ffdc = hItemToRemoveIndex
-	         $ffdd = hPlayerXCoord
 	         $ffdd = hOaksAideNumMonsOwned
+	         $ffdd = hPlayerXCoord
 	         $ffe0 = hBackupGymGateIndex
 	         $ffe0 = hUnlockedSilphCoDoors
 	         $ffe1 = hStartTileID
