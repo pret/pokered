@@ -754,7 +754,7 @@ PrintStatText:
 	jr .findStatName_inner
 .foundStatName
 	ld de, wStringBuffer
-	ld bc, $a
+	ld bc, NAME_LENGTH - 1 ; all StatModTextStrings are at most 10 bytes
 	jp CopyData
 
 INCLUDE "data/battle/stat_mod_names.asm"

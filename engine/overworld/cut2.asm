@@ -77,13 +77,13 @@ AnimCutGrass_UpdateOAMEntries:
 AnimCutGrass_SwapOAMEntries:
 	ld hl, wShadowOAMSprite36
 	ld de, wBuffer
-	ld bc, $8
+	ld bc, 2 * OBJ_SIZE
 	call CopyData
 	ld hl, wShadowOAMSprite38
 	ld de, wShadowOAMSprite36
-	ld bc, $8
+	ld bc, 2 * OBJ_SIZE
 	call CopyData
 	ld hl, wBuffer
 	ld de, wShadowOAMSprite38
-	ld bc, $8
+	ld bc, 2 * OBJ_SIZE
 	jp CopyData

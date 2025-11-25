@@ -20,7 +20,7 @@ DisplayTownMap:
 	call PlaceString
 	ld hl, wShadowOAMSprite00
 	ld de, wShadowOAMBackupSprite00
-	ld bc, 4 * 4
+	ld bc, OBJ_SIZE * 4
 	call CopyData
 	ld hl, vSprites tile BIRD_BASE_TILE
 	ld de, TownMapCursor
@@ -64,7 +64,7 @@ DisplayTownMap:
 	call PlaceString
 	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAMBackupSprite04
-	ld bc, 4 * 4
+	ld bc, OBJ_SIZE * 4
 	call CopyData
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
