@@ -188,7 +188,7 @@ HoFLoadPlayerPics:
 	call UncompressSpriteFromDE
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
-	ld bc, $310
+	ld bc, 2 * SPRITEBUFFERSIZE
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers

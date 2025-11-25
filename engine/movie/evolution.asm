@@ -30,7 +30,7 @@ EvolveMon:
 	call Evolution_LoadPic
 	ld de, vFrontPic
 	ld hl, vBackPic
-	ld bc, 7 * 7
+	ld bc, PIC_SIZE
 	call CopyVideoData
 	ld a, [wEvoOldSpecies]
 	ld [wCurPartySpecies], a

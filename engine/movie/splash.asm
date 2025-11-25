@@ -133,7 +133,7 @@ AnimateShootingStar:
 ; shift the existing OAM entries down to make room for the next wave
 	ld hl, wShadowOAMSprite04
 	ld de, wShadowOAM
-	ld bc, $50
+	ld bc, OBJ_SIZE * 20
 	call CopyData
 
 	pop af

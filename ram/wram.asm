@@ -191,7 +191,7 @@ wOverworldMap:: ds 1300
 wOverworldMapEnd::
 
 NEXTU
-wTempPic:: ds 7 * 7 tiles
+wTempPic:: ds PIC_SIZE tiles
 ENDU
 
 
@@ -688,7 +688,11 @@ NEXTU
 	ds 1
 ; difference in X between the next ball and the current one
 wHUDPokeballGfxOffsetX:: db
-wHUDGraphicsTiles:: ds 3
+wHUDGraphicsTiles::
+wHUDUnusedTopTile:: db
+wHUDCornerTile:: db
+wHUDTriangleTile:: db
+wHUDGraphicsTilesEnd::
 
 NEXTU
 ; the level of the mon at the time it entered day care
@@ -1079,7 +1083,7 @@ wExpAmountGained:: dw
 wGainBoostedExp:: db
 ENDU
 
-wGymCityName:: ds 17
+wGymCityName:: ds GYM_CITY_LENGTH
 
 wGymLeaderName:: ds NAME_LENGTH
 

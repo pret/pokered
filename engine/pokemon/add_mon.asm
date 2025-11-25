@@ -231,7 +231,7 @@ _AddPartyMon::
 	dec a
 	jr nz, .calcFreshStats
 	ld hl, wEnemyMonMaxHP
-	ld bc, $a
+	ld bc, NUM_STATS * 2
 	call CopyData          ; copy stats of cur enemy mon
 	pop hl
 	jr .done

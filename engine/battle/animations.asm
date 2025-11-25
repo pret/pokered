@@ -1213,12 +1213,12 @@ _AnimationSlideMonUp:
 	push bc
 
 ; In each iteration, slide up all rows but the top one (which is overwritten).
-	ld b, 6
+	ld b, PIC_HEIGHT - 1
 .slideLoop
 	push bc
 	push de
 	push hl
-	ld bc, 7
+	ld bc, PIC_WIDTH
 	call CopyData
 ; Note that de and hl are popped in the same order they are pushed, swapping
 ; their values. When CopyData is called, hl points to a tile 1 row below
@@ -1242,10 +1242,10 @@ _AnimationSlideMonUp:
 	ld a, [wSlideMonUpBottomRowLeftTile]
 	inc a
 	ld [wSlideMonUpBottomRowLeftTile], a
-	ld c, 7
+	ld c, PIC_WIDTH
 .fillBottomRowLoop
 	ld [hli], a
-	add 7
+	add PIC_WIDTH
 	dec c
 	jr nz, .fillBottomRowLoop
 
@@ -1723,10 +1723,10 @@ AnimationMinimizeMon:
 	ld hl, wTempPic
 	push hl
 	xor a
-	ld bc, (7 * 7) tiles
+	ld bc, PIC_SIZE tiles
 	call FillMemory
 	pop hl
-	ld de, (7 * 3 + 4) tiles + TILE_SIZE / 4
+	ld de, (PIC_WIDTH * 3 + 4) tiles + TILE_SIZE / 4
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
@@ -1774,7 +1774,7 @@ AnimationSlideMonDownAndHide:
 	jr nz, .loop
 	call AnimationHideMonPic
 	ld hl, wTempPic
-	ld bc, 7 * 7 tiles
+	ld bc, PIC_SIZE tiles
 	xor a
 	call FillMemory
 	jp CopyTempPicToMonPic
@@ -1867,7 +1867,7 @@ CopyTempPicToMonPic:
 	ld hl, vFrontPic ; enemy turn
 .next
 	ld de, wTempPic
-	ld bc, 7 * 7
+	ld bc, PIC_SIZE
 	jp CopyVideoData
 
 AnimationWavyScreen:
@@ -1935,7 +1935,7 @@ AnimationSubstitute:
 ; Changes the pokemon's sprite to the mini sprite
 	ld hl, wTempPic
 	xor a
-	ld bc, 7 * 7 tiles
+	ld bc, PIC_SIZE tiles
 	call FillMemory
 	ldh a, [hWhoseTurn]
 	and a
@@ -2473,7 +2473,7 @@ AnimationShakeEnemyHUD:
 ; Make a copy of the back pic's tile patterns in sprite tile pattern VRAM.
 	ld de, vBackPic
 	ld hl, vSprites
-	ld bc, 7 * 7
+	ld bc, PIC_SIZE
 	call CopyVideoData
 
 	xor a

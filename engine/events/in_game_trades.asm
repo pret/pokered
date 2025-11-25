@@ -226,7 +226,7 @@ InGameTrade_CopyDataToReceivedMon:
 	ld bc, wPartyMon2 - wPartyMon1
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wTradedEnemyMonOTID
-	ld bc, $2
+	ld bc, 2
 	jp CopyData
 
 ; the received mon's index is (partyCount - 1),
