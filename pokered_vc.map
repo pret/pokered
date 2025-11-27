@@ -1915,16 +1915,16 @@ ROMX bank #1:
 	         $7b5e = WhatToTossText
 	         $7b63 = TossHowManyText
 	         $7b68 = _RemovePokemon
-	         $7b74 = _RemovePokemon.usePartyCount
+	         $7b74 = _RemovePokemon.gotCount
 	         $7b81 = _RemovePokemon.shiftMonSpeciesLoop
-	         $7b97 = _RemovePokemon.usePartyMonOTs
+	         $7b97 = _RemovePokemon.gotOTsPointer
 	         $7ba6 = _RemovePokemon.notRemovingLastMon
-	         $7bb8 = _RemovePokemon.usePartyMonNicks
-	         $7bcd = _RemovePokemon.usePartyMonStructs
-	         $7be4 = _RemovePokemon.copyUntilPartyMonOTs
-	         $7beb = _RemovePokemon.continue
-	         $7bfa = _RemovePokemon.usePartyMonNicks2
-	         $7c15 = _RemovePokemon.copyUntilPartyMonNicksEnd
+	         $7bb8 = _RemovePokemon.gotNicksPointer
+	         $7bcd = _RemovePokemon.gotMonStructs
+	         $7be4 = _RemovePokemon.copyUntilPartyMonOT
+	         $7beb = _RemovePokemon.shiftOTs
+	         $7bfa = _RemovePokemon.gotNicksPointer2
+	         $7c15 = _RemovePokemon.shiftMonNicks
 	         $7c18 = _DisplayPokedex
 	EMPTY: $7c49-$7fff ($03b7 bytes)
 	TOTAL EMPTY: $03b7 bytes
@@ -3234,15 +3234,15 @@ ROMX bank #3:
 	         $678d = IsKeyItem_.checkIfItemIsHM
 	         $6799 = KeyItemFlags
 	         $67a4 = SendNewMonToBox
-	         $67b1 = SendNewMonToBox.loop
-	         $67db = SendNewMonToBox.loop2
-	         $67ee = SendNewMonToBox.skip
-	         $6817 = SendNewMonToBox.loop3
-	         $682a = SendNewMonToBox.skip2
-	         $6854 = SendNewMonToBox.loop4
-	         $6867 = SendNewMonToBox.skip3
-	         $689f = SendNewMonToBox.loop5
-	         $68b1 = SendNewMonToBox.loop6
+	         $67b1 = SendNewMonToBox.shiftSpeciesLoop
+	         $67db = SendNewMonToBox.shiftMonOTLoop
+	         $67ee = SendNewMonToBox.skipOTshift
+	         $6817 = SendNewMonToBox.shiftNickLoop
+	         $682a = SendNewMonToBox.skipNickShift
+	         $6854 = SendNewMonToBox.shiftMonDataLoop
+	         $6867 = SendNewMonToBox.skipMonDataShift
+	         $689f = SendNewMonToBox.statLoop
+	         $68b1 = SendNewMonToBox.movePPLoop
 	         $68b8 = IsNextTileShoreOrWater
 	         $68d8 = IsNextTileShoreOrWater.skipShoreTiles
 	         $68dc = IsNextTileShoreOrWater.notShoreOrWater
@@ -19261,6 +19261,7 @@ WRAM0 bank #0:
 	         $d05e = wCriticalHitOrOHKO
 	         $d05f = wMoveMissed
 	         $d060 = wPlayerStatsToDouble
+	         $d060 = wBattleStatusData
 	         $d061 = wPlayerStatsToHalve
 	         $d062 = wPlayerBattleStatus1
 	         $d063 = wPlayerBattleStatus2
@@ -19282,6 +19283,7 @@ WRAM0 bank #0:
 	         $d074 = wUnknownSerialCounter2
 	         $d074 = wPlayerBideAccumulatedDamage
 	         $d078 = wEscapedFromBattle
+	         $d078 = wBattleStatusDataEnd
 	         $d079 = wObjectToHide
 	         $d079 = wAmountMoneyWon
 	         $d07a = wObjectToShow
