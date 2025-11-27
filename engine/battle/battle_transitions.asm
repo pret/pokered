@@ -104,11 +104,11 @@ GetBattleTransitionID_CompareLevels:
 	ld a, [hli]
 	or [hl]
 	jr nz, .notFainted
-	ld de, wPartyMon2 - (wPartyMon1 + 1)
+	ld de, PARTYMON_STRUCT_LENGTH - 1
 	add hl, de
 	jr .faintedLoop
 .notFainted
-	ld de, wPartyMon1Level - (wPartyMon1HP + 1)
+	ld de, MON_LEVEL - (MON_HP + 1)
 	add hl, de
 	ld a, [hl]
 	add $3

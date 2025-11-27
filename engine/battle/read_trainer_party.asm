@@ -92,7 +92,7 @@ ReadTrainer:
 	ld a, [hli]
 	ld d, [hl]
 	ld hl, wEnemyMon1Moves + 2
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld [hl], d
 	jr .FinishUp

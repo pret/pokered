@@ -763,9 +763,9 @@ TradeCenter_Trade:
 	call CopyData
 	ld hl, wPartyMon1Species
 	ld a, [wTradingWhichPlayerMon]
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld bc, wPartyMon1OTID - wPartyMon1
+	ld bc, MON_OTID
 	add hl, bc
 	ld a, [hli]
 	ld [wTradedPlayerMonOTID], a
@@ -779,9 +779,9 @@ TradeCenter_Trade:
 	call CopyData
 	ld hl, wEnemyMons
 	ld a, [wTradingWhichEnemyMon]
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
-	ld bc, wEnemyMon1OTID - wEnemyMon1
+	ld bc, MON_OTID
 	add hl, bc
 	ld a, [hli]
 	ld [wTradedEnemyMonOTID], a
@@ -809,10 +809,10 @@ TradeCenter_Trade:
 	ld [wCurPartySpecies], a
 	ld hl, wEnemyMons
 	ld a, c
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld de, wLoadedMon
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyData
 	call AddEnemyMonToPlayerParty
 	ld a, [wPartyCount]

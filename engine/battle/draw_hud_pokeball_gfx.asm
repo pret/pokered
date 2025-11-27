@@ -90,7 +90,7 @@ PickPokeball:
 .done
 	ld a, b
 	ld [de], a
-	ld bc, wPartyMon2 - wPartyMon1Status
+	ld bc, PARTYMON_STRUCT_LENGTH - MON_STATUS
 	add hl, bc ; next mon struct
 	ret
 

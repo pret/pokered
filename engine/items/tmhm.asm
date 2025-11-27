@@ -2,7 +2,7 @@
 CheckIfMoveIsKnown:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [wMoveNum]
 	ld b, a
