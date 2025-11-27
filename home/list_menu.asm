@@ -456,7 +456,7 @@ PrintListMenuEntries::
 	ld [wLoadedMonLevel], a
 .skipCopyingLevel
 	pop hl
-	ld bc, $1c
+	ld bc, SCREEN_WIDTH + 8 ; 1 row down and 8 columns right
 	add hl, bc
 	call PrintLevel
 	pop af

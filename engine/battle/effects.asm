@@ -323,7 +323,7 @@ CheckDefrost:
 	ld [wEnemyMonStatus], a ; set opponent status to 00 ["defrost" a frozen monster]
 	ld hl, wEnemyMon1Status
 	ld a, [wEnemyMonPartyPos]
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	xor a
 	ld [hl], a ; clear status in roster
@@ -336,7 +336,7 @@ CheckDefrost:
 	ld [wBattleMonStatus], a
 	ld hl, wPartyMon1Status
 	ld a, [wPlayerMonNumber]
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	xor a
 	ld [hl], a

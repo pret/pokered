@@ -23,7 +23,7 @@ LoadMonData_::
 	call GetMonHeader
 
 	ld hl, wPartyMons
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMonDataLocation]
 	cp ENEMY_PARTY_DATA
 	jr c, .getMonEntry
@@ -33,7 +33,7 @@ LoadMonData_::
 
 	cp 2
 	ld hl, wBoxMons
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 	jr z, .getMonEntry
 
 	ld hl, wDayCareMon
@@ -45,5 +45,5 @@ LoadMonData_::
 
 .copyMonData
 	ld de, wLoadedMon
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	jp CopyData

@@ -5,7 +5,7 @@ EndOfBattle:
 ; link battle
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
@@ -61,7 +61,7 @@ EndOfBattle:
 	ld [hl], a
 	ld [wListScrollOffset], a
 	ld hl, wPlayerStatsToDouble
-	ld b, $18
+	ld b, wEscapedFromBattle - wPlayerStatsToDouble
 .loop
 	ld [hli], a
 	dec b

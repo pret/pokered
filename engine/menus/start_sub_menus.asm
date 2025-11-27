@@ -236,7 +236,7 @@ StartMenu_Pokemon::
 .softboiled
 	ld hl, wPartyMon1MaxHP
 	ld a, [wWhichPokemon]
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld a, [hli]
 	ldh [hDividend], a
@@ -246,7 +246,7 @@ StartMenu_Pokemon::
 	ldh [hDivisor], a
 	ld b, 2 ; number of bytes
 	call Divide
-	ld bc, wPartyMon1HP - wPartyMon1MaxHP
+	ld bc, MON_HP - MON_MAXHP
 	add hl, bc
 	ld a, [hld]
 	ld b, a
@@ -743,24 +743,24 @@ SwitchPartyMon_InitVarOrSwapData:
 	ldh a, [hSwapTemp]
 	ld [de], a
 	ld hl, wPartyMons
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyData
 	ld hl, wPartyMons
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wMenuItemToSwap]
 	call AddNTimes
 	pop de
 	push hl
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wCurrentMenuItem]

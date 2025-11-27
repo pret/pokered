@@ -352,11 +352,11 @@ BoxNoPCText:
 KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
 	ld hl, wPartyMon1Moves
-	ld bc, wPartyMon2 - wPartyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	jr .next
 ; unreachable
 	ld hl, wBoxMon1Moves
-	ld bc, wBoxMon2 - wBoxMon1
+	ld bc, BOXMON_STRUCT_LENGTH
 .next
 	ld a, [wWhichPokemon]
 	call AddNTimes
