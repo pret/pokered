@@ -1274,6 +1274,7 @@ wCriticalHitOrOHKO:: db
 
 wMoveMissed:: db
 
+wBattleStatusData::
 ; always 0
 wPlayerStatsToDouble:: db
 ; always 0
@@ -1331,6 +1332,7 @@ wPlayerNumHits:: db
 ENDU
 
 	ds 2
+wBattleStatusDataEnd::
 
 ; non-zero when an item or move that allows escape from battle was used
 wEscapedFromBattle:: db

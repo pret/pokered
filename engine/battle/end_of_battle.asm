@@ -60,8 +60,8 @@ EndOfBattle:
 	ld [hli], a
 	ld [hl], a
 	ld [wListScrollOffset], a
-	ld hl, wPlayerStatsToDouble
-	ld b, wEscapedFromBattle - wPlayerStatsToDouble
+	ld hl, wBattleStatusData
+	ld b, wBattleStatusDataEnd - wBattleStatusData
 .loop
 	ld [hli], a
 	dec b
