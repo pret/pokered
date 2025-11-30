@@ -188,9 +188,9 @@ InterlaceMergeSpriteBuffers::
 	or c
 	jr nz, .swapLoop
 .notFlipped
-	pop hl
+	pop hl ; hl = output address
 	ld de, sSpriteBuffer1
-	ld c, (2 * SPRITEBUFFERSIZE) / TILE_SIZE ; $31, number of 16 byte chunks to be copied
+	ld c, PIC_SIZE ; tiles
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	jp CopyVideoData
