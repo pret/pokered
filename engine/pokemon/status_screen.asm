@@ -237,8 +237,9 @@ PTile: INCBIN "gfx/font/P.1bpp"
 
 PrintStatsBox:
 	ld a, d
-	and a ; status screen
-	jr nz, .LevelUpStatBox ; battle or Rare Candy
+	ASSERT STATUS_SCREEN_STATS_BOX == 0
+	and a
+	jr nz, .LevelUpStatsBox ; battle or Rare Candy
 	hlcoord 0, 8
 	ld b, 8
 	ld c, 8
@@ -246,7 +247,7 @@ PrintStatsBox:
 	hlcoord 1, 9
 	ld bc, SCREEN_WIDTH + 5 ; one row down and 5 columns right
 	jr .PrintStats
-.LevelUpStatBox
+.LevelUpStatsBox
 	hlcoord 9, 2
 	ld b, 8
 	ld c, 9
@@ -271,7 +272,7 @@ PrintStatsBox:
 	ld de, wLoadedMonSpecial
 	jp PrintNumber
 
-.PrintStat
+.PrintStat:
 	push hl
 	call PrintNumber
 	pop hl
@@ -279,7 +280,7 @@ PrintStatsBox:
 	add hl, de
 	ret
 
-.StatsText
+.StatsText:
 	db   "ATTACK"
 	next "DEFENSE"
 	next "SPEED"
