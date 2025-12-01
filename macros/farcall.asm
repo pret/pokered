@@ -1,7 +1,7 @@
 ; Far calls to another bank
 
 ; There is no difference between `farcall` and `callfar`, except the arbitrary
-; order in which they set `a` and `hl` before calling `FarCall`.
+; order in which they set `b` and `hl` before calling `FarCall`.
 ; We use the more natural name "farcall" for the more common order.
 ; The same goes for `farjp` and `jpfar`.
 
