@@ -3573,10 +3573,7 @@ ROMX bank #4:
 	         $6a7e = StatusScreen.GetStringPointer
 	         $6a95 = OTPointers
 	         $6a9d = NamePointers2
-	         $6aa5 = Type1Text
-	         $6aac = Type2Text
-	         $6ab3 = IDNoText
-	         $6ab7 = OTText
+	         $6aa5 = TypesIDNoOTText
 	         $6abc = StatusText
 	         $6ac4 = OKText
 	         $6ac7 = DrawLineBox
@@ -3584,10 +3581,10 @@ ROMX bank #4:
 	         $6ad3 = DrawLineBox.PrintHorizLine
 	         $6adc = PTile
 	         $6ae4 = PrintStatsBox
-	         $6afa = PrintStatsBox.DifferentBox
+	         $6afa = PrintStatsBox.LevelUpStatsBox
 	         $6b0a = PrintStatsBox.PrintStats
-	         $6b30 = PrintStat
-	         $6b3a = StatsText
+	         $6b30 = PrintStatsBox.PrintStat
+	         $6b3a = PrintStatsBox.StatsText
 	         $6b57 = StatusScreen2
 	         $6bbb = StatusScreen2.InitPP
 	         $6bc3 = StatusScreen2.PrintPP
@@ -20404,8 +20401,8 @@ WRAM0 bank #0:
 	         $dcbf = wBoxMon17SpecialExp
 	         $dcc1 = wBoxMon17DVs
 	         $dcc3 = wBoxMon17PP
-	         $dcc7 = wBoxMon18Species
 	         $dcc7 = wBoxMon18
+	         $dcc7 = wBoxMon18Species
 	         $dcc8 = wBoxMon18HP
 	         $dcca = wBoxMon18BoxLevel
 	         $dccb = wBoxMon18Status

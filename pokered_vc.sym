@@ -3522,10 +3522,7 @@
 04:6a7e StatusScreen.GetStringPointer
 04:6a95 OTPointers
 04:6a9d NamePointers2
-04:6aa5 Type1Text
-04:6aac Type2Text
-04:6ab3 IDNoText
-04:6ab7 OTText
+04:6aa5 TypesIDNoOTText
 04:6abc StatusText
 04:6ac4 OKText
 04:6ac7 DrawLineBox
@@ -3533,10 +3530,10 @@
 04:6ad3 DrawLineBox.PrintHorizLine
 04:6adc PTile
 04:6ae4 PrintStatsBox
-04:6afa PrintStatsBox.DifferentBox
+04:6afa PrintStatsBox.LevelUpStatsBox
 04:6b0a PrintStatsBox.PrintStats
-04:6b30 PrintStat
-04:6b3a StatsText
+04:6b30 PrintStatsBox.PrintStat
+04:6b3a PrintStatsBox.StatsText
 04:6b57 StatusScreen2
 04:6bbb StatusScreen2.InitPP
 04:6bc3 StatusScreen2.PrintPP
