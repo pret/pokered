@@ -1653,7 +1653,9 @@
 01:6adb GetDefaultName.innerLoop
 01:6ae7 GetDefaultName.foundName
 01:6af2 DefaultNamesPlayerList
+01:6afb DefaultNamesPlayerList._list_start_u3
 01:6b0a DefaultNamesRivalList
+01:6b13 DefaultNamesRivalList._list_start_u4
 01:6b20 LinkMenuEmptyText
 01:6b21 SubtractAmountPaidFromMoney_
 01:6b44 HandleItemListSwapping

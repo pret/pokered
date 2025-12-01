@@ -1681,7 +1681,9 @@ ROMX bank #1:
 	         $6c19 = GetDefaultName.innerLoop
 	         $6c25 = GetDefaultName.foundName
 	         $6c30 = DefaultNamesPlayerList
+	         $6c39 = DefaultNamesPlayerList._list_start_u3
 	         $6c48 = DefaultNamesRivalList
+	         $6c51 = DefaultNamesRivalList._list_start_u4
 	         $6c5e = LinkMenuEmptyText
 	         $6c5f = SubtractAmountPaidFromMoney_
 	         $6c82 = HandleItemListSwapping
@@ -18392,8 +18394,8 @@ WRAM0 bank #0:
 	         $c331 = wShadowOAMSprite12XCoord
 	         $c332 = wShadowOAMSprite12TileID
 	         $c333 = wShadowOAMSprite12Attributes
-	         $c334 = wShadowOAMSprite13YCoord
 	         $c334 = wShadowOAMSprite13
+	         $c334 = wShadowOAMSprite13YCoord
 	         $c335 = wShadowOAMSprite13XCoord
 	         $c336 = wShadowOAMSprite13TileID
 	         $c337 = wShadowOAMSprite13Attributes
