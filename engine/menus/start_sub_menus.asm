@@ -123,7 +123,6 @@ StartMenu_Pokemon::
 	dw .cut
 	dw .fly
 	dw .surf
-	dw .surf
 	dw .strength
 	dw .flash
 	dw .dig
@@ -569,9 +568,9 @@ TrainerInfo_FarCopyData:
 	jp FarCopyData2
 
 TrainerInfo_NameMoneyTimeText:
-	db   "NAME/"
-	next "MONEY/"
-	next "TIME/@"
+	db   "Name/"
+	next "Money/"
+	next "Time/@"
 
 ; $76 is a circle tile
 TrainerInfo_BadgesText:

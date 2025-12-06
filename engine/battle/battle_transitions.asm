@@ -89,9 +89,9 @@ BattleTransitions:
 	assert_table_length 1 << NUM_BATTLE_TRANSITION_BITS
 
 GetBattleTransitionID_WildOrTrainer:
-	ld a, [wCurOpponent]
-	cp OPP_ID_OFFSET
-	jr nc, .trainer
+	ld a, [wIsTrainerBattle]
+	and a
+	jr nz, .trainer
 	res BIT_TRAINER_BATTLE_TRANSITION, c
 	ret
 .trainer

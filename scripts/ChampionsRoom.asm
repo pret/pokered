@@ -83,6 +83,8 @@ ChampionsRoomRivalReadyToBattleScript:
 	ld a, $3
 .saveTrainerId
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 
 	xor a
 	ldh [hJoyHeld], a

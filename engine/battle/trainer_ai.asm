@@ -283,9 +283,7 @@ INCLUDE "engine/battle/misc.asm"
 
 INCLUDE "engine/battle/read_trainer_party.asm"
 
-INCLUDE "data/trainers/special_moves.asm"
-
-INCLUDE "data/trainers/parties.asm"
+INCLUDE "data/trainers/parties_pointers.asm"
 
 TrainerAI:
 	and a
@@ -332,9 +330,8 @@ BlackbeltAI:
 	jp AIUseXAttack
 
 GiovanniAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseGuardSpec
+	and a
+	ret
 
 CooltrainerMAI:
 	cp 25 percent + 1
@@ -345,7 +342,7 @@ CooltrainerFAI:
 	; The intended 25% chance to consider switching will not apply.
 	; Uncomment the line below to fix this.
 	cp 25 percent + 1
-	; ret nc
+	ret nc
 	ld a, 10
 	call AICheckIfHPBelowFraction
 	jp c, AIUseHyperPotion
@@ -356,93 +353,56 @@ CooltrainerFAI:
 
 BrockAI:
 ; if his active monster has a status condition, use a full heal
-	ld a, [wEnemyMonStatus]
 	and a
-	ret z
-	jp AIUseFullHeal
+	ret
 
 MistyAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	and a
+	ret
 
 LtSurgeAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXSpeed
+	and a
+	ret
 
 ErikaAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	and a
+	ret
 
 KogaAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXAttack
+	and a
+	ret
 
 BlaineAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseSuperPotion
+	and a
+	ret
 
 SabrinaAI:
-	cp 25 percent + 1
-	ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
+	and a
+	ret
 
 Rival2AI:
-	cp 13 percent - 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUsePotion
+	and a
+	ret
 
 Rival3AI:
-	cp 13 percent - 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseFullRestore
+	and a
+	ret
 
 LoreleiAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	and a
+	ret
 
 BrunoAI:
-	cp 25 percent + 1
-	ret nc
-	jp AIUseXDefend
+	and a
+	ret
 
 AgathaAI:
-	cp 8 percent
-	jp c, AISwitchIfEnoughMons
-	cp 50 percent + 1
-	ret nc
-	ld a, 4
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
+	and a
+	ret
 
 LanceAI:
-	cp 50 percent + 1
-	ret nc
-	ld a, 5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
+	and a
+	ret
 
 GenericAI:
 	and a ; clear carry
@@ -569,7 +529,7 @@ AISwitchIfEnoughMons:
 	inc d
 .Fainted
 	push bc
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	add hl, bc
 	pop bc
 	dec c
@@ -583,16 +543,16 @@ AISwitchIfEnoughMons:
 
 SwitchEnemyMon:
 
-; prepare to withdraw the active monster: copy hp, number, and status to roster
+; prepare to withdraw the active monster: copy HP, party pos, and status to roster
 
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1HP
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, wEnemyMonHP
-	ld bc, 4
+	ld bc, MON_STATUS + 1 - MON_HP ; also copies party pos in-between HP and status
 	call CopyData
 
 	ld hl, AIBattleWithdrawText
@@ -626,7 +586,7 @@ AICureStatus:
 ; cures the status of enemy's active pokemon
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
-	ld bc, wEnemyMon2 - wEnemyMon1
+	ld bc, PARTYMON_STRUCT_LENGTH
 	call AddNTimes
 	xor a
 	ld [hl], a ; clear status in enemy team roster

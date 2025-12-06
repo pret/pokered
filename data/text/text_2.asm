@@ -133,30 +133,30 @@ _DexRatingText::
 _GymStatueText1::
 	text_ram wGymCityName
 	text_start
-	line "#MON GYM"
-	cont "LEADER: @"
+	line "#MON Gym"
+	cont "Leader: @"
 	text_ram wGymLeaderName
 	text_start
 
-	para "WINNING TRAINERS:"
+	para "Winning trainers:"
 	line "<RIVAL>"
 	done
 
 _GymStatueText2::
 	text_ram wGymCityName
 	text_start
-	line "#MON GYM"
-	cont "LEADER: @"
+	line "#MON Gym"
+	cont "Leader: @"
 	text_ram wGymLeaderName
 	text_start
 
-	para "WINNING TRAINERS:"
+	para "Winning trainers:"
 	line "<RIVAL>"
 	cont "<PLAYER>"
 	done
 
 _ViridianCityPokecenterGuyText::
-	text "#MON CENTERs"
+	text "#MON Centers"
 	line "heal your tired,"
 	cont "hurt or fainted"
 	cont "#MON!"
@@ -165,7 +165,7 @@ _ViridianCityPokecenterGuyText::
 _PewterCityPokecenterGuyText::
 	text "Yawn!"
 
-	para "When JIGGLYPUFF"
+	para "When Jigglypuff"
 	line "sings, #MON"
 	cont "get drowsy..."
 
@@ -174,7 +174,7 @@ _PewterCityPokecenterGuyText::
 	done
 
 _CeruleanPokecenterGuyText::
-	text "BILL has lots of"
+	text "Bill has lots of"
 	line "#MON!"
 
 	para "He collects rare"
@@ -182,7 +182,7 @@ _CeruleanPokecenterGuyText::
 	done
 
 _LavenderPokecenterGuyText::
-	text "CUBONEs wear"
+	text "Cubones wear"
 	line "skulls, right?"
 
 	para "People will pay a"
@@ -198,8 +198,8 @@ _MtMoonPokecenterBenchGuyText::
 
 _RockTunnelPokecenterGuyText::
 	text "I heard that"
-	line "GHOSTs haunt"
-	cont "LAVENDER TOWN!"
+	line "ghosts haunt"
+	cont "Lavender Town!"
 	done
 
 _UnusedBenchGuyText1::
@@ -235,15 +235,15 @@ _VermilionPokecenterGuyText::
 	done
 
 _CeladonCityPokecenterGuyText::
-	text "If I had a BIKE,"
+	text "If I had a bike,"
 	line "I would go to"
-	cont "CYCLING ROAD!"
+	cont "Cycling Road!"
 	done
 
 _FuchsiaCityPokecenterGuyText::
 	text "If you're studying "
 	line "#MON, visit"
-	cont "the SAFARI ZONE."
+	cont "the Safari Zone."
 
 	para "It has all sorts"
 	line "of rare #MON."

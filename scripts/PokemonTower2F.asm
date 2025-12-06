@@ -67,6 +67,8 @@ PokemonTower2FDefeatedRivalScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower2FResetRivalEncounter
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a
 	SetEvent EVENT_BEAT_POKEMON_TOWER_RIVAL
@@ -166,6 +168,9 @@ PokemonTower2FRivalText:
 	ld a, $6
 .done
 	ld [wTrainerNo], a
+
+	ld a, 1
+	ld [wIsTrainerBattle], a
 
 	ld a, SCRIPT_POKEMONTOWER2F_DEFEATED_RIVAL
 	ld [wPokemonTower2FCurScript], a

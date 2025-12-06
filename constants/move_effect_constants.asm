@@ -76,7 +76,7 @@
 	const DEFENSE_DOWN_SIDE_EFFECT   ; $45
 	const SPEED_DOWN_SIDE_EFFECT     ; $46
 	const SPECIAL_DOWN_SIDE_EFFECT   ; $47
-	const_skip                       ; $48
+	const BURN_EFFECT                       ; $48
 	const_skip                       ; $49
 	const_skip                       ; $4A
 	const_skip                       ; $4B
@@ -91,4 +91,14 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
+	const ATTACK_SELFDOWN1			 ; new
+	const DEFENSE_SELFDOWN1			 ; new
+	const SPEED_SELFDOWN1			 ; new - unnecessary as unused
+	const SPECIAL_SELFDOWN1			 ; new
+	const ATTACK_SELFDOWN2			 ; new - unnecessary as unused
+	const DEFENSE_SELFDOWN2			 ; new - unnecessary as unused
+	const SPEED_SELFDOWN2			 ; new - unnecessary as unused
+	const SPECIAL_SELFDOWN2			 ; new
+	const ATTACK_DEFENSE_SELFDOWN1	 
+	const DEFENSE_SPECIAL_SELFDOWN1
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

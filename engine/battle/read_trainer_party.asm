@@ -1,3 +1,9 @@
+GetNextTrainerDataByte:
+	ld a, [wEnemyPartyBank]
+	call GetFarByte
+	inc hl
+	ret
+
 ReadTrainer:
 
 ; don't change any moves in a link battle
@@ -17,11 +23,15 @@ ReadTrainer:
 ; get the pointer to trainer data for this class
 	ld a, [wCurOpponent]
 	sub OPP_ID_OFFSET + 1 ; convert value from pokemon to trainer
+	ld c, a
 	add a
+	add c
 	ld hl, TrainerDataPointers
 	ld c, a
 	ld b, 0
 	add hl, bc ; hl points to trainer class
+	ld a, [hli]
+	ld [wEnemyPartyBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -31,14 +41,16 @@ ReadTrainer:
 ; and hl points to the trainer class.
 ; Our next task is to iterate through the trainers,
 ; decrementing b each time, until we get to the right one.
-.CheckNextTrainer
+.nextTrainer
 	dec b
 	jr z, .IterateTrainer
-.SkipTrainer
-	ld a, [hli]
-	and a
-	jr nz, .SkipTrainer
-	jr .CheckNextTrainer
+	call GetNextTrainerDataByte
+	add l
+	ld l, a
+	adc h
+	sub l
+	ld h, a
+	jr .nextTrainer
 
 ; if the first byte of trainer data is FF,
 ; - each pokemon has a specific level
@@ -46,101 +58,133 @@ ReadTrainer:
 ; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
 ; else the first byte is the level of every pokemon on the team
 .IterateTrainer
-	ld a, [hli]
-	cp $FF ; is the trainer special?
-	jr z, .SpecialTrainer ; if so, check for special moves
-	ld [wCurEnemyLevel], a
-.LoopTrainerData
-	ld a, [hli]
-	and a ; have we reached the end of the trainer data?
-	jr z, .FinishUp
-	ld [wCurPartySpecies], a
-	ld a, ENEMY_PARTY_DATA
-	ld [wMonDataLocation], a
-	push hl
-	call AddPartyMon
-	pop hl
-	jr .LoopTrainerData
-.SpecialTrainer
-; if this code is being run:
-; - each pokemon has a specific level
-;      (as opposed to the whole team being of the same level)
-; - if [wLoneAttackNo] != 0, one pokemon on the team has a special move
-	ld a, [hli]
-	and a ; have we reached the end of the trainer data?
-	jr z, .AddLoneMove
-	ld [wCurEnemyLevel], a
-	ld a, [hli]
-	ld [wCurPartySpecies], a
-	ld a, ENEMY_PARTY_DATA
-	ld [wMonDataLocation], a
-	push hl
-	call AddPartyMon
-	pop hl
-	jr .SpecialTrainer
-.AddLoneMove
-; does the trainer have a single monster with a different move?
-	ld a, [wLoneAttackNo] ; Brock is 01, Misty is 02, Erika is 04, etc
-	and a
-	jr z, .AddTeamMove
-	dec a
-	add a
+	call GetNextTrainerDataByte
 	ld c, a
-	ld b, 0
-	ld hl, LoneMoves
-	add hl, bc
-	ld a, [hli]
-	ld d, [hl]
-	ld hl, wEnemyMon1Moves + 2
+	call GetNextTrainerDataByte
+	dec c
+	ld [wEnemyPartyFlags], a
+	; c is remaining trainer data size
+	; so trainer data ends at hl + c
+	; set c to l + c to stop reading when l == c
+	ld a, l
+	add c
+	ld c, a
+	push bc
+.LoopTrainerData
+
+	pop bc
+	ld a, l
+	sub c ; have we reached the end of the trainer data?
+	jp z, .FinishUp
+	push bc
+
+	call GetNextTrainerDataByte
+	ld [wCurEnemyLevel], a
+	call GetNextTrainerDataByte
+	ld [wCurPartySpecies], a
+	ld a, ENEMY_PARTY_DATA
+	ld [wMonDataLocation], a
+	push hl
+	call AddPartyMon
+	pop hl
+
+; tr_moves loading
+; flag check
+	ld a, [wEnemyPartyFlags]
+	and TRAINERTYPE_MOVES
+	jr z, .noMoves
+
+; actual loading
+	ld a, [wEnemyPartyCount]
+	dec a ; last mon in team
+
+	push hl
+	ld hl, wEnemyMon1Moves
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld [hl], d
-	jr .FinishUp
-.AddTeamMove
-; check if our trainer's team has special moves
+	ld d, h
+	ld e, l
+	pop hl
 
-; get trainer class number
-	ld a, [wCurOpponent]
-	sub OPP_ID_OFFSET
-	ld b, a
-	ld hl, TeamMoves
+	ld b, NUM_MOVES
+.copyMoves
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .copyMoves
 
-; iterate through entries in TeamMoves, checking each for our trainer class
-.IterateTeamMoves
+.noMoves
+
+; tr_dvs loading
+; flag check
+	ld a, [wEnemyPartyFlags]
+	and TRAINERTYPE_DVS
+	jr z, .noDVs
+
+; actual loading
+	ld a, [wEnemyPartyCount]
+	dec a ; last mon in team
+
+	push hl
+	ld hl, wEnemyMon1DVs
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+
+	call GetNextTrainerDataByte
+	ld [de], a
+	inc de
+	call GetNextTrainerDataByte
+	ld [de], a
+
+.noDVs
+
+	ld a, [wEnemyPartyFlags]
+	and TRAINERTYPE_DVS ; | TRAINERTYPE_STAT_EXP
+	jr z, .LoopTrainerData
+
+	push hl
+
+	ld a, [wEnemyPartyCount]
+	dec a ; last mon in team
+	ld hl, wEnemyMon1MaxHP
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld d, h
+	ld e, l
+
+	ld a, [wEnemyPartyCount]
+	dec a ; last mon in team
+	ld hl, wEnemyMon1HPExp - 1
+	call AddNTimes
+
+	ld b, TRUE
+	push de
+	call CalcStats
+
+	ld a, [wEnemyPartyCount]
+	dec a ; last mon in team
+	ld hl, wEnemyMon1HP
+	ld bc, wEnemyMon2 - wEnemyMon1
+	call AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+
+; copy max HP into HP
 	ld a, [hli]
-	cp b
-	jr z, .GiveTeamMoves ; is there a match?
-	inc hl ; if not, go to the next entry
-	inc a
-	jr nz, .IterateTeamMoves
-
-; no matches found. is this trainer champion rival?
-	ld a, b
-	cp RIVAL3
-	jr z, .ChampionRival
-	jr .FinishUp ; nope
-.GiveTeamMoves
+	ld [de], a
+	inc de
 	ld a, [hl]
-	ld [wEnemyMon5Moves + 2], a
-	jr .FinishUp
-.ChampionRival ; give moves to his team
+	ld [de], a
 
-; pidgeot
-	ld a, SKY_ATTACK
-	ld [wEnemyMon1Moves + 2], a
+	pop hl
 
-; starter
-	ld a, [wRivalStarter]
-	cp STARTER3
-	ld b, MEGA_DRAIN
-	jr z, .GiveStarterMove
-	cp STARTER1
-	ld b, FIRE_BLAST
-	jr z, .GiveStarterMove
-	ld b, BLIZZARD ; must be squirtle
-.GiveStarterMove
-	ld a, b
-	ld [wEnemyMon6Moves + 2], a
+	jp .LoopTrainerData
+
 .FinishUp
 ; clear wAmountMoneyWon addresses
 	xor a

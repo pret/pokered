@@ -108,21 +108,6 @@ _RoseText::
 	text " rose!"
 	prompt
 
-_MonsStatsFellText::
-	text "<TARGET>'s"
-	line "@"
-	text_ram wStringBuffer
-	text "@"
-	text_end
-
-_GreatlyFellText::
-	text "<SCROLL>greatly@"
-	text_end
-
-_FellText::
-	text " fell!"
-	prompt
-
 _RanFromBattleText::
 	text "<USER>"
 	line "ran from battle!"

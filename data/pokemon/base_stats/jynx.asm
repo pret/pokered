@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/jynx.pic", 0, 1 ; sprite dimensions
 	dw JynxPicFront, JynxPicBack
 
-	db POUND, LOVELY_KISS, NO_MOVE, NO_MOVE ; level 1 learnset
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
@@ -22,4 +22,5 @@
 	     SUBSTITUTE
 	; end
 
-	db 0 ; padding
+	db BANK(JynxPicFront)
+	assert BANK(JynxPicFront) == BANK(JynxPicBack)

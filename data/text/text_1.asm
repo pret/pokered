@@ -4,13 +4,13 @@ _CardKeySuccessText1::
 
 _CardKeySuccessText2::
 	text_start
-	line "The CARD KEY"
+	line "The Card Key"
 	cont "opened the door!"
 	done
 
 _CardKeyFailText::
 	text "Darn! It needs a"
-	line "CARD KEY!"
+	line "Card Key!"
 	done
 
 _TrainerNameText::
@@ -43,18 +43,18 @@ _GroundRoseText::
 
 _BoulderText::
 	text "This requires"
-	line "STRENGTH to move!"
+	line "Strength to move!"
 	done
 
 _MartSignText::
 	text "All your item"
 	line "needs fulfilled!"
-	cont "#MON MART"
+	cont "#MON Mart"
 	done
 
 _PokeCenterSignText::
 	text "Heal Your #MON!"
-	line "#MON CENTER"
+	line "#MON Center"
 	done
 
 _FoundItemText::
@@ -71,8 +71,8 @@ _NoMoreRoomForItemText::
 
 _OaksAideHiText::
 	text "Hi! Remember me?"
-	line "I'm PROF.OAK's"
-	cont "AIDE!"
+	line "I'm Prof.Oak's"
+	cont "aide!"
 
 	para "If you caught @"
 	text_decimal hOaksAideRequirement, 1, 3

@@ -72,7 +72,7 @@ MoveEffectPointerTable:
 	dw StatModifierDownEffect    ; DEFENSE_DOWN_SIDE_EFFECT
 	dw StatModifierDownEffect    ; SPEED_DOWN_SIDE_EFFECT
 	dw StatModifierDownEffect    ; SPECIAL_DOWN_SIDE_EFFECT
-	dw StatModifierDownEffect    ; unused effect
+	dw BurnEffect                ; BURN_EFFECT
 	dw StatModifierDownEffect    ; unused effect
 	dw StatModifierDownEffect    ; unused effect
 	dw StatModifierDownEffect    ; unused effect
@@ -87,4 +87,14 @@ MoveEffectPointerTable:
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT
 	dw SplashEffect              ; SPLASH_EFFECT
 	dw DisableEffect             ; DISABLE_EFFECT
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw StatModifierSelfDownEffect
+	dw AttackDefenseSelfDownEffect  ; ATTACK_DEFENSE_SELFDOWN1 
+	dw DefenseSpecialSelfDownEffect ; DEFENSE_SPECIAL_SELFDOWN1
 	assert_table_length NUM_MOVE_EFFECTS

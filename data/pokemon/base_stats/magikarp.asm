@@ -10,11 +10,12 @@
 	INCBIN "gfx/pokemon/front/magikarp.pic", 0, 1 ; sprite dimensions
 	dw MagikarpPicFront, MagikarpPicBack
 
-	db SPLASH, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
 	tmhm
 	; end
 
-	db 0 ; padding
+	db BANK(MagikarpPicFront)
+	assert BANK(MagikarpPicFront) == BANK(MagikarpPicBack)

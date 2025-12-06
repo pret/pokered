@@ -34,6 +34,8 @@ Route22GetRivalTrainerNoByStarterScript:
 .got_trainer_no
 	ld a, [hl]
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 	ret
 
 Route22MoveRivalRightScript:
@@ -150,6 +152,8 @@ Route22Rival1AfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22SetDefaultScript
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .not_facing_down
@@ -305,6 +309,8 @@ Route22Rival2AfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22SetDefaultScript
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, ROUTE22_RIVAL2
 	ldh [hSpriteIndex], a
 	ld a, [wSavedCoordIndex]

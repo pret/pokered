@@ -157,6 +157,8 @@ CeruleanCityRivalBattleScript:
 	ld a, $9
 .done
 	ld [wTrainerNo], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 
 	xor a
 	ldh [hJoyHeld], a
@@ -169,6 +171,8 @@ CeruleanCityRivalDefeatedScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeruleanCityClearScripts
+	xor a
+	ld [wIsTrainerBattle], a
 	call CeruleanCityFaceRivalScript
 	ld a, PAD_CTRL_PAD
 	ld [wJoyIgnore], a

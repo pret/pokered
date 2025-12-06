@@ -22,3 +22,19 @@ CopyData::
 	or b
 	jr nz, CopyData
 	ret
+
+; retrieve a single byte from a:hl, and return it in a.
+GetFarByte::
+	; bankswitch to new bank
+	call BankswitchHome
+
+	; get byte from new bank
+	ld a, [hl]
+	ldh [hFarByte], a
+
+	; bankswitch to previous bank
+	call BankswitchBack
+
+	; return retrieved value in a
+	ldh a, [hFarByte]
+	ret

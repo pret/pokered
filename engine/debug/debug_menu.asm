@@ -66,8 +66,8 @@ DebugBattleRivalName:
 	db "Juerry@"
 
 DebugMenuOptions:
-	db   "FIGHT"
-	next "DEBUG@"
+	db   "Fight"
+	next "Debug@"
 ELSE
 	ret
 ENDC

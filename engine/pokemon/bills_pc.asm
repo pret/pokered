@@ -339,15 +339,15 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW <PKMN>"
-	next "DEPOSIT <PKMN>"
-	next "RELEASE <PKMN>"
-	next "CHANGE BOX"
-	next "SEE YA!"
+	db   "Withdraw <PKMN>"
+	next "Deposit <PKMN>"
+	next "Release <PKMN>"
+	next "Change boxes"
+	next "Shut off PC"
 	db "@"
 
 BoxNoPCText:
-	db "BOX No.@"
+	db "Box No.@"
 
 KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move

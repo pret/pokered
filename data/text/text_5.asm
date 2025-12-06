@@ -62,6 +62,28 @@ _NewBadgeRequiredText::
 	line "is required."
 	prompt
 
+_MonsStatsFellText::
+	text "<TARGET>'s"
+	line "@"
+	text_ram wStringBuffer
+	text "@"
+	text_end
+	
+_MonsStatsSelfFellText::
+	text "<USER>'s"
+	line "@"
+	text_ram wStringBuffer
+	text "@"
+	text_end
+
+_GreatlyFellText::
+	text "<SCROLL>greatly@"
+	text_end
+
+_FellText::
+	text " fell!"
+	prompt
+		
 _CannotUseItemsHereText::
 	text "You can't use items"
 	line "here."

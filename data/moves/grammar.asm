@@ -12,7 +12,6 @@ ExclamationPointMoveSets:
 	db 0 ; end set
 
 ; set 2
-	db MEDITATE
 	db AGILITY
 	db TELEPORT
 	db MIMIC
@@ -50,12 +49,10 @@ ExclamationPointMoveSets:
 	db SCREECH
 	db HARDEN
 	db MINIMIZE
-	db WITHDRAW
 	db DEFENSE_CURL
 	db METRONOME
 	db LICK
 	db CLAMP
-	db CONSTRICT
 	db POISON_GAS
 	db LEECH_LIFE
 	db BUBBLE
@@ -64,7 +61,6 @@ ExclamationPointMoveSets:
 	db ACID_ARMOR
 	db FURY_SWIPES
 	db REST
-	db SHARPEN
 	db SLASH
 	db SUBSTITUTE
 	db 0 ; end set

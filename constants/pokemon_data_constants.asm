@@ -80,7 +80,7 @@ DEF HOF_TEAM_CAPACITY EQU 50
 	const EVOLVE_TRADE ; 3
 
 ; evolution data (see data/pokemon/evos_moves.asm)
-DEF NUM_EVOS_IN_BUFFER EQU 3
+DEF NUM_EVOS_IN_BUFFER EQU 8
 
 ; wMonHGrowthRate values
 ; GrowthRateTable indexes (see data/growth_rates.asm)

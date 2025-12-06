@@ -59,7 +59,7 @@ INCLUDE "data/tilesets/ledge_tiles.asm"
 LoadHoppingShadowOAM:
 	ld hl, vChars1 tile $7f
 	ld de, LedgeHoppingShadow
-	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
+	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / TILE_1BPP_SIZE
 	call CopyVideoDataDouble
 	ld a, $9
 	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
@@ -77,3 +77,4 @@ LedgeHoppingShadowOAMBlock:
 	db $ff, OAM_XFLIP
 	db $ff, OAM_YFLIP
 	db $ff, OAM_XFLIP | OAM_YFLIP
+	

@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/krabby.pic", 0, 1 ; sprite dimensions
 	dw KrabbyPicFront, KrabbyPicBack
 
-	db BUBBLE, LEER, NO_MOVE, NO_MOVE ; level 1 learnset
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
 	db GROWTH_MEDIUM_FAST ; growth rate
 
 	; tm/hm learnset
@@ -20,4 +20,5 @@
 	     CUT,          SURF,         STRENGTH
 	; end
 
-	db 0 ; padding
+	db BANK(KrabbyPicFront)
+	assert BANK(KrabbyPicFront) == BANK(KrabbyPicBack)

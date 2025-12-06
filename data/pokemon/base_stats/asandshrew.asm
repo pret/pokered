@@ -1,0 +1,25 @@
+	db DEX_ASANDSHREW ; pokedex id
+
+	db  50,  75,  90,  40,  10
+	;   hp  atk  def  spd  spc
+
+	db ICE, STEEL ; type
+	db 255 ; catch rate
+	db 93 ; base exp
+
+	INCBIN "gfx/pokemon/front/asandshrew.pic", 0, 1 ; sprite dimensions
+	dw ASandshrewPicFront, ASandshrewPicBack
+
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
+	db GROWTH_MEDIUM_FAST ; growth rate
+
+	; tm/hm learnset
+	tmhm SWORDS_DANCE, TOXIC,        BODY_SLAM,    TAKE_DOWN,    DOUBLE_EDGE,  \
+	     SUBMISSION,   SEISMIC_TOSS, RAGE,         EARTHQUAKE,   FISSURE,      \
+	     DIG,          MIMIC,        DOUBLE_TEAM,  BIDE,         SWIFT,        \
+	     SKULL_BASH,   REST,         ROCK_SLIDE,   SUBSTITUTE,   CUT,          \
+	     STRENGTH
+	; end
+
+	db BANK(ASandshrewPicFront)
+	assert BANK(ASandshrewPicFront) == BANK(ASandshrewPicBack)

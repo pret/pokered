@@ -1,0 +1,21 @@
+	db DEX_MELMETAL ; pokedex id
+
+	db 135, 143, 143,  34,  65
+	;   hp  atk  def  spd  spc
+
+	db STEEL, STEEL ; type
+	db 255 ; catch rate
+	db 53 ; base exp
+
+	INCBIN "gfx/pokemon/front/melmetal.pic", 0, 1 ; sprite dimensions
+	dw MelmetalPicFront, MelmetalPicBack
+
+	db HEADBUTT, HARDEN, NO_MOVE, NO_MOVE ; level 1 learnset
+	db GROWTH_MEDIUM_FAST ; growth rate
+
+	; tm/hm learnset
+	tmhm
+	; end
+
+	db BANK(MelmetalPicFront)
+	assert BANK(MelmetalPicFront) == BANK(MelmetalPicBack)

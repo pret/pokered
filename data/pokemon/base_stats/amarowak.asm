@@ -1,0 +1,26 @@
+	db DEX_AMAROWAK ; pokedex id
+
+	db  60,  80, 110,  45,  50
+	;   hp  atk  def  spd  spc
+
+	db FIRE, GHOST ; type
+	db 75 ; catch rate
+	db 149 ; base exp
+
+	INCBIN "gfx/pokemon/front/amarowak.pic", 0, 1 ; sprite dimensions
+	dw AMarowakPicFront, AMarowakPicBack
+
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
+	db GROWTH_MEDIUM_FAST ; growth rate
+
+	; tm/hm learnset
+	tmhm MEGA_PUNCH,   MEGA_KICK,    TOXIC,        BODY_SLAM,    TAKE_DOWN,    \
+	     DOUBLE_EDGE,  BUBBLEBEAM,   WATER_GUN,    ICE_BEAM,     BLIZZARD,     \
+	     HYPER_BEAM,   SUBMISSION,   COUNTER,      SEISMIC_TOSS, RAGE,         \
+	     EARTHQUAKE,   FISSURE,      DIG,          MIMIC,        DOUBLE_TEAM,  \
+	     BIDE,         FIRE_BLAST,   SKULL_BASH,   REST,         SUBSTITUTE,   \
+	     STRENGTH
+	; end
+
+	db BANK(AMarowakPicFront)
+	assert BANK(AMarowakPicFront) == BANK(AMarowakPicBack)

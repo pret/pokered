@@ -99,7 +99,6 @@ ROMX $12
 	"Screen Effects"
 	"Maps 8"
 ROMX $13
-	"Trainer Pics"
 	"Maps 9"
 	"Predefs"
 ROMX $14
@@ -177,6 +176,8 @@ ROMX $2B
 	"Pokédex Text"
 ROMX $2C
 	"Move Names"
+ROMX $2D
+	"Trainer Pics"
 WRAM0
 	"Audio RAM"
 	org $c100
@@ -188,7 +189,7 @@ WRAM0
 	"Party Data"
 	"Main Data"
 	"Current Box Data"
-	org $df00
+	org $df09
 	"Stack"
 VRAM
 	"VRAM"

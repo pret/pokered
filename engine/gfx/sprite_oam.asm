@@ -187,3 +187,4 @@ GetSpriteScreenXY:
 	and $f0
 	ld [de], a  ; [x#SPRITESTATEDATA1_XADJUSTED]
 	ret
+	

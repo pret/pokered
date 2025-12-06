@@ -241,7 +241,6 @@ INCLUDE "text/SaffronMart.asm"
 INCLUDE "text/SilphCo1F.asm"
 INCLUDE "text/SaffronPokecenter.asm"
 INCLUDE "text/MrPsychicsHouse.asm"
-
 INCLUDE "data/text/text_4.asm"
 
 
@@ -271,6 +270,14 @@ INCLUDE "data/text/text_7.asm"
 SECTION "Pokédex Text", ROMX
 
 INCLUDE "data/pokemon/dex_text.asm"
+
+
+SECTION "Pokédex Text1", ROMX
+INCLUDE "data/pokemon/dex_text1.asm"
+
+
+SECTION "Pokédex Text2", ROMX
+INCLUDE "data/pokemon/dex_text2.asm"
 
 
 SECTION "Move Names", ROMX

@@ -10,7 +10,7 @@
 	INCBIN "gfx/pokemon/front/staryu.pic", 0, 1 ; sprite dimensions
 	dw StaryuPicFront, StaryuPicBack
 
-	db TACKLE, NO_MOVE, NO_MOVE, NO_MOVE ; level 1 learnset
+    db NO_MOVE, NO_MOVE, NO_MOVE, NO_MOVE ; note: starting learnsets are part of regular learnsets
 	db GROWTH_SLOW ; growth rate
 
 	; tm/hm learnset
@@ -21,4 +21,5 @@
 	     PSYWAVE,      TRI_ATTACK,   SUBSTITUTE,   SURF,         FLASH
 	; end
 
-	db 0 ; padding
+	db BANK(StaryuPicFront)
+	assert BANK(StaryuPicFront) == BANK(StaryuPicBack)
