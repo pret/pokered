@@ -156,7 +156,7 @@ ItemUseBall:
 	dec a
 	jr nz, .notOldManBattle
 
-.oldManBattle
+; Old Man Battle
 	ld hl, wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -645,7 +645,7 @@ ItemUseBicycle:
 	jp z, ItemUseNotTime
 	dec a ; is player already bicycling?
 	jr nz, .tryToGetOnBike
-.getOffBike
+; get off bike
 	call ItemUseReloadOverworldData
 	xor a
 	ld [wWalkBikeSurfState], a ; change player state to walking
@@ -671,13 +671,13 @@ ItemUseSurfboard:
 	ld [wWalkBikeSurfStateCopy], a
 	cp 2 ; is the player already surfing?
 	jr z, .tryToStopSurfing
-.tryToSurf
+; try to Surf
 	call IsNextTileShoreOrWater
 	jp c, SurfingAttemptFailed
 	ld hl, TilePairCollisionsWater
 	call CheckForTilePairCollisions
 	jp c, SurfingAttemptFailed
-.surf
+; surfing
 	call .makePlayerMoveForward
 	ld hl, wStatusFlags5
 	set BIT_SCRIPTED_MOVEMENT_STATE, [hl]
@@ -921,7 +921,7 @@ ItemUseMedicine:
 	ld [wHPBarOldHP], a ; current HP stored at wHPBarOldHP (2 bytes, big-endian)
 	or b
 	jr nz, .notFainted
-.fainted
+; fainted
 	ld a, [wCurItem]
 	cp REVIVE
 	jr z, .updateInBattleFaintedData
@@ -973,7 +973,7 @@ ItemUseMedicine:
 .skipComparingLSB
 	pop hl
 	jr nz, .notFullHP
-.fullHP ; if the pokemon's current HP equals its max HP
+; if the pokemon's current HP equals its max HP
 	ld a, [wCurItem]
 	cp FULL_RESTORE
 	jp nz, .healingItemNoEffect
@@ -1753,8 +1753,8 @@ ItemUsePokeFlute:
 ; OUTPUT:
 ; [wWereAnyMonsAsleep]: set to 1 if any pokemon were asleep
 WakeUpEntireParty:
-	ld de, 44
-	ld c, 6
+	ld de, PARTYMON_STRUCT_LENGTH
+	ld c, PARTY_LENGTH
 .loop
 	ld a, [hl]
 	push af
@@ -1995,7 +1995,7 @@ ItemUsePPRestore:
 	ld a, [wPPRestoreItem]
 	cp ETHER
 	jr nc, .useEther ; if Ether or Max Ether
-.usePPUp
+; use PP Up
 	ld bc, MON_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl] ; move PP

@@ -18,7 +18,7 @@ LoadPartyPokeballGfx:
 
 SetupOwnPartyPokeballs:
 	call PlacePlayerHUDTiles
-	ld hl, wPartyMon1
+	ld hl, wPartyMons
 	ld de, wPartyCount
 	call SetupPokeballs
 	ld a, $60

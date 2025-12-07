@@ -340,7 +340,7 @@ StartMenu_Item::
 	ld a, [wCurItem]
 	cp BICYCLE
 	jp z, .useOrTossItem
-.notBicycle1
+; not Bicycle
 	ld a, USE_TOSS_MENU_TEMPLATE
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -370,14 +370,14 @@ StartMenu_Item::
 	call CopyToStringBuffer
 	ld a, [wCurItem]
 	cp BICYCLE
-	jr nz, .notBicycle2
+	jr nz, .notBicycle
 	ld a, [wStatusFlags6]
 	bit BIT_ALWAYS_ON_BIKE, a
 	jr z, .useItem_closeMenu
 	ld hl, CannotGetOffHereText
 	call PrintText
 	jp ItemMenuLoop
-.notBicycle2
+.notBicycle
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .tossItem

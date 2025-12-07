@@ -146,7 +146,10 @@ CreditsCopyTileMapToVRAM:
 	jp Delay3
 
 ZeroMemory:
-; zero bc bytes at hl
+; zero every second byte at hl, writing a total of bc bytes
+; When applied to VRAM font characters, it shifts their color index,
+; allowing palette-controlled text fade-in during the Credits roll,
+; while the black bars remain solid
 	ld [hl], 0
 	inc hl
 	inc hl

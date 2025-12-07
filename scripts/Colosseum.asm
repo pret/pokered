@@ -1,4 +1,5 @@
 Colosseum_Script:
+	ASSERT TRADECENTER_OPPONENT == COLOSSEUM_OPPONENT
 	jp TradeCenter_Script
 
 Colosseum_TextPointers:

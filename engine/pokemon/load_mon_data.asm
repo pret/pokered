@@ -31,7 +31,7 @@ LoadMonData_::
 	ld hl, wEnemyMons
 	jr z, .getMonEntry
 
-	cp 2
+	cp BOX_DATA
 	ld hl, wBoxMons
 	ld bc, BOXMON_STRUCT_LENGTH
 	jr z, .getMonEntry

@@ -99,7 +99,7 @@ DisplayPokemartDialogue_::
 	dec a
 	jr z, .sellMenuLoop
 
-.sellItem
+; sell item
 	ld a, [wBoughtOrSoldItemInMart]
 	and a
 	jr nz, .skipSettingFlag1
@@ -177,7 +177,7 @@ DisplayPokemartDialogue_::
 	dec a
 	jr z, .buyMenuLoop
 
-.buyItem
+; buy item
 	call .isThereEnoughMoney
 	jr c, .notEnoughMoney
 	ld hl, wNumBagItems

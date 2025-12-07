@@ -82,13 +82,13 @@ BillsHouseBillExitsMachineScript:
 	call DelayFrames
 	ld a, BILLSHOUSE_BILL1
 	ldh [hSpriteIndex], a
-	ld de, BillExitMachineMovement
+	ld de, .BillExitMachineMovement
 	call MoveSprite
 	ld a, SCRIPT_BILLSHOUSE_CLEANUP
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillExitMachineMovement:
+.BillExitMachineMovement:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT

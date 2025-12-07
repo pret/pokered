@@ -375,7 +375,7 @@ _MoveMon::
 .copySpecies
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
-.findMonDataDest
+; find mon data dest
 	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
@@ -457,7 +457,7 @@ _MoveMon::
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
-.findNickDest
+; find nick dest
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonName
 	jr z, .findNickSrc

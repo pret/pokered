@@ -178,10 +178,10 @@ MissableObjectFlagAction:
 	ld a, b
 	and a
 	jr z, .reset
-	cp 2
+	cp FLAG_TEST
 	jr z, .read
 
-.set
+; set
 	ld a, [hl]
 	ld b, a
 	ld a, d

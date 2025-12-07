@@ -82,7 +82,8 @@ MACRO print_digit
 	call .NextDigit
 ENDM
 
-.millions          print_digit 1000000
+; millions
+                   print_digit 1000000
 .hundred_thousands print_digit 100000
 .ten_thousands     print_digit 10000
 .thousands         print_digit 1000
@@ -113,7 +114,7 @@ ENDM
 .next
 
 	call .NextDigit
-.ones
+; ones
 	ld a, '0'
 	add b
 	ld [hli], a
