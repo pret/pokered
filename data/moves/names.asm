@@ -1,5 +1,5 @@
 MoveNames::
-	list_start
+	list_start MOVE_NAME_LENGTH - 2 ; move name buffers have an extra byte
 	li "POUND"
 	li "KARATE CHOP"
 	li "DOUBLESLAP"
