@@ -9,6 +9,8 @@ PewterGym_Object:
 	def_warp_events
 	warp_event  4, 13, ROUTE_22, 4
 	warp_event  5, 13, ROUTE_22, 4
+	warp_event  4, 0, CERULEAN_CITY, 1
+	warp_event  5, 0, CERULEAN_CITY, 1
 
 	def_bg_events
 
