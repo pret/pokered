@@ -15,8 +15,12 @@ OaksLab_Object:
 	db $3 ; border block
 
 	def_warp_events
-	warp_event  4, 11, LAST_MAP, 3
-	warp_event  5, 11, LAST_MAP, 3
+	warp_event  0,  2, REDS_HOUSE_2F, 1
+	warp_event  0,  3, REDS_HOUSE_2F, 1
+	warp_event  0,  4, REDS_HOUSE_2F, 1
+	warp_event  0,  5, REDS_HOUSE_2F, 1
+	warp_event  4, 11, ROUTE_22, 2
+	warp_event  5, 11, ROUTE_22, 3
 
 	def_bg_events
 

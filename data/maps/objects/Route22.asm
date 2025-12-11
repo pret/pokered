@@ -7,12 +7,15 @@ Route22_Object:
 
 	def_warp_events
 	warp_event  8,  5, ROUTE_22_GATE, 1
+	warp_event 31,  3, OAKS_LAB, 5
+	warp_event 32,  3, OAKS_LAB, 6
+	warp_event 24,  3, PEWTER_GYM, 1
 
 	def_bg_events
 	bg_event  7, 11, TEXT_ROUTE22_POKEMON_LEAGUE_SIGN
 
 	def_object_events
-	object_event 25,  5, SPRITE_BLUE, STAY, NONE, TEXT_ROUTE22_RIVAL1
-	object_event 25,  5, SPRITE_BLUE, STAY, NONE, TEXT_ROUTE22_RIVAL2
+	object_event 30,  5, SPRITE_BLUE, STAY, NONE, TEXT_ROUTE22_RIVAL1
+	object_event 18, 14, SPRITE_BLUE, STAY, NONE, TEXT_ROUTE22_RIVAL2
 
 	def_warps_to ROUTE_22
