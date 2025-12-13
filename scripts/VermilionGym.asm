@@ -7,7 +7,7 @@ VermilionGym_Script:
 	pop hl
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
-	call nz, VermilionGymSetDoorTile
+	; call nz, VermilionGymSetDoorTile ; TODO: replace with next-battle door closing
 	call EnableAutoTextBoxDrawing
 	ld hl, VermilionGymTrainerHeaders
 	ld de, VermilionGym_ScriptPointers
@@ -28,6 +28,7 @@ VermilionGym_Script:
 	db "LT.SURGE@"
 
 VermilionGymSetDoorTile:
+	; TODO: replace with next-battle door closing
 	CheckEvent EVENT_2ND_LOCK_OPENED
 	jr nz, .doorsOpen
 	ld a, $24 ; double door tile ID

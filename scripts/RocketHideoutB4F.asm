@@ -15,9 +15,9 @@ RocketHideoutB4FDoorCallbackScript:
 	ret z
 	CheckEvent EVENT_ROCKET_HIDEOUT_4_DOOR_UNLOCKED
 	jr nz, .door_already_unlocked
-	CheckBothEventsSet EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_0, EVENT_BEAT_ROCKET_HIDEOUT_4_TRAINER_1, 1
-	jr z, .unlock_door
-	ld a, $2d ; Door block
+	CheckEvent EVENT_BEAT_ROCKET_HIDEOUT_GIOVANNI
+	jr nz, .unlock_door
+	ld a, $31 ; Stones
 	jr .set_block
 .unlock_door
 	ld a, SFX_GO_INSIDE
@@ -27,7 +27,7 @@ RocketHideoutB4FDoorCallbackScript:
 	ld a, $e ; Floor block
 .set_block
 	ld [wNewTileBlockID], a
-	lb bc, 5, 12
+	lb bc, 2, 10
 	predef_jump ReplaceTileBlock
 
 RocketHideoutB4FSetDefaultScript:
