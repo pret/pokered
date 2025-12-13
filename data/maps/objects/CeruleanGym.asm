@@ -8,8 +8,10 @@ CeruleanGym_Object:
 	db $3 ; border block
 
 	def_warp_events
-	warp_event  4, 13, LAST_MAP, 4
-	warp_event  5, 13, LAST_MAP, 4
+	warp_event  4, 13, CERULEAN_CITY, 2
+	warp_event  5, 13, CERULEAN_CITY, 2
+	warp_event  4, 0,  SS_ANNE_2F, 1
+	warp_event  5, 0,  SS_ANNE_2F, 2
 
 	def_bg_events
 

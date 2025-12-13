@@ -16,6 +16,7 @@ CeruleanCity_Object:
 
 	def_warp_events
 	warp_event 9, 9, PEWTER_GYM, 4
+	warp_event 30, 19, CERULEAN_GYM, 1
 
 	def_bg_events
 	bg_event 23, 19, TEXT_CERULEANCITY_SIGN
@@ -26,7 +27,7 @@ CeruleanCity_Object:
 	bg_event 27, 21, TEXT_CERULEANCITY_GYM_SIGN
 
 	def_object_events
-	object_event 20,  2, SPRITE_BLUE, STAY, DOWN, TEXT_CERULEANCITY_RIVAL
+	object_event 20,  4, SPRITE_BLUE, STAY, DOWN, TEXT_CERULEANCITY_RIVAL
 	object_event 30,  8, SPRITE_ROCKET, STAY, NONE, TEXT_CERULEANCITY_ROCKET, OPP_ROCKET, 5
 	object_event 31, 20, SPRITE_COOLTRAINER_M, STAY, DOWN, TEXT_CERULEANCITY_COOLTRAINER_M
 	object_event 15, 18, SPRITE_SUPER_NERD, WALK, UP_DOWN, TEXT_CERULEANCITY_SUPER_NERD1

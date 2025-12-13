@@ -107,8 +107,8 @@ CeruleanCityCoords1:
 	db -1 ; end
 
 CeruleanCityCoords2:
-	dbmapcoord 20,  6
-	dbmapcoord 21,  6
+	dbmapcoord 20,  8
+	dbmapcoord 20,  9
 	db -1 ; end
 
 CeruleanCityMovement1:
