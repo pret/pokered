@@ -6,7 +6,7 @@ Route22_Object:
 	db $2c ; border block
 
 	def_warp_events
-	warp_event  8,  5, ROUTE_22_GATE, 1
+	warp_event  8,  5, INDIGO_PLATEAU_LOBBY, 1
 	warp_event 31,  3, OAKS_LAB, 5
 	warp_event 32,  3, OAKS_LAB, 6
 	warp_event 24,  3, PEWTER_GYM, 1
