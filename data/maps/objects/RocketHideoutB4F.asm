@@ -15,6 +15,7 @@ RocketHideoutB4F_Object:
 	def_warp_events
 	warp_event 24, 15, VERMILION_GYM, 3
 	warp_event 25, 15, VERMILION_GYM, 4
+	warp_event 19, 10, CELADON_GYM, 1
 
 	def_bg_events
 
