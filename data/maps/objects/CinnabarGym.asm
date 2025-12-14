@@ -15,6 +15,8 @@ CinnabarGym_Object:
 	def_warp_events
 	warp_event 16, 17, SAFFRON_GYM, 3
 	warp_event 17, 17, SAFFRON_GYM, 4
+	warp_event  4,  0, VIRIDIAN_GYM, 1
+	warp_event  5,  0, VIRIDIAN_GYM, 2
 
 	def_bg_events
 
