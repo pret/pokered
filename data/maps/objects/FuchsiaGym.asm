@@ -14,6 +14,8 @@ FuchsiaGym_Object:
 	def_warp_events
 	warp_event  4, 17, POKEMON_TOWER_2F, 2
 	warp_event  5, 17, POKEMON_TOWER_2F, 2
+	warp_event  4,  0, SILPH_CO_7F, 1
+	warp_event  5,  0, SILPH_CO_7F, 1
 
 	def_bg_events
 

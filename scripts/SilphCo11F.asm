@@ -231,6 +231,11 @@ SilphCo11FGiovanniAfterBattleScript:
 	call Delay3
 	call GBFadeInFromBlack
 	SetEvent EVENT_BEAT_SILPH_CO_GIOVANNI
+	SetEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
+	ld a, $3
+	ld [wNewTileBlockID], a
+	lb bc, 6, 3
+	predef ReplaceTileBlock
 	xor a
 	ld [wJoyIgnore], a
 	jp SilphCo11FSetCurScript
