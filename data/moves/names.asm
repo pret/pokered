@@ -1,5 +1,6 @@
 MoveNames::
-	list_start MOVE_NAME_LENGTH - 2 ; move name buffers have an extra byte
+	; in-battle "used <move name>!" text can only fit 12 (MOVE_NAME_LENGTH - 2) characters
+	list_start MOVE_NAME_LENGTH - 2
 	li "POUND"
 	li "KARATE CHOP"
 	li "DOUBLESLAP"
