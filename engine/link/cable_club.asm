@@ -673,7 +673,7 @@ TradeCenter_PrintPartyListNames:
 	pop de
 	inc de
 	pop hl
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	inc c

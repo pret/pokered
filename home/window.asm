@@ -52,11 +52,11 @@ HandleMenuInput_::
 	ld b, a
 	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
-.upPressed
+; Up pressed
 	ld a, [wCurrentMenuItem] ; selected menu item
 	and a ; already at the top of the menu?
 	jr z, .alreadyAtTop
-.notAtTop
+; not at top
 	dec a
 	ld [wCurrentMenuItem], a ; move selected menu item up one space
 	jr .checkOtherKeys
@@ -70,14 +70,14 @@ HandleMenuInput_::
 .checkIfDownPressed
 	bit B_PAD_DOWN, a
 	jr z, .checkOtherKeys
-.downPressed
+; Down pressed
 	ld a, [wCurrentMenuItem]
 	inc a
 	ld c, a
 	ld a, [wMaxMenuItem]
 	cp c
 	jr nc, .notAtBottom
-.alreadyAtBottom
+; already at bottom
 	ld a, [wMenuWrappingEnabled]
 	and a ; is wrapping around enabled?
 	jr z, .noWrappingAround
@@ -93,7 +93,7 @@ HandleMenuInput_::
 	ldh a, [hJoy5]
 	and PAD_A | PAD_B
 	jr z, .skipPlayingSound
-.AButtonOrBButtonPressed
+; A or B pressed
 	push hl
 	ld hl, wMiscFlags
 	bit BIT_NO_MENU_BUTTON_SOUND, [hl]
@@ -153,7 +153,7 @@ PlaceMenuCursor::
 	ld a, [hl]
 	cp '▶' ; was an arrow next to the previously selected menu item?
 	jr nz, .skipClearingArrow
-.clearArrow
+; clear arrow
 	ld a, [wTileBehindCursor]
 	ld [hl], a
 .skipClearingArrow

@@ -343,7 +343,7 @@ MACRO ResetEventRange
 		IF event_fill_count > 1
 			ld hl, wEventFlags + event_fill_start
 
-			; force xor a if we just to wrote to it above
+			; force xor a if we just wrote to it above
 			IF (_NARG < 3) || (((\1) % 8) != 0)
 				xor a
 			ENDC

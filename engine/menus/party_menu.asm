@@ -90,7 +90,7 @@ RedrawPartyMenu_::
 	jr nz, .placeMoveLearnabilityString
 	ld de, .notAbleToLearnMoveText
 .placeMoveLearnabilityString
-	ld bc, 20 + 9 ; down 1 row and right 9 columns
+	ld bc, SCREEN_WIDTH + 9 ; 1 row down and 9 columns right
 	push hl
 	add hl, bc
 	call PlaceString
@@ -102,7 +102,7 @@ RedrawPartyMenu_::
 	pop hl
 	pop de
 	inc de
-	ld bc, 2 * 20
+	ld bc, 2 * SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	inc c

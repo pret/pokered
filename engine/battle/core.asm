@@ -1247,7 +1247,7 @@ SlideTrainerPicOffScreen:
 	ldh a, [hSlideAmount]
 	cp 8
 	jr z, .slideRight
-.slideLeft ; slide player sprite off screen
+; slide player sprite left off screen
 	ld a, [hld]
 	ld [hli], a
 	inc hl
@@ -3557,11 +3557,12 @@ CheckPlayerStatusConditions:
 	ld hl, AttackContinuesText
 	call PrintText
 	ld a, [wPlayerNumAttacksLeft]
-	dec a ; did multi-turn move end?
+	dec a
 	ld [wPlayerNumAttacksLeft], a
-	ld hl, GetPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
-	                ; DecrementPP and MoveHitTest
-	jp nz, .returnToHL
+	ld hl, GetPlayerAnimationType ; skip damage calculation (deal damage equal to last hit),
+	                              ; DecrementPP and MoveHitTest
+	jp nz, .returnToHL  ; redundant leftover code, the case wEnemyNumAttacksLeft == 0
+						; is handled within CheckNumAttacksLeft
 	jp .returnToHL
 
 .RageCheck
@@ -3626,7 +3627,7 @@ ConfusedNoMoreText:
 	text_far _ConfusedNoMoreText
 	text_end
 
-SavingEnergyText:
+SavingEnergyText: ; unreferenced
 	text_far _SavingEnergyText
 	text_end
 
@@ -4171,7 +4172,7 @@ GetDamageVarsForPlayerAttack:
 	ld a, [hl] ; a = [wPlayerMoveType]
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
-.physicalAttack
+; physical attack
 	ld hl, wEnemyMonDefense
 	ld a, [hli]
 	ld b, a
@@ -4284,7 +4285,7 @@ GetDamageVarsForEnemyAttack:
 	ld a, [hl] ; a = [wEnemyMoveType]
 	cp SPECIAL ; types >= SPECIAL are all special
 	jr nc, .specialAttack
-.physicalAttack
+; physical attack
 	ld hl, wBattleMonDefense
 	ld a, [hli]
 	ld b, a
@@ -5301,7 +5302,6 @@ AdjustDamageForMoveType:
 	ld [hl], a
 	or b ; is damage 0?
 	jr nz, .skipTypeImmunity
-.typeImmunity
 ; if damage is 0, make the move miss
 ; this only occurs if a move that would do 2 or 3 damage is 0.25x effective against the target
 	inc a
@@ -5394,7 +5394,7 @@ MoveHitTest:
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .enemyTurn
-.playerTurn
+; player's turn
 ; this checks if the move effect is disallowed by mist
 	ld a, [wPlayerMoveEffect]
 	cp ATTACK_DOWN1_EFFECT
@@ -5466,12 +5466,12 @@ MoveHitTest:
 	ld [wMoveMissed], a
 	ldh a, [hWhoseTurn]
 	and a
-	jr z, .playerTurn2
-.enemyTurn2
+	jr z, .playerTurn
+; enemy's turn
 	ld hl, wEnemyBattleStatus1
 	res USING_TRAPPING_MOVE, [hl] ; end multi-turn attack e.g. wrap
 	ret
-.playerTurn2
+.playerTurn
 	ld hl, wPlayerBattleStatus1
 	res USING_TRAPPING_MOVE, [hl] ; end multi-turn attack e.g. wrap
 	ret
@@ -6063,10 +6063,11 @@ CheckEnemyStatusConditions:
 	ld hl, AttackContinuesText
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
-	dec [hl] ; did multi-turn move end?
-	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
+	dec [hl]
+	ld hl, GetEnemyAnimationType ; skip damage calculation (deal damage equal to last hit),
 	                             ; DecrementPP and MoveHitTest
-	jp nz, .enemyReturnToHL
+	jp nz, .enemyReturnToHL ; redundant leftover code, the case wEnemyNumAttacksLeft == 0
+							; is handled within CheckNumAttacksLeft
 	jp .enemyReturnToHL
 .checkIfUsingRage
 	ld a, [wEnemyBattleStatus2]
@@ -6415,7 +6416,7 @@ QuarterSpeedDueToParalysis:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-.enemyTurn ; quarter the player's speed
+; enemy's turn, quarter the player's speed
 	ld a, [wBattleMonStatus]
 	and 1 << PAR
 	ret z ; return if player not paralysed
@@ -6458,7 +6459,7 @@ HalveAttackDueToBurn:
 	ldh a, [hWhoseTurn]
 	and a
 	jr z, .playerTurn
-.enemyTurn ; halve the player's attack
+; enemy's turn, halve the player's attack
 	ld a, [wBattleMonStatus]
 	and 1 << BRN
 	ret z ; return if player not burnt
@@ -6642,7 +6643,7 @@ LoadHudTilePatterns:
 	ldh a, [rLCDC]
 	add a ; is LCD disabled?
 	jr c, .lcdEnabled
-.lcdDisabled
+; LCD disabled
 	ld hl, BattleHudTiles1
 	ld de, vChars2 tile $6d
 	ld bc, BattleHudTiles1End - BattleHudTiles1

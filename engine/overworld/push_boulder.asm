@@ -43,7 +43,7 @@ TryPushingBoulder::
 	jr z, .pushBoulderLeft
 	cp SPRITE_FACING_RIGHT
 	jr z, .pushBoulderRight
-.pushBoulderDown
+; push boulder down
 	bit B_PAD_DOWN, b
 	ret z
 	ld de, PushBoulderDownMovementData

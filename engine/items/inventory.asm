@@ -118,7 +118,6 @@ RemoveItemFromInventory_::
 	jr nz, .skipMovingUpSlots
 ; if the remaining quantity is 0,
 ; remove the emptied item slot and move up all the following item slots
-.moveSlotsUp
 	ld e, l
 	ld d, h
 	inc de

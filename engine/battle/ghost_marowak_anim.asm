@@ -48,7 +48,7 @@ MarowakAnim:
 	call Delay3
 	jp ClearSprites
 
-; copies a mon pic's  from background VRAM to sprite VRAM and sets up OAM
+; copies a mon pic's from background VRAM to sprite VRAM and sets up OAM
 CopyMonPicFromBGToSpriteVRAM:
 	ld de, vFrontPic
 	ld hl, vSprites

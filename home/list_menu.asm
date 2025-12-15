@@ -65,7 +65,7 @@ DisplayListMenuIDLoop::
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
 	jr z, .notOldManBattle
-.oldManBattle
+; Old Man battle
 	ld a, '▶'
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 80
@@ -178,7 +178,7 @@ DisplayListMenuIDLoop::
 	bit B_PAD_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
-.downPressed
+; Down pressed
 	ld a, [hl]
 	add 3
 	ld b, a
@@ -380,7 +380,7 @@ PrintListMenuEntries::
 	jr z, .pokemonPCMenu
 	cp MOVESLISTMENU
 	jr z, .movesMenu
-.itemMenu
+; item menu
 	call GetItemName
 	jr .placeNameString
 .pokemonPCMenu
@@ -411,7 +411,7 @@ PrintListMenuEntries::
 	ld a, [wPrintItemPrices]
 	and a ; should prices be printed?
 	jr z, .skipPrintingItemPrice
-.printItemPrice
+; print item price
 	push hl
 	ld a, [de]
 	ld de, ItemPrices
@@ -426,7 +426,7 @@ PrintListMenuEntries::
 	ld a, [wListMenuID]
 	and a ; PCPOKEMONLISTMENU?
 	jr nz, .skipPrintingPokemonLevel
-.printPokemonLevel
+; print Pokemon level
 	ld a, [wNamedObjectIndex]
 	push af
 	push hl
@@ -451,7 +451,7 @@ PrintListMenuEntries::
 	ld a, [wMonDataLocation]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z, .skipCopyingLevel
-.copyLevel
+; copy level
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
 .skipCopyingLevel
@@ -468,7 +468,7 @@ PrintListMenuEntries::
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jr nz, .nextListEntry
-.printItemQuantity
+; print item quantity
 	ld a, [wNamedObjectIndex]
 	ld [wCurItem], a
 	call IsKeyItem ; check if item is unsellable

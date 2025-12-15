@@ -1,6 +1,6 @@
 PlayerStepOutFromDoor::
-	ld hl, wStatusFlags5 ; should this be wMovementFlags?
-	res BIT_EXITING_DOOR, [hl]
+	ld hl, wStatusFlags5
+	res BIT_UNKNOWN_5_1, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
 	ld a, PAD_SELECT | PAD_START | PAD_CTRL_PAD

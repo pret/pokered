@@ -31,9 +31,9 @@ PrintBCDNumber::
 	inc de
 	dec c
 	jr nz, .loop
-	bit BIT_LEADING_ZEROES, b
+	bit BIT_LEADING_ZEROES, b ; were any non-zero digits printed?
 	jr z, .done ; if so, we are done
-.numberEqualsZero ; if every digit of the BCD number is zero
+; if every digit of the BCD number is zero, print the last 0
 	bit BIT_LEFT_ALIGN, b
 	jr nz, .skipRightAlignmentAdjustment
 	dec hl ; if the string is right-aligned, it needs to be moved back one space

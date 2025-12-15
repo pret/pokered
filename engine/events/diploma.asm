@@ -73,8 +73,8 @@ DisplayDiploma::
 	jp GBPalNormal
 
 UnusedPlayerNameLengthFunc:
-; Unused function that does a calculation involving the length of the player's
-; name.
+; Unused function that performs bc = -(player name's length)
+; leftover from the JPN versions
 	ld hl, wPlayerName
 	lb bc, $ff, $00
 .loop

@@ -2,17 +2,22 @@ TransformEffect_:
 	ld hl, wBattleMonSpecies
 	ld de, wEnemyMonSpecies
 	ld bc, wEnemyBattleStatus3
+	; bug: on enemy's turn, a is overloaded with hWhoseTurn,
+	; before the check for INVULNERABLE
 	ld a, [wEnemyBattleStatus1]
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .hitTest
+; player's turn
 	ld hl, wEnemyMonSpecies
 	ld de, wBattleMonSpecies
 	ld bc, wPlayerBattleStatus3
 	ld [wPlayerMoveListIndex], a
+	; bug: this should be target's BattleStatus1 (i.e. wEnemyBattleStatus1)
 	ld a, [wPlayerBattleStatus1]
 .hitTest
 	bit INVULNERABLE, a ; is mon invulnerable to typical attacks? (fly/dig)
+	                    ; this check doesn't work due to above bugs
 	jp nz, .failed
 	push hl
 	push de

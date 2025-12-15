@@ -25,7 +25,7 @@ JoypadLowSensitivity::
 	ldh a, [hJoyPressed] ; newly pressed buttons
 	and a ; have any buttons been newly pressed since last check?
 	jr z, .noNewlyPressedButtons
-.newlyPressedButtons
+; newly pressed buttons
 	ld a, 30 ; half a second delay
 	ldh [hFrameCounter], a
 	ret
@@ -33,7 +33,7 @@ JoypadLowSensitivity::
 	ldh a, [hFrameCounter]
 	and a ; is the delay over?
 	jr z, .delayOver
-.delayNotOver
+; delay not over
 	xor a
 	ldh [hJoy5], a ; report no buttons as pressed
 	ret
