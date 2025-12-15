@@ -546,7 +546,7 @@ ContinueCheckWarpsNoCollisionLoop::
 
 ; if no matching warp was found
 CheckMapConnections::
-; check West map
+; check west map
 	ld a, [wXCoord]
 	cp $ff
 	jr nz, .checkEastMap
@@ -2046,7 +2046,7 @@ LoadMapHeader::
 ; copy connection data (if any) to WRAM
 	ld a, [wCurMapConnections]
 	ld b, a
-; check North
+; check north
 	bit NORTH_F, b
 	jr z, .checkSouth
 	ld de, wNorthConnectionHeader

@@ -1097,8 +1097,8 @@ SetAnimationBGPalette:
 	ldh [rBGP], a
 	ret
 
-AnimationUnusedShakeScreen:
-; Shakes the screen for a while. Unreferenced.
+AnimationUnusedShakeScreen: ; unreferenced
+; Shakes the screen for a while.
 	ld b, $5
 
 AnimationShakeScreenVertically:

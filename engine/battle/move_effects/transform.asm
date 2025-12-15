@@ -13,7 +13,7 @@ TransformEffect_:
 	ld de, wBattleMonSpecies
 	ld bc, wPlayerBattleStatus3
 	ld [wPlayerMoveListIndex], a
-	; bug: this should be target's BattleStatus1 (ie wEnemyBattleStatus1)
+	; bug: this should be target's BattleStatus1 (i.e. wEnemyBattleStatus1)
 	ld a, [wPlayerBattleStatus1]
 .hitTest
 	bit INVULNERABLE, a ; is mon invulnerable to typical attacks? (fly/dig)

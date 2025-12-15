@@ -156,7 +156,7 @@ ItemUseBall:
 	dec a
 	jr nz, .notOldManBattle
 
-; Old Man Battle
+; Old Man battle
 	ld hl, wGrassRate
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
