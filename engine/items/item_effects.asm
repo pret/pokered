@@ -1308,7 +1308,7 @@ ItemUseMedicine:
 	jr .statNameLoop
 .gotStatName
 	ld de, wStringBuffer
-	ld bc, NAME_LENGTH - 1 ; all VitaminStats are at most 10 bytes
+	ld bc, STAT_NAME_LENGTH
 	call CopyData ; copy the stat's name to wStringBuffer
 	ld a, SFX_HEAL_AILMENT
 	call PlaySound
