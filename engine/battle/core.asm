@@ -3561,9 +3561,8 @@ CheckPlayerStatusConditions:
 	ld [wPlayerNumAttacksLeft], a
 	ld hl, GetPlayerAnimationType ; skip damage calculation (deal damage equal to last hit),
 	                              ; DecrementPP and MoveHitTest
-	; redundant code, we don't need to test here if wPlayerNumAttacksLeft hit 0,
-	; since CheckNumAttacksLeft will reset bit USING_TRAPPING_MOVE
-	jp nz, .returnToHL
+	jp nz, .returnToHL  ; redundant leftover code, the case wEnemyNumAttacksLeft == 0
+						; is handled within CheckNumAttacksLeft
 	jp .returnToHL
 
 .RageCheck
@@ -6067,9 +6066,8 @@ CheckEnemyStatusConditions:
 	dec [hl]
 	ld hl, GetEnemyAnimationType ; skip damage calculation (deal damage equal to last hit),
 	                             ; DecrementPP and MoveHitTest
-	; redundant code, we don't need to test here if wEnemyNumAttacksLeft hit 0,
-	; since CheckNumAttacksLeft will reset bit USING_TRAPPING_MOVE
-	jp nz, .enemyReturnToHL
+	jp nz, .enemyReturnToHL ; redundant leftover code, the case wEnemyNumAttacksLeft == 0
+							; is handled within CheckNumAttacksLeft
 	jp .enemyReturnToHL
 .checkIfUsingRage
 	ld a, [wEnemyBattleStatus2]

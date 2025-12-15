@@ -295,11 +295,11 @@ LoadSubanimation:
 	and %11100000
 	cp SUBANIMTYPE_ENEMY << 5
 	vc_hook_blue Reduce_move_anim_flashing_Blizzard
-	jr nz, .isNotType5
-; Type 5
+	jr nz, .isNotTypeEnemy
+; subanim type enemy
 	call GetSubanimationTransform2
 	jr .saveTransformation
-.isNotType5
+.isNotTypeEnemy
 	vc_hook Reduce_move_anim_flashing_Hyper_Beam
 	call GetSubanimationTransform1
 .saveTransformation
