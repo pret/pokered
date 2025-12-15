@@ -99,7 +99,6 @@ ROM0 bank #0:
 	         $07aa = WarpFound2.done
 	         $07b5 = ContinueCheckWarpsNoCollisionLoop
 	         $07ba = CheckMapConnections
-	         $07ba = CheckMapConnections.checkWestMap
 	         $07e5 = CheckMapConnections.pointerAdjustmentLoop1
 	         $07f3 = CheckMapConnections.savePointer1
 	         $07fe = CheckMapConnections.checkEastMap
@@ -154,7 +153,6 @@ ROM0 bank #0:
 	         $0b23 = IsSpriteOrSignInFrontOfPlayer
 	         $0b3a = IsSpriteOrSignInFrontOfPlayer.signLoop
 	         $0b42 = IsSpriteOrSignInFrontOfPlayer.yCoordMatched
-	         $0b46 = IsSpriteOrSignInFrontOfPlayer.xCoordMatched
 	         $0b55 = IsSpriteOrSignInFrontOfPlayer.retry
 	         $0b58 = IsSpriteOrSignInFrontOfPlayer.extendRangeOverCounter
 	         $0b64 = IsSpriteOrSignInFrontOfPlayer.counterTilesLoop
@@ -255,12 +253,10 @@ ROM0 bank #0:
 	         $10a9 = LoadMapHeader.noCarry1
 	         $10ae = LoadMapHeader.noCarry2
 	         $10b6 = LoadMapHeader.copyFixedHeaderLoop
-	         $10ce = LoadMapHeader.checkNorth
 	         $10d8 = LoadMapHeader.checkSouth
 	         $10e2 = LoadMapHeader.checkWest
 	         $10ec = LoadMapHeader.checkEast
 	         $10f6 = LoadMapHeader.getObjectDataPointer
-	         $110c = LoadMapHeader.loadWarpData
 	         $1117 = LoadMapHeader.warpLoop
 	         $1119 = LoadMapHeader.warpInnerLoop
 	         $1122 = LoadMapHeader.loadSignData
@@ -329,7 +325,6 @@ ROM0 bank #0:
 	         $15ba = GetPartyMonName
 	         $15cd = PrintBCDNumber
 	         $15df = PrintBCDNumber.loop
-	         $15f1 = PrintBCDNumber.numberEqualsZero
 	         $15f6 = PrintBCDNumber.skipRightAlignmentAdjustment
 	         $15fd = PrintBCDNumber.skipCurrencySymbol
 	         $1603 = PrintBCDNumber.done
@@ -714,7 +709,6 @@ ROM0 bank #0:
 	         $2acd = DisplayStartMenu
 	         $2adf = RedisplayStartMenu
 	         $2af2 = RedisplayStartMenu.loop
-	         $2af6 = RedisplayStartMenu.checkIfUpPressed
 	         $2b10 = RedisplayStartMenu.wrapMenuItemId
 	         $2b18 = RedisplayStartMenu.checkIfDownPressed
 	         $2b29 = RedisplayStartMenu.checkIfPastBottom
@@ -734,7 +728,6 @@ ROM0 bank #0:
 	         $2c2e = DisplayListMenuID.skipMovingSprites
 	         $2c3c = DisplayListMenuID.setMenuVariables
 	         $2c53 = DisplayListMenuIDLoop
-	         $2c66 = DisplayListMenuIDLoop.oldManBattle
 	         $2c81 = DisplayListMenuIDLoop.notOldManBattle
 	         $2c91 = DisplayListMenuIDLoop.buttonAPressed
 	         $2cc5 = DisplayListMenuIDLoop.skipMultiplying
@@ -743,7 +736,6 @@ ROM0 bank #0:
 	         $2d0b = DisplayListMenuIDLoop.getPokemonName
 	         $2d11 = DisplayListMenuIDLoop.storeChosenEntry
 	         $2d2d = DisplayListMenuIDLoop.checkOtherKeys
-	         $2d3f = DisplayListMenuIDLoop.downPressed
 	         $2d4e = DisplayListMenuIDLoop.upPressed
 	         $2d57 = DisplayChooseQuantityMenu
 	         $2d6c = DisplayChooseQuantityMenu.drawTextBox
@@ -765,19 +757,14 @@ ROM0 bank #0:
 	         $2e7d = PrintListMenuEntries.skipMultiplying
 	         $2e82 = PrintListMenuEntries.noCarry
 	         $2e87 = PrintListMenuEntries.loop
-	         $2ea3 = PrintListMenuEntries.itemMenu
 	         $2ea8 = PrintListMenuEntries.pokemonPCMenu
 	         $2eb8 = PrintListMenuEntries.getPokemonName
 	         $2eca = PrintListMenuEntries.movesMenu
 	         $2ecd = PrintListMenuEntries.placeNameString
-	         $2ed8 = PrintListMenuEntries.printItemPrice
 	         $2eed = PrintListMenuEntries.skipPrintingItemPrice
-	         $2ef3 = PrintListMenuEntries.printPokemonLevel
 	         $2f05 = PrintListMenuEntries.next
-	         $2f1f = PrintListMenuEntries.copyLevel
 	         $2f25 = PrintListMenuEntries.skipCopyingLevel
 	         $2f31 = PrintListMenuEntries.skipPrintingPokemonLevel
-	         $2f3b = PrintListMenuEntries.printItemQuantity
 	         $2f6b = PrintListMenuEntries.skipPrintingItemQuantity
 	         $2f7f = PrintListMenuEntries.nextListEntry
 	         $2f91 = PrintListMenuEntries.printCancelMenuItem
@@ -874,9 +861,7 @@ ROM0 bank #0:
 	         $34d3 = ArePlayerCoordsInArray
 	         $34db = CheckCoords
 	         $34df = CheckCoords.loop
-	         $34ea = CheckCoords.compareYCoord
 	         $34f0 = CheckCoords.compareXCoord
-	         $34f4 = CheckCoords.inArray
 	         $34f6 = CheckCoords.notInArray
 	         $34f8 = CheckBoulderCoords
 	         $3510 = GetPointerWithinSpriteStateData1
@@ -912,13 +897,10 @@ ROM0 bank #0:
 	         $368a = DivideBytes.loop
 	         $3692 = DivideBytes.done
 	         $3694 = LoadFontTilePatterns
-	         $369a = LoadFontTilePatterns.off
 	         $36a8 = LoadFontTilePatterns.on
 	         $36b4 = LoadTextBoxTilePatterns
-	         $36ba = LoadTextBoxTilePatterns.off
 	         $36c8 = LoadTextBoxTilePatterns.on
 	         $36d4 = LoadHpBarAndStatusTilePatterns
-	         $36da = LoadHpBarAndStatusTilePatterns.off
 	         $36e8 = LoadHpBarAndStatusTilePatterns.on
 	         $36f4 = FillMemory
 	         $36f6 = FillMemory.loop
@@ -948,9 +930,7 @@ ROM0 bank #0:
 	         $383d = CopyString
 	         $3845 = JoypadLowSensitivity
 	         $3851 = JoypadLowSensitivity.storeButtonState
-	         $3858 = JoypadLowSensitivity.newlyPressedButtons
 	         $385d = JoypadLowSensitivity.noNewlyPressedButtons
-	         $3862 = JoypadLowSensitivity.delayNotOver
 	         $3866 = JoypadLowSensitivity.delayOver
 	         $3874 = JoypadLowSensitivity.setShortDelay
 	         $3879 = WaitForTextScrollButtonPress
@@ -963,7 +943,6 @@ ROM0 bank #0:
 	         $38e7 = PrintLetterDelay
 	         $3906 = PrintLetterDelay.waitOneFrame
 	         $390a = PrintLetterDelay.checkButtons
-	         $390f = PrintLetterDelay.checkAButton
 	         $3915 = PrintLetterDelay.checkBButton
 	         $3919 = PrintLetterDelay.endWait
 	         $391e = PrintLetterDelay.buttonsNotPressed
@@ -976,7 +955,6 @@ ROM0 bank #0:
 	         $395e = CalcStat
 	         $3975 = CalcStat.statExpLoop
 	         $3993 = CalcStat.statExpDone
-	         $39ad = CalcStat.getHpIV
 	         $39d3 = CalcStat.getAttackIV
 	         $39da = CalcStat.getDefenseIV
 	         $39df = CalcStat.getSpeedIV
@@ -1005,16 +983,11 @@ ROM0 bank #0:
 	         $3afc = HandleMenuInput_.getJoypadState
 	         $3b15 = HandleMenuInput_.giveUpWaiting
 	         $3b20 = HandleMenuInput_.keyPressed
-	         $3b2b = HandleMenuInput_.upPressed
-	         $3b31 = HandleMenuInput_.notAtTop
 	         $3b37 = HandleMenuInput_.alreadyAtTop
 	         $3b45 = HandleMenuInput_.checkIfDownPressed
-	         $3b49 = HandleMenuInput_.downPressed
-	         $3b54 = HandleMenuInput_.alreadyAtBottom
 	         $3b5c = HandleMenuInput_.notAtBottom
 	         $3b60 = HandleMenuInput_.checkOtherKeys
 	         $3b67 = HandleMenuInput_.checkIfAButtonOrBButtonPressed
-	         $3b6d = HandleMenuInput_.AButtonOrBButtonPressed
 	         $3b7b = HandleMenuInput_.skipPlayingSound
 	         $3b88 = HandleMenuInput_.noWrappingAround
 	         $3b90 = PlaceMenuCursor
@@ -1024,7 +997,6 @@ ROM0 bank #0:
 	         $3bbd = PlaceMenuCursor.getOldMenuItemScreenPosition
 	         $3bbe = PlaceMenuCursor.oldMenuItemLoop
 	         $3bc2 = PlaceMenuCursor.checkForArrow1
-	         $3bc7 = PlaceMenuCursor.clearArrow
 	         $3bcb = PlaceMenuCursor.skipClearingArrow
 	         $3bde = PlaceMenuCursor.doubleSpaced2
 	         $3be1 = PlaceMenuCursor.getCurrentMenuItemScreenPosition
@@ -1046,7 +1018,6 @@ ROM0 bank #0:
 	         $3c93 = PrintNumber.word
 	         $3c9c = PrintNumber.byte
 	         $3c9f = PrintNumber.start
-	         $3cba = PrintNumber.millions
 	         $3ccc = PrintNumber.hundred_thousands
 	         $3cde = PrintNumber.ten_thousands
 	         $3cef = PrintNumber.thousands
@@ -1056,7 +1027,6 @@ ROM0 bank #0:
 	         $3d1d = PrintNumber.ok
 	         $3d2a = PrintNumber.past
 	         $3d2e = PrintNumber.next
-	         $3d31 = PrintNumber.ones
 	         $3d39 = PrintNumber.PrintDigit
 	         $3d3b = PrintNumber.loop
 	         $3d5d = PrintNumber.noborrow1
@@ -1329,7 +1299,7 @@ ROMX bank #1:
 	         $50e9 = UpdateSpriteMovementDelay
 	         $50fb = UpdateSpriteMovementDelay.tickMoveCounter
 	         $50fe = UpdateSpriteMovementDelay.moving
-	         $5105 = notYetMoving
+	         $5105 = NotYetMoving
 	         $5111 = MakeNPCFacePlayer
 	         $5125 = MakeNPCFacePlayer.notFacingDown
 	         $512d = MakeNPCFacePlayer.notFacingUp
@@ -1488,7 +1458,6 @@ ROMX bank #1:
 	         $5fa4 = DisplayOptionMenu.exitMenu
 	         $5faa = DisplayOptionMenu.eraseOldMenuCursor
 	         $5fb3 = DisplayOptionMenu.checkDirectionKeys
-	         $5fca = DisplayOptionMenu.cursorInTextSpeed
 	         $5fd2 = DisplayOptionMenu.downPressed
 	         $5fec = DisplayOptionMenu.upPressed
 	         $6004 = DisplayOptionMenu.updateMenuVariables
@@ -1506,10 +1475,8 @@ ROMX bank #1:
 	         $60b1 = SetOptionsFromCursorPositions
 	         $60b8 = SetOptionsFromCursorPositions.loop
 	         $60bf = SetOptionsFromCursorPositions.textSpeedMatchFound
-	         $60c7 = SetOptionsFromCursorPositions.battleAnimationOff
 	         $60cb = SetOptionsFromCursorPositions.battleAnimationOn
 	         $60cd = SetOptionsFromCursorPositions.checkBattleStyle
-	         $60d3 = SetOptionsFromCursorPositions.battleStyleSet
 	         $60d7 = SetOptionsFromCursorPositions.battleStyleShift
 	         $60d9 = SetOptionsFromCursorPositions.storeOptions
 	         $60de = SetCursorPositionsFromOptions
@@ -1635,13 +1602,12 @@ ROMX bank #1:
 	         $68dc = LowerCaseAlphabet
 	         $6914 = UpperCaseAlphabet
 	         $694c = PrintNicknameAndUnderscores
-	         $6973 = PrintNicknameAndUnderscores.pokemon1
-	         $6975 = PrintNicknameAndUnderscores.playerOrRival1
+	         $6973 = PrintNicknameAndUnderscores.pokemon
+	         $6975 = PrintNicknameAndUnderscores.gotUnderscoreCount
 	         $6977 = PrintNicknameAndUnderscores.placeUnderscoreLoop
 	         $6989 = PrintNicknameAndUnderscores.pokemon2
-	         $698b = PrintNicknameAndUnderscores.playerOrRival2
-	         $69a5 = PrintNicknameAndUnderscores.emptySpacesRemaining
-	         $69a5 = PrintNicknameAndUnderscores.pokemon3
+	         $698b = PrintNicknameAndUnderscores.checkEmptySpaces
+	         $69a5 = PrintNicknameAndUnderscores.placeRaisedUnderscore
 	         $69af = DakutensAndHandakutens
 	         $69c3 = Dakutens
 	         $6a14 = Handakutens
@@ -1689,7 +1655,6 @@ ROMX bank #1:
 	         $6c82 = HandleItemListSwapping
 	         $6cbf = HandleItemListSwapping.swapItems
 	         $6cfa = HandleItemListSwapping.noCarry
-	         $6d00 = HandleItemListSwapping.swapDifferentItems
 	         $6d1a = HandleItemListSwapping.swapSameItemType
 	         $6d2b = HandleItemListSwapping.combineItemSlots
 	         $6d3e = HandleItemListSwapping.skipSettingMaxMenuItemID
@@ -1701,13 +1666,11 @@ ROMX bank #1:
 	         $6da6 = DisplayPokemartDialogue_.sellMenu
 	         $6dc7 = DisplayPokemartDialogue_.sellMenuLoop
 	         $6def = DisplayPokemartDialogue_.confirmItemSale
-	         $6e31 = DisplayPokemartDialogue_.sellItem
 	         $6e3b = DisplayPokemartDialogue_.skipSettingFlag1
 	         $6e47 = DisplayPokemartDialogue_.unsellableItem
 	         $6e50 = DisplayPokemartDialogue_.bagEmpty
 	         $6e5c = DisplayPokemartDialogue_.buyMenu
 	         $6e77 = DisplayPokemartDialogue_.buyMenuLoop
-	         $6eda = DisplayPokemartDialogue_.buyItem
 	         $6ef5 = DisplayPokemartDialogue_.skipSettingFlag2
 	         $6f06 = DisplayPokemartDialogue_.returnToMainPokemartMenu
 	         $6f1a = DisplayPokemartDialogue_.isThereEnoughMoney
@@ -2790,7 +2753,6 @@ ROMX bank #3:
 	         $4e6b = AddItemToInventory_.done
 	         $4e74 = RemoveItemFromInventory_
 	         $4e80 = RemoveItemFromInventory_.noCarry
-	         $4e8e = RemoveItemFromInventory_.moveSlotsUp
 	         $4e92 = RemoveItemFromInventory_.loop
 	         $4eb6 = RemoveItemFromInventory_.skipMovingUpSlots
 	         $4eb7 = RemoveItemFromInventory_.done
@@ -2980,7 +2942,6 @@ ROMX bank #3:
 	         $56a7 = ItemUseBall.canUseBall
 	         $56b2 = ItemUseBall.safariZone
 	         $56b6 = ItemUseBall.skipSafariZoneCode
-	         $56da = ItemUseBall.oldManBattle
 	         $56e9 = ItemUseBall.notOldManBattle
 	         $56fa = ItemUseBall.loop
 	         $571a = ItemUseBall.checkForAilments
@@ -3015,12 +2976,9 @@ ROMX bank #3:
 	         $5961 = ItemUseBallText06
 	         $5968 = ItemUseTownMap
 	         $5977 = ItemUseBicycle
-	         $598c = ItemUseBicycle.getOffBike
 	         $599b = ItemUseBicycle.tryToGetOnBike
 	         $59b1 = ItemUseBicycle.printText
 	         $59b4 = ItemUseSurfboard
-	         $59be = ItemUseSurfboard.tryToSurf
-	         $59cd = ItemUseSurfboard.surf
 	         $59e3 = ItemUseSurfboard.tryToStopSurfing
 	         $5a04 = ItemUseSurfboard.passableTileLoop
 	         $5a0c = ItemUseSurfboard.cannotStopSurfing
@@ -3043,13 +3001,11 @@ ROMX bank #3:
 	         $5b4a = ItemUseMedicine.cureStatusAilment
 	         $5b77 = ItemUseMedicine.checkMonStatus
 	         $5ba9 = ItemUseMedicine.healHP
-	         $5bb7 = ItemUseMedicine.fainted
 	         $5bc5 = ItemUseMedicine.updateInBattleFaintedData
 	         $5bee = ItemUseMedicine.next
 	         $5bf3 = ItemUseMedicine.notFainted
 	         $5c00 = ItemUseMedicine.compareCurrentHPToMaxHP
 	         $5c0d = ItemUseMedicine.skipComparingLSB
-	         $5c10 = ItemUseMedicine.fullHP
 	         $5c2a = ItemUseMedicine.notFullHP
 	         $5cc5 = ItemUseMedicine.notUsingSoftboiled2
 	         $5ce4 = ItemUseMedicine.addHealAmount
@@ -3154,7 +3110,6 @@ ROMX bank #3:
 	         $6328 = ItemUsePPRestore.chooseMon
 	         $6339 = ItemUsePPRestore.chooseMove
 	         $6353 = ItemUsePPRestore.printWhichTechniqueMessage
-	         $6385 = ItemUsePPRestore.usePPUp
 	         $6396 = ItemUsePPRestore.PPNotMaxedOut
 	         $63a8 = ItemUsePPRestore.done
 	         $63b5 = ItemUsePPRestore.afterRestoringPP
@@ -3330,12 +3285,10 @@ ROMX bank #3:
 	         $71fa = MissableObjectFlagAction.ok
 	         $71fd = MissableObjectFlagAction.shift
 	         $7204 = MissableObjectFlagAction.shifted
-	         $720c = MissableObjectFlagAction.set
 	         $7213 = MissableObjectFlagAction.reset
 	         $721c = MissableObjectFlagAction.read
 	         $7220 = MissableObjectFlagAction.done
 	         $7225 = TryPushingBoulder
-	         $7281 = TryPushingBoulder.pushBoulderDown
 	         $7289 = TryPushingBoulder.pushBoulderUp
 	         $7291 = TryPushingBoulder.pushBoulderLeft
 	         $7299 = TryPushingBoulder.pushBoulderRight
@@ -3368,7 +3321,6 @@ ROMX bank #3:
 	         $7541 = _MoveMon.boxFull
 	         $7543 = _MoveMon.partyOrBoxNotFull
 	         $7556 = _MoveMon.copySpecies
-	         $7559 = _MoveMon.findMonDataDest
 	         $7571 = _MoveMon.addMonOffset
 	         $7575 = _MoveMon.findMonDataSrc
 	         $7591 = _MoveMon.addMonOffset2
@@ -3378,7 +3330,6 @@ ROMX bank #3:
 	         $75d3 = _MoveMon.findOTsrc
 	         $75e6 = _MoveMon.addOToffset2
 	         $75ec = _MoveMon.copyOT
-	         $75f5 = _MoveMon.findNickDest
 	         $760b = _MoveMon.addNickOffset
 	         $7611 = _MoveMon.findNickSrc
 	         $7624 = _MoveMon.addNickOffset2
@@ -3389,7 +3340,6 @@ ROMX bank #3:
 	         $767d = FlagAction.ok
 	         $7680 = FlagAction.shift
 	         $7687 = FlagAction.shifted
-	         $768f = FlagAction.set
 	         $7695 = FlagAction.reset
 	         $769d = FlagAction.read
 	         $76a0 = FlagAction.done
@@ -3440,10 +3390,8 @@ ROMX bank #3:
 	         $7926 = FindPathToPlayer.done
 	         $7929 = CalcPositionOfPlayerRelativeToNPC
 	         $7940 = CalcPositionOfPlayerRelativeToNPC.noCarry
-	         $7948 = CalcPositionOfPlayerRelativeToNPC.NPCNorthOfPlayer
 	         $7953 = CalcPositionOfPlayerRelativeToNPC.NPCSouthOfOrAlignedWithPlayer
 	         $795c = CalcPositionOfPlayerRelativeToNPC.divideYDistance
-	         $7973 = CalcPositionOfPlayerRelativeToNPC.NPCWestOfPlayer
 	         $797e = CalcPositionOfPlayerRelativeToNPC.NPCEastOfOrAlignedWithPlayer
 	         $7987 = CalcPositionOfPlayerRelativeToNPC.divideXDistance
 	         $79a0 = ConvertNPCMovementDirectionsToJoypadMasks
@@ -3666,9 +3614,8 @@ ROMX bank #4:
 	         $7310 = StartMenu_Item.notInCableClubRoom
 	         $7333 = StartMenu_Item.exitMenu
 	         $733f = StartMenu_Item.choseItem
-	         $735c = StartMenu_Item.notBicycle1
 	         $7384 = StartMenu_Item.useOrTossItem
-	         $73a7 = StartMenu_Item.notBicycle2
+	         $73a7 = StartMenu_Item.notBicycle
 	         $73d6 = StartMenu_Item.useItem_closeMenu
 	         $73e7 = StartMenu_Item.useItem_partyMenu
 	         $7403 = StartMenu_Item.partyMenuNotDisplayed
@@ -3862,7 +3809,6 @@ ROMX bank #5:
 	         $7d8d = InGameTrade_CheckForTradeEvo.nameMatched
 	         $7dad = SubstituteEffect_
 	         $7dc9 = SubstituteEffect_.notEnemy
-	         $7dea = SubstituteEffect_.userHasZeroOrMoreHP
 	         $7e01 = SubstituteEffect_.animationEnabled
 	         $7e12 = SubstituteEffect_.alreadyHasSubstitute
 	         $7e17 = SubstituteEffect_.notEnoughHP
@@ -4941,7 +4887,7 @@ ROMX bank #7:
 	         $67a0 = BillsHousePokemonWalkToMachineScript.PokemonWalkAroundPlayerMovement
 	         $67a6 = BillsHousePokemonEntersMachineScript
 	         $67c5 = BillsHouseBillExitsMachineScript
-	         $6807 = BillExitMachineMovement
+	         $6807 = BillsHouseBillExitsMachineScript.BillExitMachineMovement
 	         $680d = BillsHouseCleanupScript
 	         $6827 = BillsHousePCScript
 	         $6834 = BillsHouse_TextPointers
@@ -6866,7 +6812,6 @@ ROMX bank #15:
 	         $48e2 = SlideTrainerPicOffScreen.slideStepLoop
 	         $48e6 = SlideTrainerPicOffScreen.rowLoop
 	         $48ea = SlideTrainerPicOffScreen.columnLoop
-	         $48f0 = SlideTrainerPicOffScreen.slideLeft
 	         $48f5 = SlideTrainerPicOffScreen.slideRight
 	         $48f8 = SlideTrainerPicOffScreen.nextColumn
 	         $490e = EnemySendOut
@@ -7138,7 +7083,6 @@ ROMX bank #15:
 	         $5dc5 = TurnedAwayText
 	         $5dca = IgnoredOrdersText
 	         $5dcf = GetDamageVarsForPlayerAttack
-	         $5de1 = GetDamageVarsForPlayerAttack.physicalAttack
 	         $5df2 = GetDamageVarsForPlayerAttack.physicalAttackCritCheck
 	         $5e16 = GetDamageVarsForPlayerAttack.specialAttack
 	         $5e27 = GetDamageVarsForPlayerAttack.specialAttackCritCheck
@@ -7146,7 +7090,6 @@ ROMX bank #15:
 	         $5e64 = GetDamageVarsForPlayerAttack.next
 	         $5e71 = GetDamageVarsForPlayerAttack.done
 	         $5e75 = GetDamageVarsForEnemyAttack
-	         $5e87 = GetDamageVarsForEnemyAttack.physicalAttack
 	         $5e98 = GetDamageVarsForEnemyAttack.physicalAttackCritCheck
 	         $5ebc = GetDamageVarsForEnemyAttack.specialAttack
 	         $5ecd = GetDamageVarsForEnemyAttack.specialAttackCritCheck
@@ -7222,7 +7165,6 @@ ROMX bank #15:
 	         $63f3 = AdjustDamageForMoveType.skipSameTypeAttackBonus
 	         $63fa = AdjustDamageForMoveType.loop
 	         $640b = AdjustDamageForMoveType.matchingPairFound
-	         $643d = AdjustDamageForMoveType.typeImmunity
 	         $6441 = AdjustDamageForMoveType.skipTypeImmunity
 	         $6443 = AdjustDamageForMoveType.nextTypePair
 	         $6448 = AdjustDamageForMoveType.done
@@ -7236,7 +7178,6 @@ ROMX bank #15:
 	         $6582 = MoveHitTest.dreamEaterCheck
 	         $658d = MoveHitTest.swiftCheck
 	         $65a0 = MoveHitTest.checkForDigOrFlyStatus
-	         $65aa = MoveHitTest.playerTurn
 	         $65bf = MoveHitTest.enemyMistCheck
 	         $65c7 = MoveHitTest.skipEnemyMistCheck
 	         $65cf = MoveHitTest.enemyTurn
@@ -7245,8 +7186,7 @@ ROMX bank #15:
 	         $65f2 = MoveHitTest.calcHitChance
 	         $6602 = MoveHitTest.doAccuracyCheck
 	         $6609 = MoveHitTest.moveMissed
-	         $6618 = MoveHitTest.enemyTurn2
-	         $661e = MoveHitTest.playerTurn2
+	         $661e = MoveHitTest.playerTurn
 	         $6624 = CalcHitChance
 	         $663f = CalcHitChance.next
 	         $664e = CalcHitChance.loop
@@ -7325,12 +7265,10 @@ ROMX bank #15:
 	         $6d1e = ApplyBurnAndParalysisPenaltiesToEnemy
 	         $6d1f = ApplyBurnAndParalysisPenalties
 	         $6d27 = QuarterSpeedDueToParalysis
-	         $6d2c = QuarterSpeedDueToParalysis.enemyTurn
 	         $6d46 = QuarterSpeedDueToParalysis.storePlayerSpeed
 	         $6d48 = QuarterSpeedDueToParalysis.playerTurn
 	         $6d62 = QuarterSpeedDueToParalysis.storeEnemySpeed
 	         $6d64 = HalveAttackDueToBurn
-	         $6d69 = HalveAttackDueToBurn.enemyTurn
 	         $6d7f = HalveAttackDueToBurn.storePlayerAttack
 	         $6d81 = HalveAttackDueToBurn.playerTurn
 	         $6d97 = HalveAttackDueToBurn.storeEnemyAttack
@@ -7347,7 +7285,6 @@ ROMX bank #15:
 	         $6e35 = ApplyBadgeStatBoosts.applyBoostToStat
 	         $6e58 = LoadHudAndHpBarAndStatusTilePatterns
 	         $6e5b = LoadHudTilePatterns
-	         $6e60 = LoadHudTilePatterns.lcdDisabled
 	         $6e7c = LoadHudTilePatterns.lcdEnabled
 	         $6e94 = PrintEmptyString
 	         $6e9a = PrintEmptyString.emptyString
@@ -7580,7 +7517,6 @@ ROMX bank #16:
 	         $4061 = ShowPokedexMenu.goToSideMenu
 	         $406d = HandlePokedexSideMenu
 	         $40ac = HandlePokedexSideMenu.handleMenuInput
-	         $40c1 = HandlePokedexSideMenu.choseQuit
 	         $40c3 = HandlePokedexSideMenu.exitSideMenu
 	         $40e6 = HandlePokedexSideMenu.buttonBPressed
 	         $40f6 = HandlePokedexSideMenu.choseData
@@ -7596,14 +7532,10 @@ ROMX bank #16:
 	         $41ed = HandlePokedexListMenu.dashedLine
 	         $41f8 = HandlePokedexListMenu.getPokemonName
 	         $41fe = HandlePokedexListMenu.skipGettingName
-	         $4222 = HandlePokedexListMenu.checkIfUpPressed
 	         $4226 = HandlePokedexListMenu.upPressed
 	         $4234 = HandlePokedexListMenu.checkIfDownPressed
-	         $4238 = HandlePokedexListMenu.downPressed
 	         $4251 = HandlePokedexListMenu.checkIfRightPressed
-	         $4255 = HandlePokedexListMenu.rightPressed
 	         $4274 = HandlePokedexListMenu.checkIfLeftPressed
-	         $4278 = HandlePokedexListMenu.leftPressed
 	         $428a = HandlePokedexListMenu.buttonAPressed
 	         $428c = HandlePokedexListMenu.buttonBPressed
 	         $428e = DrawPokedexVerticalLine
@@ -9945,11 +9877,11 @@ ROMX bank #20:
 	         $6945 = HandlePrizeChoice.notEnoughCoins
 	         $694b = HandlePrizeChoice.printOhFineThen
 	         $6951 = UnknownPrizeData
-	         $695a = HereYouGoTextPtr
-	         $6960 = SoYouWantPrizeTextPtr
+	         $695a = HereYouGoText
+	         $6960 = SoYouWantPrizeText
 	         $6965 = SorryNeedMoreCoinsText
-	         $696b = PrizeRoomBagIsFullTextPtr
-	         $6971 = OhFineThenTextPtr
+	         $696b = PrizeRoomBagIsFullText
+	         $6971 = OhFineThenText
 	         $6977 = GetPrizeMonLevel
 	         $697e = GetPrizeMonLevel.loop
 	         $6985 = GetPrizeMonLevel.matchFound
@@ -12978,8 +12910,8 @@ ROMX bank #29:
 	         $404c = CeruleanBadgeHouse_Blocks
 	SECTION: $405c-$4872 ($0817 bytes) ["Itemfinder 1"]
 	         $405c = HallOfFamePC
-	         $40ba = FadeInCreditsText
-	         $40bf = FadeInCreditsText.loop
+	         $40ba = FadeInCredits
+	         $40bf = FadeInCredits.loop
 	         $40cb = DisplayCreditsMon
 	         $4115 = DisplayCreditsMon.scrollLoop1
 	         $411d = DisplayCreditsMon.scrollLoop2
@@ -12989,7 +12921,7 @@ ROMX bank #29:
 	         $415a = ScrollCreditsMonLeft_SetSCX.loop
 	         $4160 = HoFGBPalettes
 	         $4164 = CreditsCopyTileMapToVRAM
-	         $4171 = ZeroMemory
+	         $4171 = ShiftFontColorIndex
 	         $417b = FillFourRowsWithBlack
 	         $4183 = FillMiddleOfScreenWithWhite
 	         $418e = Credits
@@ -13664,7 +13596,6 @@ ROMX bank #30:
 	SECTION: $4000-$7fbf ($3fc0 bytes) ["bank1E"]
 	         $4000 = DrawFrameBlock
 	         $4012 = DrawFrameBlock.loop
-	         $4026 = DrawFrameBlock.noTransformation
 	         $4032 = DrawFrameBlock.flipBaseCoords
 	         $4044 = DrawFrameBlock.finishCopying
 	         $4053 = DrawFrameBlock.flipHorizontalAndVertical
@@ -13674,13 +13605,11 @@ ROMX bank #30:
 	         $40aa = DrawFrameBlock.disableHorizontalFlip
 	         $40ac = DrawFrameBlock.storeFlags2
 	         $40ae = DrawFrameBlock.nextTile
-	         $40b9 = DrawFrameBlock.afterDrawingTiles
 	         $40dc = DrawFrameBlock.resetFrameBlockDestAddr
 	         $40e8 = DrawFrameBlock.advanceFrameBlockDestAddr
 	         $40f0 = DrawFrameBlock.done
 	         $40f1 = PlayAnimation
 	         $4106 = PlayAnimation.animationLoop
-	         $410f = PlayAnimation.doSpecialEffect
 	         $4113 = PlayAnimation.searchSpecialEffectTableLoop
 	         $411c = PlayAnimation.foundMatch
 	         $412e = PlayAnimation.skipPlayingSound
@@ -13688,8 +13617,7 @@ ROMX bank #30:
 	         $4178 = PlayAnimation.nextAnimationCommand
 	         $417b = PlayAnimation.AnimationOver
 	         $417c = LoadSubanimation
-	         $4196 = LoadSubanimation.isType5
-	         $419b = LoadSubanimation.isNotType5
+	         $419b = LoadSubanimation.isNotTypeEnemy
 	         $419e = LoadSubanimation.saveTransformation
 	         $41b3 = LoadSubanimation.loop
 	         $41b7 = LoadSubanimation.storeSubentryAddr
@@ -13705,7 +13633,7 @@ ROMX bank #30:
 	         $4d5e = SlotMachineTiles2End
 	         $4d79 = MoveAnimation.moveAnimation
 	         $4d88 = MoveAnimation.animationsDisabled
-	         $4d8d = MoveAnimation.next4
+	         $4d8d = MoveAnimation.next
 	         $4d90 = MoveAnimation.animationFinished
 	         $4da6 = ShareMoveAnimations
 	         $4db8 = ShareMoveAnimations.replaceAnim
@@ -13785,6 +13713,7 @@ ROMX bank #30:
 	         $51f9 = AnimationUnusedPalette4
 	         $51fc = SetAnimationBGPalette
 	         $5204 = SetAnimationBGPalette.next
+	         $5207 = AnimationUnusedShakeScreen
 	         $5209 = AnimationShakeScreenVertically
 	         $520e = AnimationShakeScreen
 	         $5210 = AnimationShakeScreenHorizontallyFast

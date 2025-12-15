@@ -74,7 +74,6 @@
 00:07aa WarpFound2.done
 00:07b5 ContinueCheckWarpsNoCollisionLoop
 00:07ba CheckMapConnections
-00:07ba CheckMapConnections.checkWestMap
 00:07e5 CheckMapConnections.pointerAdjustmentLoop1
 00:07f3 CheckMapConnections.savePointer1
 00:07fe CheckMapConnections.checkEastMap
@@ -129,7 +128,6 @@
 00:0b23 IsSpriteOrSignInFrontOfPlayer
 00:0b3a IsSpriteOrSignInFrontOfPlayer.signLoop
 00:0b42 IsSpriteOrSignInFrontOfPlayer.yCoordMatched
-00:0b46 IsSpriteOrSignInFrontOfPlayer.xCoordMatched
 00:0b55 IsSpriteOrSignInFrontOfPlayer.retry
 00:0b58 IsSpriteOrSignInFrontOfPlayer.extendRangeOverCounter
 00:0b64 IsSpriteOrSignInFrontOfPlayer.counterTilesLoop
@@ -230,12 +228,10 @@
 00:10a9 LoadMapHeader.noCarry1
 00:10ae LoadMapHeader.noCarry2
 00:10b6 LoadMapHeader.copyFixedHeaderLoop
-00:10ce LoadMapHeader.checkNorth
 00:10d8 LoadMapHeader.checkSouth
 00:10e2 LoadMapHeader.checkWest
 00:10ec LoadMapHeader.checkEast
 00:10f6 LoadMapHeader.getObjectDataPointer
-00:110c LoadMapHeader.loadWarpData
 00:1117 LoadMapHeader.warpLoop
 00:1119 LoadMapHeader.warpInnerLoop
 00:1122 LoadMapHeader.loadSignData
@@ -304,7 +300,6 @@
 00:15ba GetPartyMonName
 00:15cd PrintBCDNumber
 00:15df PrintBCDNumber.loop
-00:15f1 PrintBCDNumber.numberEqualsZero
 00:15f6 PrintBCDNumber.skipRightAlignmentAdjustment
 00:15fd PrintBCDNumber.skipCurrencySymbol
 00:1603 PrintBCDNumber.done
@@ -689,7 +684,6 @@
 00:2acd DisplayStartMenu
 00:2adf RedisplayStartMenu
 00:2af2 RedisplayStartMenu.loop
-00:2af6 RedisplayStartMenu.checkIfUpPressed
 00:2b10 RedisplayStartMenu.wrapMenuItemId
 00:2b18 RedisplayStartMenu.checkIfDownPressed
 00:2b29 RedisplayStartMenu.checkIfPastBottom
@@ -709,7 +703,6 @@
 00:2c2e DisplayListMenuID.skipMovingSprites
 00:2c3c DisplayListMenuID.setMenuVariables
 00:2c53 DisplayListMenuIDLoop
-00:2c66 DisplayListMenuIDLoop.oldManBattle
 00:2c81 DisplayListMenuIDLoop.notOldManBattle
 00:2c91 DisplayListMenuIDLoop.buttonAPressed
 00:2cc5 DisplayListMenuIDLoop.skipMultiplying
@@ -718,7 +711,6 @@
 00:2d0b DisplayListMenuIDLoop.getPokemonName
 00:2d11 DisplayListMenuIDLoop.storeChosenEntry
 00:2d2d DisplayListMenuIDLoop.checkOtherKeys
-00:2d3f DisplayListMenuIDLoop.downPressed
 00:2d4e DisplayListMenuIDLoop.upPressed
 00:2d57 DisplayChooseQuantityMenu
 00:2d6c DisplayChooseQuantityMenu.drawTextBox
@@ -740,19 +732,14 @@
 00:2e7d PrintListMenuEntries.skipMultiplying
 00:2e82 PrintListMenuEntries.noCarry
 00:2e87 PrintListMenuEntries.loop
-00:2ea3 PrintListMenuEntries.itemMenu
 00:2ea8 PrintListMenuEntries.pokemonPCMenu
 00:2eb8 PrintListMenuEntries.getPokemonName
 00:2eca PrintListMenuEntries.movesMenu
 00:2ecd PrintListMenuEntries.placeNameString
-00:2ed8 PrintListMenuEntries.printItemPrice
 00:2eed PrintListMenuEntries.skipPrintingItemPrice
-00:2ef3 PrintListMenuEntries.printPokemonLevel
 00:2f05 PrintListMenuEntries.next
-00:2f1f PrintListMenuEntries.copyLevel
 00:2f25 PrintListMenuEntries.skipCopyingLevel
 00:2f31 PrintListMenuEntries.skipPrintingPokemonLevel
-00:2f3b PrintListMenuEntries.printItemQuantity
 00:2f6b PrintListMenuEntries.skipPrintingItemQuantity
 00:2f7f PrintListMenuEntries.nextListEntry
 00:2f91 PrintListMenuEntries.printCancelMenuItem
@@ -849,9 +836,7 @@
 00:34d3 ArePlayerCoordsInArray
 00:34db CheckCoords
 00:34df CheckCoords.loop
-00:34ea CheckCoords.compareYCoord
 00:34f0 CheckCoords.compareXCoord
-00:34f4 CheckCoords.inArray
 00:34f6 CheckCoords.notInArray
 00:34f8 CheckBoulderCoords
 00:3510 GetPointerWithinSpriteStateData1
@@ -887,13 +872,10 @@
 00:368a DivideBytes.loop
 00:3692 DivideBytes.done
 00:3694 LoadFontTilePatterns
-00:369a LoadFontTilePatterns.off
 00:36a8 LoadFontTilePatterns.on
 00:36b4 LoadTextBoxTilePatterns
-00:36ba LoadTextBoxTilePatterns.off
 00:36c8 LoadTextBoxTilePatterns.on
 00:36d4 LoadHpBarAndStatusTilePatterns
-00:36da LoadHpBarAndStatusTilePatterns.off
 00:36e8 LoadHpBarAndStatusTilePatterns.on
 00:36f4 FillMemory
 00:36f6 FillMemory.loop
@@ -923,9 +905,7 @@
 00:383d CopyString
 00:3845 JoypadLowSensitivity
 00:3851 JoypadLowSensitivity.storeButtonState
-00:3858 JoypadLowSensitivity.newlyPressedButtons
 00:385d JoypadLowSensitivity.noNewlyPressedButtons
-00:3862 JoypadLowSensitivity.delayNotOver
 00:3866 JoypadLowSensitivity.delayOver
 00:3874 JoypadLowSensitivity.setShortDelay
 00:3879 WaitForTextScrollButtonPress
@@ -938,7 +918,6 @@
 00:38e7 PrintLetterDelay
 00:3906 PrintLetterDelay.waitOneFrame
 00:390a PrintLetterDelay.checkButtons
-00:390f PrintLetterDelay.checkAButton
 00:3915 PrintLetterDelay.checkBButton
 00:3919 PrintLetterDelay.endWait
 00:391e PrintLetterDelay.buttonsNotPressed
@@ -951,7 +930,6 @@
 00:395e CalcStat
 00:3975 CalcStat.statExpLoop
 00:3993 CalcStat.statExpDone
-00:39ad CalcStat.getHpIV
 00:39d3 CalcStat.getAttackIV
 00:39da CalcStat.getDefenseIV
 00:39df CalcStat.getSpeedIV
@@ -980,16 +958,11 @@
 00:3afc HandleMenuInput_.getJoypadState
 00:3b15 HandleMenuInput_.giveUpWaiting
 00:3b20 HandleMenuInput_.keyPressed
-00:3b2b HandleMenuInput_.upPressed
-00:3b31 HandleMenuInput_.notAtTop
 00:3b37 HandleMenuInput_.alreadyAtTop
 00:3b45 HandleMenuInput_.checkIfDownPressed
-00:3b49 HandleMenuInput_.downPressed
-00:3b54 HandleMenuInput_.alreadyAtBottom
 00:3b5c HandleMenuInput_.notAtBottom
 00:3b60 HandleMenuInput_.checkOtherKeys
 00:3b67 HandleMenuInput_.checkIfAButtonOrBButtonPressed
-00:3b6d HandleMenuInput_.AButtonOrBButtonPressed
 00:3b7b HandleMenuInput_.skipPlayingSound
 00:3b88 HandleMenuInput_.noWrappingAround
 00:3b90 PlaceMenuCursor
@@ -999,7 +972,6 @@
 00:3bbd PlaceMenuCursor.getOldMenuItemScreenPosition
 00:3bbe PlaceMenuCursor.oldMenuItemLoop
 00:3bc2 PlaceMenuCursor.checkForArrow1
-00:3bc7 PlaceMenuCursor.clearArrow
 00:3bcb PlaceMenuCursor.skipClearingArrow
 00:3bde PlaceMenuCursor.doubleSpaced2
 00:3be1 PlaceMenuCursor.getCurrentMenuItemScreenPosition
@@ -1021,7 +993,6 @@
 00:3c93 PrintNumber.word
 00:3c9c PrintNumber.byte
 00:3c9f PrintNumber.start
-00:3cba PrintNumber.millions
 00:3ccc PrintNumber.hundred_thousands
 00:3cde PrintNumber.ten_thousands
 00:3cef PrintNumber.thousands
@@ -1031,7 +1002,6 @@
 00:3d1d PrintNumber.ok
 00:3d2a PrintNumber.past
 00:3d2e PrintNumber.next
-00:3d31 PrintNumber.ones
 00:3d39 PrintNumber.PrintDigit
 00:3d3b PrintNumber.loop
 00:3d5d PrintNumber.noborrow1
@@ -1299,7 +1269,7 @@
 01:50e9 UpdateSpriteMovementDelay
 01:50fb UpdateSpriteMovementDelay.tickMoveCounter
 01:50fe UpdateSpriteMovementDelay.moving
-01:5105 notYetMoving
+01:5105 NotYetMoving
 01:5111 MakeNPCFacePlayer
 01:5125 MakeNPCFacePlayer.notFacingDown
 01:512d MakeNPCFacePlayer.notFacingUp
@@ -1458,7 +1428,6 @@
 01:5fa4 DisplayOptionMenu.exitMenu
 01:5faa DisplayOptionMenu.eraseOldMenuCursor
 01:5fb3 DisplayOptionMenu.checkDirectionKeys
-01:5fca DisplayOptionMenu.cursorInTextSpeed
 01:5fd2 DisplayOptionMenu.downPressed
 01:5fec DisplayOptionMenu.upPressed
 01:6004 DisplayOptionMenu.updateMenuVariables
@@ -1476,10 +1445,8 @@
 01:60b1 SetOptionsFromCursorPositions
 01:60b8 SetOptionsFromCursorPositions.loop
 01:60bf SetOptionsFromCursorPositions.textSpeedMatchFound
-01:60c7 SetOptionsFromCursorPositions.battleAnimationOff
 01:60cb SetOptionsFromCursorPositions.battleAnimationOn
 01:60cd SetOptionsFromCursorPositions.checkBattleStyle
-01:60d3 SetOptionsFromCursorPositions.battleStyleSet
 01:60d7 SetOptionsFromCursorPositions.battleStyleShift
 01:60d9 SetOptionsFromCursorPositions.storeOptions
 01:60de SetCursorPositionsFromOptions
@@ -1605,13 +1572,12 @@
 01:68dc LowerCaseAlphabet
 01:6914 UpperCaseAlphabet
 01:694c PrintNicknameAndUnderscores
-01:6973 PrintNicknameAndUnderscores.pokemon1
-01:6975 PrintNicknameAndUnderscores.playerOrRival1
+01:6973 PrintNicknameAndUnderscores.pokemon
+01:6975 PrintNicknameAndUnderscores.gotUnderscoreCount
 01:6977 PrintNicknameAndUnderscores.placeUnderscoreLoop
 01:6989 PrintNicknameAndUnderscores.pokemon2
-01:698b PrintNicknameAndUnderscores.playerOrRival2
-01:69a5 PrintNicknameAndUnderscores.emptySpacesRemaining
-01:69a5 PrintNicknameAndUnderscores.pokemon3
+01:698b PrintNicknameAndUnderscores.checkEmptySpaces
+01:69a5 PrintNicknameAndUnderscores.placeRaisedUnderscore
 01:69af DakutensAndHandakutens
 01:69c3 Dakutens
 01:6a14 Handakutens
@@ -1659,7 +1625,6 @@
 01:6c82 HandleItemListSwapping
 01:6cbf HandleItemListSwapping.swapItems
 01:6cfa HandleItemListSwapping.noCarry
-01:6d00 HandleItemListSwapping.swapDifferentItems
 01:6d1a HandleItemListSwapping.swapSameItemType
 01:6d2b HandleItemListSwapping.combineItemSlots
 01:6d3e HandleItemListSwapping.skipSettingMaxMenuItemID
@@ -1671,13 +1636,11 @@
 01:6da6 DisplayPokemartDialogue_.sellMenu
 01:6dc7 DisplayPokemartDialogue_.sellMenuLoop
 01:6def DisplayPokemartDialogue_.confirmItemSale
-01:6e31 DisplayPokemartDialogue_.sellItem
 01:6e3b DisplayPokemartDialogue_.skipSettingFlag1
 01:6e47 DisplayPokemartDialogue_.unsellableItem
 01:6e50 DisplayPokemartDialogue_.bagEmpty
 01:6e5c DisplayPokemartDialogue_.buyMenu
 01:6e77 DisplayPokemartDialogue_.buyMenuLoop
-01:6eda DisplayPokemartDialogue_.buyItem
 01:6ef5 DisplayPokemartDialogue_.skipSettingFlag2
 01:6f06 DisplayPokemartDialogue_.returnToMainPokemartMenu
 01:6f1a DisplayPokemartDialogue_.isThereEnoughMoney
@@ -2746,7 +2709,6 @@
 03:4e6b AddItemToInventory_.done
 03:4e74 RemoveItemFromInventory_
 03:4e80 RemoveItemFromInventory_.noCarry
-03:4e8e RemoveItemFromInventory_.moveSlotsUp
 03:4e92 RemoveItemFromInventory_.loop
 03:4eb6 RemoveItemFromInventory_.skipMovingUpSlots
 03:4eb7 RemoveItemFromInventory_.done
@@ -2936,7 +2898,6 @@
 03:56a7 ItemUseBall.canUseBall
 03:56b2 ItemUseBall.safariZone
 03:56b6 ItemUseBall.skipSafariZoneCode
-03:56da ItemUseBall.oldManBattle
 03:56e9 ItemUseBall.notOldManBattle
 03:56fa ItemUseBall.loop
 03:571a ItemUseBall.checkForAilments
@@ -2971,12 +2932,9 @@
 03:5961 ItemUseBallText06
 03:5968 ItemUseTownMap
 03:5977 ItemUseBicycle
-03:598c ItemUseBicycle.getOffBike
 03:599b ItemUseBicycle.tryToGetOnBike
 03:59b1 ItemUseBicycle.printText
 03:59b4 ItemUseSurfboard
-03:59be ItemUseSurfboard.tryToSurf
-03:59cd ItemUseSurfboard.surf
 03:59e3 ItemUseSurfboard.tryToStopSurfing
 03:5a04 ItemUseSurfboard.passableTileLoop
 03:5a0c ItemUseSurfboard.cannotStopSurfing
@@ -2999,13 +2957,11 @@
 03:5b4a ItemUseMedicine.cureStatusAilment
 03:5b77 ItemUseMedicine.checkMonStatus
 03:5ba9 ItemUseMedicine.healHP
-03:5bb7 ItemUseMedicine.fainted
 03:5bc5 ItemUseMedicine.updateInBattleFaintedData
 03:5bee ItemUseMedicine.next
 03:5bf3 ItemUseMedicine.notFainted
 03:5c00 ItemUseMedicine.compareCurrentHPToMaxHP
 03:5c0d ItemUseMedicine.skipComparingLSB
-03:5c10 ItemUseMedicine.fullHP
 03:5c2a ItemUseMedicine.notFullHP
 03:5cc5 ItemUseMedicine.notUsingSoftboiled2
 03:5ce4 ItemUseMedicine.addHealAmount
@@ -3110,7 +3066,6 @@
 03:6328 ItemUsePPRestore.chooseMon
 03:6339 ItemUsePPRestore.chooseMove
 03:6353 ItemUsePPRestore.printWhichTechniqueMessage
-03:6385 ItemUsePPRestore.usePPUp
 03:6396 ItemUsePPRestore.PPNotMaxedOut
 03:63a8 ItemUsePPRestore.done
 03:63b5 ItemUsePPRestore.afterRestoringPP
@@ -3286,12 +3241,10 @@
 03:71fa MissableObjectFlagAction.ok
 03:71fd MissableObjectFlagAction.shift
 03:7204 MissableObjectFlagAction.shifted
-03:720c MissableObjectFlagAction.set
 03:7213 MissableObjectFlagAction.reset
 03:721c MissableObjectFlagAction.read
 03:7220 MissableObjectFlagAction.done
 03:7225 TryPushingBoulder
-03:7281 TryPushingBoulder.pushBoulderDown
 03:7289 TryPushingBoulder.pushBoulderUp
 03:7291 TryPushingBoulder.pushBoulderLeft
 03:7299 TryPushingBoulder.pushBoulderRight
@@ -3324,7 +3277,6 @@
 03:7541 _MoveMon.boxFull
 03:7543 _MoveMon.partyOrBoxNotFull
 03:7556 _MoveMon.copySpecies
-03:7559 _MoveMon.findMonDataDest
 03:7571 _MoveMon.addMonOffset
 03:7575 _MoveMon.findMonDataSrc
 03:7591 _MoveMon.addMonOffset2
@@ -3334,7 +3286,6 @@
 03:75d3 _MoveMon.findOTsrc
 03:75e6 _MoveMon.addOToffset2
 03:75ec _MoveMon.copyOT
-03:75f5 _MoveMon.findNickDest
 03:760b _MoveMon.addNickOffset
 03:7611 _MoveMon.findNickSrc
 03:7624 _MoveMon.addNickOffset2
@@ -3345,7 +3296,6 @@
 03:767d FlagAction.ok
 03:7680 FlagAction.shift
 03:7687 FlagAction.shifted
-03:768f FlagAction.set
 03:7695 FlagAction.reset
 03:769d FlagAction.read
 03:76a0 FlagAction.done
@@ -3396,10 +3346,8 @@
 03:7926 FindPathToPlayer.done
 03:7929 CalcPositionOfPlayerRelativeToNPC
 03:7940 CalcPositionOfPlayerRelativeToNPC.noCarry
-03:7948 CalcPositionOfPlayerRelativeToNPC.NPCNorthOfPlayer
 03:7953 CalcPositionOfPlayerRelativeToNPC.NPCSouthOfOrAlignedWithPlayer
 03:795c CalcPositionOfPlayerRelativeToNPC.divideYDistance
-03:7973 CalcPositionOfPlayerRelativeToNPC.NPCWestOfPlayer
 03:797e CalcPositionOfPlayerRelativeToNPC.NPCEastOfOrAlignedWithPlayer
 03:7987 CalcPositionOfPlayerRelativeToNPC.divideXDistance
 03:79a0 ConvertNPCMovementDirectionsToJoypadMasks
@@ -3615,9 +3563,8 @@
 04:7310 StartMenu_Item.notInCableClubRoom
 04:7333 StartMenu_Item.exitMenu
 04:733f StartMenu_Item.choseItem
-04:735c StartMenu_Item.notBicycle1
 04:7384 StartMenu_Item.useOrTossItem
-04:73a7 StartMenu_Item.notBicycle2
+04:73a7 StartMenu_Item.notBicycle
 04:73d6 StartMenu_Item.useItem_closeMenu
 04:73e7 StartMenu_Item.useItem_partyMenu
 04:7403 StartMenu_Item.partyMenuNotDisplayed
@@ -3805,7 +3752,6 @@
 05:7d8d InGameTrade_CheckForTradeEvo.nameMatched
 05:7dad SubstituteEffect_
 05:7dc9 SubstituteEffect_.notEnemy
-05:7dea SubstituteEffect_.userHasZeroOrMoreHP
 05:7e01 SubstituteEffect_.animationEnabled
 05:7e12 SubstituteEffect_.alreadyHasSubstitute
 05:7e17 SubstituteEffect_.notEnoughHP
@@ -4869,7 +4815,7 @@
 07:67a0 BillsHousePokemonWalkToMachineScript.PokemonWalkAroundPlayerMovement
 07:67a6 BillsHousePokemonEntersMachineScript
 07:67c5 BillsHouseBillExitsMachineScript
-07:6807 BillExitMachineMovement
+07:6807 BillsHouseBillExitsMachineScript.BillExitMachineMovement
 07:680d BillsHouseCleanupScript
 07:6827 BillsHousePCScript
 07:6834 BillsHouse_TextPointers
@@ -6742,7 +6688,6 @@
 0f:48e2 SlideTrainerPicOffScreen.slideStepLoop
 0f:48e6 SlideTrainerPicOffScreen.rowLoop
 0f:48ea SlideTrainerPicOffScreen.columnLoop
-0f:48f0 SlideTrainerPicOffScreen.slideLeft
 0f:48f5 SlideTrainerPicOffScreen.slideRight
 0f:48f8 SlideTrainerPicOffScreen.nextColumn
 0f:490e EnemySendOut
@@ -7014,7 +6959,6 @@
 0f:5dc5 TurnedAwayText
 0f:5dca IgnoredOrdersText
 0f:5dcf GetDamageVarsForPlayerAttack
-0f:5de1 GetDamageVarsForPlayerAttack.physicalAttack
 0f:5df2 GetDamageVarsForPlayerAttack.physicalAttackCritCheck
 0f:5e16 GetDamageVarsForPlayerAttack.specialAttack
 0f:5e27 GetDamageVarsForPlayerAttack.specialAttackCritCheck
@@ -7022,7 +6966,6 @@
 0f:5e64 GetDamageVarsForPlayerAttack.next
 0f:5e71 GetDamageVarsForPlayerAttack.done
 0f:5e75 GetDamageVarsForEnemyAttack
-0f:5e87 GetDamageVarsForEnemyAttack.physicalAttack
 0f:5e98 GetDamageVarsForEnemyAttack.physicalAttackCritCheck
 0f:5ebc GetDamageVarsForEnemyAttack.specialAttack
 0f:5ecd GetDamageVarsForEnemyAttack.specialAttackCritCheck
@@ -7098,7 +7041,6 @@
 0f:63f3 AdjustDamageForMoveType.skipSameTypeAttackBonus
 0f:63fa AdjustDamageForMoveType.loop
 0f:640b AdjustDamageForMoveType.matchingPairFound
-0f:643d AdjustDamageForMoveType.typeImmunity
 0f:6441 AdjustDamageForMoveType.skipTypeImmunity
 0f:6443 AdjustDamageForMoveType.nextTypePair
 0f:6448 AdjustDamageForMoveType.done
@@ -7112,7 +7054,6 @@
 0f:6582 MoveHitTest.dreamEaterCheck
 0f:658d MoveHitTest.swiftCheck
 0f:65a0 MoveHitTest.checkForDigOrFlyStatus
-0f:65aa MoveHitTest.playerTurn
 0f:65bf MoveHitTest.enemyMistCheck
 0f:65c7 MoveHitTest.skipEnemyMistCheck
 0f:65cf MoveHitTest.enemyTurn
@@ -7121,8 +7062,7 @@
 0f:65f2 MoveHitTest.calcHitChance
 0f:6602 MoveHitTest.doAccuracyCheck
 0f:6609 MoveHitTest.moveMissed
-0f:6618 MoveHitTest.enemyTurn2
-0f:661e MoveHitTest.playerTurn2
+0f:661e MoveHitTest.playerTurn
 0f:6624 CalcHitChance
 0f:663f CalcHitChance.next
 0f:664e CalcHitChance.loop
@@ -7201,12 +7141,10 @@
 0f:6d1e ApplyBurnAndParalysisPenaltiesToEnemy
 0f:6d1f ApplyBurnAndParalysisPenalties
 0f:6d27 QuarterSpeedDueToParalysis
-0f:6d2c QuarterSpeedDueToParalysis.enemyTurn
 0f:6d46 QuarterSpeedDueToParalysis.storePlayerSpeed
 0f:6d48 QuarterSpeedDueToParalysis.playerTurn
 0f:6d62 QuarterSpeedDueToParalysis.storeEnemySpeed
 0f:6d64 HalveAttackDueToBurn
-0f:6d69 HalveAttackDueToBurn.enemyTurn
 0f:6d7f HalveAttackDueToBurn.storePlayerAttack
 0f:6d81 HalveAttackDueToBurn.playerTurn
 0f:6d97 HalveAttackDueToBurn.storeEnemyAttack
@@ -7223,7 +7161,6 @@
 0f:6e35 ApplyBadgeStatBoosts.applyBoostToStat
 0f:6e58 LoadHudAndHpBarAndStatusTilePatterns
 0f:6e5b LoadHudTilePatterns
-0f:6e60 LoadHudTilePatterns.lcdDisabled
 0f:6e7c LoadHudTilePatterns.lcdEnabled
 0f:6e94 PrintEmptyString
 0f:6e9a PrintEmptyString.emptyString
@@ -7451,7 +7388,6 @@
 10:4061 ShowPokedexMenu.goToSideMenu
 10:406d HandlePokedexSideMenu
 10:40ac HandlePokedexSideMenu.handleMenuInput
-10:40c1 HandlePokedexSideMenu.choseQuit
 10:40c3 HandlePokedexSideMenu.exitSideMenu
 10:40e6 HandlePokedexSideMenu.buttonBPressed
 10:40f6 HandlePokedexSideMenu.choseData
@@ -7467,14 +7403,10 @@
 10:41ed HandlePokedexListMenu.dashedLine
 10:41f8 HandlePokedexListMenu.getPokemonName
 10:41fe HandlePokedexListMenu.skipGettingName
-10:4222 HandlePokedexListMenu.checkIfUpPressed
 10:4226 HandlePokedexListMenu.upPressed
 10:4234 HandlePokedexListMenu.checkIfDownPressed
-10:4238 HandlePokedexListMenu.downPressed
 10:4251 HandlePokedexListMenu.checkIfRightPressed
-10:4255 HandlePokedexListMenu.rightPressed
 10:4274 HandlePokedexListMenu.checkIfLeftPressed
-10:4278 HandlePokedexListMenu.leftPressed
 10:428a HandlePokedexListMenu.buttonAPressed
 10:428c HandlePokedexListMenu.buttonBPressed
 10:428e DrawPokedexVerticalLine
@@ -9787,11 +9719,11 @@
 14:6945 HandlePrizeChoice.notEnoughCoins
 14:694b HandlePrizeChoice.printOhFineThen
 14:6951 UnknownPrizeData
-14:695a HereYouGoTextPtr
-14:6960 SoYouWantPrizeTextPtr
+14:695a HereYouGoText
+14:6960 SoYouWantPrizeText
 14:6965 SorryNeedMoreCoinsText
-14:696b PrizeRoomBagIsFullTextPtr
-14:6971 OhFineThenTextPtr
+14:696b PrizeRoomBagIsFullText
+14:6971 OhFineThenText
 14:6977 GetPrizeMonLevel
 14:697e GetPrizeMonLevel.loop
 14:6985 GetPrizeMonLevel.matchFound
@@ -12761,8 +12693,8 @@
 1d:4030 FuchsiaPokecenter_Blocks
 1d:404c CeruleanBadgeHouse_Blocks
 1d:405c HallOfFamePC
-1d:40ba FadeInCreditsText
-1d:40bf FadeInCreditsText.loop
+1d:40ba FadeInCredits
+1d:40bf FadeInCredits.loop
 1d:40cb DisplayCreditsMon
 1d:4115 DisplayCreditsMon.scrollLoop1
 1d:411d DisplayCreditsMon.scrollLoop2
@@ -12772,7 +12704,7 @@
 1d:415a ScrollCreditsMonLeft_SetSCX.loop
 1d:4160 HoFGBPalettes
 1d:4164 CreditsCopyTileMapToVRAM
-1d:4171 ZeroMemory
+1d:4171 ShiftFontColorIndex
 1d:417b FillFourRowsWithBlack
 1d:4183 FillMiddleOfScreenWithWhite
 1d:418e Credits
@@ -13438,7 +13370,6 @@
 1d:6879 FindHiddenItemOrCoinsIndex.next2
 1e:4000 DrawFrameBlock
 1e:4012 DrawFrameBlock.loop
-1e:4026 DrawFrameBlock.noTransformation
 1e:4032 DrawFrameBlock.flipBaseCoords
 1e:4044 DrawFrameBlock.finishCopying
 1e:4053 DrawFrameBlock.flipHorizontalAndVertical
@@ -13448,13 +13379,11 @@
 1e:40aa DrawFrameBlock.disableHorizontalFlip
 1e:40ac DrawFrameBlock.storeFlags2
 1e:40ae DrawFrameBlock.nextTile
-1e:40b9 DrawFrameBlock.afterDrawingTiles
 1e:40dc DrawFrameBlock.resetFrameBlockDestAddr
 1e:40e8 DrawFrameBlock.advanceFrameBlockDestAddr
 1e:40f0 DrawFrameBlock.done
 1e:40f1 PlayAnimation
 1e:4106 PlayAnimation.animationLoop
-1e:410f PlayAnimation.doSpecialEffect
 1e:4113 PlayAnimation.searchSpecialEffectTableLoop
 1e:411c PlayAnimation.foundMatch
 1e:412e PlayAnimation.skipPlayingSound
@@ -13462,8 +13391,7 @@
 1e:4178 PlayAnimation.nextAnimationCommand
 1e:417b PlayAnimation.AnimationOver
 1e:417c LoadSubanimation
-1e:4196 LoadSubanimation.isType5
-1e:419b LoadSubanimation.isNotType5
+1e:419b LoadSubanimation.isNotTypeEnemy
 1e:419e LoadSubanimation.saveTransformation
 1e:41b3 LoadSubanimation.loop
 1e:41b7 LoadSubanimation.storeSubentryAddr
@@ -13479,7 +13407,7 @@
 1e:4d5e SlotMachineTiles2End
 1e:4d79 MoveAnimation.moveAnimation
 1e:4d88 MoveAnimation.animationsDisabled
-1e:4d8d MoveAnimation.next4
+1e:4d8d MoveAnimation.next
 1e:4d90 MoveAnimation.animationFinished
 1e:4da6 ShareMoveAnimations
 1e:4db8 ShareMoveAnimations.replaceAnim
@@ -13559,6 +13487,7 @@
 1e:51f9 AnimationUnusedPalette4
 1e:51fc SetAnimationBGPalette
 1e:5204 SetAnimationBGPalette.next
+1e:5207 AnimationUnusedShakeScreen
 1e:5209 AnimationShakeScreenVertically
 1e:520e AnimationShakeScreen
 1e:5210 AnimationShakeScreenHorizontallyFast
