@@ -640,21 +640,21 @@ AIUseXAccuracy: ; unreferenced
 	ld hl, wEnemyBattleStatus2
 	set USING_X_ACCURACY, [hl]
 	ld a, X_ACCURACY
-	jp AIPrintItemUse
+	jr AIPrintItemUse
 
 AIUseGuardSpec:
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
 	set PROTECTED_BY_MIST, [hl]
 	ld a, GUARD_SPEC
-	jp AIPrintItemUse
+	jr AIPrintItemUse
 
 AIUseDireHit: ; unreferenced
 	call AIPlayRestoringSFX
 	ld hl, wEnemyBattleStatus2
 	set GETTING_PUMPED, [hl]
 	ld a, DIRE_HIT
-	jp AIPrintItemUse
+	jr AIPrintItemUse
 
 AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
