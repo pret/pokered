@@ -411,7 +411,7 @@ Rival3AI:
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUseFullRestore
+	jr AIUseFullRestore
 
 LoreleiAI:
 	cp 50 percent + 1
