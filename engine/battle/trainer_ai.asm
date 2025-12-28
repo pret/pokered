@@ -403,7 +403,7 @@ Rival2AI:
 	ld a, 5
 	call AICheckIfHPBelowFraction
 	ret nc
-	jp AIUsePotion
+	jr AIUsePotion
 
 Rival3AI:
 	cp 13 percent - 1
