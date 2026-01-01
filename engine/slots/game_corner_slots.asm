@@ -1,5 +1,5 @@
 StartSlotMachine:
-	ld a, [wHiddenObjectFunctionArgument]
+	ld a, [wHiddenEventFunctionArgument]
 	cp SLOTS_OUTOFORDER
 	jr z, .printOutOfOrder
 	cp SLOTS_OUTTOLUNCH
@@ -10,9 +10,9 @@ StartSlotMachine:
 	ld a, [wCanPlaySlots]
 	and a
 	ret z
-	ld a, [wLuckySlotHiddenObjectIndex]
+	ld a, [wLuckySlotHiddenEventIndex]
 	ld b, a
-	ld a, [wHiddenObjectIndex]
+	ld a, [wHiddenEventIndex]
 	inc a
 	cp b
 	jr z, .match

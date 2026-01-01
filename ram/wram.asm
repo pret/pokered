@@ -390,7 +390,7 @@ wSlotMachineSevenAndBarModeChance:: db
 ; ROM back to return to when the player is done with the slot machine
 wSlotMachineSavedROMBank:: db
 	ds 166
-wLuckySlotHiddenObjectIndex:: db
+wLuckySlotHiddenEventIndex:: db
 
 NEXTU
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
@@ -744,12 +744,12 @@ wTempCoins1:: dw
 wTempCoins2:: dw
 
 NEXTU
-wHiddenObjectFunctionArgument:: db
-wHiddenObjectFunctionRomBank:: db
-wHiddenObjectIndex:: db
-wHiddenObjectY:: db
+wHiddenEventFunctionArgument:: db
+wHiddenEventFunctionRomBank:: db
+wHiddenEventIndex:: db
+wHiddenEventY:: db
 wHiddenItemOrCoinsIndex::
-wHiddenObjectX:: db
+wHiddenEventX:: db
 
 NEXTU
 wPlayerSpinInPlaceAnimFrameDelay:: db

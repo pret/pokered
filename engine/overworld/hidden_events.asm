@@ -14,16 +14,16 @@ IsPlayerOnDungeonWarp::
 	set BIT_DUNGEON_WARP, [hl]
 	ret
 
-; if a hidden object was found, stores $00 in [hDidntFindAnyHiddenObject], else stores $ff
-CheckForHiddenObject::
+; if a hidden event was found, stores $00 in [hDidntFindAnyHiddenEvent], else stores $ff
+CheckForHiddenEvent::
 	ld hl, hItemAlreadyFound
 	xor a
 	ld [hli], a ; [hItemAlreadyFound]
 	ld [hli], a ; [hSavedMapTextPtr]
 	ld [hli], a ; [hSavedMapTextPtr + 1]
-	ld [hl], a  ; [hDidntFindAnyHiddenObject]
+	ld [hl], a  ; [hDidntFindAnyHiddenEvent]
 	ld de, $0
-	ld hl, HiddenObjectMaps
+	ld hl, HiddenEventMaps
 .hiddenMapLoop
 	ld a, [hli]
 	ld b, a
@@ -36,52 +36,52 @@ CheckForHiddenObject::
 	inc de
 	jr .hiddenMapLoop
 .foundMatchingMap
-	ld hl, HiddenObjectPointers
+	ld hl, HiddenEventPointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld hl, wHiddenObjectFunctionArgument
+	ld hl, wHiddenEventFunctionArgument
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	pop hl
-.hiddenObjectLoop
+.hiddenEventLoop
 	ld a, [hli]
 	cp $ff
 	jr z, .noMatch
-	ld [wHiddenObjectY], a
+	ld [wHiddenEventY], a
 	ld b, a
 	ld a, [hli]
-	ld [wHiddenObjectX], a
+	ld [wHiddenEventX], a
 	ld c, a
 	call CheckIfCoordsInFrontOfPlayerMatch
 	ldh a, [hCoordsInFrontOfPlayerMatch]
 	and a
-	jr z, .foundMatchingObject
+	jr z, .foundMatchingEvent
 	inc hl
 	inc hl
 	inc hl
 	inc hl
 	push hl
-	ld hl, wHiddenObjectIndex
+	ld hl, wHiddenEventIndex
 	inc [hl]
 	pop hl
-	jr .hiddenObjectLoop
-.foundMatchingObject
+	jr .hiddenEventLoop
+.foundMatchingEvent
 	ld a, [hli]
-	ld [wHiddenObjectFunctionArgument], a
+	ld [wHiddenEventFunctionArgument], a
 	ld a, [hli]
-	ld [wHiddenObjectFunctionRomBank], a
+	ld [wHiddenEventFunctionRomBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ret
 .noMatch
 	ld a, $ff
-	ldh [hDidntFindAnyHiddenObject], a
+	ldh [hDidntFindAnyHiddenEvent], a
 	ret
 
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
@@ -130,4 +130,4 @@ CheckIfCoordsInFrontOfPlayerMatch:
 	ldh [hCoordsInFrontOfPlayerMatch], a
 	ret
 
-INCLUDE "data/events/hidden_objects.asm"
+INCLUDE "data/events/hidden_events.asm"
