@@ -107,8 +107,8 @@ GameCornerRocketExitScript:
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, HS_GAME_CORNER_ROCKET
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_GAME_CORNER_ROCKET
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]

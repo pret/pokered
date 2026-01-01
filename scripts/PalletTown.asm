@@ -51,8 +51,8 @@ PalletTownOakHeyWaitScript:
 	call DisplayTextID
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
-	ld a, HS_PALLET_TOWN_OAK
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_PALLET_TOWN_OAK
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 
 	; trigger the next script
@@ -136,11 +136,11 @@ PalletTownDaisyScript:
 	CheckBothEventsSet EVENT_GOT_TOWN_MAP, EVENT_ENTERED_BLUES_HOUSE, 1
 	jr nz, .next
 	SetEvent EVENT_DAISY_WALKING
-	ld a, HS_DAISY_SITTING
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_DAISY_SITTING
+	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld a, HS_DAISY_WALKING
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_DAISY_WALKING
+	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
 .next
 	CheckEvent EVENT_GOT_POKEBALLS_FROM_OAK

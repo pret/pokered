@@ -325,7 +325,7 @@ hItemToRemoveIndex:: db
 NEXTU
 hItemCounter::
 hSavedCoordIndex::
-hMissableObjectIndex::
+hToggleableObjectIndex::
 hGymTrashCanRandNumMask::
 hInteractedWithBookshelf::
 	db
@@ -350,7 +350,7 @@ hDivisor2::  db
 hQuotient2:: db
 
 NEXTU
-hIsHiddenMissableObject:: db
+hIsToggleableObjectOff:: db
 ENDU
 
 hMapROMBank:: db

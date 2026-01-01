@@ -12,23 +12,23 @@ SeafoamIslandsB2F_Script:
 	cp $1
 	jr nz, .boulder2FellDownHole
 	SetEventReuseHL EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE
-	ld a, HS_SEAFOAM_ISLANDS_B2F_BOULDER_1
+	ld a, TOGGLE_SEAFOAM_ISLANDS_B2F_BOULDER_1
 	ld [wObjectToHide], a
-	ld a, HS_SEAFOAM_ISLANDS_B3F_BOULDER_3
+	ld a, TOGGLE_SEAFOAM_ISLANDS_B3F_BOULDER_3
 	ld [wObjectToShow], a
 	jr .hideAndShowBoulderObjects
 .boulder2FellDownHole
 	SetEventAfterBranchReuseHL EVENT_SEAFOAM3_BOULDER2_DOWN_HOLE, EVENT_SEAFOAM3_BOULDER1_DOWN_HOLE
-	ld a, HS_SEAFOAM_ISLANDS_B2F_BOULDER_2
+	ld a, TOGGLE_SEAFOAM_ISLANDS_B2F_BOULDER_2
 	ld [wObjectToHide], a
-	ld a, HS_SEAFOAM_ISLANDS_B3F_BOULDER_4
+	ld a, TOGGLE_SEAFOAM_ISLANDS_B3F_BOULDER_4
 	ld [wObjectToShow], a
 .hideAndShowBoulderObjects
 	ld a, [wObjectToHide]
-	ld [wMissableObjectIndex], a
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, [wObjectToShow]
-	ld [wMissableObjectIndex], a
+	ld [wToggleableObjectIndex], a
 	predef_jump ShowObject
 .noBoulderWasPushed
 	ld a, SEAFOAM_ISLANDS_B3F

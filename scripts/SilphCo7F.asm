@@ -255,8 +255,8 @@ SilphCo7FRivalExitScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	ld a, HS_SILPH_CO_7F_RIVAL
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_SILPH_CO_7F_RIVAL
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	call PlayDefaultMusic
 	xor a
