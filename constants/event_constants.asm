@@ -1,7 +1,7 @@
 ; wEventFlags bit flags
 
 ; Pallet Town events
-	const_def
+	const_def 0, 1, WORD
 	const EVENT_FOLLOWED_OAK_INTO_LAB
 	const_skip 2
 	const EVENT_HALL_OF_FAME_DEX_RATING

@@ -13,6 +13,7 @@ INCLUDE "macros/scripts/maps.asm"
 INCLUDE "macros/scripts/events.asm"
 INCLUDE "macros/scripts/text.asm"
 
+INCLUDE "constants/constants_limits_constants.asm"
 INCLUDE "constants/charmap.asm"
 INCLUDE "constants/hardware.inc"
 INCLUDE "constants/oam_constants.asm"
