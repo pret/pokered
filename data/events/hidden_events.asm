@@ -1,178 +1,108 @@
+DEF num_hidden_event_maps = 0
+
+MACRO hidden_event_map
+	db \1 ; map id
+	DEF HIDDENEVENTMAP{num_hidden_event_maps} EQUS "\1"
+	DEF num_hidden_event_maps += 1
+ENDM
+
 HiddenEventMaps:
-	db REDS_HOUSE_2F
-	db BLUES_HOUSE
-	db OAKS_LAB
-	db VIRIDIAN_POKECENTER
-	db VIRIDIAN_MART
-	db VIRIDIAN_SCHOOL_HOUSE
-	db VIRIDIAN_GYM
-	db MUSEUM_1F
-	db PEWTER_GYM
-	db PEWTER_MART
-	db PEWTER_POKECENTER
-	db CERULEAN_POKECENTER
-	db CERULEAN_GYM
-	db CERULEAN_MART
-	db LAVENDER_POKECENTER
-	db VERMILION_POKECENTER
-	db VERMILION_GYM
-	db CELADON_MANSION_2F
-	db CELADON_POKECENTER
-	db CELADON_GYM
-	db GAME_CORNER
-	db CELADON_HOTEL
-	db FUCHSIA_POKECENTER
-	db FUCHSIA_GYM
-	db CINNABAR_GYM
-	db CINNABAR_POKECENTER
-	db SAFFRON_GYM
-	db MT_MOON_POKECENTER
-	db ROCK_TUNNEL_POKECENTER
-	db TRADE_CENTER
-	db COLOSSEUM
-	db VIRIDIAN_FOREST
-	db MT_MOON_B2F
-	db INDIGO_PLATEAU
-	db ROUTE_25
-	db ROUTE_9
-	db SS_ANNE_KITCHEN
-	db SS_ANNE_B1F_ROOMS
-	db ROCKET_HIDEOUT_B1F
-	db ROCKET_HIDEOUT_B3F
-	db ROCKET_HIDEOUT_B4F
-	db SAFFRON_POKECENTER
-	db POKEMON_TOWER_5F
-	db ROUTE_13
-	db SAFARI_ZONE_GATE
-	db SAFARI_ZONE_WEST
-	db SILPH_CO_5F
-	db SILPH_CO_9F
-	db COPYCATS_HOUSE_2F
-	db CERULEAN_CAVE_1F
-	db CERULEAN_CAVE_B1F
-	db POWER_PLANT
-	db SEAFOAM_ISLANDS_B2F
-	db SEAFOAM_ISLANDS_B4F
-	db POKEMON_MANSION_1F
-	db POKEMON_MANSION_3F
-	db ROUTE_23
-	db VICTORY_ROAD_2F
-	db UNUSED_MAP_6F
-	db BILLS_HOUSE
-	db VIRIDIAN_CITY
-	db SAFARI_ZONE_WEST_REST_HOUSE
-	db SAFARI_ZONE_EAST_REST_HOUSE
-	db SAFARI_ZONE_NORTH_REST_HOUSE
-	db ROUTE_15_GATE_2F
-	db MR_FUJIS_HOUSE
-	db CELADON_MANSION_ROOF_HOUSE
-	db FIGHTING_DOJO
-	db ROUTE_10
-	db INDIGO_PLATEAU_LOBBY
-	db CINNABAR_LAB_FOSSIL_ROOM
-	db BIKE_SHOP
-	db ROUTE_11
-	db ROUTE_12
-	db POKEMON_MANSION_2F
-	db POKEMON_MANSION_B1F
-	db SILPH_CO_11F
-	db ROUTE_17
-	db UNDERGROUND_PATH_NORTH_SOUTH
-	db UNDERGROUND_PATH_WEST_EAST
-	db CELADON_CITY
-	db SEAFOAM_ISLANDS_B3F
-	db VERMILION_CITY
-	db CERULEAN_CITY
-	db ROUTE_4
+	hidden_event_map REDS_HOUSE_2F
+	hidden_event_map BLUES_HOUSE
+	hidden_event_map OAKS_LAB
+	hidden_event_map VIRIDIAN_POKECENTER
+	hidden_event_map VIRIDIAN_MART
+	hidden_event_map VIRIDIAN_SCHOOL_HOUSE
+	hidden_event_map VIRIDIAN_GYM
+	hidden_event_map MUSEUM_1F
+	hidden_event_map PEWTER_GYM
+	hidden_event_map PEWTER_MART
+	hidden_event_map PEWTER_POKECENTER
+	hidden_event_map CERULEAN_POKECENTER
+	hidden_event_map CERULEAN_GYM
+	hidden_event_map CERULEAN_MART
+	hidden_event_map LAVENDER_POKECENTER
+	hidden_event_map VERMILION_POKECENTER
+	hidden_event_map VERMILION_GYM
+	hidden_event_map CELADON_MANSION_2F
+	hidden_event_map CELADON_POKECENTER
+	hidden_event_map CELADON_GYM
+	hidden_event_map GAME_CORNER
+	hidden_event_map CELADON_HOTEL
+	hidden_event_map FUCHSIA_POKECENTER
+	hidden_event_map FUCHSIA_GYM
+	hidden_event_map CINNABAR_GYM
+	hidden_event_map CINNABAR_POKECENTER
+	hidden_event_map SAFFRON_GYM
+	hidden_event_map MT_MOON_POKECENTER
+	hidden_event_map ROCK_TUNNEL_POKECENTER
+	hidden_event_map TRADE_CENTER
+	hidden_event_map COLOSSEUM
+	hidden_event_map VIRIDIAN_FOREST
+	hidden_event_map MT_MOON_B2F
+	hidden_event_map INDIGO_PLATEAU
+	hidden_event_map ROUTE_25
+	hidden_event_map ROUTE_9
+	hidden_event_map SS_ANNE_KITCHEN
+	hidden_event_map SS_ANNE_B1F_ROOMS
+	hidden_event_map ROCKET_HIDEOUT_B1F
+	hidden_event_map ROCKET_HIDEOUT_B3F
+	hidden_event_map ROCKET_HIDEOUT_B4F
+	hidden_event_map SAFFRON_POKECENTER
+	hidden_event_map POKEMON_TOWER_5F
+	hidden_event_map ROUTE_13
+	hidden_event_map SAFARI_ZONE_GATE
+	hidden_event_map SAFARI_ZONE_WEST
+	hidden_event_map SILPH_CO_5F
+	hidden_event_map SILPH_CO_9F
+	hidden_event_map COPYCATS_HOUSE_2F
+	hidden_event_map CERULEAN_CAVE_1F
+	hidden_event_map CERULEAN_CAVE_B1F
+	hidden_event_map POWER_PLANT
+	hidden_event_map SEAFOAM_ISLANDS_B2F
+	hidden_event_map SEAFOAM_ISLANDS_B4F
+	hidden_event_map POKEMON_MANSION_1F
+	hidden_event_map POKEMON_MANSION_3F
+	hidden_event_map ROUTE_23
+	hidden_event_map VICTORY_ROAD_2F
+	hidden_event_map UNUSED_MAP_6F
+	hidden_event_map BILLS_HOUSE
+	hidden_event_map VIRIDIAN_CITY
+	hidden_event_map SAFARI_ZONE_WEST_REST_HOUSE
+	hidden_event_map SAFARI_ZONE_EAST_REST_HOUSE
+	hidden_event_map SAFARI_ZONE_NORTH_REST_HOUSE
+	hidden_event_map ROUTE_15_GATE_2F
+	hidden_event_map MR_FUJIS_HOUSE
+	hidden_event_map CELADON_MANSION_ROOF_HOUSE
+	hidden_event_map FIGHTING_DOJO
+	hidden_event_map ROUTE_10
+	hidden_event_map INDIGO_PLATEAU_LOBBY
+	hidden_event_map CINNABAR_LAB_FOSSIL_ROOM
+	hidden_event_map BIKE_SHOP
+	hidden_event_map ROUTE_11
+	hidden_event_map ROUTE_12
+	hidden_event_map POKEMON_MANSION_2F
+	hidden_event_map POKEMON_MANSION_B1F
+	hidden_event_map SILPH_CO_11F
+	hidden_event_map ROUTE_17
+	hidden_event_map UNDERGROUND_PATH_NORTH_SOUTH
+	hidden_event_map UNDERGROUND_PATH_WEST_EAST
+	hidden_event_map CELADON_CITY
+	hidden_event_map SEAFOAM_ISLANDS_B3F
+	hidden_event_map VERMILION_CITY
+	hidden_event_map CERULEAN_CITY
+	hidden_event_map ROUTE_4
 	db -1 ; end
 
 HiddenEventPointers:
 ; each of these pointers is for the corresponding map in HiddenEventMaps
-	dw RedsHouse2FHiddenEvents
-	dw BluesHouseHiddenEvents
-	dw OaksLabHiddenEvents
-	dw ViridianPokecenterHiddenEvents
-	dw ViridianMartHiddenEvents
-	dw ViridianSchoolHiddenEvents
-	dw ViridianGymHiddenEvents
-	dw Museum1FHiddenEvents
-	dw PewterGymHiddenEvents
-	dw PewterMartHiddenEvents
-	dw PewterPokecenterHiddenEvents
-	dw CeruleanPokecenterHiddenEvents
-	dw CeruleanGymHiddenEvents
-	dw CeruleanMartHiddenEvents
-	dw LavenderPokecenterHiddenEvents
-	dw VermilionPokecenterHiddenEvents
-	dw VermilionGymHiddenEvents
-	dw CeladonMansion2HiddenEvents
-	dw CeladonPokecenterHiddenEvents
-	dw CeladonGymHiddenEvents
-	dw GameCornerHiddenEvents
-	dw CeladonHotelHiddenEvents
-	dw FuchsiaPokecenterHiddenEvents
-	dw FuchsiaGymHiddenEvents
-	dw CinnabarGymHiddenEvents
-	dw CinnabarPokecenterHiddenEvents
-	dw SaffronGymHiddenEvents
-	dw MtMoonPokecenterHiddenEvents
-	dw RockTunnelPokecenterHiddenEvents
-	dw TradeCenterHiddenEvents
-	dw ColosseumHiddenEvents
-	dw ViridianForestHiddenEvents
-	dw MtMoon3HiddenEvents
-	dw IndigoPlateauHiddenEvents
-	dw Route25HiddenEvents
-	dw Route9HiddenEvents
-	dw SSAnne6HiddenEvents
-	dw SSAnne10HiddenEvents
-	dw RocketHideout1HiddenEvents
-	dw RocketHideout3HiddenEvents
-	dw RocketHideout4HiddenEvents
-	dw SaffronPokecenterHiddenEvents
-	dw PokemonTower5HiddenEvents
-	dw Route13HiddenEvents
-	dw SafariZoneEntranceHiddenEvents
-	dw SafariZoneWestHiddenEvents
-	dw SilphCo5FHiddenEvents
-	dw SilphCo9FHiddenEvents
-	dw CopycatsHouse2FHiddenEvents
-	dw CeruleanCave1HiddenEvents
-	dw CeruleanCave3HiddenEvents
-	dw PowerPlantHiddenEvents
-	dw SeafoamIslands3HiddenEvents
-	dw SeafoamIslands5HiddenEvents
-	dw Mansion1HiddenEvents
-	dw Mansion3HiddenEvents
-	dw Route23HiddenEvents
-	dw VictoryRoad2HiddenEvents
-	dw Unused6FHiddenEvents
-	dw BillsHouseHiddenEvents
-	dw ViridianCityHiddenEvents
-	dw SafariZoneRestHouse2HiddenEvents
-	dw SafariZoneRestHouse3HiddenEvents
-	dw SafariZoneRestHouse4HiddenEvents
-	dw Route15GateUpstairsHiddenEvents
-	dw LavenderHouse1HiddenEvents
-	dw CeladonMansion5HiddenEvents
-	dw FightingDojoHiddenEvents
-	dw Route10HiddenEvents
-	dw IndigoPlateauLobbyHiddenEvents
-	dw CinnabarLab4HiddenEvents
-	dw BikeShopHiddenEvents
-	dw Route11HiddenEvents
-	dw Route12HiddenEvents
-	dw Mansion2HiddenEvents
-	dw Mansion4HiddenEvents
-	dw SilphCo11FHiddenEvents
-	dw Route17HiddenEvents
-	dw UndergroundPathNsHiddenEvents
-	dw UndergroundPathWeHiddenEvents
-	dw CeladonCityHiddenEvents
-	dw SeafoamIslands4HiddenEvents
-	dw VermilionCityHiddenEvents
-	dw CeruleanCityHiddenEvents
-	dw Route4HiddenEvents
+FOR n, num_hidden_event_maps
+	dw HiddenEventsFor_{HIDDENEVENTMAP{n}}
+ENDR
+
+MACRO hidden_events_for
+	HiddenEventsFor_\1:
+ENDM
 
 MACRO hidden_event
 	db \2 ; y coord
@@ -193,94 +123,94 @@ ENDM
 ; from interacting with them in any direction.
 DEF ANY_FACING EQU $d0
 
-TradeCenterHiddenEvents:
+	hidden_events_for TRADE_CENTER
 	hidden_event  5,  4, ANY_FACING, CableClubRightGameboy
 	hidden_event  4,  4, ANY_FACING, CableClubLeftGameboy
 	db -1 ; end
 
-ColosseumHiddenEvents:
+	hidden_events_for COLOSSEUM
 	hidden_event  5,  4, ANY_FACING, CableClubRightGameboy
 	hidden_event  4,  4, ANY_FACING, CableClubLeftGameboy
 	db -1 ; end
 
-RedsHouse2FHiddenEvents:
+	hidden_events_for REDS_HOUSE_2F
 	hidden_event  0,  1, SPRITE_FACING_UP, OpenRedsPC
 	hidden_event  3,  5, ANY_FACING, PrintRedSNESText
 	db -1 ; end
 
-BluesHouseHiddenEvents:
+	hidden_events_for BLUES_HOUSE
 	hidden_event  0,  1, SPRITE_FACING_UP, PrintBookcaseText
 	hidden_event  1,  1, SPRITE_FACING_UP, PrintBookcaseText
 	hidden_event  7,  1, SPRITE_FACING_UP, PrintBookcaseText
 	db -1 ; end
 
-OaksLabHiddenEvents:
+	hidden_events_for OAKS_LAB
 	hidden_event  4,  0, SPRITE_FACING_UP, DisplayOakLabLeftPoster
 	hidden_event  5,  0, SPRITE_FACING_UP, DisplayOakLabRightPoster
 	hidden_event  0,  1, SPRITE_FACING_UP, DisplayOakLabEmailText
 	hidden_event  1,  1, SPRITE_FACING_UP, DisplayOakLabEmailText
 	db -1 ; end
 
-ViridianPokecenterHiddenEvents:
+	hidden_events_for VIRIDIAN_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-ViridianMartHiddenEvents:
+	hidden_events_for VIRIDIAN_MART
 	db -1 ; end
 
-ViridianSchoolHiddenEvents:
+	hidden_events_for VIRIDIAN_SCHOOL_HOUSE
 	hidden_text_predef  3,  4, ViridianSchoolNotebook, PrintNotebookText
 	hidden_text_predef  3,  0, ViridianSchoolBlackboard, PrintBlackboardLinkCableText
 	db -1 ; end
 
-ViridianGymHiddenEvents:
+	hidden_events_for VIRIDIAN_GYM
 	hidden_event 15, 15, SPRITE_FACING_UP, GymStatues
 	hidden_event 18, 15, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-Museum1FHiddenEvents:
+	hidden_events_for MUSEUM_1F
 	hidden_event  2,  3, SPRITE_FACING_UP, AerodactylFossil
 	hidden_event  2,  6, SPRITE_FACING_UP, KabutopsFossil
 	db -1 ; end
 
-PewterGymHiddenEvents:
+	hidden_events_for PEWTER_GYM
 	hidden_event  3, 10, SPRITE_FACING_UP, GymStatues
 	hidden_event  6, 10, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-PewterMartHiddenEvents:
+	hidden_events_for PEWTER_MART
 	db -1 ; end
 
-PewterPokecenterHiddenEvents:
+	hidden_events_for PEWTER_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-CeruleanPokecenterHiddenEvents:
+	hidden_events_for CERULEAN_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-CeruleanGymHiddenEvents:
+	hidden_events_for CERULEAN_GYM
 	hidden_event  3, 11, SPRITE_FACING_UP, GymStatues
 	hidden_event  6, 11, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-CeruleanMartHiddenEvents:
+	hidden_events_for CERULEAN_MART
 	db -1 ; end
 
-LavenderPokecenterHiddenEvents:
+	hidden_events_for LAVENDER_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-VermilionPokecenterHiddenEvents:
+	hidden_events_for VERMILION_POKECENTER
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	hidden_event  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
 	db -1 ; end
 
-VermilionGymHiddenEvents:
+	hidden_events_for VERMILION_GYM
 	hidden_event  3, 14, SPRITE_FACING_UP, GymStatues
 	hidden_event  6, 14, SPRITE_FACING_UP, GymStatues
 	hidden_event  6,  1, SPRITE_FACING_DOWN, PrintTrashText
@@ -302,21 +232,21 @@ VermilionGymHiddenEvents:
 	hidden_event  9, 11, 14, GymTrashScript
 	db -1 ; end
 
-CeladonMansion2HiddenEvents:
+	hidden_events_for CELADON_MANSION_2F
 	hidden_event  0,  5, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-CeladonPokecenterHiddenEvents:
+	hidden_events_for CELADON_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-CeladonGymHiddenEvents:
+	hidden_events_for CELADON_GYM
 	hidden_event  3, 15, SPRITE_FACING_UP, GymStatues
 	hidden_event  6, 15, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-GameCornerHiddenEvents:
+	hidden_events_for GAME_CORNER
 	hidden_event 18, 15, ANY_FACING, StartSlotMachine
 	hidden_event 18, 14, ANY_FACING, StartSlotMachine
 	hidden_event 18, 13, ANY_FACING, StartSlotMachine
@@ -353,36 +283,37 @@ GameCornerHiddenEvents:
 	hidden_event  1, 13, ANY_FACING, StartSlotMachine
 	hidden_event  1, 14, ANY_FACING, StartSlotMachine
 	hidden_event  1, 15, ANY_FACING, StartSlotMachine
-	hidden_event  0,  8, COIN+10, HiddenCoins
-	hidden_event  1, 16, COIN+10, HiddenCoins
-	hidden_event  3, 11, COIN+20, HiddenCoins
-	hidden_event  3, 14, COIN+10, HiddenCoins
-	hidden_event  4, 12, COIN+10, HiddenCoins
-	hidden_event  9, 12, COIN+20, HiddenCoins
-	hidden_event  9, 15, COIN+10, HiddenCoins
-	hidden_event 16, 14, COIN+10, HiddenCoins
-	hidden_event 10, 16, COIN+10, HiddenCoins
-	hidden_event 11,  7, COIN+40, HiddenCoins
-	hidden_event 15,  8, COIN+100, HiddenCoins
-	hidden_event 12, 15, COIN+10, HiddenCoins
+	; third param: COIN + <number of coins>
+	hidden_event  0,  8, COIN + 10, HiddenCoins
+	hidden_event  1, 16, COIN + 10, HiddenCoins
+	hidden_event  3, 11, COIN + 20, HiddenCoins
+	hidden_event  3, 14, COIN + 10, HiddenCoins
+	hidden_event  4, 12, COIN + 10, HiddenCoins
+	hidden_event  9, 12, COIN + 20, HiddenCoins
+	hidden_event  9, 15, COIN + 10, HiddenCoins
+	hidden_event 16, 14, COIN + 10, HiddenCoins
+	hidden_event 10, 16, COIN + 10, HiddenCoins
+	hidden_event 11,  7, COIN + 40, HiddenCoins
+	hidden_event 15,  8, COIN + 100, HiddenCoins
+	hidden_event 12, 15, COIN + 10, HiddenCoins
 	db -1 ; end
 
-CeladonHotelHiddenEvents:
+	hidden_events_for CELADON_HOTEL
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	db -1 ; end
 
-FuchsiaPokecenterHiddenEvents:
+	hidden_events_for FUCHSIA_POKECENTER
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	hidden_event  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
 	db -1 ; end
 
-FuchsiaGymHiddenEvents:
+	hidden_events_for FUCHSIA_GYM
 	hidden_event  3, 15, SPRITE_FACING_UP, GymStatues
 	hidden_event  6, 15, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-CinnabarGymHiddenEvents:
+	hidden_events_for CINNABAR_GYM
 	hidden_event 17, 13, SPRITE_FACING_UP, GymStatues
 	; third param: ([hGymGateAnswer] << 4) | [hGymGateIndex]
 	hidden_event 15,  7, (FALSE << 4) | 1, PrintCinnabarQuiz
@@ -393,222 +324,222 @@ CinnabarGymHiddenEvents:
 	hidden_event  1,  7, (TRUE  << 4) | 6, PrintCinnabarQuiz
 	db -1 ; end
 
-CinnabarPokecenterHiddenEvents:
+	hidden_events_for CINNABAR_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-SaffronGymHiddenEvents:
+	hidden_events_for SAFFRON_GYM
 	hidden_event  9, 15, SPRITE_FACING_UP, GymStatues
 	db -1 ; end
 
-MtMoonPokecenterHiddenEvents:
+	hidden_events_for MT_MOON_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-RockTunnelPokecenterHiddenEvents:
+	hidden_events_for ROCK_TUNNEL_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-ViridianForestHiddenEvents:
+	hidden_events_for VIRIDIAN_FOREST
 	hidden_event  1, 18, POTION, HiddenItems
 	hidden_event 16, 42, ANTIDOTE, HiddenItems
 	db -1 ; end
 
-MtMoon3HiddenEvents:
+	hidden_events_for MT_MOON_B2F
 	hidden_event 18, 12, MOON_STONE, HiddenItems
 	hidden_event 33,  9, ETHER, HiddenItems
 	db -1 ; end
 
-IndigoPlateauHiddenEvents:
+	hidden_events_for INDIGO_PLATEAU
 	hidden_event  8, 13, $ff, PrintIndigoPlateauHQText ; inaccessible
 	hidden_event 11, 13, SPRITE_FACING_DOWN, PrintIndigoPlateauHQText ; inaccessible
 	db -1 ; end
 
-Route25HiddenEvents:
+	hidden_events_for ROUTE_25
 	hidden_event 38,  3, ETHER, HiddenItems
 	hidden_event 10,  1, ELIXER, HiddenItems
 	db -1 ; end
 
-Route9HiddenEvents:
+	hidden_events_for ROUTE_9
 	hidden_event 14,  7, ETHER, HiddenItems
 	db -1 ; end
 
-SSAnne6HiddenEvents:
+	hidden_events_for SS_ANNE_KITCHEN
 	hidden_event 13,  5, SPRITE_FACING_DOWN, PrintTrashText
 	hidden_event 13,  7, SPRITE_FACING_DOWN, PrintTrashText
 	hidden_event 13,  9, GREAT_BALL, HiddenItems
 	db -1 ; end
 
-SSAnne10HiddenEvents:
+	hidden_events_for SS_ANNE_B1F_ROOMS
 	hidden_event  3,  1, HYPER_POTION, HiddenItems
 	db -1 ; end
 
-Route10HiddenEvents:
+	hidden_events_for ROUTE_10
 	hidden_event  9, 17, SUPER_POTION, HiddenItems
 	hidden_event 16, 53, MAX_ETHER, HiddenItems
 	db -1 ; end
 
-RocketHideout1HiddenEvents:
+	hidden_events_for ROCKET_HIDEOUT_B1F
 	hidden_event 21, 15, PP_UP, HiddenItems
 	db -1 ; end
 
-RocketHideout3HiddenEvents:
+	hidden_events_for ROCKET_HIDEOUT_B3F
 	hidden_event 27, 17, NUGGET, HiddenItems
 	db -1 ; end
 
-RocketHideout4HiddenEvents:
+	hidden_events_for ROCKET_HIDEOUT_B4F
 	hidden_event 25,  1, SUPER_POTION, HiddenItems
 	db -1 ; end
 
-SaffronPokecenterHiddenEvents:
+	hidden_events_for SAFFRON_POKECENTER
 	hidden_event  0,  4, SPRITE_FACING_UP, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-PokemonTower5HiddenEvents:
+	hidden_events_for POKEMON_TOWER_5F
 	hidden_event  4, 12, ELIXER, HiddenItems
 	db -1 ; end
 
-Route13HiddenEvents:
+	hidden_events_for ROUTE_13
 	hidden_event  1, 14, PP_UP, HiddenItems
 	hidden_event 16, 13, CALCIUM, HiddenItems
 	db -1 ; end
 
-SafariZoneEntranceHiddenEvents:
+	hidden_events_for SAFARI_ZONE_GATE
 	hidden_event 10,  1, NUGGET, HiddenItems ; inaccessible
 	db -1 ; end
 
-SafariZoneWestHiddenEvents:
+	hidden_events_for SAFARI_ZONE_WEST
 	hidden_event  6,  5, REVIVE, HiddenItems
 	db -1 ; end
 
-SilphCo5FHiddenEvents:
+	hidden_events_for SILPH_CO_5F
 	hidden_event 12,  3, ELIXER, HiddenItems
 	db -1 ; end
 
-SilphCo9FHiddenEvents:
+	hidden_events_for SILPH_CO_9F
 	hidden_event  2, 15, MAX_POTION, HiddenItems
 	db -1 ; end
 
-CopycatsHouse2FHiddenEvents:
+	hidden_events_for COPYCATS_HOUSE_2F
 	hidden_event  1,  1, NUGGET, HiddenItems
 	db -1 ; end
 
-CeruleanCave1HiddenEvents:
+	hidden_events_for CERULEAN_CAVE_1F
 	hidden_event 14, 11, RARE_CANDY, HiddenItems
 	db -1 ; end
 
-CeruleanCave3HiddenEvents:
+	hidden_events_for CERULEAN_CAVE_B1F
 	hidden_event 27,  3, ULTRA_BALL, HiddenItems
 	db -1 ; end
 
-PowerPlantHiddenEvents:
+	hidden_events_for POWER_PLANT
 	hidden_event 17, 16, MAX_ELIXER, HiddenItems
 	hidden_event 12,  1, PP_UP, HiddenItems
 	db -1 ; end
 
-SeafoamIslands3HiddenEvents:
+	hidden_events_for SEAFOAM_ISLANDS_B2F
 	hidden_event 15, 15, NUGGET, HiddenItems
 	db -1 ; end
 
-SeafoamIslands5HiddenEvents:
+	hidden_events_for SEAFOAM_ISLANDS_B4F
 	hidden_event 25, 17, ULTRA_BALL, HiddenItems
 	db -1 ; end
 
-Mansion1HiddenEvents:
+	hidden_events_for POKEMON_MANSION_1F
 	hidden_event  8, 16, MOON_STONE, HiddenItems
 	hidden_event  2,  5, SPRITE_FACING_UP, Mansion1Script_Switches
 	db -1 ; end
 
-Mansion2HiddenEvents:
+	hidden_events_for POKEMON_MANSION_2F
 	hidden_event  2, 11, SPRITE_FACING_UP, Mansion2Script_Switches
 	db -1 ; end
 
-Mansion3HiddenEvents:
+	hidden_events_for POKEMON_MANSION_3F
 	hidden_event  1,  9, MAX_REVIVE, HiddenItems
 	hidden_event 10,  5, SPRITE_FACING_UP, Mansion3Script_Switches
 	db -1 ; end
 
-Mansion4HiddenEvents:
+	hidden_events_for POKEMON_MANSION_B1F
 	hidden_event  1,  9, RARE_CANDY, HiddenItems
 	hidden_event 20,  3, SPRITE_FACING_UP, Mansion4Script_Switches
 	hidden_event 18, 25, SPRITE_FACING_UP, Mansion4Script_Switches
 	db -1 ; end
 
-Route23HiddenEvents:
+	hidden_events_for ROUTE_23
 	hidden_event  9, 44, FULL_RESTORE, HiddenItems
 	hidden_event 19, 70, ULTRA_BALL, HiddenItems
 	hidden_event  8, 90, MAX_ETHER, HiddenItems
 	db -1 ; end
 
-VictoryRoad2HiddenEvents:
+	hidden_events_for VICTORY_ROAD_2F
 	hidden_event  5,  2, ULTRA_BALL, HiddenItems
 	hidden_event 26,  7, FULL_RESTORE, HiddenItems
 	db -1 ; end
 
-Unused6FHiddenEvents:
+	hidden_events_for UNUSED_MAP_6F
 	hidden_event 14, 11, MAX_ELIXER, HiddenItems
 	db -1 ; end
 
-BillsHouseHiddenEvents:
+	hidden_events_for BILLS_HOUSE
 	hidden_event  1,  4, SPRITE_FACING_UP, BillsHousePC
 	db -1 ; end
 
-ViridianCityHiddenEvents:
+	hidden_events_for VIRIDIAN_CITY
 	hidden_event 14,  4, POTION, HiddenItems
 	db -1 ; end
 
-SafariZoneRestHouse2HiddenEvents:
+	hidden_events_for SAFARI_ZONE_WEST_REST_HOUSE
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-SafariZoneRestHouse3HiddenEvents:
+	hidden_events_for SAFARI_ZONE_EAST_REST_HOUSE
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-SafariZoneRestHouse4HiddenEvents:
+	hidden_events_for SAFARI_ZONE_NORTH_REST_HOUSE
 	hidden_event  0,  4, SPRITE_FACING_LEFT, PrintBenchGuyText
 	hidden_event 13,  3, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-Route15GateUpstairsHiddenEvents:
+	hidden_events_for ROUTE_15_GATE_2F
 	hidden_event  1,  2, SPRITE_FACING_UP, Route15GateLeftBinoculars
 	db -1 ; end
 
-LavenderHouse1HiddenEvents:
+	hidden_events_for MR_FUJIS_HOUSE
 	hidden_event  0,  1, SPRITE_FACING_DOWN, PrintMagazinesText
 	hidden_event  1,  1, SPRITE_FACING_DOWN, PrintMagazinesText
 	hidden_event  7,  1, SPRITE_FACING_DOWN, PrintMagazinesText
 	db -1 ; end
 
-CeladonMansion5HiddenEvents:
+	hidden_events_for CELADON_MANSION_ROOF_HOUSE
 	hidden_text_predef  3,  0, LinkCableHelp, PrintBlackboardLinkCableText
 	hidden_text_predef  4,  0, LinkCableHelp, PrintBlackboardLinkCableText
 	hidden_text_predef  3,  4, TMNotebook, PrintNotebookText
 	db -1 ; end
 
-FightingDojoHiddenEvents:
+	hidden_events_for FIGHTING_DOJO
 	hidden_event  3,  9, SPRITE_FACING_UP, PrintFightingDojoText
 	hidden_event  6,  9, SPRITE_FACING_UP, PrintFightingDojoText
 	hidden_event  4,  0, SPRITE_FACING_UP, PrintFightingDojoText2
 	hidden_event  5,  0, SPRITE_FACING_UP, PrintFightingDojoText3
 	db -1 ; end
 
-IndigoPlateauLobbyHiddenEvents:
+	hidden_events_for INDIGO_PLATEAU_LOBBY
 	hidden_event 15,  7, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-CinnabarLab4HiddenEvents:
+	hidden_events_for CINNABAR_LAB_FOSSIL_ROOM
 	hidden_event  0,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
 	hidden_event  2,  4, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-BikeShopHiddenEvents:
+	hidden_events_for BIKE_SHOP
 	hidden_event  1,  0, ANY_FACING, PrintNewBikeText
 	hidden_event  2,  1, ANY_FACING, PrintNewBikeText
 	hidden_event  1,  2, ANY_FACING, PrintNewBikeText
@@ -617,19 +548,19 @@ BikeShopHiddenEvents:
 	hidden_event  1,  5, ANY_FACING, PrintNewBikeText
 	db -1 ; end
 
-Route11HiddenEvents:
+	hidden_events_for ROUTE_11
 	hidden_event 48,  5, ESCAPE_ROPE, HiddenItems
 	db -1 ; end
 
-Route12HiddenEvents:
+	hidden_events_for ROUTE_12
 	hidden_event  2, 63, HYPER_POTION, HiddenItems
 	db -1 ; end
 
-SilphCo11FHiddenEvents:
+	hidden_events_for SILPH_CO_11F
 	hidden_event 10, 12, SPRITE_FACING_UP, OpenPokemonCenterPC
 	db -1 ; end
 
-Route17HiddenEvents:
+	hidden_events_for ROUTE_17
 	hidden_event 15,  14, RARE_CANDY, HiddenItems
 	hidden_event  8,  45, FULL_RESTORE, HiddenItems
 	hidden_event 17,  72, PP_UP, HiddenItems
@@ -637,32 +568,37 @@ Route17HiddenEvents:
 	hidden_event  8, 121, MAX_ELIXER, HiddenItems
 	db -1 ; end
 
-UndergroundPathNsHiddenEvents:
+	hidden_events_for UNDERGROUND_PATH_NORTH_SOUTH
 	hidden_event  3,  4, FULL_RESTORE, HiddenItems
 	hidden_event  4, 34, X_SPECIAL, HiddenItems
 	db -1 ; end
 
-UndergroundPathWeHiddenEvents:
+	hidden_events_for UNDERGROUND_PATH_WEST_EAST
 	hidden_event 12,  2, NUGGET, HiddenItems
 	hidden_event 21,  5, ELIXER, HiddenItems
 	db -1 ; end
 
-CeladonCityHiddenEvents:
+	hidden_events_for CELADON_CITY
 	hidden_event 48, 15, PP_UP, HiddenItems
 	db -1 ; end
 
-SeafoamIslands4HiddenEvents:
+	hidden_events_for SEAFOAM_ISLANDS_B3F
 	hidden_event  9, 16, MAX_ELIXER, HiddenItems
 	db -1 ; end
 
-VermilionCityHiddenEvents:
+	hidden_events_for VERMILION_CITY
 	hidden_event 14, 11, MAX_ETHER, HiddenItems
 	db -1 ; end
 
-CeruleanCityHiddenEvents:
+	hidden_events_for CERULEAN_CITY
 	hidden_event 15,  8, RARE_CANDY, HiddenItems
 	db -1 ; end
 
-Route4HiddenEvents:
+	hidden_events_for ROUTE_4
 	hidden_event 40,  3, GREAT_BALL, HiddenItems
 	db -1 ; end
+
+FOR n, num_hidden_event_maps
+	ASSERT DEF(HiddenEventsFor_{HIDDENEVENTMAP{n}}), \
+		"`hidden_events_for {HIDDENEVENTMAP{n}}` is not defined"
+ENDR
