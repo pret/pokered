@@ -5,7 +5,7 @@
 ; - CryData (see data/pokemon/cries.asm)
 ; - PokedexOrder (see data/pokemon/dex_order.asm)
 ; - PokedexEntryPointers (see data/pokemon/dex_entries.asm)
-	const_def
+	const_def 0, 1, POKEMON_CONST_LIMIT
 	const NO_MON             ; $00
 	const RHYDON             ; $01
 	const KANGASKHAN         ; $02

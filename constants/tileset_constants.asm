@@ -1,6 +1,6 @@
 ; tileset ids
 ; Tilesets indexes (see data/tilesets/tileset_headers.asm)
-	const_def
+	const_def 0, 1, TILESET_CONST_LIMIT
 	const OVERWORLD    ; 0
 	const REDS_HOUSE_1 ; 1
 	const MART         ; 2

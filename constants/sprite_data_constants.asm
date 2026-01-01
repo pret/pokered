@@ -1,11 +1,11 @@
 ; sprite facing directions
-	const_def 0, $04
+	const_def 0, $04, $0C
 	const SPRITE_FACING_DOWN  ; $00
 	const SPRITE_FACING_UP    ; $04
 	const SPRITE_FACING_LEFT  ; $08
 	const SPRITE_FACING_RIGHT ; $0C
 
-	const_def 0, $40
+	const_def 0, $40, $C0
 	const NPC_MOVEMENT_DOWN  ; $00
 	const NPC_MOVEMENT_UP    ; $40
 	const NPC_MOVEMENT_LEFT  ; $80
@@ -14,7 +14,7 @@
 DEF NPC_CHANGE_FACING EQU $E0
 
 ; player direction constants
-	const_def
+	const_def 0, 1, BIT
 	const PLAYER_DIR_BIT_RIGHT ; 0
 	const PLAYER_DIR_BIT_LEFT  ; 1
 	const PLAYER_DIR_BIT_DOWN  ; 2

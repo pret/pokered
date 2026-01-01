@@ -1,6 +1,7 @@
 ; special effects that are part of move animations
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
-	const_def $C0
+	const_def $C0, 1, FF_TERMINATED_CONST
+DEF SUBANIM_CONST_LIMIT EQU const_value - 1
 DEF FIRST_SE_ID EQU const_value
 	const_skip $18
 	const SE_WAVY_SCREEN               ; $D8 used in Psywave/Night Shade/Psychic etc.
@@ -48,7 +49,7 @@ DEF FIRST_SE_ID EQU const_value
 
 ; The 0 or 1 in the name of a subanim indicates whether to use tileset 0 or 1 data/moves/animations.asm.
 ; "Both" indicates either can be used for different images using the same animation.
-	const_def
+	const_def 0, 1, SUBANIM_CONST_LIMIT
 	const SUBANIM_0_STAR
 	const SUBANIM_0_STAR_TWICE
 	const SUBANIM_0_STAR_THRICE

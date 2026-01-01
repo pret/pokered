@@ -1,5 +1,5 @@
 ; TypeNames indexes (see data/types/names.asm)
-	const_def
+	const_def 0, 1, FF_TERMINATED_CONST
 
 DEF PHYSICAL EQU const_value
 	const NORMAL       ; $00
