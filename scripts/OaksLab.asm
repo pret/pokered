@@ -13,7 +13,7 @@ OaksLab_ScriptPointers:
 	def_script_pointers
 	dw_const OaksLabDefaultScript,                   SCRIPT_OAKSLAB_DEFAULT
 	dw_const OaksLabOakEntersLabScript,              SCRIPT_OAKSLAB_OAK_ENTERS_LAB
-	dw_const OaksLabHideShowOaksScript,              SCRIPT_OAKSLAB_HIDE_SHOW_OAKS
+	dw_const OaksLabToggleOaksScript,                SCRIPT_OAKSLAB_TOGGLE_OAKS
 	dw_const OaksLabPlayerEntersLabScript,           SCRIPT_OAKSLAB_PLAYER_ENTERS_LAB
 	dw_const OaksLabFollowedOakScript,               SCRIPT_OAKSLAB_FOLLOWED_OAK
 	dw_const OaksLabOakChooseMonSpeechScript,        SCRIPT_OAKSLAB_OAK_CHOOSE_MON_SPEECH
@@ -37,8 +37,8 @@ OaksLabDefaultScript:
 	ld a, [wNPCMovementScriptFunctionNum]
 	and a
 	ret nz
-	ld a, HS_OAKS_LAB_OAK_2
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_OAK_2
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld hl, wStatusFlags4
 	res BIT_NO_BATTLES, [hl]
@@ -53,7 +53,7 @@ OaksLabOakEntersLabScript:
 	ld de, OakEntryMovement
 	call MoveSprite
 
-	ld a, SCRIPT_OAKSLAB_HIDE_SHOW_OAKS
+	ld a, SCRIPT_OAKSLAB_TOGGLE_OAKS
 	ld [wOaksLabCurScript], a
 	ret
 
@@ -63,15 +63,15 @@ OakEntryMovement:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-OaksLabHideShowOaksScript:
+OaksLabToggleOaksScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	ld a, HS_OAKS_LAB_OAK_2
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_OAK_2
+	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld a, HS_OAKS_LAB_OAK_1
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_OAK_1
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 
 	ld a, SCRIPT_OAKSLAB_PLAYER_ENTERS_LAB
@@ -306,17 +306,17 @@ OaksLabRivalChoosesStarterScript:
 	ld a, [wRivalStarterBallSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
 	jr nz, .not_charmander
-	ld a, HS_STARTER_BALL_1
+	ld a, TOGGLE_STARTER_BALL_1
 	jr .hideBallAndContinue
 .not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
 	jr nz, .not_squirtle
-	ld a, HS_STARTER_BALL_2
+	ld a, TOGGLE_STARTER_BALL_2
 	jr .hideBallAndContinue
 .not_squirtle
-	ld a, HS_STARTER_BALL_3
+	ld a, TOGGLE_STARTER_BALL_3
 .hideBallAndContinue
-	ld [wMissableObjectIndex], a
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	call Delay3
 	ld a, [wRivalStarterTemp]
@@ -475,8 +475,8 @@ OaksLabPlayerWatchRivalExitScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	jr nz, .checkRivalPosition
-	ld a, HS_OAKS_LAB_RIVAL
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_RIVAL
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
@@ -519,8 +519,8 @@ OaksLabRivalArrivesAtOaksRequestScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	call OaksLabCalcRivalMovementScript
-	ld a, HS_OAKS_LAB_RIVAL
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_RIVAL
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, [wNPCMovementDirections2Index]
 	ld [wSavedNPCMovementDirections2Index], a
@@ -578,11 +578,11 @@ OaksLabOakGivesPokedexScript:
 	ldh [hTextID], a
 	call DisplayTextID
 	call Delay3
-	ld a, HS_POKEDEX_1
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_POKEDEX_1
+	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld a, HS_POKEDEX_2
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_POKEDEX_2
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	call OaksLabRivalFaceUpOakFaceDownScript
 	ld a, TEXT_OAKSLAB_OAK_THAT_WAS_MY_DREAM
@@ -599,11 +599,11 @@ OaksLabOakGivesPokedexScript:
 	call DisplayTextID
 	SetEvent EVENT_GOT_POKEDEX
 	SetEvent EVENT_OAK_GOT_PARCEL
-	ld a, HS_LYING_OLD_MAN
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_LYING_OLD_MAN
+	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld a, HS_OLD_MAN
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OLD_MAN
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, [wSavedNPCMovementDirections2Index]
 	ld b, 0
@@ -630,14 +630,14 @@ OaksLabRivalLeavesWithPokedexScript:
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	call PlayDefaultMusic
-	ld a, HS_OAKS_LAB_RIVAL
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_OAKS_LAB_RIVAL
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
 	ResetEventReuseHL EVENT_2ND_ROUTE22_RIVAL_BATTLE
 	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_BATTLE
-	ld a, HS_ROUTE_22_RIVAL_1
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_ROUTE_22_RIVAL_1
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, SCRIPT_PALLETTOWN_DAISY
 	ld [wPalletTownCurScript], a
@@ -904,17 +904,17 @@ OaksLabMonChoiceMenu:
 	ld a, [wSpriteIndex]
 	cp OAKSLAB_CHARMANDER_POKE_BALL
 	jr nz, .not_charmander
-	ld a, HS_STARTER_BALL_1
+	ld a, TOGGLE_STARTER_BALL_1
 	jr .continue
 .not_charmander
 	cp OAKSLAB_SQUIRTLE_POKE_BALL
 	jr nz, .not_squirtle
-	ld a, HS_STARTER_BALL_2
+	ld a, TOGGLE_STARTER_BALL_2
 	jr .continue
 .not_squirtle
-	ld a, HS_STARTER_BALL_3
+	ld a, TOGGLE_STARTER_BALL_3
 .continue
-	ld [wMissableObjectIndex], a
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

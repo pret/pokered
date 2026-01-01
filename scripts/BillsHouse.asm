@@ -49,8 +49,8 @@ BillsHousePokemonEntersMachineScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	ld a, HS_BILL_POKEMON
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_BILL_POKEMON
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	SetEvent EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	xor a
@@ -75,8 +75,8 @@ BillsHouseBillExitsMachineScript:
 	ld a, 5
 	ldh [hSpriteMapXCoord], a
 	call SetSpritePosition1
-	ld a, HS_BILL_1
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_BILL_1
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld c, 8
 	call DelayFrames
@@ -171,11 +171,11 @@ BillsHouseBillSSTicketText:
 	ld hl, .SSTicketReceivedText
 	call PrintText
 	SetEvent EVENT_GOT_SS_TICKET
-	ld a, HS_CERULEAN_GUARD_1
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_CERULEAN_GUARD_1
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
-	ld a, HS_CERULEAN_GUARD_2
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_CERULEAN_GUARD_2
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 .got_ss_ticket
 	ld hl, .WhyDontYouGoInsteadOfMeText
