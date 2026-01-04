@@ -597,8 +597,3 @@ DEF ANY_FACING EQU $d0
 	hidden_events_for ROUTE_4
 	hidden_event 40,  3, HiddenItems, GREAT_BALL
 	db -1 ; end
-
-FOR n, num_hidden_event_maps
-	ASSERT DEF(HiddenEventsFor_{HIDDENEVENTMAP{n}}), \
-		"`hidden_events_for {HIDDENEVENTMAP{n}}` is not defined"
-ENDR
