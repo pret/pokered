@@ -27,7 +27,7 @@ MACRO? toggleable_objects_for
 		DEF toggles_ok &= DEF(TOGGLEMAP{toggle_map_id})
 		IF toggles_ok
 			assert_table_length TOGGLEMAP{toggle_map_id}
-			DEF toggles_ok &= TOGGLEMAP{toggle_map_id} * 3 == @ - ToggleableObjectState
+			DEF toggles_ok &= TOGGLEMAP{toggle_map_id} * 3 == @ - ToggleableObjectStates
 		ENDC
 	ENDC
 ENDM
@@ -38,7 +38,7 @@ MACRO toggle_object_state
 	db \2 ; OFF/ON
 ENDM
 
-ToggleableObjectState:
+ToggleableObjectStates:
 ; entries correspond to TOGGLE_* constants (see constants/toggle_constants.asm)
 	table_width 3
 

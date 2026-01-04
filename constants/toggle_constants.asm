@@ -5,7 +5,7 @@ MACRO toggle_consts_for
 	DEF TOGGLEMAP{\1} EQU const_value
 ENDM
 
-; ToggleableObjects indexes (see data/maps/toggle_data.asm)
+; ToggleableObjectStates indexes (see data/maps/toggleable_objects.asm)
 ; This lists the object_events that can be toggled by ShowObject/HideObject.
 ; The constants marked with an X are never used, because those object_events
 ; are not toggled on/off in any map's script.
