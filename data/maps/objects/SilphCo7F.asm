@@ -10,7 +10,7 @@
 	const_export SILPHCO7F_RIVAL
 	const_export SILPHCO7F_CALCIUM
 	const_export SILPHCO7F_TM_SWORDS_DANCE
-	const_export SILPHCO7F_UNUSED ; referenced in data/maps/hide_show_data.asm, no corresponding object_event
+	const_export SILPHCO7F_UNUSED ; referenced in data/maps/toggleable_objects.asm, no corresponding object_event
 
 SilphCo7F_Object:
 	db $2e ; border block
