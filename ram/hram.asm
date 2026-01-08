@@ -370,7 +370,7 @@ hSpriteMapXCoord::    db
 NEXTU
 hItemAlreadyFound:: db
 	ds 2
-hDidntFindAnyHiddenObject:: db
+hDidntFindAnyHiddenEvent:: db
 
 NEXTU
 	ds 1

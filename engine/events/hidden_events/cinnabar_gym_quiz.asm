@@ -9,7 +9,7 @@ CinnabarGymQuiz::
 	text_asm
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
-	ld a, [wHiddenObjectFunctionArgument]
+	ld a, [wHiddenEventFunctionArgument]
 	push af
 	and $f
 	ldh [hGymGateIndex], a

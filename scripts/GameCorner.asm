@@ -20,7 +20,7 @@ GameCornerSelectLuckySlotMachine:
 	srl a
 	srl a
 	srl a
-	ld [wLuckySlotHiddenObjectIndex], a
+	ld [wLuckySlotHiddenEventIndex], a
 	ret
 
 GameCornerSetRocketHideoutDoorTile:
