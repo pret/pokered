@@ -140,7 +140,7 @@ DEF FIRST_SE_ID EQU $C0
 DEF NUM_SUBANIMS EQU const_value
 
 ; types of subanimations
-	nybble_const_def
+	const_def 0, 1, 7 ; (see MACRO subanim in data/battle_anims/subanimations.asm)
 	const SUBANIMTYPE_NORMAL
 	const SUBANIMTYPE_HVFLIP
 	const SUBANIMTYPE_HFLIP
