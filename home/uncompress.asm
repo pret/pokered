@@ -1,5 +1,5 @@
 ; wSpriteLoadFlags bits, streamed from compressed sprite data
-	const_def
+	bit_const_def
 	const BIT_USE_SPRITE_BUFFER_2 ; 0
 	const BIT_LAST_SPRITE_CHUNK   ; 1
 

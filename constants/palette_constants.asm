@@ -16,8 +16,10 @@
 	const SET_PAL_GAME_FREAK_INTRO     ; $0C
 	const SET_PAL_TRAINER_CARD         ; $0D
 
-DEF SET_PAL_PARTY_MENU_HP_BARS EQU $fc
-DEF SET_PAL_DEFAULT EQU $ff
+	const_def $ff, -1, {const_value}
+	const SET_PAL_DEFAULT              ; $FF
+	const_skip 2
+	const SET_PAL_PARTY_MENU_HP_BARS   ; $FC
 
 ; sgb palettes
 ; SuperPalettes indexes (see data/sgb/sgb_palettes.asm)

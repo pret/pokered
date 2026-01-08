@@ -11,9 +11,57 @@ MACRO? const_def
 	ELSE
 		DEF const_inc = 1
 	ENDC
+	IF _NARG >= 3
+		DEF const_max = \3
+	ELSE
+		DEF const_max = $ff
+	ENDC
+ENDM
+
+MACRO? max_const_def
+	IF _NARG == 1
+		const_def 0, 1, \1
+	ELIF _NARG == 2
+		const_def \2, 1, \1
+	ELSE
+		const_def \2, \3, \1
+	ENDC
+ENDM
+
+MACRO? bit_const_def
+	max_const_def 7, \#
+ENDM
+
+MACRO? nybble_const_def
+	max_const_def $f, \#
+ENDM
+
+MACRO? listable_const_def
+	max_const_def $fe, \# ; $ff aka -1 is reserved for the end-of-list marker
+ENDM
+
+MACRO? word_const_def
+	max_const_def $ffff, \#
+ENDM
+
+MACRO? unlimited_const_def
+	max_const_def 0, \#
+ENDM
+
+MACRO? check_const_value
+	IF const_max
+		IF const_inc > 0
+			ASSERT const_value <= const_max, \
+				"\1 would be {d:const_value}, but cannot be greater than {d:const_max}"
+		ELSE
+			ASSERT const_value >= const_max, \
+				"\1 would be {d:const_value}, but cannot be less than {d:const_max}"
+		ENDC
+	ENDC
 ENDM
 
 MACRO? const
+	check_const_value \1
 	DEF \1 EQU const_value
 	DEF const_value += const_inc
 ENDM
@@ -24,6 +72,7 @@ MACRO? const_export
 ENDM
 
 MACRO? shift_const
+	check_const_value \1
 	DEF \1 EQU 1 << const_value
 	DEF const_value += const_inc
 ENDM
@@ -34,6 +83,7 @@ MACRO? const_skip
 	else
 		DEF const_value += const_inc
 	endc
+	check_const_value The next constant
 ENDM
 
 MACRO? const_next
@@ -41,6 +91,7 @@ MACRO? const_next
 		fail "const_next cannot go backwards from {const_value} to \1"
 	else
 		DEF const_value = \1
+		check_const_value The next constant
 	endc
 ENDM
 

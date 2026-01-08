@@ -64,7 +64,7 @@ BattleTransition:
 	ld l, a
 	jp hl
 
-	const_def
+	bit_const_def
 	const BIT_TRAINER_BATTLE_TRANSITION  ; 0
 	const BIT_STRONGER_BATTLE_TRANSITION ; 1
 	const BIT_DUNGEON_BATTLE_TRANSITION  ; 2

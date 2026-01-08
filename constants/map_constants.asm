@@ -22,7 +22,7 @@ ENDM
 ; - WildDataPointers (see data/wild/grass_water.asm)
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
-	const_def
+	listable_const_def
 	map_const PALLET_TOWN,                   10,  9 ; $00
 	map_const VIRIDIAN_CITY,                 20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02
@@ -401,5 +401,3 @@ DEF NUM_MAPS EQU const_value
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps
 ; This map ID takes the player back to the last outdoor map they were on, stored in wLastMap
 DEF LAST_MAP EQU $ff
-
-ASSERT NUM_MAPS <= LAST_MAP, "map IDs overlap LAST_MAP"
