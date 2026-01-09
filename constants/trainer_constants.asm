@@ -1,8 +1,8 @@
-DEF OPP_ID_OFFSET EQU POKEMON_CONST_LIMIT + 1 ; 200
+DEF OPP_ID_OFFSET EQU 200
 
 MACRO trainer_const
-	const \1
-	DEF OPP_\1 EQU OPP_ID_OFFSET + \1
+	const OPP_\1
+	DEF \1 EQU OPP_\1 - OPP_ID_OFFSET
 ENDM
 
 ; trainer class ids
@@ -13,7 +13,7 @@ ENDM
 ; - TrainerPicAndMoneyPointers (see data/trainers/pic_pointers_money.asm)
 ; - TrainerAIPointers (see data/trainers/ai_pointers.asm)
 ; - TrainerClassMoveChoiceModifications (see data/trainers/move_choices.asm)
-	const_def 0, 1, TRAINER_CONST_LIMIT
+	listable_const_def OPP_ID_OFFSET
 	trainer_const NOBODY         ; $00
 	trainer_const YOUNGSTER      ; $01
 	trainer_const BUG_CATCHER    ; $02
@@ -62,4 +62,4 @@ ENDM
 	trainer_const CHANNELER      ; $2D
 	trainer_const AGATHA         ; $2E
 	trainer_const LANCE          ; $2F
-DEF NUM_TRAINERS EQU const_value - 1
+DEF NUM_TRAINERS EQU const_value - OPP_ID_OFFSET - 1

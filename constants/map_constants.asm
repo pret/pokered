@@ -22,7 +22,7 @@ ENDM
 ; - WildDataPointers (see data/wild/grass_water.asm)
 ; Each map also has associated data in maps.asm.
 ; Order: towns/cities, then routes, then indoor/dungeon maps
-	const_def 0, 1, FF_TERMINATED_CONST
+	listable_const_def
 	map_const PALLET_TOWN,                   10,  9 ; $00
 	map_const VIRIDIAN_CITY,                 20, 18 ; $01
 	map_const PEWTER_CITY,                   20, 18 ; $02

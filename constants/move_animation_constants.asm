@@ -1,6 +1,6 @@
 ; special effects that are part of move animations
 ; SpecialEffectPointers associates them with effect routines (see data/battle_anims/special_effect_pointers.asm)
-	const_def $C0, 1, FF_TERMINATED_CONST
+	listable_const_def $C0
 DEF SUBANIM_CONST_LIMIT EQU const_value - 1
 DEF FIRST_SE_ID EQU const_value
 	const_skip $18

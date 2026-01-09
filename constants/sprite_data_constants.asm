@@ -14,7 +14,7 @@
 DEF NPC_CHANGE_FACING EQU $E0
 
 ; player direction constants
-	const_def 0, 1, BIT
+	bit_const_def
 	const PLAYER_DIR_BIT_RIGHT ; 0
 	const PLAYER_DIR_BIT_LEFT  ; 1
 	const PLAYER_DIR_BIT_DOWN  ; 2

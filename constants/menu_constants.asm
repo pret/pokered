@@ -2,7 +2,7 @@ DEF BAG_ITEM_CAPACITY EQU 20
 DEF PC_ITEM_CAPACITY  EQU 50
 
 ; text box IDs
-	const_def 1, 1, FF_TERMINATED_CONST
+	listable_const_def 1
 	const MESSAGE_BOX                       ; $01
 	const_skip                              ; $02
 	const MENU_TEMPLATE_03                  ; $03 unused
