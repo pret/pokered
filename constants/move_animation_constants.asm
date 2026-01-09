@@ -49,7 +49,7 @@ DEF FIRST_SE_ID EQU const_value
 
 ; The 0 or 1 in the name of a subanim indicates whether to use tileset 0 or 1 data/moves/animations.asm.
 ; "Both" indicates either can be used for different images using the same animation.
-	const_def 0, 1, SUBANIM_CONST_LIMIT
+	max_const_def SUBANIM_CONST_LIMIT
 	const SUBANIM_0_STAR
 	const SUBANIM_0_STAR_TWICE
 	const SUBANIM_0_STAR_THRICE

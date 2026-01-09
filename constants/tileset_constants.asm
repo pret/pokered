@@ -6,7 +6,7 @@ DEF TILESET_CONST_LIMIT EQU $FF / 8
 
 ; tileset ids
 ; Tilesets indexes (see data/tilesets/tileset_headers.asm)
-	const_def 0, 1, TILESET_CONST_LIMIT
+	max_const_def TILESET_CONST_LIMIT
 	const OVERWORLD    ; 0
 	const REDS_HOUSE_1 ; 1
 	const MART         ; 2

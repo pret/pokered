@@ -1,15 +1,14 @@
-; sprite facing directions
-	const_def 0, $04, $0C
-	const SPRITE_FACING_DOWN  ; $00
-	const SPRITE_FACING_UP    ; $04
-	const SPRITE_FACING_LEFT  ; $08
-	const SPRITE_FACING_RIGHT ; $0C
+MACRO sprite_facing_const
+	const \1
+	DEF \2 EQU \1 << 4
+ENDM
 
-	const_def 0, $40, $C0
-	const NPC_MOVEMENT_DOWN  ; $00
-	const NPC_MOVEMENT_UP    ; $40
-	const NPC_MOVEMENT_LEFT  ; $80
-	const NPC_MOVEMENT_RIGHT ; $C0
+; sprite facing directions
+	nybble_const_def 0, $4
+	sprite_facing_const SPRITE_FACING_DOWN,  NPC_MOVEMENT_DOWN  ; $00, $00
+	sprite_facing_const SPRITE_FACING_UP,    NPC_MOVEMENT_UP    ; $04, $40
+	sprite_facing_const SPRITE_FACING_LEFT,  NPC_MOVEMENT_LEFT  ; $08, $80
+	sprite_facing_const SPRITE_FACING_RIGHT, NPC_MOVEMENT_RIGHT ; $0C, $C0
 
 DEF NPC_CHANGE_FACING EQU $E0
 

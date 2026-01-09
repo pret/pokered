@@ -5,7 +5,7 @@
 ; - CryData (see data/pokemon/cries.asm)
 ; - PokedexOrder (see data/pokemon/dex_order.asm)
 ; - PokedexEntryPointers (see data/pokemon/dex_entries.asm)
-	const_def 0, 1, OPP_ID_OFFSET - 1
+	max_const_def OPP_ID_OFFSET - 1
 	; Pokemons and trainers share ID values. 
 	; Note : even without this limitation, they would be limited to $FD.
 	const NO_MON             ; $00
