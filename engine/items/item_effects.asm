@@ -726,13 +726,13 @@ ItemUseSurfboard:
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
 	ld a, [wPlayerDirection] ; direction the player is going
-	bit PLAYER_DIR_BIT_UP, a
+	bit BIT_PLAYER_DIR_UP, a
 	ld b, PAD_UP
 	jr nz, .storeSimulatedButtonPress
-	bit PLAYER_DIR_BIT_DOWN, a
+	bit BIT_PLAYER_DIR_DOWN, a
 	ld b, PAD_DOWN
 	jr nz, .storeSimulatedButtonPress
-	bit PLAYER_DIR_BIT_LEFT, a
+	bit BIT_PLAYER_DIR_LEFT, a
 	ld b, PAD_LEFT
 	jr nz, .storeSimulatedButtonPress
 	ld b, PAD_RIGHT

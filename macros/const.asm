@@ -77,8 +77,14 @@ MACRO? const_export
 ENDM
 
 MACRO? shift_const
-	DEF \1 EQU 1 << const_value
-	DEF const_value += const_inc
+	IF (const_format != $FFFFFFFF) && ((const_inc > 0 && const_value > const_limit) || (const_inc < 0 && const_value < const_limit))
+		DEF failed_const_value = 1 << const_value
+		fail "Constant value cannot be {const_size_compare} than {const_limit}. Attempted to use constant value {const_value} to define constant \1 for shifted value {failed_const_value}."
+	ELSE
+		DEF BIT_\1 EQU const_value
+		DEF \1 EQU 1 << const_value
+		DEF const_value += const_inc
+	ENDC
 ENDM
 
 MACRO? const_skip
