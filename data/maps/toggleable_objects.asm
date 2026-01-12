@@ -5,7 +5,7 @@ ToggleableObjectMapPointers:
 	table_width 2
 FOR n, NUM_MAPS
 	IF DEF(TOGGLEMAP{n}) ; defined by `toggle_consts_for`
-		dw ToggleData{n}
+		dw ToggleData_{TOGGLEMAP{n}_NAME}
 	ELSE
 		dw NoToggleData
 	ENDC
@@ -20,7 +20,7 @@ DEF toggles_ok = 1
 
 MACRO? toggleable_objects_for
 	DEF toggle_map_id = \1 ; map id
-	ToggleData{toggle_map_id}:
+	ToggleData_\1:
 	IF toggles_ok
 		ASSERT DEF(TOGGLEMAP{toggle_map_id}), \
 			"`toggleable_objects_for \1` is not defined"
