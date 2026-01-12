@@ -64,7 +64,7 @@ ENDM
 
 MACRO? const
 	IF (const_format != $FFFFFFFF) && ((const_inc > 0 && const_value > const_limit) || (const_inc < 0 && const_value < const_limit))
-		fail "Constant value cannot be {const_size_compare} than {const_limit}. Attempted to define constant \1 for value {const_value}."
+		fail "Constant value cannot be {const_size_compare} than {const_limit}.\n       Attempted to define constant \1 for value {const_value}."
 	ELSE
 		DEF \1 EQU const_value
 		DEF const_value += const_inc
@@ -79,7 +79,7 @@ ENDM
 MACRO? shift_const
 	IF (const_format != $FFFFFFFF) && ((const_inc > 0 && const_value > const_limit) || (const_inc < 0 && const_value < const_limit))
 		DEF failed_const_value = 1 << const_value
-		fail "Constant value cannot be {const_size_compare} than {const_limit}. Attempted to use constant value {const_value} to define constant \1 for shifted value {failed_const_value}."
+		fail "Constant value cannot be {const_size_compare} than {const_limit}.\n       Attempted to use constant value {const_value} to define constant \1 for shifted value {failed_const_value}."
 	ELSE
 		DEF BIT_\1 EQU const_value
 		DEF \1 EQU 1 << const_value
@@ -98,7 +98,7 @@ ENDM
 MACRO? const_next
 	if (const_inc > 0 && \1 < const_value) || (const_inc < 0 && \1 > const_value)
 		DEF failed_const_value = \1
-		fail "const_next cannot go backwards from {const_value} to {failed_const_value}"
+		fail "const_next cannot go backwards from {const_value} to {failed_const_value} with a {const_inc} increment."
 	else
 		DEF const_value = \1
 	endc
@@ -158,15 +158,15 @@ MACRO? const_def_common
 		ELIF (const_format == $7 || const_format == $F) && (const_value < 0 || const_value > const_format)
 			fail "Starting constant value {const_value} for {const_format_string}_const_def outside of range [$0 , {const_format}]."
 		ELIF (const_inc > 0 && const_value > const_limit) || (const_inc < 0 && const_value < const_limit)
-			fail "Starting constant value {const_value} {const_size_compare} than constant limit value {const_limit}."
+			fail "Starting constant value {const_value} cannot be {const_size_compare} than constant limit value {const_limit} while using a {d:const_inc} increment."
 		ELIF ((const_limit > 0 && const_value < 0) && (const_value & const_format) < const_limit)
 			DEF failed_const_value = const_value & const_format
 			fail "Starting constant value and constant limit allow an overlap in constant value range [{failed_const_value} , {const_limit}]."
 		ELIF ((const_limit < 0 && const_value > 0) && const_value > (const_limit & const_format))
 			DEF failed_const_value = const_limit & const_format
 			fail "Starting constant value and constant limit allow an overlap in constant value range [{failed_const_value} , {const_value}]."
-		ELIF ((const_value & const_format) != const_value && (const_value & const_format) == const_limit) || \
-				((const_limit & const_format) != const_limit && const_value == (const_limit & const_format))
+		ELIF (const_limit & const_format) == (const_value & const_format) && \
+			((const_limit & const_format) != const_limit) != ((const_value & const_format) != const_value)
 			DEF failed_const_value = const_value & const_format
 			fail "Starting constant value and constant limit allow an overlap on constant value {failed_const_value}."
 		ENDC
@@ -177,14 +177,6 @@ MACRO? const_def_common_$FFFF
 	const_def_common_$FF \#
 ENDM
 MACRO? const_def_common_$FF
-	IF const_value >= 0 && const_inc > 0
-		DEF const_limit_offset = 0
-	ELIF const_value < 0 && const_inc < 0
-		DEF const_limit_offset = -1
-	ELSE
-		DEF const_limit_offset = const_value
-	ENDC
-
 	; change default $FF const_format to $FFFF if starting constant value is outside of [-$100 ; $FF] range
 	IF const_format == $FF && (const_value < -$100 || const_value > $FF)
 		DEF const_format = $FFFF
@@ -196,10 +188,14 @@ MACRO? const_def_common_$FF
 		IF const_format == $FF && (const_limit < -$100 || const_limit > $FF)
 			DEF const_format = $FFFF
 		ENDC
+	ELIF const_value >= 0 && const_inc > 0
+		DEF const_limit = const_format
+	ELIF const_value < 0 && const_inc < 0
+		DEF const_limit = -1 - const_format
 	ELIF const_inc < 0
-		DEF const_limit = const_limit_offset - const_format
+		DEF const_limit = const_value - const_format
 	ELSE
-		DEF const_limit = const_limit_offset + const_format
+		DEF const_limit = const_value + const_format
 	ENDC
 ENDM
 
