@@ -59,7 +59,7 @@ CureVolatileStatuses:
 	ret
 
 ResetStatMods:
-	ld b, $8
+	ld b, NUM_STAT_MODS
 .loop
 	ld [hli], a
 	dec b
@@ -67,7 +67,7 @@ ResetStatMods:
 	ret
 
 ResetStats:
-	ld b, $8
+	ld b, (NUM_STATS - 1) * 2 ; NUM_STATS normally counts HP, Attack, etc. But we don't reset MaxHP here. We skip that (first item of stats) and start with the second item which is Attack. Each stat is a dw.
 .loop
 	ld a, [hli]
 	ld [de], a
