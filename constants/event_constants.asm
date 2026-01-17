@@ -598,7 +598,7 @@
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_3
 	const EVENT_BEAT_ROCKET_HIDEOUT_1_TRAINER_4
 	const_skip
-	const EVENT_677 ; ???
+	const EVENT_ENTERED_ROCKET_HIDEOUT
 	const_skip 7
 	const EVENT_67F ; ???
 	const_skip
