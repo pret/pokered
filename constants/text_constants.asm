@@ -8,7 +8,7 @@ DEF GYM_CITY_LENGTH     EQU 17
 DEF NAME_BUFFER_LENGTH  EQU 20
 
 ; PrintNumber, PrintBCDNumber
-	const_def 5
+	bit_const_def 5
 	const BIT_MONEY_SIGN     ; 5
 	const BIT_LEFT_ALIGN     ; 6
 	const BIT_LEADING_ZEROES ; 7

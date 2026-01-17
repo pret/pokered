@@ -3,7 +3,7 @@
 ; {status condition}_EFFECT means that the move causes the status condition every time it hits the target
 
 ; MoveEffectPointerTable indexes (see data/moves/effects_pointers.asm)
-	const_def
+	listable_const_def
 	const NO_ADDITIONAL_EFFECT       ; $00
 	const EFFECT_01                  ; $01 unused
 	const POISON_SIDE_EFFECT1        ; $02

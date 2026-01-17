@@ -1,6 +1,6 @@
 ; overworld sprites
 ; SpriteSheetPointerTable indexes (see data/sprites/sprites.asm)
-	const_def
+	const_def 0, 1, 127 ; (see LoadMapSpriteTilePatterns in engine/overworld/map_sprites.asm)
 	const SPRITE_NONE                    ; $00
 	const SPRITE_RED                     ; $01
 	const SPRITE_BLUE                    ; $02

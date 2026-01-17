@@ -1,5 +1,5 @@
 ; sprite facing directions
-	const_def 0, $04
+	nybble_const_def 0, $04
 	const SPRITE_FACING_DOWN  ; $00
 	const SPRITE_FACING_UP    ; $04
 	const SPRITE_FACING_LEFT  ; $08
@@ -14,7 +14,7 @@
 DEF NPC_CHANGE_FACING EQU $E0
 
 ; player direction constants
-	const_def
+	bit_const_def
 	const PLAYER_DIR_BIT_RIGHT ; 0
 	const PLAYER_DIR_BIT_LEFT  ; 1
 	const PLAYER_DIR_BIT_DOWN  ; 2
