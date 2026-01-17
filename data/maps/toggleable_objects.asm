@@ -4,8 +4,8 @@ ToggleableObjectMapPointers:
 ; entries correspond to map ids
 	table_width 2
 FOR n, NUM_MAPS
-	IF DEF(TOGGLEMAP{n}) ; defined by `toggle_consts_for`
-		dw ToggleData{n}
+	IF DEF(TOGGLEMAP{n}_NAME) ; defined by `toggle_consts_for`
+		dw ToggleData_{TOGGLEMAP{n}_NAME}
 	ELSE
 		dw NoToggleData
 	ENDC
@@ -20,14 +20,14 @@ DEF toggles_ok = 1
 
 MACRO? toggleable_objects_for
 	DEF toggle_map_id = \1 ; map id
-	ToggleData{toggle_map_id}:
+	ToggleData_\1:
 	IF toggles_ok
-		ASSERT DEF(TOGGLEMAP{toggle_map_id}), \
+		ASSERT DEF(TOGGLEMAP{toggle_map_id}_ID), \
 			"`toggleable_objects_for \1` is not defined"
-		DEF toggles_ok &= DEF(TOGGLEMAP{toggle_map_id})
+		DEF toggles_ok &= DEF(TOGGLEMAP{toggle_map_id}_ID)
 		IF toggles_ok
-			assert_table_length TOGGLEMAP{toggle_map_id}
-			DEF toggles_ok &= TOGGLEMAP{toggle_map_id} * 3 == @ - ToggleableObjectStates
+			assert_table_length TOGGLEMAP{toggle_map_id}_ID
+			DEF toggles_ok &= TOGGLEMAP{toggle_map_id}_ID * 3 == @ - ToggleableObjectStates
 		ENDC
 	ENDC
 ENDM
