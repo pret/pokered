@@ -29,22 +29,22 @@ UpdatePlayerSprite:
 	jr nz, .moving
 	ld a, [wPlayerMovingDirection]
 ; check if down
-	bit PLAYER_DIR_BIT_DOWN, a
+	bit BIT_PLAYER_DIR_DOWN, a
 	jr z, .checkIfUp
 	xor a ; ld a, SPRITE_FACING_DOWN
 	jr .next
 .checkIfUp
-	bit PLAYER_DIR_BIT_UP, a
+	bit BIT_PLAYER_DIR_UP, a
 	jr z, .checkIfLeft
 	ld a, SPRITE_FACING_UP
 	jr .next
 .checkIfLeft
-	bit PLAYER_DIR_BIT_LEFT, a
+	bit BIT_PLAYER_DIR_LEFT, a
 	jr z, .checkIfRight
 	ld a, SPRITE_FACING_LEFT
 	jr .next
 .checkIfRight
-	bit PLAYER_DIR_BIT_RIGHT, a
+	bit BIT_PLAYER_DIR_RIGHT, a
 	jr z, .notMoving
 	ld a, SPRITE_FACING_RIGHT
 	jr .next
@@ -415,17 +415,17 @@ MakeNPCFacePlayer:
 	jr nz, NotYetMoving
 	res BIT_FACE_PLAYER, [hl]
 	ld a, [wPlayerDirection]
-	bit PLAYER_DIR_BIT_UP, a
+	bit BIT_PLAYER_DIR_UP, a
 	jr z, .notFacingDown
 	ld c, SPRITE_FACING_DOWN
 	jr .facingDirectionDetermined
 .notFacingDown
-	bit PLAYER_DIR_BIT_DOWN, a
+	bit BIT_PLAYER_DIR_DOWN, a
 	jr z, .notFacingUp
 	ld c, SPRITE_FACING_UP
 	jr .facingDirectionDetermined
 .notFacingUp
-	bit PLAYER_DIR_BIT_LEFT, a
+	bit BIT_PLAYER_DIR_LEFT, a
 	jr z, .notFacingRight
 	ld c, SPRITE_FACING_RIGHT
 	jr .facingDirectionDetermined

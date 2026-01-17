@@ -181,9 +181,11 @@ MACRO text_end
 	db TX_END
 ENDM
 
+DEF TEXT_SCRIPT_CONST_LIMIT EQU const_value 
+
 
 ; Text script IDs (see home/text_script.asm)
-	const_def -1, -1
+	const_def $ff, -1, TEXT_SCRIPT_CONST_LIMIT
 
 	const TX_SCRIPT_POKECENTER_NURSE ; $ff
 MACRO script_pokecenter_nurse
