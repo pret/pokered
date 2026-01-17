@@ -52,7 +52,7 @@ UsedMoveText_CheckObedience:
 	ret
 
 .UsedInsteadText:
-	text_far _.UsedInsteadText
+	text_far _UsedInsteadText
 	text_asm
 	; fall through
 

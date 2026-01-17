@@ -1089,7 +1089,7 @@ _UsedMove2Text::
 	line "used @"
 	text_end
 
-_.UsedInsteadText::
+_UsedInsteadText::
 	text "instead,"
 	cont "@"
 	text_end
