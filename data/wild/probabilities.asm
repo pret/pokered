@@ -1,11 +1,9 @@
 DEF wild_chance_total = 0
-DEF wild_chance_slot = 0
 
 MACRO wild_chance
 	DEF wild_chance_total += \1
 	db wild_chance_total - 1
-	db wild_chance_slot * 2
-	DEF wild_chance_slot += 1
+	db @ - 1 - WildMonEncounterSlotChances ; slot * 2: 0, 2, 4, 6, ...(NUM_WILDMONS - 1) * 2
 ENDM
 
 WildMonEncounterSlotChances:
@@ -25,5 +23,4 @@ WildMonEncounterSlotChances:
 	wild_chance 11 ; 11/256 =  4.3% chance of slot 8
 	wild_chance  3 ;  3/256 =  1.2% chance of slot 9
 	assert_table_length NUM_WILDMONS
-
-ASSERT wild_chance_total == 256, "Total wild_chance expected to add up to 256, currently {d:wild_chance_total}."
+	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances do not sum to 256!"
