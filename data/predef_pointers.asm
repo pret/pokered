@@ -32,14 +32,14 @@ PredefPointers::
 	add_predef ApplyOutOfBattlePoisonDamage
 	add_predef AnyPartyAlive
 	add_predef ShowObject
-	add_predef ShowObject2
+	add_predef ShowObject2 ; identical to ShowObject
 	add_predef ReplaceTileBlock
 	add_predef InitPlayerData2
 	add_predef LoadTilesetHeader
 	add_predef LearnMoveFromLevelUp
 	add_predef LearnMove
 	add_predef GetQuantityOfItemInBag
-	add_predef CheckForHiddenObjectOrBookshelfOrCardKeyDoor, $03 ; home bank
+	add_predef CheckForHiddenEventOrBookshelfOrCardKeyDoor, $03 ; home bank
 	add_predef GiveItem, $03 ; home bank
 	add_predef ChangeBGPalColor0_4Frames
 	add_predef FindPathToPlayer
@@ -75,7 +75,7 @@ PredefPointers::
 	add_predef WriteMonMoves
 	add_predef SaveMenu
 	add_predef LoadSGB
-	add_predef MarkTownVisitedAndLoadMissableObjects
+	add_predef MarkTownVisitedAndLoadToggleableObjects
 	add_predef SetPartyMonTypes
 	add_predef CanLearnTM
 	add_predef TMToMove

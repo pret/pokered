@@ -2,7 +2,7 @@ PrintBlackboardLinkCableText:
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, [wHiddenObjectFunctionArgument]
+	ld a, [wHiddenEventFunctionArgument]
 	call PrintPredefTextID
 	ret
 
