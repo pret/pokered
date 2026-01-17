@@ -2,7 +2,7 @@ DEF OFF EQU $11
 DEF ON  EQU $15
 
 MACRO toggle_consts_for
-	DEF TOGGLEMAP{\1} EQU const_value
+	DEF TOGGLEMAP{\1}_ID EQU const_value
 	DEF TOGGLEMAP{\1}_NAME EQUS "\1"
 ENDM
 
