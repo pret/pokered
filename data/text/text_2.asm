@@ -1075,21 +1075,21 @@ _MoveIsDisabledText::
 	cont "disabled!"
 	prompt
 
-_MonName1Text::
+_ActorNameText::
 	text "<USER>@"
 	text_end
 
-_Used1Text::
+_UsedMove1Text::
 	text_start
 	line "used @"
 	text_end
 
-_Used2Text::
+_UsedMove2Text::
 	text_start
 	line "used @"
 	text_end
 
-_InsteadText::
+_.UsedInsteadText::
 	text "instead,"
 	cont "@"
 	text_end
@@ -1098,23 +1098,23 @@ _MoveNameText::
 	text_ram wStringBuffer
 	text "@"
 
-_ExclamationPoint1Text::
+_EndUsedMove1Text::
 	text "!"
 	done
 
-_ExclamationPoint2Text::
+_EndUsedMove2Text::
 	text "!"
 	done
 
-_ExclamationPoint3Text::
+_EndUsedMove3Text::
 	text "!"
 	done
 
-_ExclamationPoint4Text::
+_EndUsedMove4Text::
 	text "!"
 	done
 
-_ExclamationPoint5Text::
+_EndUsedMove5Text::
 	text "!"
 	done
 

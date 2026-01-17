@@ -1,67 +1,69 @@
-PrintMonName1Text:
-	ld hl, MonName1Text
+DisplayUsedMoveText:
+	ld hl, UsedMoveText
 	jp PrintText
 
-; this function wastes time calling DetermineExclamationPointTextNum
-; and choosing between Used1Text and Used2Text, even though
-; those text strings are identical and both continue at PrintInsteadText
-; this likely had to do with Japanese grammar that got translated,
-; but the functionality didn't get removed
-MonName1Text:
-	text_far _MonName1Text
+UsedMoveText:
+	text_far _ActorNameText
 	text_asm
+
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, [wPlayerMoveNum]
 	ld hl, wPlayerUsedMove
 	jr z, .playerTurn
+
 	ld a, [wEnemyMoveNum]
 	ld hl, wEnemyUsedMove
+
 .playerTurn
 	ld [hl], a
 	ld [wMoveGrammar], a
-	call DetermineExclamationPointTextNum
+	call GetMoveGrammar
 	ld a, [wMonIsDisobedient]
 	and a
-	ld hl, Used2Text
+	ld hl, UsedMove2Text
 	ret nz
+
+	; check move grammar
 	ld a, [wMoveGrammar]
-	cp 3
-	ld hl, Used2Text
+	cp $3
+	ld hl, UsedMove2Text
 	ret c
-	ld hl, Used1Text
+	ld hl, UsedMove1Text
 	ret
 
-Used1Text:
-	text_far _Used1Text
+UsedMove1Text:
+	text_far _UsedMove1Text
 	text_asm
-	jr PrintInsteadText
+	jr UsedMoveText_CheckObedience
 
-Used2Text:
-	text_far _Used2Text
+UsedMove2Text:
+	text_far _UsedMove2Text
 	text_asm
 	; fall through
 
-PrintInsteadText:
+UsedMoveText_CheckObedience:
+; check obedience
 	ld a, [wMonIsDisobedient]
 	and a
-	jr z, PrintMoveName
-	ld hl, InsteadText
+	jr z, .GetMoveNameText
+; print "instead,"
+	ld hl, .UsedInsteadText
 	ret
 
-InsteadText:
-	text_far _InsteadText
+.UsedInsteadText:
+	text_far _.UsedInsteadText
 	text_asm
 	; fall through
 
-PrintMoveName:
-	ld hl, _PrintMoveName
+.GetMoveNameText:
+	ld hl, MoveNameText
 	ret
 
-_PrintMoveName:
+MoveNameText:
 	text_far _MoveNameText
 	text_asm
-	ld hl, ExclamationPointPointerTable
+	ld hl, .endusedmovetexts
 	ld a, [wMoveGrammar]
 	add a
 	push bc
@@ -74,57 +76,61 @@ _PrintMoveName:
 	ld l, a
 	ret
 
-ExclamationPointPointerTable:
-	dw ExclamationPoint1Text
-	dw ExclamationPoint2Text
-	dw ExclamationPoint3Text
-	dw ExclamationPoint4Text
-	dw ExclamationPoint5Text
+.endusedmovetexts:
+; entries correspond to MoveGrammar sets
+	dw EndUsedMove1Text
+	dw EndUsedMove2Text
+	dw EndUsedMove3Text
+	dw EndUsedMove4Text
+	dw EndUsedMove5Text
 
-ExclamationPoint1Text:
-	text_far _ExclamationPoint1Text
+EndUsedMove1Text:
+	text_far _EndUsedMove1Text
 	text_end
 
-ExclamationPoint2Text:
-	text_far _ExclamationPoint2Text
+EndUsedMove2Text:
+	text_far _EndUsedMove2Text
 	text_end
 
-ExclamationPoint3Text:
-	text_far _ExclamationPoint3Text
+EndUsedMove3Text:
+	text_far _EndUsedMove3Text
 	text_end
 
-ExclamationPoint4Text:
-	text_far _ExclamationPoint4Text
+EndUsedMove4Text:
+	text_far _EndUsedMove4Text
 	text_end
 
-ExclamationPoint5Text:
-	text_far _ExclamationPoint5Text
+EndUsedMove5Text:
+	text_far _EndUsedMove5Text
 	text_end
 
-; this function does nothing useful
-; if the move being used is in set [1-4] from ExclamationPointMoveSets,
-; use ExclamationPoint[1-4]Text
-; otherwise, use ExclamationPoint5Text
-; but all five text strings are identical
-; this likely had to do with Japanese grammar that got translated,
-; but the functionality didn't get removed
-DetermineExclamationPointTextNum:
+; This function is redundant in the English localization.
+; In Japanese, it selects one of 5 distinct sentence structures.
+; In English, all of these sentences have the exact same structure,
+; so this serves no purpose.
+GetMoveGrammar:
 	push bc
 	ld a, [wMoveGrammar] ; move ID
 	ld c, a
 	ld b, $0
-	ld hl, ExclamationPointMoveSets
+	ld hl, MoveGrammar
 .loop
 	ld a, [hli]
-	cp $ff
-	jr z, .done
+; end of table?
+	cp -1
+	jr z, .end
+; match?
 	cp c
-	jr z, .done
+	jr z, .end
+; advance grammar type at 0
 	and a
 	jr nz, .loop
+; next grammar type
 	inc b
 	jr .loop
-.done
+
+.end
+; wMoveGrammar now contains move grammar
 	ld a, b
 	ld [wMoveGrammar], a
 	pop bc

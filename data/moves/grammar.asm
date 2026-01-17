@@ -1,8 +1,8 @@
-; Used by DetermineExclamationPointTextNum (see engine/battle/core.asm)
+; Used by GetMoveGrammar (see engine/battle/core.asm)
 ; Each move is given an identifier for what usedmovetext to use (0-4).
 ; Made redundant in English localization, where all are just "[mon]<LINE>used [move]!"
 
-ExclamationPointMoveSets:
+MoveGrammar:
 ; 0: originally "[mon]は<LINE>[move]を　つかった！" ("[mon]<LINE>used [move]!")
 	db SWORDS_DANCE
 	db GROWTH

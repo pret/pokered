@@ -3115,7 +3115,7 @@ PlayerCanExecuteChargingMove:
 	                    ; resulting in the Pokemon being invulnerable for the whole battle
 	res INVULNERABLE, [hl]
 PlayerCanExecuteMove:
-	call PrintMonName1Text
+	call DisplayUsedMoveText
 	ld hl, DecrementPP
 	ld de, wPlayerSelectedMove ; pointer to the move just used
 	ld b, BANK(DecrementPP)
@@ -5510,7 +5510,7 @@ EnemyCanExecuteChargingMove:
 EnemyCanExecuteMove:
 	xor a
 	ld [wMonIsDisobedient], a
-	call PrintMonName1Text
+	call DisplayUsedMoveText
 	ld a, [wEnemyMoveEffect]
 	ld hl, ResidualEffects1
 	ld de, $1
