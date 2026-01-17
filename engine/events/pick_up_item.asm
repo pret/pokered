@@ -3,19 +3,19 @@ PickUpItem:
 
 	ldh a, [hSpriteIndex]
 	ld b, a
-	ld hl, wMissableObjectList
-.missableObjectsListLoop
+	ld hl, wToggleableObjectList
+.toggleableObjectsListLoop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .isMissable
+	jr z, .isToggleable
 	inc hl
-	jr .missableObjectsListLoop
+	jr .toggleableObjectsListLoop
 
-.isMissable
+.isToggleable
 	ld a, [hl]
-	ldh [hMissableObjectIndex], a
+	ldh [hToggleableObjectIndex], a
 
 	ld hl, wMapSpriteExtraData
 	ldh a, [hSpriteIndex]
@@ -30,8 +30,8 @@ PickUpItem:
 	call GiveItem
 	jr nc, .BagFull
 
-	ldh a, [hMissableObjectIndex]
-	ld [wMissableObjectIndex], a
+	ldh a, [hToggleableObjectIndex]
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

@@ -44,15 +44,15 @@ PokemonTower7FHideNPCScript:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	ld hl, wMissableObjectList
+	ld hl, wToggleableObjectList
 	ld a, [wSpriteIndex]
 	ld b, a
-.missableObjectsListLoop
+.toggleableObjectsListLoop
 	ld a, [hli]
-	cp b            ; search for sprite ID in missing objects list
+	cp b            ; search for sprite ID in toggleable objects list
 	ld a, [hli]
-	jr nz, .missableObjectsListLoop
-	ld [wMissableObjectIndex], a   ; remove missable object
+	jr nz, .toggleableObjectsListLoop
+	ld [wToggleableObjectIndex], a   ; remove toggleable object
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
@@ -67,8 +67,8 @@ PokemonTower7FHideNPCScript:
 PokemonTower7FWarpToMrFujiHouseScript:
 	ld a, PAD_BUTTONS | PAD_CTRL_PAD
 	ld [wJoyIgnore], a
-	ld a, HS_POKEMON_TOWER_7F_MR_FUJI
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_POKEMON_TOWER_7F_MR_FUJI
+	ld [wToggleableObjectIndex], a
 	predef HideObject
 	ld a, SPRITE_FACING_UP
 	ld [wSpritePlayerStateData1FacingDirection], a
@@ -228,14 +228,14 @@ PokemonTower7FMrFujiText:
 	call PrintText
 	SetEvent EVENT_RESCUED_MR_FUJI
 	SetEvent EVENT_RESCUED_MR_FUJI_2
-	ld a, HS_MR_FUJIS_HOUSE_MR_FUJI
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_MR_FUJIS_HOUSE_MR_FUJI
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
-	ld a, HS_SAFFRON_CITY_E
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_SAFFRON_CITY_E
+	ld [wToggleableObjectIndex], a
 	predef HideObject
-	ld a, HS_SAFFRON_CITY_F
-	ld [wMissableObjectIndex], a
+	ld a, TOGGLE_SAFFRON_CITY_F
+	ld [wToggleableObjectIndex], a
 	predef ShowObject
 	ld a, SCRIPT_POKEMONTOWER7F_WARP_TO_MR_FUJI_HOUSE
 	ld [wPokemonTower7FCurScript], a

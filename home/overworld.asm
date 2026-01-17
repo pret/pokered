@@ -87,10 +87,10 @@ OverworldLoopLessDelay::
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
-	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
+	call CheckForHiddenEventOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
-	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
+	jp z, OverworldLoop ; jump if a hidden event or bookshelf was found, but not if a card key door was found
 	call IsSpriteOrSignInFrontOfPlayer
 	ldh a, [hTextID]
 	and a
@@ -2003,7 +2003,7 @@ LoadPlayerSpriteGraphicsCommon::
 
 ; function to load data from the map header
 LoadMapHeader::
-	farcall MarkTownVisitedAndLoadMissableObjects
+	farcall MarkTownVisitedAndLoadToggleableObjects
 	ld a, [wCurMapTileset]
 	ld [wUnusedCurMapTilesetCopy], a
 	ld a, [wCurMap]

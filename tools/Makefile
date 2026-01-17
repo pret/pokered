@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 CC := gcc
-CFLAGS := -O3 -flto -std=c11 -Wall -Wextra -pedantic
+CFLAGS := -O3 -std=c11 -Wall -Wextra -pedantic
 
 tools := \
 	gfx \
