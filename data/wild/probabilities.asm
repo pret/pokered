@@ -1,9 +1,11 @@
+DEF wild_chance_slot = 0
 DEF wild_chance_total = 0
 
 MACRO wild_chance
 	DEF wild_chance_total += \1
 	db wild_chance_total - 1
-	db @ - 1 - WildMonEncounterSlotChances ; slot * 2: 0, 2, 4, 6, ...(NUM_WILDMONS - 1) * 2
+	db wild_chance_slot * 2
+	DEF wild_chance_slot += 1
 ENDM
 
 WildMonEncounterSlotChances:
