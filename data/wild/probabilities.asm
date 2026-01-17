@@ -25,4 +25,4 @@ WildMonEncounterSlotChances:
 	wild_chance 11 ; 11/256 =  4.3% chance of slot 8
 	wild_chance  3 ;  3/256 =  1.2% chance of slot 9
 	assert_table_length NUM_WILDMONS
-	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances do not sum to 256!"
+	ASSERT wild_chance_total == 256, "WildMonEncounterSlotChances sum to {d:wild_chance_total}, not 256!"
