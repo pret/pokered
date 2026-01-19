@@ -50,9 +50,8 @@ void symbol_append(struct Symbol **symbols, const char *name, int bank, int addr
 	size_t name_len = strlen(name) + 1;
 	struct Symbol *symbol = xmalloc(sizeof(*symbol) + name_len);
 	symbol->address = address;
-	symbol->offset = address < 0x8000
-		? (bank > 0 ? address + (bank - 1) * 0x4000 : address) // ROM addresses are relative to their bank
-		: address - 0x8000; // RAM addresses are relative to the start of all RAM
+	symbol->offset = address < 0x8000 ? (bank > 0 ? address + (bank - 1) * 0x4000 : address) // ROM addresses are relative to their bank
+	                                  : address - 0x8000;                                    // RAM addresses are relative to the start of all RAM
 	memcpy(symbol->name, name, name_len);
 	symbol->next = *symbols;
 	*symbols = symbol;
@@ -117,7 +116,12 @@ struct Symbol *parse_symbols(const char *filename) {
 	FILE *file = xfopen(filename, 'r');
 	struct Buffer *buffer = buffer_create(1);
 
-	enum { SYM_PRE, SYM_VALUE, SYM_SPACE, SYM_NAME } state = SYM_PRE;
+	enum {
+		SYM_PRE,
+		SYM_VALUE,
+		SYM_SPACE,
+		SYM_NAME,
+	} state = SYM_PRE;
 	int bank = 0;
 	int address = 0;
 	struct Symbol *symbols = NULL;
@@ -184,7 +188,11 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 	}
 
 	// Symbols may take the low or high part
-	enum { SYM_WHOLE, SYM_LOW, SYM_HIGH } part = SYM_WHOLE;
+	enum {
+		SYM_WHOLE,
+		SYM_LOW,
+		SYM_HIGH,
+	} part = SYM_WHOLE;
 	if (arg[0] == '<') {
 		part = SYM_LOW;
 		arg++;
@@ -209,7 +217,17 @@ int parse_arg_value(const char *arg, bool absolute, const struct Symbol *symbols
 	return part == SYM_LOW ? value & 0xff : part == SYM_HIGH ? value >> 8 : value;
 }
 
-void interpret_command(char *command, const struct Symbol *current_hook, const struct Symbol *symbols, struct Buffer *patches, FILE *restrict new_rom, FILE *restrict orig_rom, FILE *restrict output) {
+void interpret_command(
+	// clang-format off
+	char *command,
+	const struct Symbol *current_hook,
+	const struct Symbol *symbols,
+	struct Buffer *patches,
+	FILE *restrict new_rom,
+	FILE *restrict orig_rom,
+	FILE *restrict output
+	// clang-format on
+) {
 	// Strip all leading spaces and all but one trailing space
 	int x = 0;
 	for (int i = 0; command[i]; i++) {
@@ -301,7 +319,7 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 			if (i) {
 				putc(' ', output);
 			}
-			fprintf(output, isupper((unsigned)command[0]) ? "%02X %02X": "%02x %02x", value & 0xff, value >> 8);
+			fprintf(output, isupper((unsigned)command[0]) ? "%02X %02X" : "%02x %02x", value & 0xff, value >> 8);
 		}
 
 	} else if (vstrfind(command, "db", "DB", "db_", "DB_", "db/", "DB/") >= 0) {
@@ -350,6 +368,7 @@ void skip_to_next_line(FILE *restrict input, FILE *restrict output) {
 }
 
 struct Buffer *process_template(
+	// clang-format off
 	const char *template_filename,
 	const char *patch_filename,
 	FILE *restrict new_rom,
@@ -357,6 +376,7 @@ struct Buffer *process_template(
 	const struct Symbol *symbols,
 	unsigned int ignore_addr,
 	unsigned int ignore_size
+	// clang-format on
 ) {
 	FILE *input = xfopen(template_filename, 'r');
 	FILE *output = xfopen(patch_filename, 'w');
@@ -445,7 +465,7 @@ int compare_patch(const void *patch1, const void *patch2) {
 
 bool verify_completeness(FILE *restrict orig_rom, FILE *restrict new_rom, struct Buffer *patches) {
 	qsort(patches->data, patches->size, patches->item_size, compare_patch);
-	for (unsigned int offset = 0, index = 0; ; offset++) {
+	for (unsigned int offset = 0, index = 0;; offset++) {
 		int orig_byte = getc(orig_rom);
 		int new_byte = getc(new_rom);
 		if (orig_byte == EOF || new_byte == EOF) {
@@ -475,7 +495,7 @@ void parse_args(int argc, char *argv[], unsigned int *ignore_addr, unsigned int 
 	struct option long_options[] = {
 		{"ignore", required_argument, 0, 'i'},
 		{"help", no_argument, 0, 'h'},
-		{0}
+		{0},
 	};
 	for (int opt; (opt = getopt_long(argc, argv, "h", long_options)) != -1;) {
 		switch (opt) {
