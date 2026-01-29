@@ -1,6 +1,12 @@
+; Tileset IDs values are limited by the fact that the function LoadTilesetHeader (engine/overworld/tilesets.asm) 
+; multiply the ID by 8 before taking carry into account.
+; Hence any value bigger than 31 would overflow.
+; Note : even without this limitation, would be listable_const_def
+DEF TILESET_CONST_LIMIT EQU $FF / 8
+
 ; tileset ids
 ; Tilesets indexes (see data/tilesets/tileset_headers.asm)
-	const_def
+	max_const_def TILESET_CONST_LIMIT
 	const OVERWORLD    ; 0
 	const REDS_HOUSE_1 ; 1
 	const MART         ; 2
