@@ -1,5 +1,5 @@
 MonPartyData:
-	nybble_array MonPartyData
+	nybble_array
 	nybble ICON_GRASS     ; Bulbasaur
 	nybble ICON_GRASS     ; Ivysaur
 	nybble ICON_GRASS     ; Venusaur
