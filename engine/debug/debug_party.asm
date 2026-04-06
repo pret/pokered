@@ -125,27 +125,17 @@ IF DEF(_DEBUG)
 
 	ret
 
-IF (NUM_POKEMON % 8) != 0 ; true by default
-	DEF LAST_BYTE_NOT_FULL EQU 1
-	DEF LAST_BYTE_VALUE    EQU ((1 << (NUM_POKEMON % 8)) - 1) ; %01111111 by default
-ELSE
-	DEF LAST_BYTE_NOT_FULL EQU 0
-ENDC
-
 DebugSetPokedexEntries:
-	ld b, wPokedexOwnedEnd - wPokedexOwned - LAST_BYTE_NOT_FULL
+	ld b, NUM_POKEMON / 8
 	ld a, %11111111
 .loop
 	ld [hli], a
 	dec b
 	jr nz, .loop
-IF LAST_BYTE_NOT_FULL ; 1 by default
-	ld [hl], LAST_BYTE_VALUE ; %01111111 by default
-	PURGE LAST_BYTE_VALUE
+IF (NUM_POKEMON % 8) != 0 ; true by default
+	ld [hl], ((1 << (NUM_POKEMON % 8)) - 1) ; %01111111 by default
 ENDC
 	ret
-
-PURGE LAST_BYTE_NOT_FULL
 
 DebugNewGameItemsList:
 	db BICYCLE, 1
