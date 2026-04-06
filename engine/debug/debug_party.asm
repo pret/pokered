@@ -126,14 +126,16 @@ IF DEF(_DEBUG)
 	ret
 
 DebugSetPokedexEntries:
-	ld b, NUM_POKEMON / 8
+IF NUM_POKEMON / 8 != 0
+	ld b, NUM_POKEMON / 8 ; 151 / 8 == 18
 	ld a, %11111111
 .loop
 	ld [hli], a
 	dec b
 	jr nz, .loop
-IF (NUM_POKEMON % 8) != 0 ; true by default
-	ld [hl], ((1 << (NUM_POKEMON % 8)) - 1) ; %01111111 by default
+ENDC
+IF NUM_POKEMON % 8 != 0
+	ld [hl], (1 << (NUM_POKEMON % 8)) - 1 ; (1 << 151 % 8)) - 1 == %01111111
 ENDC
 	ret
 
