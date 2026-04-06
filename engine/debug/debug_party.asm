@@ -126,13 +126,17 @@ IF DEF(_DEBUG)
 	ret
 
 DebugSetPokedexEntries:
-	ld b, wPokedexOwnedEnd - wPokedexOwned - 1
+IF NUM_POKEMON / 8 != 0
+	ld b, NUM_POKEMON / 8 ; 151 / 8 == 18
 	ld a, %11111111
 .loop
 	ld [hli], a
 	dec b
 	jr nz, .loop
-	ld [hl], %01111111
+ENDC
+IF NUM_POKEMON % 8 != 0
+	ld [hl], (1 << (NUM_POKEMON % 8)) - 1 ; (1 << 151 % 8)) - 1 == %01111111
+ENDC
 	ret
 
 DebugNewGameItemsList:
