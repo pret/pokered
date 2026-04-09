@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: all clean format
 
 CC := gcc
 CFLAGS := -O3 -std=c11 -Wall -Wextra -pedantic
@@ -14,6 +14,9 @@ all: $(tools)
 
 clean:
 	$(RM) $(tools)
+
+format:
+	clang-format -i $$(git ls-files '*.h' '*.c')
 
 %: %.c common.h
 	$(CC) $(CFLAGS) -o $@ $<
