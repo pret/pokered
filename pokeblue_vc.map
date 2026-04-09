@@ -15394,7 +15394,7 @@ ROMX bank #33:
 	         $494a = _SilphCo7FRivalDefeatedText
 	         $4975 = _SilphCo7FRivalVictoryText
 	         $49bd = _SilphCo7FRivalGoodLuckToYouText
-	         $4ac4 = __SilphCo8FSilphWorkerMThanksForSavingUsText
+	         $4ac4 = _SilphCo8FSilphWorkerMSilphIsFinishedText
 	         $4ae6 = _SilphCo8FSilphWorkerMThanksForSavingUsText
 	         $4afd = _SilphCo8FRocket1BattleText
 	         $4b18 = _SilphCo8FRocket1EndBattleText
