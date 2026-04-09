@@ -1,4 +1,4 @@
-__SilphCo8FSilphWorkerMThanksForSavingUsText::
+_SilphCo8FSilphWorkerMSilphIsFinishedText::
 	text "I wonder if SILPH"
 	line "is finished..."
 	done
