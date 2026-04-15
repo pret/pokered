@@ -1,13 +1,15 @@
 LoadTilesetHeader:
 	call GetPredefRegisters
 	push hl
+	; hl = Tilesets + [wCurMapTileset] * 12
+	; (this would overflow for a tileset ID greater than 31)
 	ld d, 0
 	ld a, [wCurMapTileset]
 	add a
 	add a
 	ld b, a
 	add a
-	add b ; a = tileset * 12
+	add b
 	jr nc, .noCarry
 	inc d
 .noCarry
