@@ -1,4 +1,4 @@
-SFX_Silph_Scope_Ch5:
+SFX_Trainer_Appeared_Ch5:
 	duty_cycle 0
 	square_note 0, 13, 2, 1792
 	square_note 0, 13, 2, 1856
