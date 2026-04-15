@@ -6,7 +6,7 @@ MoveSoundTable:
 	db SFX_DOUBLESLAP,         $00, $80 ; DOUBLESLAP
 	db SFX_BATTLE_0B,          $01, $80 ; COMET_PUNCH
 	db SFX_BATTLE_0D,          $00, $40 ; MEGA_PUNCH
-	db SFX_SILPH_SCOPE,        $00, $ff ; PAY_DAY
+	db SFX_TRAINER_APPEARED,   $00, $ff ; PAY_DAY
 	db SFX_BATTLE_0D,          $10, $60 ; FIRE_PUNCH
 	db SFX_BATTLE_0D,          $20, $80 ; ICE_PUNCH
 	db SFX_BATTLE_0D,          $00, $a0 ; THUNDERPUNCH

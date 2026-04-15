@@ -587,6 +587,6 @@ SFX_Battle_36::
 	channel 6, SFX_Battle_36_Ch6
 	channel 8, SFX_Battle_36_Ch8
 
-SFX_Silph_Scope::
+SFX_Trainer_Appeared::
 	channel_count 1
-	channel 5, SFX_Silph_Scope_Ch5
+	channel 5, SFX_Trainer_Appeared_Ch5
