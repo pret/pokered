@@ -120,8 +120,8 @@ uint32_t read_png_width(const char *filename) {
 	xfread(header, sizeof(header), filename, f);
 	static uint8_t expected_header[16] = {
 		0x89, 'P', 'N', 'G', '\r', '\n', 0x1A, '\n', // signature
-		0, 0, 0, 13,                                 // IHDR chunk length
-		'I', 'H', 'D', 'R',                          // IHDR chunk type
+		0,    0,   0,   13,                          // IHDR chunk length
+		'I',  'H', 'D', 'R',                         // IHDR chunk type
 	};
 	if (memcmp(header, expected_header, sizeof(header))) {
 		fclose(f);
