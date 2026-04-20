@@ -295,7 +295,7 @@ _GetTileAndCoordsInFrontOfPlayer:
 	ret
 
 ; hPlayerFacing
-	const_def
+	bit_const_def
 	const BIT_FACING_DOWN  ; 0
 	const BIT_FACING_UP    ; 1
 	const BIT_FACING_LEFT  ; 2

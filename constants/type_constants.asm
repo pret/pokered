@@ -1,5 +1,5 @@
 ; TypeNames indexes (see data/types/names.asm)
-	const_def
+	listable_const_def
 
 DEF PHYSICAL EQU const_value
 	const NORMAL       ; $00

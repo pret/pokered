@@ -1,5 +1,5 @@
 ; Pseudo-OAM flags used by game logic
-	const_def
+	bit_const_def
 	const BIT_END_OF_OAM_DATA    ; 0
 	const BIT_SPRITE_UNDER_GRASS ; 1
 

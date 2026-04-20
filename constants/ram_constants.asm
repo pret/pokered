@@ -1,10 +1,10 @@
 ; wSlotMachineFlags
-	const_def 6
+	bit_const_def 6
 	const BIT_SLOTS_CAN_WIN               ; 6
 	const BIT_SLOTS_CAN_WIN_WITH_7_OR_BAR ; 7
 
 ; wMiscFlags
-	const_def
+	bit_const_def
 	const BIT_SEEN_BY_TRAINER      ; 0
 	const BIT_BOULDER_DUST         ; 1
 	const BIT_TURNING              ; 2
@@ -24,14 +24,14 @@ DEF BIT_TEXT_PREDEF EQU 0
 DEF BIT_FONT_LOADED EQU 0
 
 ; wCurrentMapScriptFlags
-	const_def 5
+	bit_const_def 5
 	const BIT_CUR_MAP_LOADED_1 ; 5
 	const BIT_CUR_MAP_LOADED_2 ; 6
 	const BIT_CUR_MAP_USED_ELEVATOR ; 7
 
 ; wOptions
 DEF TEXT_DELAY_MASK EQU %111
-	const_def 6
+	bit_const_def 6
 	const BIT_BATTLE_SHIFT     ; 6
 	const BIT_BATTLE_ANIMATION ; 7
 
@@ -40,7 +40,7 @@ DEF TEXT_DELAY_MEDIUM EQU %011 ; 3
 DEF TEXT_DELAY_SLOW   EQU %101 ; 5
 
 ; wLetterPrintingDelayFlags
-	const_def
+	bit_const_def
 	const BIT_FAST_TEXT_DELAY ; 0
 	const BIT_TEXT_DELAY      ; 1
 
@@ -52,7 +52,7 @@ DEF BIT_HAS_CHANGED_BOXES EQU 7
 DEF BOX_NUM_MASK EQU %01111111
 
 ; wObtainedBadges, wBeatGymFlags
-	const_def
+	bit_const_def
 	const BIT_BOULDERBADGE ; 0
 	const BIT_CASCADEBADGE ; 1
 	const BIT_THUNDERBADGE ; 2
@@ -64,7 +64,7 @@ DEF BOX_NUM_MASK EQU %01111111
 DEF NUM_BADGES EQU const_value
 
 ; wStatusFlags1
-	const_def
+	bit_const_def
 	const BIT_STRENGTH_ACTIVE           ; 0
 	const BIT_SURF_ALLOWED              ; 1
 	const_skip                          ; 2 ; unused
@@ -75,12 +75,12 @@ DEF NUM_BADGES EQU const_value
 	const BIT_UNUSED_CARD_KEY           ; 7
 
 ; wStatusFlags2
-	const_def
+	bit_const_def
 	const BIT_WILD_ENCOUNTER_COOLDOWN ; 0
 	const BIT_NO_AUDIO_FADE_OUT       ; 1
 
 ; wStatusFlags3
-	const_def
+	bit_const_def
 	const BIT_INIT_TRADE_CENTER_FACING ; 0
 	const_skip 2                       ; 1-2 ; unused
 	const BIT_WARP_FROM_CUR_SCRIPT     ; 3
@@ -90,7 +90,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_PRINT_END_BATTLE_TEXT    ; 7
 
 ; wStatusFlags4
-	const_def
+	bit_const_def
 	const BIT_GOT_LAPRAS              ; 0
 	const BIT_UNKNOWN_4_1             ; 1
 	const BIT_USED_POKECENTER         ; 2
@@ -101,7 +101,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_INIT_SCRIPTED_MOVEMENT  ; 7
 
 ; wStatusFlags5
-	const_def
+	bit_const_def
 	const BIT_SCRIPTED_NPC_MOVEMENT   ; 0
 	const BIT_UNKNOWN_5_1             ; 1
 	const BIT_UNKNOWN_5_2             ; 2
@@ -112,7 +112,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_SCRIPTED_MOVEMENT_STATE ; 7
 
 ; wStatusFlags6
-	const_def
+	bit_const_def
 	const BIT_GAME_TIMER_COUNTING ; 0
 	const BIT_DEBUG_MODE          ; 1
 	const BIT_FLY_OR_DUNGEON_WARP ; 2
@@ -122,7 +122,7 @@ DEF NUM_BADGES EQU const_value
 	const BIT_ESCAPE_WARP         ; 6
 
 ; wStatusFlags7
-	const_def
+	bit_const_def
 	const BIT_TEST_BATTLE        ; 0
 	const BIT_NO_MAP_MUSIC       ; 1
 	const BIT_FORCED_WARP        ; 2
@@ -132,12 +132,12 @@ DEF NUM_BADGES EQU const_value
 	const BIT_USED_FLY           ; 7
 
 ; wElite4Flags
-	const_def
+	bit_const_def
 	const BIT_UNUSED_BEAT_ELITE_4 ; 0
 	const BIT_STARTED_ELITE_4     ; 1
 
 ; wMovementFlags
-	const_def
+	bit_const_def
 	const BIT_STANDING_ON_DOOR ; 0
 	const BIT_EXITING_DOOR     ; 1
 	const BIT_STANDING_ON_WARP ; 2
@@ -146,12 +146,12 @@ DEF NUM_BADGES EQU const_value
 	const BIT_SPINNING         ; 7
 
 ; hFindPathFlags
-	const_def
+	bit_const_def
 	const BIT_PATH_FOUND_Y ; 0
 	const BIT_PATH_FOUND_X ; 1
 
 ; hNPCPlayerRelativePosFlags
-	const_def
+	bit_const_def
 	const BIT_PLAYER_LOWER_Y ; 0
 	const BIT_PLAYER_LOWER_X ; 1
 

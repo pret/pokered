@@ -60,7 +60,7 @@ DEF NO_EFFECT          EQU 00
 
 ; non-volatile statuses
 DEF SLP_MASK EQU %111 ; 0-7 turns
-	const_def 3
+	bit_const_def 3
 	const PSN ; 3
 	const BRN ; 4
 	const FRZ ; 5
@@ -77,7 +77,7 @@ DEF BIT_STAB_DAMAGE EQU 7
 DEF EFFECTIVENESS_MASK EQU %01111111
 
 ; wPlayerBattleStatus1 or wEnemyBattleStatus1 bit flags
-	const_def
+	bit_const_def
 	const STORING_ENERGY           ; 0 ; Bide
 	const THRASHING_ABOUT          ; 1 ; Thrash, Petal Dance
 	const ATTACKING_MULTIPLE_TIMES ; 2 ; e.g. Double Kick, Fury Attack
@@ -88,7 +88,7 @@ DEF EFFECTIVENESS_MASK EQU %01111111
 	const CONFUSED                 ; 7
 
 ; wPlayerBattleStatus2 or wEnemyBattleStatus2 bit flags
-	const_def
+	bit_const_def
 	const USING_X_ACCURACY    ; 0
 	const PROTECTED_BY_MIST   ; 1
 	const GETTING_PUMPED      ; 2 ; Focus Energy
@@ -99,7 +99,7 @@ DEF EFFECTIVENESS_MASK EQU %01111111
 	const SEEDED              ; 7 ; Leech Seed
 
 ; wPlayerBattleStatus3 or wEnemyBattleStatus3 bit flags
-	const_def
+	bit_const_def
 	const BADLY_POISONED      ; 0 ; Toxic
 	const HAS_LIGHT_SCREEN_UP ; 1
 	const HAS_REFLECT_UP      ; 2
