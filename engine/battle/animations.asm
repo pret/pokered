@@ -1943,30 +1943,30 @@ AnimationSubstitute:
 	and a
 	jr z, .playerTurn
 	ld hl, MonsterSprite tile 0 ; facing down sprite
-	ld de, wTempPic + $120
+	ld de, wTempPic + tile (PIC_HEIGHT * 2 + 4) ; x=2, y=4, in the 7*7 tiles pic data ; the tile data is organised rows>columns unlike the usual columns>rows tilemapping
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 1
-	ld de, wTempPic + $120 + $70
+	ld de, wTempPic + tile (PIC_HEIGHT * 3 + 4) ; x=3, y=4
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 2
-	ld de, wTempPic + $120 + $10
+	ld de, wTempPic + tile (PIC_HEIGHT * 2 + 5) ; x=2, y=5
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 3
-	ld de, wTempPic + $120 + $10 + $70
+	ld de, wTempPic + tile (PIC_HEIGHT * 3 + 5) ; x=3, y=5
 	call CopyMonsterSpriteData
 	jr .next
 .playerTurn
 	ld hl, MonsterSprite tile 4 ; facing up sprite
-	ld de, wTempPic + $120 + $70
+	ld de, wTempPic + tile (PIC_HEIGHT * 3 + 4) ; x=3, y=4
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 5
-	ld de, wTempPic + $120 + $e0
+	ld de, wTempPic + tile (PIC_HEIGHT * 4 + 4) ; x=4, y=4
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 6
-	ld de, wTempPic + $120 + $80
+	ld de, wTempPic + tile (PIC_HEIGHT * 3 + 5) ; x=3, y=5
 	call CopyMonsterSpriteData
 	ld hl, MonsterSprite tile 7
-	ld de, wTempPic + $120 + $f0
+	ld de, wTempPic + tile (PIC_HEIGHT * 4 + 5) ; x=4, y=5
 	call CopyMonsterSpriteData
 .next
 	call CopyTempPicToMonPic
