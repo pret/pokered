@@ -13,7 +13,7 @@ OneHitKOEffect_:
 	ld hl, wEnemyMonSpeed + 1
 	ld de, wBattleMonSpeed + 1
 .compareSpeed
-; set damage to 65535 and OHKO flag is the user's current speed is higher than the target's
+; set damage to 65535 and OHKO flag if the user's current speed is higher than the target's
 	ld a, [de]
 	dec de
 	ld b, a
