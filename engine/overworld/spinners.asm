@@ -55,10 +55,10 @@ SpinnerPlayerFacingDirections:
 ; This isn't the order of the facing directions.  Rather, it's a list of
 ; the facing directions that come next. For example, when the player is
 ; facing down (00), the next facing direction is left (08).
-	db $08 ; down -> left
-	db $0C ; up -> right
-	db $04 ; left -> up
-	db $00 ; right -> down
+	db SPRITE_FACING_LEFT  ; down -> left
+	db SPRITE_FACING_RIGHT ; up -> right
+	db SPRITE_FACING_UP    ; left -> up
+	db SPRITE_FACING_DOWN  ; right -> down
 
 ; these tiles are the animation for the tiles that push the player in dungeons like Rocket HQ
 SpinnerArrowAnimTiles:
