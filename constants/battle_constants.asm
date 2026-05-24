@@ -37,6 +37,11 @@ DEF MOVE_ACC    rb
 DEF MOVE_PP     rb
 DEF MOVE_LENGTH EQU _RS
 
+; move damage categories (see data/moves/categories.asm)
+; selects Attack/Defense vs Special per move, instead of deriving it from type
+DEF PHYSICAL_MOVE EQU 0
+DEF SPECIAL_MOVE  EQU 1
+
 ; battle type constants (wBattleType values)
 	const_def
 	const BATTLE_TYPE_NORMAL  ; 0

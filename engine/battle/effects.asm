@@ -103,6 +103,12 @@ PoisonEffect:
 	cp POISON_SIDE_EFFECT2
 	ld b, 40 percent + 1 ; chance of poisoning
 	jr z, .sideEffectTest
+	cp POISON_SIDE_EFFECT3
+	ld b, 75 percent + 1 ; chance of poisoning
+	jr z, .sideEffectTest
+	cp SMOG_SIDE_EFFECT
+	ld b, 30 percent + 1 ; chance of poisoning
+	jr z, .sideEffectTest
 	push hl
 	push de
 	call MoveHitTest ; apply accuracy tests
@@ -168,6 +174,22 @@ PoisonedText:
 BadlyPoisonedText:
 	text_far _BadlyPoisonedText
 	text_end
+
+SmogSideEffect:
+; Custom effect: always lowers the target's accuracy by one stage,
+; then has a 30% chance to poison the target.
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wPlayerMoveEffect
+	jr z, .gotEffectPointer
+	ld hl, wEnemyMoveEffect
+.gotEffectPointer
+	ld [hl], ACCURACY_DOWN1_EFFECT ; masquerade as an accuracy-down move
+	push hl
+	call StatModifierDownEffect
+	pop hl
+	ld [hl], SMOG_SIDE_EFFECT ; restore so PoisonEffect takes the 30% branch
+	jp PoisonEffect
 
 DrainHPEffect:
 	jpfar DrainHPEffect_
@@ -1161,6 +1183,73 @@ ConfusionEffectFailed:
 	ld c, 50
 	call DelayFrames
 	jp ConditionalPrintButItFailed
+
+ConfusionAllSideEffect:
+; Guaranteed confusion side effect: the move still deals damage, and the
+; target is always confused (does nothing if it is already confused).
+	ldh a, [hWhoseTurn]
+	and a
+	ld hl, wEnemyBattleStatus1
+	ld bc, wEnemyConfusedCounter
+	jr z, .confuseTarget
+	ld hl, wPlayerBattleStatus1
+	ld bc, wPlayerConfusedCounter
+.confuseTarget
+	bit CONFUSED, [hl]
+	ret nz ; already confused
+	set CONFUSED, [hl]
+	call BattleRandom
+	and $3
+	inc a
+	inc a
+	ld [bc], a ; confusion lasts 2-5 turns
+	ld hl, BecameConfusedText
+	jp PrintText
+
+ParalyzeAllSideEffect:
+; Guaranteed paralyze side effect: the move still deals damage, and the target
+; is always paralyzed, subject to the same restrictions as the paralyze side
+; effects (no substitute, target not already statused, and the target must not
+; share a type with the move).
+	call CheckTargetSubstitute
+	ret nz ; can't affect a substitute
+	ldh a, [hWhoseTurn]
+	and a
+	jr nz, .enemyAttacking
+; player is attacking the enemy
+	ld a, [wEnemyMonStatus]
+	and a
+	ret nz ; can't status an already-statused target
+	ld a, [wPlayerMoveType]
+	ld b, a
+	ld a, [wEnemyMonType1]
+	cp b
+	ret z
+	ld a, [wEnemyMonType2]
+	cp b
+	ret z
+	ld a, 1 << PAR
+	ld [wEnemyMonStatus], a
+	call QuarterSpeedDueToParalysis
+	ld a, ENEMY_HUD_SHAKE_ANIM
+	call PlayBattleAnimation
+	jp PrintMayNotAttackText
+.enemyAttacking
+	ld a, [wBattleMonStatus]
+	and a
+	ret nz
+	ld a, [wEnemyMoveType]
+	ld b, a
+	ld a, [wBattleMonType1]
+	cp b
+	ret z
+	ld a, [wBattleMonType2]
+	cp b
+	ret z
+	ld a, 1 << PAR
+	ld [wBattleMonStatus], a
+	call QuarterSpeedDueToParalysis
+	jp PrintMayNotAttackText
 
 ParalyzeEffect:
 	jpfar ParalyzeEffect_

@@ -253,7 +253,7 @@ ClefairyEvosMoves:
 
 SpearowEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 20, FEAROW
+	db EVOLVE_LEVEL, 18, FEAROW
 	db 0
 ; Learnset
 	db 9, LEER
@@ -344,7 +344,7 @@ ExeggcuteEvosMoves:
 
 GrimerEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 38, MUK
+	db EVOLVE_LEVEL, 26, MUK
 	db 0
 ; Learnset
 	db 30, POISON_GAS
@@ -387,7 +387,7 @@ NidoqueenEvosMoves:
 
 CuboneEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 28, MAROWAK
+	db EVOLVE_LEVEL, 22, MAROWAK
 	db 0
 ; Learnset
 	db 25, LEER
@@ -399,7 +399,7 @@ CuboneEvosMoves:
 
 RhyhornEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 42, RHYDON
+	db EVOLVE_LEVEL, 36, RHYDON
 	db 0
 ; Learnset
 	db 30, STOMP
@@ -478,7 +478,7 @@ TentacoolEvosMoves:
 
 GastlyEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 25, HAUNTER
+	db EVOLVE_LEVEL, 20, HAUNTER
 	db 0
 ; Learnset
 	db 27, HYPNOSIS
@@ -595,7 +595,7 @@ FearowEvosMoves:
 
 PidgeyEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 18, PIDGEOTTO
+	db EVOLVE_LEVEL, 14, PIDGEOTTO
 	db 0
 ; Learnset
 	db 5, SAND_ATTACK
@@ -621,7 +621,7 @@ SlowpokeEvosMoves:
 
 KadabraEvosMoves:
 ; Evolutions
-	db EVOLVE_TRADE, 1, ALAKAZAM
+	db EVOLVE_LEVEL, 35, ALAKAZAM
 	db 0
 ; Learnset
 	db 16, CONFUSION
@@ -634,7 +634,7 @@ KadabraEvosMoves:
 
 GravelerEvosMoves:
 ; Evolutions
-	db EVOLVE_TRADE, 1, GOLEM
+	db EVOLVE_LEVEL, 35, GOLEM
 	db 0
 ; Learnset
 	db 11, DEFENSE_CURL
@@ -659,7 +659,7 @@ ChanseyEvosMoves:
 
 MachokeEvosMoves:
 ; Evolutions
-	db EVOLVE_TRADE, 1, MACHAMP
+	db EVOLVE_LEVEL, 35, MACHAMP
 	db 0
 ; Learnset
 	db 20, LOW_KICK
@@ -726,7 +726,7 @@ ParasectEvosMoves:
 
 PsyduckEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 33, GOLDUCK
+	db EVOLVE_LEVEL, 26, GOLDUCK
 	db 0
 ; Learnset
 	db 28, TAIL_WHIP
@@ -810,7 +810,7 @@ MagnetonEvosMoves:
 
 KoffingEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 35, WEEZING
+	db EVOLVE_LEVEL, 26, WEEZING
 	db 0
 ; Learnset
 	db 32, SLUDGE
@@ -828,7 +828,7 @@ MissingNo38EvosMoves:
 
 MankeyEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 28, PRIMEAPE
+	db EVOLVE_LEVEL, 26, PRIMEAPE
 	db 0
 ; Learnset
 	db 15, KARATE_CHOP
@@ -840,7 +840,7 @@ MankeyEvosMoves:
 
 SeelEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 34, DEWGONG
+	db EVOLVE_LEVEL, 26, DEWGONG
 	db 0
 ; Learnset
 	db 30, GROWL
@@ -904,7 +904,7 @@ FarfetchdEvosMoves:
 
 VenonatEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 31, VENOMOTH
+	db EVOLVE_LEVEL, 18, VENOMOTH
 	db 0
 ; Learnset
 	db 24, POISONPOWDER
@@ -946,7 +946,7 @@ MissingNo45EvosMoves:
 
 DoduoEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 31, DODRIO
+	db EVOLVE_LEVEL, 26, DODRIO
 	db 0
 ; Learnset
 	db 20, GROWL
@@ -959,7 +959,7 @@ DoduoEvosMoves:
 
 PoliwagEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 25, POLIWHIRL
+	db EVOLVE_LEVEL, 16, POLIWHIRL
 	db 0
 ; Learnset
 	db 16, HYPNOSIS
@@ -1017,7 +1017,7 @@ DittoEvosMoves:
 
 MeowthEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 28, PERSIAN
+	db EVOLVE_LEVEL, 24, PERSIAN
 	db 0
 ; Learnset
 	db 12, BITE
@@ -1029,7 +1029,7 @@ MeowthEvosMoves:
 
 KrabbyEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 28, KINGLER
+	db EVOLVE_LEVEL, 22, KINGLER
 	db 0
 ; Learnset
 	db 20, VICEGRIP
@@ -1131,7 +1131,7 @@ DragonairEvosMoves:
 
 KabutoEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 40, KABUTOPS
+	db EVOLVE_LEVEL, 26, KABUTOPS
 	db 0
 ; Learnset
 	db 34, ABSORB
@@ -1152,7 +1152,7 @@ KabutopsEvosMoves:
 
 HorseaEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 32, SEADRA
+	db EVOLVE_LEVEL, 28, SEADRA
 	db 0
 ; Learnset
 	db 19, SMOKESCREEN
@@ -1187,7 +1187,7 @@ MissingNo5FEvosMoves:
 
 SandshrewEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 22, SANDSLASH
+	db EVOLVE_LEVEL, 18, SANDSLASH
 	db 0
 ; Learnset
 	db 10, SAND_ATTACK
@@ -1210,7 +1210,7 @@ SandslashEvosMoves:
 
 OmanyteEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 40, OMASTAR
+	db EVOLVE_LEVEL, 26, OMASTAR
 	db 0
 ; Learnset
 	db 34, HORN_ATTACK
@@ -1306,7 +1306,7 @@ VaporeonEvosMoves:
 
 MachopEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 28, MACHOKE
+	db EVOLVE_LEVEL, 22, MACHOKE
 	db 0
 ; Learnset
 	db 20, LOW_KICK
@@ -1330,7 +1330,7 @@ ZubatEvosMoves:
 
 EkansEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 22, ARBOK
+	db EVOLVE_LEVEL, 18, ARBOK
 	db 0
 ; Learnset
 	db 10, POISON_STING
@@ -1342,7 +1342,7 @@ EkansEvosMoves:
 
 ParasEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 24, PARASECT
+	db EVOLVE_LEVEL, 16, PARASECT
 	db 0
 ; Learnset
 	db 13, STUN_SPORE
@@ -1693,7 +1693,7 @@ MissingNo92EvosMoves:
 
 HaunterEvosMoves:
 ; Evolutions
-	db EVOLVE_TRADE, 1, GENGAR
+	db EVOLVE_LEVEL, 35, GENGAR
 	db 0
 ; Learnset
 	db 29, HYPNOSIS
@@ -1721,7 +1721,7 @@ AlakazamEvosMoves:
 
 PidgeottoEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 36, PIDGEOT
+	db EVOLVE_LEVEL, 30, PIDGEOT
 	db 0
 ; Learnset
 	db 5, SAND_ATTACK
@@ -1799,7 +1799,7 @@ MissingNo9CEvosMoves:
 
 GoldeenEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 33, SEAKING
+	db EVOLVE_LEVEL, 22, SEAKING
 	db 0
 ; Learnset
 	db 19, SUPERSONIC
@@ -1848,7 +1848,7 @@ MissingNoA2EvosMoves:
 
 PonytaEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 40, RAPIDASH
+	db EVOLVE_LEVEL, 26, RAPIDASH
 	db 0
 ; Learnset
 	db 30, TAIL_WHIP
@@ -1873,7 +1873,7 @@ RapidashEvosMoves:
 
 RattataEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 20, RATICATE
+	db EVOLVE_LEVEL, 16, RATICATE
 	db 0
 ; Learnset
 	db 7, QUICK_ATTACK
@@ -1920,7 +1920,7 @@ NidorinaEvosMoves:
 
 GeodudeEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 25, GRAVELER
+	db EVOLVE_LEVEL, 20, GRAVELER
 	db 0
 ; Learnset
 	db 11, DEFENSE_CURL
@@ -1959,7 +1959,7 @@ MissingNoACEvosMoves:
 
 MagnemiteEvosMoves:
 ; Evolutions
-	db EVOLVE_LEVEL, 30, MAGNETON
+	db EVOLVE_LEVEL, 26, MAGNETON
 	db 0
 ; Learnset
 	db 21, SONICBOOM

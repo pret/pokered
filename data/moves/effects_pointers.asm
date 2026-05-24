@@ -87,4 +87,8 @@ MoveEffectPointerTable:
 	dw LeechSeedEffect           ; LEECH_SEED_EFFECT
 	dw SplashEffect              ; SPLASH_EFFECT
 	dw DisableEffect             ; DISABLE_EFFECT
+	dw PoisonEffect              ; POISON_SIDE_EFFECT3
+	dw SmogSideEffect            ; SMOG_SIDE_EFFECT
+	dw ParalyzeAllSideEffect     ; PARALYZE_SIDE_EFFECT3
+	dw ConfusionAllSideEffect    ; CONFUSION_SIDE_EFFECT2
 	assert_table_length NUM_MOVE_EFFECTS

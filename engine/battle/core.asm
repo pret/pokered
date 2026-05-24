@@ -368,15 +368,15 @@ MainInBattleLoop:
 	callfar SwitchEnemyMon
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
-	cp QUICK_ATTACK
+	call CheckPriorityMove
 	jr nz, .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
-	cp QUICK_ATTACK
+	call CheckPriorityMove
 	jr z, .compareSpeed  ; if both used Quick Attack
 	jp .playerMovesFirst ; if player used Quick Attack and enemy didn't
 .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
-	cp QUICK_ATTACK
+	call CheckPriorityMove
 	jr z, .enemyMovesFirst ; if enemy used Quick Attack and player didn't
 	ld a, [wPlayerSelectedMove]
 	cp COUNTER
@@ -466,6 +466,14 @@ MainInBattleLoop:
 	call DrawHUDsAndHPBars
 	call CheckNumAttacksLeft
 	jp MainInBattleLoop
+
+CheckPriorityMove:
+; Returns z if the move id in a is a high-priority move that moves first
+; (Quick Attack or Constrict).
+	cp QUICK_ATTACK
+	ret z
+	cp CONSTRICT
+	ret
 
 HandlePoisonBurnLeechSeed:
 	ld hl, wBattleMonHP
@@ -3363,13 +3371,8 @@ CheckPlayerStatusConditions:
 	jp .returnToHL
 
 .HeldInPlaceCheck
-	ld a, [wEnemyBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is enemy using a multi-turn move like wrap?
-	jp z, .FlinchedCheck
-	ld hl, CantMoveText
-	call PrintText
-	ld hl, ExecutePlayerMoveDone ; player can't move this turn
-	jp .returnToHL
+; Trapping moves like Wrap no longer hold the target in place: it can still act
+; (attack or switch) to break free, instead of losing every turn.
 
 .FlinchedCheck
 	ld hl, wPlayerBattleStatus1
@@ -4026,6 +4029,17 @@ IgnoredOrdersText:
 	text_far _IgnoredOrdersText
 	text_end
 
+; Returns the damage category (PHYSICAL_MOVE or SPECIAL_MOVE) in a for the move
+; id passed in a. Used to choose Attack/Defense vs Special per move.
+GetMoveCategory:
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, MoveCategories
+	add hl, bc
+	ld a, [hl]
+	ret
+
 ; sets b, c, d, and e for the CalculateDamage routine in the case of an attack by the player mon
 GetDamageVarsForPlayerAttack:
 	xor a
@@ -4037,9 +4051,10 @@ GetDamageVarsForPlayerAttack:
 	and a
 	ld d, a ; d = move power
 	ret z ; return if move power is zero
-	ld a, [hl] ; a = [wPlayerMoveType]
-	cp SPECIAL ; types >= SPECIAL are all special
-	jr nc, .specialAttack
+	ld a, [wPlayerMoveNum]
+	call GetMoveCategory ; a = move's damage category (independent of type)
+	and a
+	jr nz, .specialAttack ; SPECIAL_MOVE uses Special; PHYSICAL_MOVE uses Attack/Defense
 ; physical attack
 	ld hl, wEnemyMonDefense
 	ld a, [hli]
@@ -4150,9 +4165,10 @@ GetDamageVarsForEnemyAttack:
 	ld d, a ; d = move power
 	and a
 	ret z ; return if move power is zero
-	ld a, [hl] ; a = [wEnemyMoveType]
-	cp SPECIAL ; types >= SPECIAL are all special
-	jr nc, .specialAttack
+	ld a, [wEnemyMoveNum]
+	call GetMoveCategory ; a = move's damage category (independent of type)
+	and a
+	jr nz, .specialAttack ; SPECIAL_MOVE uses Special; PHYSICAL_MOVE uses Attack/Defense
 ; physical attack
 	ld hl, wBattleMonDefense
 	ld a, [hli]
@@ -5708,13 +5724,8 @@ CheckEnemyStatusConditions:
 	ld hl, ExecuteEnemyMoveDone ; enemy can't move this turn
 	jp .enemyReturnToHL
 .checkIfTrapped
-	ld a, [wPlayerBattleStatus1]
-	bit USING_TRAPPING_MOVE, a ; is the player using a multi-turn attack like warp
-	jp z, .checkIfFlinched
-	ld hl, CantMoveText
-	call PrintText
-	ld hl, ExecuteEnemyMoveDone ; enemy can't move this turn
-	jp .enemyReturnToHL
+; Trapping moves like Wrap no longer hold the target in place: it can still act
+; (attack or switch) to break free, instead of losing every turn.
 .checkIfFlinched
 	ld hl, wEnemyBattleStatus1
 	bit FLINCHED, [hl] ; check if enemy mon flinched

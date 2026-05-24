@@ -91,4 +91,8 @@
 	const LEECH_SEED_EFFECT          ; $54
 	const SPLASH_EFFECT              ; $55
 	const DISABLE_EFFECT             ; $56
+	const POISON_SIDE_EFFECT3        ; $57 75% chance to poison
+	const SMOG_SIDE_EFFECT           ; $58 lowers accuracy 1 stage + 30% chance to poison
+	const PARALYZE_SIDE_EFFECT3      ; $59 always paralyzes (move still deals damage)
+	const CONFUSION_SIDE_EFFECT2     ; $5A always confuses (move still deals damage)
 DEF NUM_MOVE_EFFECTS EQU const_value - 1

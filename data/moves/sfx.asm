@@ -165,6 +165,26 @@ MoveSoundTable:
 	db SFX_BATTLE_26,          $f0, $ff ; SUPER_FANG
 	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; SLASH
 	db SFX_BATTLE_2C,          $d8, $04 ; SUBSTITUTE
+	db SFX_BATTLE_27,          $00, $80 ; FAIRY_WIND
+	db SFX_PSYCHIC_M,          $00, $80 ; DAZZLING_GLEAM
+	db SFX_BATTLE_36,          $00, $80 ; FLEUR_CANNON
+	db SFX_BATTLE_09,          $88, $10 ; DRAIN_KISS
+	db SFX_FAINT_FALL,         $ff, $04 ; DRAIN_PUNCH
+	db SFX_BATTLE_1B,          $20, $c0 ; POISON_NEEDLE
+	db SFX_FAINT_FALL,         $ff, $04 ; POISON_JAB
+	db SFX_NOT_VERY_EFFECTIVE, $01, $ff ; POISON_SLASH
+	db SFX_BATTLE_1E,          $00, $80 ; CRUNCH
+	db SFX_PSYCHIC_M,          $00, $80 ; DARK_PULSE
+	db SFX_PSYCHIC_M,          $00, $80 ; PHANTOM_FORCE
+	db SFX_BATTLE_19,          $21, $e0 ; DRAGON_BREATH
+	db SFX_BATTLE_36,          $00, $80 ; DRACO_METEOR
+	db SFX_BATTLE_26,          $1f, $18 ; ICICLE_SHARD
+	db SFX_BATTLE_12,          $00, $c0 ; HURRICANE
+	db SFX_BATTLE_18,          $00, $80 ; IRON_HEAD
+	db SFX_BATTLE_21,          $00, $80 ; IRON_TAIL
+	db SFX_BATTLE_28,          $40, $80 ; FLASH_CANNON
+	db SFX_BATTLE_35,          $42, $01 ; NIGHTMARE
+	db SFX_BATTLE_0C,          $f0, $f0 ; HEX
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

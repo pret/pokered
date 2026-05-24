@@ -170,6 +170,26 @@
 	const SUPER_FANG   ; a2
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
+	const FAIRY_WIND
+	const DAZZLING_GLEAM
+	const FLEUR_CANNON
+	const DRAIN_KISS
+	const DRAIN_PUNCH
+	const POISON_NEEDLE
+	const POISON_JAB
+	const POISON_SLASH
+	const CRUNCH
+	const DARK_PULSE
+	const PHANTOM_FORCE
+	const DRAGON_BREATH
+	const DRACO_METEOR
+	const ICICLE_SHARD
+	const HURRICANE
+	const IRON_HEAD
+	const IRON_TAIL
+	const FLASH_CANNON
+	const NIGHTMARE
+	const HEX
 	const STRUGGLE     ; a5
 DEF NUM_ATTACKS EQU const_value - 1
 
