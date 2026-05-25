@@ -4,7 +4,7 @@ Route17WildMons:
 	db 22, SPEAROW
 	db 25, RATICATE
 	db 24, DODUO
-	db 27, RATICATE
+	db 27, PONYTA
 	db 26, DODUO
 	db 28, DODUO
 	db 29, RATICATE

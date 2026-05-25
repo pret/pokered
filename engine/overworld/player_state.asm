@@ -224,13 +224,13 @@ PrintSafariZoneSteps::
 	ret nc
 	hlcoord 0, 0
 	ld b, 3
-	ld c, 7
+	ld c, 9
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, wSafariSteps
-	lb bc, 2, 3
+	lb bc, 2, 4
 	call PrintNumber
-	hlcoord 4, 1
+	hlcoord 5, 1
 	ld de, SafariSteps
 	call PlaceString
 	hlcoord 1, 3
@@ -249,7 +249,7 @@ PrintSafariZoneSteps::
 	jp PrintNumber
 
 SafariSteps:
-	db "/500@"
+	db "/1500@"
 
 SafariBallText:
 	db "BALL×× @"

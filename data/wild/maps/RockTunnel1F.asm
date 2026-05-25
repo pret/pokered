@@ -3,7 +3,7 @@ RockTunnel1FWildMons:
 	db 16, ZUBAT
 	db 17, ZUBAT
 	db 17, GEODUDE
-	db 15, MACHOP
+	db 15, CUBONE
 	db 16, GEODUDE
 	db 18, ZUBAT
 	db 15, ZUBAT

@@ -135,6 +135,8 @@ ItemUseBall:
 .safariZone
 	ld hl, wNumSafariBalls
 	dec [hl] ; remove a Safari Ball
+	ld a, 255
+	ld [wEnemyMonActualCatchRate], a ; make Safari Zone catches much easier
 
 .skipSafariZoneCode
 	call RunDefaultPaletteCommand

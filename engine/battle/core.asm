@@ -179,32 +179,8 @@ StartBattle:
 	jp PrintText
 .notOutOfSafariBalls
 	callfar PrintSafariZoneBattleText
-	ld a, [wEnemyMonSpeed + 1]
-	add a
-	ld b, a ; init b (which is later compared with random value) to (enemy speed % 256) * 2
-	jp c, EnemyRan ; if (enemy speed % 256) > 127, the enemy runs
-	ld a, [wSafariBaitFactor]
-	and a ; is bait factor 0?
-	jr z, .checkEscapeFactor
-; bait factor is not 0
-; divide b by 4 (making the mon less likely to run)
-	srl b
-	srl b
-.checkEscapeFactor
-	ld a, [wSafariEscapeFactor]
-	and a ; is escape factor 0?
-	jr z, .compareWithRandomValue
-; escape factor is not 0
-; multiply b by 2 (making the mon more likely to run)
-	sla b
-	jr nc, .compareWithRandomValue
-; cap b at 255
-	ld b, $ff
-.compareWithRandomValue
-	call Random
-	cp b
-	jr nc, .checkAnyPartyAlive
-	jr EnemyRan ; if b was greater than the random value, the enemy runs
+; Safari Zone Pokémon never flee.
+	jr .checkAnyPartyAlive
 
 .outOfSafariBallsText
 	text_far _OutOfSafariBallsText

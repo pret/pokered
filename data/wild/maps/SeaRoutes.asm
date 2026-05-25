@@ -12,5 +12,5 @@ SeaRoutesWildMons:
 	db 20, TENTACOOL
 	db 30, TENTACOOL
 	db 35, TENTACOOL
-	db 40, TENTACOOL
+	db 40, DRATINI
 	end_water_wildmons
