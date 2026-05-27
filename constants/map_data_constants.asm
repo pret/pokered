@@ -2,19 +2,14 @@
 ; height of north/south connections
 DEF MAP_BORDER EQU 3
 
-; connection directions
-	const_def
-	const EAST_F
-	const WEST_F
-	const SOUTH_F
-	const NORTH_F
+; wCurMapConnections    : \1
+; connection directions : BIT_\1
+	bit_const_def
+	shift_const EAST   ; $01 (BIT_EAST  ; 0)
+	shift_const WEST   ; $02 (BIT_WEST  ; 1)
+	shift_const SOUTH  ; $04 (BIT_SOUTH ; 2)
+	shift_const NORTH  ; $08 (BIT_NORTH ; 4)
 
-; wCurMapConnections
-	const_def
-	shift_const EAST   ; 1
-	shift_const WEST   ; 2
-	shift_const SOUTH  ; 4
-	shift_const NORTH  ; 8
 
 ; wWarpEntries
 DEF MAX_WARP_EVENTS EQU 32

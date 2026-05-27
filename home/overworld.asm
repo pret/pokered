@@ -2047,22 +2047,22 @@ LoadMapHeader::
 	ld a, [wCurMapConnections]
 	ld b, a
 ; check north
-	bit NORTH_F, b
+	bit BIT_NORTH, b
 	jr z, .checkSouth
 	ld de, wNorthConnectionHeader
 	call CopyMapConnectionHeader
 .checkSouth
-	bit SOUTH_F, b
+	bit BIT_SOUTH, b
 	jr z, .checkWest
 	ld de, wSouthConnectionHeader
 	call CopyMapConnectionHeader
 .checkWest
-	bit WEST_F, b
+	bit BIT_WEST, b
 	jr z, .checkEast
 	ld de, wWestConnectionHeader
 	call CopyMapConnectionHeader
 .checkEast
-	bit EAST_F, b
+	bit BIT_EAST, b
 	jr z, .getObjectDataPointer
 	ld de, wEastConnectionHeader
 	call CopyMapConnectionHeader
