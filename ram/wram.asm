@@ -508,13 +508,13 @@ wPlayerMonMinimized:: db
 
 	ds 13
 
-UNION
-; the amount of damage accumulated by the enemy while biding
-wEnemyBideAccumulatedDamage:: dw
-NEXTU
-; number of hits by enemy in attacks like Double Slap, etc.
-wEnemyNumHits:: db
-ENDU
+	UNION
+	; the amount of damage accumulated by the enemy while biding
+	wEnemyBideAccumulatedDamage:: dw
+	NEXTU
+	; number of hits by enemy in attacks like Double Slap, etc.
+	wEnemyNumHits:: db
+	ENDU
 
 	ds 8
 wMiscBattleDataEnd::
