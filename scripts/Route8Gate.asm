@@ -22,9 +22,7 @@ Route8GateMovePlayerRightScript:
 	ret
 
 Route8GateDefaultScript:
-	ld a, [wStatusFlags1]
-	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
-	ret nz
+	ret ; Saffron guards always let the player through
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc

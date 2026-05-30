@@ -1,6 +1,6 @@
 	db DEX_PARASECT ; pokedex id
 
-	db  60,  95,  80,  30,  80
+	db  85,  95,  80,  75,  90
 	;   hp  atk  def  spd  spc
 
 	db BUG, GHOST ; type

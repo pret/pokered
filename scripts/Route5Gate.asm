@@ -17,9 +17,7 @@ Route5GateMovePlayerUpScript:
 	jp StartSimulatingJoypadStates
 
 Route5GateDefaultScript:
-	ld a, [wStatusFlags1]
-	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
-	ret nz
+	ret ; Saffron guards always let the player through
 	ld hl, .PlayerInCoordsArray
 	call ArePlayerCoordsInArray
 	ret nc
@@ -69,9 +67,7 @@ Route5Gate_TextPointers:
 
 SaffronGateGuardText:
 	text_asm
-	ld a, [wStatusFlags1]
-	bit BIT_GAVE_SAFFRON_GUARDS_DRINK, a
-	jr nz, .thanks_for_drink
+	jr .thanks_for_drink ; Saffron guards always thank the player
 	farcall RemoveGuardDrink
 	ldh a, [hItemToRemoveID]
 	and a

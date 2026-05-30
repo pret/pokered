@@ -1,9 +1,9 @@
 	db DEX_SHELLDER ; pokedex id
 
-	db  30,  65, 100,  40,  45
+	db  50,  65, 100,  40,  45
 	;   hp  atk  def  spd  spc
 
-	db WATER, WATER ; type
+	db STEEL, WATER ; type
 	db 190 ; catch rate
 	db 97 ; base exp
 

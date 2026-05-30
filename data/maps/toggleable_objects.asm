@@ -57,7 +57,7 @@ ToggleableObjectStates:
 	toggle_object_state CERULEANCITY_RIVAL,       OFF
 	toggle_object_state CERULEANCITY_ROCKET,      ON
 	toggle_object_state CERULEANCITY_GUARD1,      OFF
-	toggle_object_state CERULEANCITY_SUPER_NERD3, ON
+	toggle_object_state CERULEANCITY_SUPER_NERD3, OFF ; Cerulean Cave is open from the start
 	toggle_object_state CERULEANCITY_GUARD2,      ON
 
 	toggleable_objects_for SAFFRON_CITY

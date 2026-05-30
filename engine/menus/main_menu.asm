@@ -285,7 +285,7 @@ LinkMenu:
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
 	ld [wEnteringCableClub], a
-	jr SpecialEnterMap
+	jp SpecialEnterMap
 .choseCancel
 	xor a
 	ld [wMenuJoypadPollCount], a
@@ -322,6 +322,66 @@ StartNewGameDebug:
 	call OakSpeech
 	ld c, 20
 	call DelayFrames
+
+; Give the player all 5 HMs at the start of the game.
+	ld b, HM_CUT
+	ld c, 1
+	call GiveItem
+	ld b, HM_FLY
+	ld c, 1
+	call GiveItem
+	ld b, HM_SURF
+	ld c, 1
+	call GiveItem
+	ld b, HM_STRENGTH
+	ld c, 1
+	call GiveItem
+	ld b, HM_FLASH
+	ld c, 1
+	call GiveItem
+
+; Give the player all 3 fishing rods at the start of the game.
+	ld b, OLD_ROD
+	ld c, 1
+	call GiveItem
+	ld b, GOOD_ROD
+	ld c, 1
+	call GiveItem
+	ld b, SUPER_ROD
+	ld c, 1
+	call GiveItem
+
+; Give the player 200 Master Balls at the start of the game (99 + 99 + 2,
+; since each bag slot caps at 99).
+	ld b, MASTER_BALL
+	ld c, 99
+	call GiveItem
+	ld b, MASTER_BALL
+	ld c, 99
+	call GiveItem
+	ld b, MASTER_BALL
+	ld c, 2
+	call GiveItem
+
+; Give the player 500 Rare Candies: 99 in the bag, 401 in PC item storage
+; (4 stacks of 99 + 1 stack of 5, since each slot caps at 99).
+	ld b, RARE_CANDY
+	ld c, 99
+	call GiveItem
+	ld a, RARE_CANDY
+	ld [wCurItem], a
+	ld b, 4
+.rareCandyPCLoop
+	ld a, 99
+	ld [wItemQuantity], a
+	ld hl, wNumBoxItems
+	call AddItemToInventory
+	dec b
+	jr nz, .rareCandyPCLoop
+	ld a, 5
+	ld [wItemQuantity], a
+	ld hl, wNumBoxItems
+	call AddItemToInventory
 
 ; enter map after using a special warp or loading the game from the main menu
 SpecialEnterMap::

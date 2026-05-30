@@ -1,9 +1,9 @@
 	db DEX_MAROWAK ; pokedex id
 
-	db  60,  80, 110,  45,  50
+	db  80,  95, 110,  80,  50
 	;   hp  atk  def  spd  spc
 
-	db GROUND, GROUND ; type
+	db GROUND, GHOST ; type
 	db 75 ; catch rate
 	db 124 ; base exp
 

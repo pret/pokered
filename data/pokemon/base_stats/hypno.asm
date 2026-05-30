@@ -1,6 +1,6 @@
 	db DEX_HYPNO ; pokedex id
 
-	db  85,  73,  70,  67, 115
+	db  85,  70,  80,  70, 115
 	;   hp  atk  def  spd  spc
 
 	db PSYCHIC_TYPE, DARK ; type

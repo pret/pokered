@@ -1275,6 +1275,8 @@ EnemySendOut:
 ; don't change wPartyGainExpFlags or wPartyFoughtCurrentEnemyFlags
 EnemySendOutFirstMon:
 	xor a
+	ld [wEnemyBattleStatus3], a ; clear BADLY_POISONED, light screen, reflect, transformed
+	ld [wEnemyToxicCounter], a  ; reset Toxic damage counter on switch
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -1716,6 +1718,8 @@ SendOutMon:
 	predef LoadMonBackPic
 	xor a
 	ldh [hStartTileID], a
+	ld [wPlayerBattleStatus3], a ; clear BADLY_POISONED, light screen, reflect, transformed
+	ld [wPlayerToxicCounter], a  ; reset Toxic damage counter on switch
 	ld hl, wBattleAndStartSavedMenuItem
 	ld [hli], a
 	ld [hl], a
@@ -4496,14 +4500,22 @@ CriticalHitTest:
 	ld c, [hl]                   ; read move id
 	ld a, [de]
 	bit GETTING_PUMPED, a        ; test for focus energy
-	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
-	                             ; resulting in 1/4 the usual crit chance
+	jr nz, .focusEnergyUsed
 	sla b                        ; (effective (base speed/2)*2)
 	jr nc, .noFocusEnergyUsed
 	ld b, $ff                    ; cap at 255/256
 	jr .noFocusEnergyUsed
 .focusEnergyUsed
-	srl b
+; Fix: Focus Energy quadruples crit chance (sla b twice = *4) instead of the
+; original `srl b` which incorrectly quartered it.
+	sla b
+	jr nc, .focusEnergyDoubled
+	ld b, $ff
+	jr .noFocusEnergyUsed
+.focusEnergyDoubled
+	sla b
+	jr nc, .noFocusEnergyUsed
+	ld b, $ff
 .noFocusEnergyUsed
 	ld hl, HighCriticalMoves     ; table of high critical hit moves
 .Loop

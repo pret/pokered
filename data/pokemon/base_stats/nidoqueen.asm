@@ -1,9 +1,9 @@
 	db DEX_NIDOQUEEN ; pokedex id
 
-	db  90,  82,  87,  76,  75
+	db  90,  95,  95,  80,  65
 	;   hp  atk  def  spd  spc
 
-	db POISON, GROUND ; type
+	db DARK, GROUND ; type
 	db 45 ; catch rate
 	db 194 ; base exp
 

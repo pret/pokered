@@ -1,9 +1,9 @@
 	db DEX_CLOYSTER ; pokedex id
 
-	db  50,  95, 180,  70,  85
+	db  75,  95, 180,  60,  90
 	;   hp  atk  def  spd  spc
 
-	db WATER, ICE ; type
+	db STEEL, ICE ; type
 	db 60 ; catch rate
 	db 203 ; base exp
 
