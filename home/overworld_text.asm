@@ -14,7 +14,15 @@ GroundRoseText::
 	text_end
 
 BoulderText::
-	text_far _BoulderText
+; Pressing A on a boulder now activates Strength automatically.
+	text_asm
+	ld hl, wStatusFlags1
+	set BIT_STRENGTH_ACTIVE, [hl]
+	ld hl, .CanMoveBouldersText
+	call PrintText
+	jp TextScriptEnd
+.CanMoveBouldersText
+	text_far _CanMoveBouldersText
 	text_end
 
 MartSignText::
