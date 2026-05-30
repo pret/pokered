@@ -293,7 +293,7 @@ NidokingEvosMoves:
 	db 14, POISON_STING
 	db 15, BIND
 	db 16, COMET_PUNCH
-	db 16, DRAIN_PUNCH
+	db 17, DRAIN_PUNCH
 	db 19, SPIKE_CANNON
 	db 22, IRON_TAIL
 	db 23, THRASH

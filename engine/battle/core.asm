@@ -3811,11 +3811,9 @@ OHKOText:
 ; checks if a traded mon will disobey due to lack of badges
 ; stores whether the mon will use a move in Z flag
 CheckForDisobedience:
+; Pokemon always obey regardless of level, original trainer, or badge count.
 	xor a
 	ld [wMonIsDisobedient], a
-	ld a, [wLinkState]
-	cp LINK_STATE_BATTLING
-	jr nz, .checkIfMonIsTraded
 	ld a, $1
 	and a
 	ret
