@@ -190,6 +190,7 @@
 	const FLASH_CANNON
 	const NIGHTMARE
 	const HEX
+	const EXTREME_SPEED
 	const STRUGGLE     ; a5
 DEF NUM_ATTACKS EQU const_value - 1
 

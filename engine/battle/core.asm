@@ -445,10 +445,12 @@ MainInBattleLoop:
 
 CheckPriorityMove:
 ; Returns z if the move id in a is a high-priority move that moves first
-; (Quick Attack or Constrict).
+; (Quick Attack, Constrict, or Extreme Speed).
 	cp QUICK_ATTACK
 	ret z
 	cp CONSTRICT
+	ret z
+	cp EXTREME_SPEED
 	ret
 
 HandlePoisonBurnLeechSeed:

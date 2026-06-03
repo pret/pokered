@@ -184,6 +184,7 @@ AttackAnimationPointers:
 	dw IceBeamAnim
 	dw DreamEaterAnim
 	dw PsywaveAnim
+	dw QuickAttackAnim ; EXTREME_SPEED reuses Quick Attack's animation
 	dw StruggleAnim
 	assert_table_length NUM_ATTACKS
 	dw ShowPicAnim

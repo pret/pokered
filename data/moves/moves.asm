@@ -25,7 +25,7 @@ Moves:
 	move GUILLOTINE,   OHKO_EFFECT,                  1, NORMAL,        30,  5
 	move RAZOR_WIND,   NO_ADDITIONAL_EFFECT,        55, FLYING,        95, 25
 	move SWORDS_DANCE, ATTACK_UP2_EFFECT,            0, NORMAL,       100, 30
-	move CUT,          NO_ADDITIONAL_EFFECT,        50, NORMAL,        95, 30
+	move CUT,          NO_ADDITIONAL_EFFECT,        50, NORMAL,       100, 30
 	move GUST,         NO_ADDITIONAL_EFFECT,        40, NORMAL,       100, 35
 	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        35, FLYING,       100, 35
 	move WHIRLWIND,    SWITCH_AND_TELEPORT_EFFECT,   0, NORMAL,        85, 20
@@ -34,10 +34,10 @@ Moves:
 	move SLAM,         NO_ADDITIONAL_EFFECT,        80, FIGHTING,     100, 20
 	move VINE_WHIP,    NO_ADDITIONAL_EFFECT,        35, GRASS,        100, 10
 	move STOMP,        FLINCH_SIDE_EFFECT2,         65, NORMAL,       100, 20
-	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         30, FIGHTING,     100, 30
+	move DOUBLE_KICK,  ATTACK_TWICE_EFFECT,         35, FIGHTING,     100, 30
 	move MEGA_KICK,    NO_ADDITIONAL_EFFECT,       120, FIGHTING,     100,  5
-	move JUMP_KICK,    NO_ADDITIONAL_EFFECT,        70, FIGHTING,      95, 25
-	move ROLLING_KICK, FLINCH_SIDE_EFFECT2,         60, FIGHTING,      85, 15
+	move JUMP_KICK,    NO_ADDITIONAL_EFFECT,        70, FIGHTING,     100, 25
+	move ROLLING_KICK, FLINCH_SIDE_EFFECT2,         60, FIGHTING,     100, 15
 	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,        0, NORMAL,       100, 15
 	move HEADBUTT,     FLINCH_SIDE_EFFECT2,         70, NORMAL,       100, 15
 	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,        65, ROCK,         100, 25
@@ -146,7 +146,7 @@ Moves:
 	move AMNESIA,      SPECIAL_UP2_EFFECT,           0, PSYCHIC_TYPE, 100, 20
 	move KINESIS,      ACCURACY_DOWN1_EFFECT,        0, PSYCHIC_TYPE,  80, 15
 	move SOFTBOILED,   HEAL_EFFECT,                  0, NORMAL,       100, 10
-	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85, FIGHTING,      90, 20
+	move HI_JUMP_KICK, JUMP_KICK_EFFECT,            85, FIGHTING,      95, 20
 	move GLARE,        PARALYZE_EFFECT,              0, NORMAL,        75, 30
 	move DREAM_EATER,  DREAM_EATER_EFFECT,         100, PSYCHIC_TYPE, 100, 15
 	move POISON_GAS,   POISON_EFFECT,                0, POISON,       100, 40
@@ -195,5 +195,6 @@ Moves:
 	move FLASH_CANNON,   SPECIAL_DOWN_SIDE_EFFECT,    80, STEEL,        100, 10
 	move NIGHTMARE,      DREAM_EATER_EFFECT,         100, GHOST,        100,  5
 	move HEX,            DISABLE_EFFECT,              50, GHOST,        100, 15
+	move EXTREME_SPEED,  NO_ADDITIONAL_EFFECT,        80, NORMAL,       100, 10
 	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,       100, 10
 	assert_table_length NUM_ATTACKS

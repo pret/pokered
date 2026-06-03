@@ -185,5 +185,6 @@ MoveNames::
 	li "FLASH CANNON"
 	li "NIGHTMARE"
 	li "HEX"
+	li "EXTREMESPEED"
 	li "STRUGGLE"
 	assert_list_length NUM_ATTACKS

@@ -185,6 +185,7 @@ MoveSoundTable:
 	db SFX_BATTLE_28,          $40, $80 ; FLASH_CANNON
 	db SFX_BATTLE_35,          $42, $01 ; NIGHTMARE
 	db SFX_BATTLE_0C,          $f0, $f0 ; HEX
+	db SFX_BATTLE_25,          $00, $10 ; EXTREME_SPEED
 	db SFX_BATTLE_0B,          $00, $80 ; STRUGGLE
 	assert_table_length NUM_ATTACKS
 	db SFX_BATTLE_0B,          $00, $80

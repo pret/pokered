@@ -351,17 +351,21 @@ StartNewGameDebug:
 	ld c, 1
 	call GiveItem
 
-; Give the player 200 Master Balls at the start of the game (99 + 99 + 2,
-; since each bag slot caps at 99).
+; Give the player 200 Master Balls at the start of the game:
+; 99 in the bag, 101 in PC item storage (99 + 2), since each slot caps at 99.
 	ld b, MASTER_BALL
 	ld c, 99
 	call GiveItem
-	ld b, MASTER_BALL
-	ld c, 99
-	call GiveItem
-	ld b, MASTER_BALL
-	ld c, 2
-	call GiveItem
+	ld a, MASTER_BALL
+	ld [wCurItem], a
+	ld a, 99
+	ld [wItemQuantity], a
+	ld hl, wNumBoxItems
+	call AddItemToInventory
+	ld a, 2
+	ld [wItemQuantity], a
+	ld hl, wNumBoxItems
+	call AddItemToInventory
 
 ; Give the player 500 Rare Candies: 99 in the bag, 401 in PC item storage
 ; (4 stacks of 99 + 1 stack of 5, since each slot caps at 99).
