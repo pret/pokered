@@ -148,7 +148,7 @@ struct Symbol *parse_symbols(const char *filename) {
 				}
 				buffer->size = 0;
 			}
-			buffer_append(buffer, &c);
+			buffer_append(buffer, &(char){c});
 		} else if (state == SYM_VALUE) {
 			// The symbol value has ended; wait to see if a name comes after it
 			state = SYM_SPACE;
@@ -386,7 +386,7 @@ struct Buffer *process_template(
 			// "{...}" is a template command; buffer its contents
 			buffer->size = 0;
 			for (c = getc(input); c != EOF && c != '}'; c = getc(input)) {
-				buffer_append(buffer, &c);
+				buffer_append(buffer, &(char){c});
 			}
 			buffer_append(buffer, &(char){'\0'});
 			// Interpret the command in the context of the current patch
@@ -414,7 +414,7 @@ struct Buffer *process_template(
 							c = '_';
 						}
 					}
-					buffer_append(buffer, &c);
+					buffer_append(buffer, &(char){c});
 				}
 			}
 			buffer_append(buffer, &(char){'\0'});
