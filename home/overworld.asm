@@ -875,7 +875,7 @@ LoadTilesetTilePatternData::
 	ld a, [wTilesetGfxPtr + 1]
 	ld h, a
 	ld de, vTileset
-	ld bc, $600
+	ld bc, MAP_TILESET_SIZE * TILE_SIZE
 	ld a, [wTilesetBank]
 	jp FarCopyData2
 
