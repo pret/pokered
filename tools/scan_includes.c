@@ -25,22 +25,30 @@ void parse_args(int argc, char *argv[], bool *strict) {
 	}
 }
 
-void scan_file(const char *filename, bool strict) {
-	errno = 0;
-	FILE *f = fopen(filename, "rb");
-	if (!f) {
-		if (strict) {
-			error_exit("Could not open file \"%s\": %s\n", filename, strerror(errno));
-		} else {
-			return;
+void scan_file(const char *filename, bool strict, bool top_level) {
+	long size = 0;
+	char *contents = NULL;
+	if (top_level && !strcmp(filename, "-")) {
+		contents = (char *)read_stdin(&size);
+		contents = xrealloc(contents, size + 1);
+		contents[size] = '\0';
+	} else {
+		errno = 0;
+		FILE *f = fopen(filename, "rb");
+		if (!f) {
+			if (strict) {
+				error_exit("Could not open file \"%s\": %s\n", filename, strerror(errno));
+			} else {
+				return;
+			}
 		}
-	}
 
-	long size = xfsize(filename, f);
-	char *contents = xmalloc(size + 1);
-	xfread((uint8_t *)contents, size, filename, f);
-	fclose(f);
-	contents[size] = '\0';
+		size = xfsize(filename, f);
+		contents = xmalloc(size + 1);
+		xfread((uint8_t *)contents, size, filename, f);
+		xfclose(f);
+		contents[size] = '\0';
+	}
 
 	for (char *ptr = contents; ptr && ptr < contents + size; ptr++) {
 		ptr = strpbrk(ptr, ";\"Ii");
@@ -90,7 +98,7 @@ void scan_file(const char *filename, bool strict) {
 					include_path[length] = '\0';
 					printf("%s ", include_path);
 					if (is_include) {
-						scan_file(include_path, strict);
+						scan_file(include_path, strict, false);
 					}
 				} else {
 					fprintf(stderr, "%s: no file path after INC%s\n", filename, is_include ? "LUDE" : "BIN");
@@ -117,6 +125,6 @@ int main(int argc, char *argv[]) {
 		usage_exit(1);
 	}
 
-	scan_file(argv[0], strict);
+	scan_file(argv[0], strict, true);
 	return 0;
 }

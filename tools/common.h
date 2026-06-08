@@ -59,6 +59,9 @@ void *xrealloc(void *m, size_t size) {
 }
 
 FILE *xfopen(const char *filename, char rw) {
+	if (!strcmp(filename, "-")) {
+		return rw == 'r' ? stdin : stdout;
+	}
 	char mode[3] = {rw, 'b', '\0'};
 	errno = 0;
 	FILE *f = fopen(filename, mode);
@@ -68,10 +71,16 @@ FILE *xfopen(const char *filename, char rw) {
 	return f;
 }
 
+void xfclose(FILE *f) {
+	if (f != stdin && f != stdout) {
+		fclose(f);
+	}
+}
+
 void xfread(uint8_t *data, size_t size, const char *filename, FILE *f) {
 	errno = 0;
 	if (fread(data, 1, size, f) != size) {
-		fclose(f);
+		xfclose(f);
 		error_exit("Could not read from file \"%s\": %s\n", filename, strerror(errno));
 	}
 }
@@ -79,7 +88,7 @@ void xfread(uint8_t *data, size_t size, const char *filename, FILE *f) {
 void xfwrite(const uint8_t *data, size_t size, const char *filename, FILE *f) {
 	errno = 0;
 	if (fwrite(data, 1, size, f) != size) {
-		fclose(f);
+		xfclose(f);
 		error_exit("Could not write to file \"%s\": %s\n", filename, strerror(errno));
 	}
 }
@@ -99,19 +108,41 @@ long xfsize(const char *filename, FILE *f) {
 	return size;
 }
 
+uint8_t *read_stdin(long *size) {
+	uint8_t buffer[0x1000] = {0};
+	*size = 0;
+	uint8_t *data = malloc(0);
+	for (;;) {
+		size_t n = fread(buffer, 1, sizeof(buffer), stdin);
+		if (n == 0) {
+			if (ferror(stdin)) {
+				error_exit("Could not read from stdin: %s\n", strerror(errno));
+			}
+			break;
+		}
+		data = xrealloc(data, *size + n);
+		memcpy(data + *size, buffer, n);
+		*size += n;
+	}
+	return data;
+}
+
 uint8_t *read_u8(const char *filename, long *size) {
 	FILE *f = xfopen(filename, 'r');
+	if (f == stdin) {
+		return read_stdin(size);
+	}
 	*size = xfsize(filename, f);
 	uint8_t *data = xmalloc(*size);
 	xfread(data, *size, filename, f);
-	fclose(f);
+	xfclose(f);
 	return data;
 }
 
 void write_u8(const char *filename, uint8_t *data, size_t size) {
 	FILE *f = xfopen(filename, 'w');
 	xfwrite(data, size, filename, f);
-	fclose(f);
+	xfclose(f);
 }
 
 uint32_t read_png_width(const char *filename) {
@@ -124,12 +155,12 @@ uint32_t read_png_width(const char *filename) {
 		'I', 'H', 'D', 'R',                          // IHDR chunk type
 	};
 	if (memcmp(header, expected_header, sizeof(header))) {
-		fclose(f);
+		xfclose(f);
 		error_exit("Not a valid PNG file: \"%s\"\n", filename);
 	}
 	uint8_t bytes[4] = {0};
 	xfread(bytes, sizeof(bytes), filename, f);
-	fclose(f);
+	xfclose(f);
 	return (bytes[0] << 24) | (bytes[1] << 16) | (bytes[2] << 8) | bytes[3];
 }
 
