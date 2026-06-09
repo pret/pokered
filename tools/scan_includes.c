@@ -9,7 +9,7 @@ void parse_args(int argc, char *argv[], bool *strict) {
 	struct option long_options[] = {
 		{"strict", no_argument, 0, 's'},
 		{"help", no_argument, 0, 'h'},
-		{0}
+		{0},
 	};
 	for (int opt; (opt = getopt_long(argc, argv, "sh", long_options)) != -1;) {
 		switch (opt) {
