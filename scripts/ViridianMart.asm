@@ -63,19 +63,18 @@ ViridianMartNoopScript:
 	ret
 
 ViridianMart_TextPointers:
-	dw ViridianMartClerkSayHiToOakText
-	dw ViridianMartYoungsterText
-	dw ViridianMartCooltrainerMText
-	const_def 4
+	def_text_pointers
+	dw_const ViridianMartClerkSayHiToOakText,            TEXT_VIRIDIANMART_CLERK
+	dw_const ViridianMartYoungsterText,                  TEXT_VIRIDIANMART_YOUNGSTER
+	dw_const ViridianMartCooltrainerMText,               TEXT_VIRIDIANMART_COOLTRAINER_M
 	dw_const ViridianMartClerkYouCameFromPalletTownText, TEXT_VIRIDIANMART_CLERK_YOU_CAME_FROM_PALLET_TOWN
 	dw_const ViridianMartClerkParcelQuestText,           TEXT_VIRIDIANMART_CLERK_PARCEL_QUEST
 
 ViridianMart_TextPointers2:
 	; This becomes the primary text pointers table when Oak's parcel has been delivered.
-	def_text_pointers
-	dw_const ViridianMartClerkText,        TEXT_VIRIDIANMART_CLERK
-	dw_const ViridianMartYoungsterText,    TEXT_VIRIDIANMART_YOUNGSTER
-	dw_const ViridianMartCooltrainerMText, TEXT_VIRIDIANMART_COOLTRAINER_M
+	dw ViridianMartClerkText        ; TEXT_VIRIDIANMART_CLERK
+	dw ViridianMartYoungsterText    ; TEXT_VIRIDIANMART_YOUNGSTER
+	dw ViridianMartCooltrainerMText ; TEXT_VIRIDIANMART_COOLTRAINER_M
 
 ViridianMartClerkSayHiToOakText:
 	text_far _ViridianMartClerkSayHiToOakText

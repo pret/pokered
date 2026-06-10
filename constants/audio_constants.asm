@@ -55,7 +55,7 @@ DEF HW_CH4_DISABLE_MASK EQU (~HW_CH4_ENABLE_MASK & $ff)
 	const REG_FREQUENCY_LO    ; 3
 
 ; wChannelFlags1 constants
-	const_def
+	bit_const_def
 	const BIT_PERFECT_PITCH          ; 0 ; controlled by toggle_perfect_pitch command
 	const BIT_SOUND_CALL             ; 1 ; if in sound call
 	const BIT_NOISE_OR_SFX           ; 2 ; if channel is the music noise channel or an SFX channel
