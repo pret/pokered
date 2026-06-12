@@ -228,7 +228,8 @@ void interpret_command(char *command, const struct Symbol *current_hook, const s
 	}
 
 	// Get the arguments
-	char *argv[argc]; // VLA
+	char *argv[argc + 1]; // VLA (cannot be zero-length)
+	argv[argc] = NULL;
 	char *arg = command;
 	for (int i = 0; i < argc; i++) {
 		while (*arg && !isspace((unsigned)*arg)) {
@@ -515,7 +516,7 @@ int main(int argc, char *argv[]) {
 	FILE *new_rom = xfopen(argv[1], 'r');
 	FILE *orig_rom = xfopen(argv[2], 'r');
 	if (new_rom == stdin || orig_rom == stdin) {
-		error_exit("Error: Cannot read ROM file from stdin (not rewindable)");
+		error_exit("Error: Cannot read ROM file from stdin (not rewindable)\n");
 	}
 	struct Buffer *patches = process_template(argv[3], argv[4], new_rom, orig_rom, symbols, ignore_addr, ignore_size);
 
