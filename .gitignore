@@ -29,3 +29,9 @@
 *.sn*
 *.sa*
 *.sg1
+
+# local toolchain and scratch files
+/rgbds/
+rgbds-linux-x86_64.tar.xz
+*:Zone.Identifier
+move_effects.csv
