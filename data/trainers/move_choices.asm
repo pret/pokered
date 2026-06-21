@@ -11,7 +11,7 @@ ENDM
 ; move choice modification methods that are applied for each trainer class
 TrainerClassMoveChoiceModifications:
 	move_choices         ; YOUNGSTER
-	move_choices 1       ; BUG CATCHER
+	move_choices 1       ; BUG_CATCHER
 	move_choices 1       ; LASS
 	move_choices 1, 3    ; SAILOR
 	move_choices 1       ; JR_TRAINER_M
