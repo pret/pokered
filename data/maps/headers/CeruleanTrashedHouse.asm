@@ -1,2 +1,2 @@
-	map_header CeruleanTrashedHouse, CERULEAN_TRASHED_HOUSE, HOUSE, 0
+	map_header CeruleanTrashedHouse, CERULEAN_TRASHED_HOUSE, HOUSE
 	end_map_header

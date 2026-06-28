@@ -1,2 +1,2 @@
-	map_header FightingDojo, FIGHTING_DOJO, DOJO, 0
+	map_header FightingDojo, FIGHTING_DOJO, DOJO
 	end_map_header

@@ -1,2 +1,2 @@
-	map_header Museum2F, MUSEUM_2F, MUSEUM, 0
+	map_header Museum2F, MUSEUM_2F, MUSEUM
 	end_map_header

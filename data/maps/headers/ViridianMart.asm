@@ -1,2 +1,2 @@
-	map_header ViridianMart, VIRIDIAN_MART, MART, 0
+	map_header ViridianMart, VIRIDIAN_MART, MART
 	end_map_header

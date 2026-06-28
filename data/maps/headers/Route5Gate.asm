@@ -1,2 +1,2 @@
-	map_header Route5Gate, ROUTE_5_GATE, GATE, 0
+	map_header Route5Gate, ROUTE_5_GATE, GATE
 	end_map_header

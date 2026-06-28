@@ -1,2 +1,2 @@
-	map_header Daycare, DAYCARE, HOUSE, 0
+	map_header Daycare, DAYCARE, HOUSE
 	end_map_header

@@ -1,2 +1,2 @@
-	map_header ViridianForestNorthGate, VIRIDIAN_FOREST_NORTH_GATE, FOREST_GATE, 0
+	map_header ViridianForestNorthGate, VIRIDIAN_FOREST_NORTH_GATE, FOREST_GATE
 	end_map_header

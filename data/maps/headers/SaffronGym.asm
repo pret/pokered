@@ -1,2 +1,2 @@
-	map_header SaffronGym, SAFFRON_GYM, FACILITY, 0
+	map_header SaffronGym, SAFFRON_GYM, FACILITY
 	end_map_header

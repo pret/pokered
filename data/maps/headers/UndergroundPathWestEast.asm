@@ -1,2 +1,2 @@
-	map_header UndergroundPathWestEast, UNDERGROUND_PATH_WEST_EAST, UNDERGROUND, 0
+	map_header UndergroundPathWestEast, UNDERGROUND_PATH_WEST_EAST, UNDERGROUND
 	end_map_header

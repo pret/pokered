@@ -1,2 +1,2 @@
-	map_header BikeShop, BIKE_SHOP, CLUB, 0
+	map_header BikeShop, BIKE_SHOP, CLUB
 	end_map_header

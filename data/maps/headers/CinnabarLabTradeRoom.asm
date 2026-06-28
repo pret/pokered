@@ -1,2 +1,2 @@
-	map_header CinnabarLabTradeRoom, CINNABAR_LAB_TRADE_ROOM, LAB, 0
+	map_header CinnabarLabTradeRoom, CINNABAR_LAB_TRADE_ROOM, LAB
 	end_map_header

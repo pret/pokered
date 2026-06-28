@@ -1,4 +1,4 @@
-	map_header ViridianCity, VIRIDIAN_CITY, OVERWORLD, NORTH | SOUTH | WEST
+	map_header ViridianCity, VIRIDIAN_CITY, OVERWORLD
 	connection north, Route2, ROUTE_2, 5
 	connection south, Route1, ROUTE_1, 5
 	connection west, Route22, ROUTE_22, 4

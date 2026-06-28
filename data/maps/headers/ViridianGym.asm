@@ -1,2 +1,2 @@
-	map_header ViridianGym, VIRIDIAN_GYM, GYM, 0
+	map_header ViridianGym, VIRIDIAN_GYM, GYM
 	end_map_header
