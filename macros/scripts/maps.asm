@@ -138,8 +138,8 @@ ENDM
 ;\1 map name
 ;\2 map id
 ;\3 tileset
-;\4 connections: combo of NORTH, SOUTH, WEST, and/or EAST, or 0 for none
 MACRO map_header
+	REDEF CURRENT_MAP_ID EQUS "\2"
 	DEF CURRENT_MAP_WIDTH = \2_WIDTH
 	DEF CURRENT_MAP_HEIGHT = \2_HEIGHT
 	DEF CURRENT_MAP_OBJECT EQUS "\1_Object"
@@ -149,7 +149,10 @@ MACRO map_header
 	dw \1_Blocks
 	dw \1_TextPointers
 	dw \1_Script
-	db \4
+	db MAP_CONNECTIONS_\2
+	; Define `MAP_CONNECTIONS_\2` after `db`ing it so that the `db`ed value
+	; gets updated when subsequent `connection`s modify `MAP_CONNECTIONS_\2`.
+	DEF MAP_CONNECTIONS_\2 = 0
 ENDM
 
 ; Comes after map_header and connection macros
@@ -175,6 +178,10 @@ MACRO connection
 	ENDC
 
 	IF "\1" === "north"
+		IF MAP_CONNECTIONS_{CURRENT_MAP_ID} & (NORTH | SOUTH | WEST | EAST)
+			fail "Invalid order for 'connection' (must be north, south, west, east)"
+		ENDC
+		DEF MAP_CONNECTIONS_{CURRENT_MAP_ID} |= NORTH
 		DEF _blk = \3_WIDTH * (\3_HEIGHT - 3) + _src
 		DEF _map = _tgt
 		DEF _win = (\3_WIDTH + 6) * \3_HEIGHT + 1
@@ -186,6 +193,10 @@ MACRO connection
 		ENDC
 
 	ELIF "\1" === "south"
+		IF MAP_CONNECTIONS_{CURRENT_MAP_ID} & (SOUTH | WEST | EAST)
+			fail "Invalid order for 'connection' (must be north, south, west, east)"
+		ENDC
+		DEF MAP_CONNECTIONS_{CURRENT_MAP_ID} |= SOUTH
 		DEF _blk = _src
 		DEF _map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
 		DEF _win = \3_WIDTH + 7
@@ -197,6 +208,10 @@ MACRO connection
 		ENDC
 
 	ELIF "\1" === "west"
+		IF MAP_CONNECTIONS_{CURRENT_MAP_ID} & (WEST | EAST)
+			fail "Invalid order for 'connection' (must be north, south, west, east)"
+		ENDC
+		DEF MAP_CONNECTIONS_{CURRENT_MAP_ID} |= WEST
 		DEF _blk = (\3_WIDTH * _src) + \3_WIDTH - 3
 		DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt
 		DEF _win = (\3_WIDTH + 6) * 2 - 6
@@ -208,6 +223,10 @@ MACRO connection
 		ENDC
 
 	ELIF "\1" === "east"
+		IF MAP_CONNECTIONS_{CURRENT_MAP_ID} & EAST
+			fail "Invalid order for 'connection' (must be north, south, west, east)"
+		ENDC
+		DEF MAP_CONNECTIONS_{CURRENT_MAP_ID} |= EAST
 		DEF _blk = (\3_WIDTH * _src)
 		DEF _map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
 		DEF _win = \3_WIDTH + 7

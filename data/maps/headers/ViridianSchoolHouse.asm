@@ -1,2 +1,2 @@
-	map_header ViridianSchoolHouse, VIRIDIAN_SCHOOL_HOUSE, HOUSE, 0
+	map_header ViridianSchoolHouse, VIRIDIAN_SCHOOL_HOUSE, HOUSE
 	end_map_header

@@ -1,2 +1,2 @@
-	map_header CinnabarPokecenter, CINNABAR_POKECENTER, POKECENTER, 0
+	map_header CinnabarPokecenter, CINNABAR_POKECENTER, POKECENTER
 	end_map_header

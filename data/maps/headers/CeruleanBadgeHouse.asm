@@ -1,2 +1,2 @@
-	map_header CeruleanBadgeHouse, CERULEAN_BADGE_HOUSE, SHIP, 0
+	map_header CeruleanBadgeHouse, CERULEAN_BADGE_HOUSE, SHIP
 	end_map_header

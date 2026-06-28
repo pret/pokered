@@ -1,2 +1,2 @@
-	map_header CopycatsHouse1F, COPYCATS_HOUSE_1F, REDS_HOUSE_1, 0
+	map_header CopycatsHouse1F, COPYCATS_HOUSE_1F, REDS_HOUSE_1
 	end_map_header

@@ -1,2 +1,2 @@
-	map_header Route8Gate, ROUTE_8_GATE, GATE, 0
+	map_header Route8Gate, ROUTE_8_GATE, GATE
 	end_map_header

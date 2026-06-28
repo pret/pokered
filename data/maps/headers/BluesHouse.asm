@@ -1,2 +1,2 @@
-	map_header BluesHouse, BLUES_HOUSE, HOUSE, 0
+	map_header BluesHouse, BLUES_HOUSE, HOUSE
 	end_map_header

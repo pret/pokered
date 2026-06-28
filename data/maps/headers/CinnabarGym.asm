@@ -1,2 +1,2 @@
-	map_header CinnabarGym, CINNABAR_GYM, FACILITY, 0
+	map_header CinnabarGym, CINNABAR_GYM, FACILITY
 	end_map_header

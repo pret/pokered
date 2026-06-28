@@ -1,2 +1,2 @@
-	map_header FuchsiaMart, FUCHSIA_MART, MART, 0
+	map_header FuchsiaMart, FUCHSIA_MART, MART
 	end_map_header

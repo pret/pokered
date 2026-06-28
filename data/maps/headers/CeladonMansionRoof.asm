@@ -1,2 +1,2 @@
-	map_header CeladonMansionRoof, CELADON_MANSION_ROOF, MANSION, 0
+	map_header CeladonMansionRoof, CELADON_MANSION_ROOF, MANSION
 	end_map_header
