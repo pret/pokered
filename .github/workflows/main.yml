@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Checkout rgbds
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           path: rgbds
           ref: ${{ env.rgbds_version }}
@@ -47,7 +47,7 @@ jobs:
 
       - name: Checkout symbols
         if: ${{ github.repository_owner == 'pret' && github.event_name == 'push' }}
-        uses: actions/checkout@master
+        uses: actions/checkout@v7
         with:
           path: symbols
           ref: symbols
@@ -59,7 +59,7 @@ jobs:
 
       - name: Update symbols
         if: ${{ github.repository_owner == 'pret' && github.event_name == 'push' }}
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           cwd: "./symbols"
           add: "*.sym *.map"
@@ -69,10 +69,10 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Checkout rgbds
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           path: rgbds
           ref: ${{ env.rgbds_version }}
