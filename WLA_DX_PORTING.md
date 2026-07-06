@@ -72,6 +72,19 @@ The validation scripts protect prior `wla-dx` work by checking that:
 
 This is structural validation, not semantic ROM parity.
 
-## Next phase
+## Phase 1: data/moves/field_move_names.asm reconciliation
+
+**Reconciled file**: `wla/data/moves/field_move_names_reconcile.asm`
+**Original master file**: `data/moves/field_move_names.asm` (RGBDS source untouched)
+**Validation**: `make wla-unit-poc` passes (53 bytes, FieldMoveNamesUnit BANK 1 SLOT 1 FREE)
+
+**Cleanup**:
+- Old `wla/data/moves/field_move_names.asm` (byte-expanded POC from wla-dx) deleted — unreferenced
+- POC driver now uses `wla/data/moves/field_move_names_reconcile.asm` (master RGBDS source)
+- Unit link file: `wla/unit_poc.link` references `wla/build/field_move_names_poc.o` only
+- RGBDS source: untouched
+- Bank files: untouched
+
+**Next step**: choose another small data file for reconciliation.
 
 Choose one small master-aligned bank/region and reconcile it against `wla/pkrd` using `/data/pkrd/pkrd-noanon-hram-fixed.asm` for WLA label/symbol authority. Preserve the RGBDS tree and stop at one bounded conversion boundary.
