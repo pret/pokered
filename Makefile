@@ -57,6 +57,12 @@ RGBGFXFLAGS  ?= -Weverything
 	blue_debug \
 	red_vc \
 	blue_vc \
+	wla-poc \
+	wla-unit-poc \
+	wla-index-monolith \
+	wla-check-split \
+	wla-report \
+	wla-reference \
 	clean \
 	tidy \
 	compare \
@@ -213,3 +219,41 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 %.blk: ;
 %.bst: ;
 %.rle: ;
+
+### WLA-DX reconciliation scaffold
+
+WLA ?= wla-gb
+WLALINK ?= wlalink
+PYTHON ?= python3
+PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
+
+wla-build-dir := wla/build
+wla-reference-dir := wla/reference
+
+wla-poc:
+	mkdir -p $(wla-build-dir)
+	$(WLA) -v -o $(wla-build-dir)/home_start_poc.o wla/poc/home_start_poc_driver.asm
+	$(WLALINK) -v -s wla/layout.link $(wla-build-dir)/home_start_poc.gb
+
+wla-unit-poc:
+	mkdir -p $(wla-build-dir)
+	$(WLA) -v -o $(wla-build-dir)/field_move_names_poc.o wla/poc/field_move_names_poc_driver.asm
+	$(WLALINK) -v -s wla/unit_poc.link $(wla-build-dir)/field_move_names_poc.gb
+
+wla-index-monolith:
+	mkdir -p $(wla-reference-dir)
+	$(PYTHON) wla/tools/index_monolith.py $(PKRD_MONOLITH) > $(wla-reference-dir)/MONOLITH_INDEX.md
+
+wla-check-split:
+	$(PYTHON) wla/tools/check_split_against_monolith.py $(PKRD_MONOLITH)
+
+wla-report:
+	$(PYTHON) wla/tools/report_split_status.py --monolith $(PKRD_MONOLITH)
+
+wla-reference:
+	mkdir -p $(wla-reference-dir)
+	cp $(PKRD_MONOLITH) $(wla-reference-dir)/pkrd-noanon-hram-fixed.asm
+	test -f $(wla-reference-dir)/pkrd-noanon-hram-fixed.asm
+
+.SECONDARY: $(wla-build-dir)/home_start_poc.gb $(wla-build-dir)/field_move_names_poc.gb
+.PRECIOUS: $(wla-build-dir)/%.o

@@ -10,6 +10,8 @@
 *.gbc
 *.gb
 *.patch
+wla/build/
+wla/reference/pkrd-noanon-hram-fixed.asm
 
 # rgbds extras
 *.map
