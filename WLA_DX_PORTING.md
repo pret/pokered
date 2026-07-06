@@ -85,6 +85,19 @@ This is structural validation, not semantic ROM parity.
 - RGBDS source: untouched
 - Bank files: untouched
 
-**Next step**: choose another small data file for reconciliation.
+## Phase 2: data/battle/stat_names.asm reconciliation
+
+**Reconciled file**: `wla/data/battle/stat_names_reconcile.asm`
+**Original master file**: `data/battle/stat_names.asm` (RGBDS source untouched)
+**Validation**: `make wla-unit-poc` passes (122 bytes, VitaminStats BANK 1 SLOT 1 FREE)
+
+**Data content**: Pure .DB table of 5 vitamin stat names (HEALTH/ATTACK/DEFENSE/SPEED/SPECIAL) — master RGBDS source uses .DB with RGBDS-specific macros (list_start/assert_list_length/li), WLA-DX uses .DB directly
+
+**Status**:
+- RGBDS source: untouched
+- Bank files: untouched
+- No POC driver modified (no active driver referenced this file)
+
+## Next step
 
 Choose one small master-aligned bank/region and reconcile it against `wla/pkrd` using `/data/pkrd/pkrd-noanon-hram-fixed.asm` for WLA label/symbol authority. Preserve the RGBDS tree and stop at one bounded conversion boundary.
