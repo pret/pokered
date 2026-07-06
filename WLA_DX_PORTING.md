@@ -98,6 +98,22 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified (no active driver referenced this file)
 
+## Phase 3: data/battle/stat_mod_names.asm reconciliation
+
+**Reconciled file**: `wla/data/battle/stat_mod_names_reconcile.asm`
+**Original master file**: `data/battle/stat_mod_names.asm` (RGBDS source untouched)
+**Commit**: `5aed9e56`
+**Validation**: WLA-DX .DB syntax with 6 stat mod strings; asserts dropped
+
+**Data content**: Pure `.DB` table of 6 move side-effect stat names (ATTACK/DEFENSE/SPEED/SPECIAL/ACCURACY/EVASION). The RGBDS source uses RGBDS-specific macros (`list_start`/`assert_list_length`/`li`) and references constants like `NUM_STAT_MODS` and 8 side-effect constants that do not exist in the monolith.
+
+**Assert handling**: Dropped. The `assert_list_length` checks enforced list length against `NUM_STAT_MODS` and side-effect constants that only exist in the RGBDS constants file, not in the monolith. No validation needed — the 6 strings are fixed and self-documenting.
+
+**Status**:
+- RGBDS source: untouched
+- Bank files: untouched
+- No POC driver modified (no active driver referenced this file)
+
 ## Next step
 
 Choose one small master-aligned bank/region and reconcile it against `wla/pkrd` using `/data/pkrd/pkrd-noanon-hram-fixed.asm` for WLA label/symbol authority. Preserve the RGBDS tree and stop at one bounded conversion boundary.
