@@ -2,10 +2,10 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-ResidualEffects2:
 ; non-side effects not included in ResidualEffects1
 ; stat-affecting moves, sleep-inflicting moves, and Bide
 ; e.g., Meditate, Bide, Hypnosis
+.ResidualEffects2:
 .DB EFFECT_01
 .DB ATTACK_UP1_EFFECT
 .DB DEFENSE_UP1_EFFECT
