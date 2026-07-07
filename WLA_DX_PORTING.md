@@ -101,6 +101,25 @@ This is structural validation, not semantic ROM parity.
 ## Phase 3: data/battle/stat_mod_names.asm reconciliation
 
 **Reconciled file**: `wla/data/battle/stat_mod_names_reconcile.asm`
+
+## Phase 4: data/battle/residual_effects_1.asm reconciliation
+
+**Reconciled file**: `wla/data/battle/residual_effects_1_reconcile.asm`
+**Original master file**: `data/battle/residual_effects_1.asm` (RGBDS source untouched)
+**Validation**: 17 `.DB` entries verified (16 named constants + `-1` terminator), section label `ResidualEffects1:` preserved, RGBDS source untouched, no `wla/pkrd` files modified
+
+**Data content**: Pure `.DB` table of 16 named move effect constants (CONVERSION_EFFECT/HAZE_EFFECT/SWITCH_AND_TELEPORT_EFFECT/MIST_EFFECT/FOCUS_ENERGY_EFFECT/CONFUSION_EFFECT/HEAL_EFFECT/TRANSFORM_EFFECT/LIGHT_SCREEN_EFFECT/REFLECT_EFFECT/POISON_EFFECT/PARALYZE_EFFECT/SUBSTITUTE_EFFECT/MIMIC_EFFECT/LEECH_SEED_EFFECT/SPLASH_EFFECT) plus `-1` end marker
+
+**Translation notes**:
+- Comments preserved verbatim (not assembly directives)
+- Section label `ResidualEffects1:` preserved
+- No macros, no conditionals, no pointer relocation
+- No asserts to handle
+
+**Status**:
+- RGBDS source: untouched
+- Bank files: untouched
+- No POC driver modified
 **Original master file**: `data/battle/stat_mod_names.asm` (RGBDS source untouched)
 **Commit**: `5aed9e56`
 **Validation**: WLA-DX .DB syntax with 6 stat mod strings; asserts dropped
