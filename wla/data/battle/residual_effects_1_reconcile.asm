@@ -3,8 +3,8 @@
 ; WLA-DX representation for reconciliation only.
 
 ; These are move effects (second value from the Moves table in bank $E).
-ResidualEffects1:
 ; most non-side effects
+.ResidualEffects1:
 .DB CONVERSION_EFFECT
 .DB HAZE_EFFECT
 .DB SWITCH_AND_TELEPORT_EFFECT
