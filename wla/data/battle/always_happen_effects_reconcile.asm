@@ -1,5 +1,8 @@
-; Attacks that aren't finished after they faint the opponent
+; Reconciled from master RGBDS source: data/battle/always_happen_effects.asm
+; RGBDS source is untouched.
+; WLA-DX representation for reconciliation only.
 
+; Attacks that aren't finished after they faint the opponent.
 .DB DRAIN_HP_EFFECT
 .DB EXPLODE_EFFECT
 .DB DREAM_EATER_EFFECT
