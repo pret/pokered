@@ -3,6 +3,7 @@
 ; WLA-DX representation for reconciliation only.
 
 ; Moves that deal critical hits
+HighCriticalMoves:
 .DB KARATE_CHOP
 .DB RAZOR_LEAF
 .DB CRABHAMMER

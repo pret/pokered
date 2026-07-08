@@ -6,7 +6,7 @@
 ; .assert_list_length is RGBDS-only; dropped with documentation in WLA_DX_PORTING.md.
 ; Source labels are preserved where safe; .db strings converted to .DB for consistency.
 
-.VitaminStats:
+VitaminStats:
 .DB "HEALTH"
 .DB "ATTACK"
 .DB "DEFENSE"

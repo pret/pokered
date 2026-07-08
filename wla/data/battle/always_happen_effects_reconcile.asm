@@ -3,6 +3,7 @@
 ; WLA-DX representation for reconciliation only.
 
 ; Attacks that aren't finished after they faint the opponent.
+AlwaysHappenSideEffects:
 .DB DRAIN_HP_EFFECT
 .DB EXPLODE_EFFECT
 .DB DREAM_EATER_EFFECT

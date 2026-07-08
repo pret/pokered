@@ -3,6 +3,7 @@
 ; WLA-DX representation for reconciliation only.
 
 ; first byte is numerator, second byte is denominator
+StatModifierRatios:
 .DB 25, 100
 .DB 28, 100
 .DB 33, 100

@@ -4,7 +4,7 @@
 
 ; moves that do damage but not through normal calculations
 ; e.g., Super Fang, Psywave
-.SetDamageEffects:
+SetDamageEffects:
 .DB SUPER_FANG_EFFECT
 .DB SPECIAL_DAMAGE_EFFECT
 .DB -1
