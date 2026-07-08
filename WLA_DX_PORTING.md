@@ -242,6 +242,31 @@ This is structural validation, not semantic ROM parity.
 - Bank files: untouched
 - No POC driver modified
 
+## Phase 11: data/battle_anims/subanimations.asm reconciliation
+
+**Reconciled file**: `wla/data/battle_anims/subanimations_reconcile.asm`
+**Original master file**: `data/battle_anims/subanimations.asm` (RGBDS source untouched)
+
+**Data content**: Subanimation pointer table (SubanimationPointers:) with all subanimation entry labels as `.DW` pointers:
+- 87 subanimation entry pointers: Subanim_0Star through Subanim_2TradeBallPoof
+- 45 subanimation body blocks: individual subanim definitions with `.DB` frame/block/mode triples
+- 10 subanimation type constants: SUBANIMTYPE_NORMAL, HFLIP, REVERSE, HVFLIP, ENEMY, COORDFLIP
+
+**Translation notes**:
+- `table_width 2` directive dropped (RGBDS-only)
+- `assert_table_length NUM_SUBANIMS` dropped (RGBDS-only)
+- `REPT/ENDR` macro expansion replaced with explicit `.DB` entries
+- `MACRO subanim ... ENDM` dropped (subanim bodies are static data, no macro expansion needed)
+- `table_width`/`assert_*` directives dropped with documentation
+- All global labels preserved: `SubanimationPointers:`, `Subanim_*:`
+- Comments preserved verbatim where present
+- Side-effect constants dropped (only in RGBDS constants file)
+
+**Status**:
+- RGBDS source: untouched
+- Bank files: untouched
+- No POC driver modified
+
 ## Battle reconciliation label audit
 
 All `wla/data/battle/*_reconcile.asm` files were checked against their master `data/battle/*.asm` sources. Master global labels are preserved exactly; no global labels are intentionally converted to WLA local labels.
