@@ -110,6 +110,8 @@ LoadMapSpriteTilePatterns:
 	ld [hl], a ; store VRAM slot at [x#SPRITESTATEDATA2_IMAGEBASEOFFSET]
 	ldh [hVRAMSlot], a ; used to determine if it's 4-tile sprite later
 	ld a, b ; a = current sprite picture ID
+	; hl = SpriteSheetPointerTable + (a - 1) * 4
+	; (this would overflow for a sprite picture ID greater than 127)
 	dec a
 	add a
 	add a

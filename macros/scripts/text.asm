@@ -183,7 +183,7 @@ ENDM
 
 
 ; Text script IDs (see home/text_script.asm)
-	const_def -1, -1
+	const_def $ff, -1, {const_value}
 
 	const TX_SCRIPT_POKECENTER_NURSE ; $ff
 MACRO script_pokecenter_nurse

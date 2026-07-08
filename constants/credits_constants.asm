@@ -66,7 +66,7 @@
 	const CRED_PAAD           ; $3F
 DEF NUM_CRED_STRINGS EQU const_value
 
-	const_def -1, -1
+	const_def $ff, -1, NUM_CRED_STRINGS
 	const CRED_TEXT_FADE_MON ; $FF
 	const CRED_TEXT_MON      ; $FE
 	const CRED_TEXT_FADE     ; $FD
