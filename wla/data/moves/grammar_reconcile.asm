@@ -6,76 +6,77 @@
 ; Each move is given an identifier for what usedmovetext to use (0-4).
 ; Made redundant in English localization, where all are just "[mon]<LINE>used [move]!"
 
-; 0: originally "[mon]は<LINE>[move]を　つかった！" ("[mon]<LINE>used [move]!")
-.DW SWORDS_DANCE
-.DW GROWTH
-.DW 0
+MoveGrammar:
+; 0: originally "[mon]は<LINE>[move]を つかった！"("[mon]<LINE>used [move]!")
+.DB SWORDS_DANCE
+.DB GROWTH
+.DB 0
 
-; 1: originally "[mon]は<LINE>[move]を　した！" ("[mon]<LINE>did [move]!")
-.DW RECOVER
-.DW BIDE
-.DW SELFDESTRUCT
-.DW AMNESIA
-.DW 0
+; 1: originally "[mon]は<LINE>[move]を した！"("[mon]<LINE>did [move]!")
+.DB RECOVER
+.DB BIDE
+.DB SELFDESTRUCT
+.DB AMNESIA
+.DB 0
 
-; 2: originally "[mon]は<LINE>[move]した！" ("[mon]<LINE>did [move]!")
-.DW MEDITATE
-.DW AGILITY
-.DW TELEPORT
-.DW MIMIC
-.DW DOUBLE_TEAM
-.DW BARRAGE
-.DW 0
+; 2: originally "[mon]は<LINE>[move]した！"("[mon]<LINE>did [move]!")
+.DB MEDITATE
+.DB AGILITY
+.DB TELEPORT
+.DB MIMIC
+.DB DOUBLE_TEAM
+.DB BARRAGE
+.DB 0
 
-; 3: originally "[mon]の<LINE>[move]　こうげき！" ("[mon]'s<LINE>[move] attack!")
-.DW POUND
-.DW SCRATCH
-.DW VICEGRIP
-.DW WING_ATTACK
-.DW FLY
-.DW BIND
-.DW SLAM
-.DW HORN_ATTACK
-.DW BODY_SLAM
-.DW WRAP
-.DW THRASH
-.DW TAIL_WHIP
-.DW LEER
-.DW BITE
-.DW GROWL
-.DW ROAR
-.DW SING
-.DW PECK
-.DW COUNTER
-.DW STRENGTH
-.DW ABSORB
-.DW STRING_SHOT
-.DW EARTHQUAKE
-.DW FISSURE
-.DW DIG
-.DW TOXIC
-.DW SCREECH
-.DW HARDEN
-.DW MINIMIZE
-.DW WITHDRAW
-.DW DEFENSE_CURL
-.DW METRONOME
-.DW LICK
-.DW CLAMP
-.DW CONSTRICT
-.DW POISON_GAS
-.DW LEECH_LIFE
-.DW BUBBLE
-.DW FLASH
-.DW SPLASH
-.DW ACID_ARMOR
-.DW FURY_SWIPES
-.DW REST
-.DW SHARPEN
-.DW SLASH
-.DW SUBSTITUTE
-.DW 0
+; 3: originally "[mon]の<LINE>[move] こうげき！"("[mon]'s<LINE>[move] attack!")
+.DB POUND
+.DB SCRATCH
+.DB VICEGRIP
+.DB WING_ATTACK
+.DB FLY
+.DB BIND
+.DB SLAM
+.DB HORN_ATTACK
+.DB BODY_SLAM
+.DB WRAP
+.DB THRASH
+.DB TAIL_WHIP
+.DB LEER
+.DB BITE
+.DB GROWL
+.DB ROAR
+.DB SING
+.DB PECK
+.DB COUNTER
+.DB STRENGTH
+.DB ABSORB
+.DB STRING_SHOT
+.DB EARTHQUAKE
+.DB FISSURE
+.DB DIG
+.DB TOXIC
+.DB SCREECH
+.DB HARDEN
+.DB MINIMIZE
+.DB WITHDRAW
+.DB DEFENSE_CURL
+.DB METRONOME
+.DB LICK
+.DB CLAMP
+.DB CONSTRICT
+.DB POISON_GAS
+.DB LEECH_LIFE
+.DB BUBBLE
+.DB FLASH
+.DB SPLASH
+.DB ACID_ARMOR
+.DB FURY_SWIPES
+.DB REST
+.DB SHARPEN
+.DB SLASH
+.DB SUBSTITUTE
+.DB 0
 
-; 4: originally "[mon]の<LINE>[move]！" ("[mon]'s<LINE>[move]!")
+; 4: originally "[mon]の<LINE>[move]!"("[mon]'s<LINE>[move]!")
 ; Any move not listed above uses this grammar.
-.DW -1
+.DB -1
