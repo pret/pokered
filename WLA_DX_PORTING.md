@@ -234,7 +234,7 @@ This is structural validation, not semantic ROM parity.
 - `table_width` directive dropped (RGBDS-only)
 - `REPT UNUSED_TYPES_END - UNUSED_TYPES` expanded to explicit `.DW .Normal`
 - `assert_table_length` dropped (RGBDS-only)
-- String labels use global form (`.Normal:`, `.Fighting:`, etc.) per master source convention
+- The top-level `TypeNames:` label is preserved as global; type string labels preserve the master local-label form (`.Normal:`, `.Fighting:`, etc.).
 - No macros, no conditionals, no pointer relocation
 
 **Status**:
