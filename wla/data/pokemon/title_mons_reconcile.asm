@@ -1,4 +1,5 @@
 TitleMons::
+; mons on the title screen are randomly chosen from here
 .DB STARTER1
 .DB STARTER2
 .DB STARTER3
