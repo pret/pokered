@@ -1,11 +1,33 @@
-LedgeTiles::
-; player direction, tile player standing on, ledge tile, input required
-.DB SPRITE_FACING_DOWN,  $2C, $37, PAD_DOWN
-.DB SPRITE_FACING_DOWN,  $39, $36, PAD_DOWN
-.DB SPRITE_FACING_DOWN,  $39, $37, PAD_DOWN
-.DB SPRITE_FACING_LEFT,  $2C, $27, PAD_LEFT
-.DB SPRITE_FACING_LEFT,  $39, $27, PAD_LEFT
-.DB SPRITE_FACING_RIGHT, $2C, $0D, PAD_RIGHT
-.DB SPRITE_FACING_RIGHT, $2C, $1D, PAD_RIGHT
-.DB SPRITE_FACING_RIGHT, $39, $0D, PAD_RIGHT
-.DB -1
+LedgeTiles:
+.DB $0A
+.DB $0B
+.DB $0C
+.DB $0D
+.DB $0E
+.DB $0F
+.DB $10
+.DB $11
+.DB $12
+.DB $13
+.DB $14
+.DB $15
+.DB $16
+.DB $17
+.DB $18
+.DB $19
+.DB $1A
+.DB $1B
+.DB $1C
+.DB $1D
+.DB $1E
+.DB $1F
+.DB $20
+.DB $21
+.DB $22
+.DB $23
+.DB $24
+.DB $25
+.DB $26
+.DB $27
+.DB $28
+.DB $29
