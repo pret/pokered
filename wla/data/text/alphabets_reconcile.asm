@@ -1,4 +1,4 @@
-LowerCaseAlphabet:
+LowerCaseAlphabet::
 .DB "abcdefghi"
 .DB "jklmnopqr"
 .DB "stuvwxyz "
@@ -6,7 +6,7 @@ LowerCaseAlphabet:
 .DB "-?!♂♀/<DOT>,<ED>"
 .DB "UPPER CASE@"
 
-UpperCaseAlphabet:
+UpperCaseAlphabet::
 .DB "ABCDEFGHI"
 .DB "JKLMNOPQR"
 .DB "STUVWXYZ "
