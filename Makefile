@@ -250,6 +250,9 @@ wla-check-split:
 wla-report:
 	$(PYTHON) wla/tools/report_split_status.py --monolith $(PKRD_MONOLITH)
 
+wla-verify-type-matchups:
+	$(PYTHON) wla/tools/verify_type_matchups.py
+
 wla-reference:
 	mkdir -p $(wla-reference-dir)
 	cp $(PKRD_MONOLITH) $(wla-reference-dir)/pkrd-noanon-hram-fixed.asm
