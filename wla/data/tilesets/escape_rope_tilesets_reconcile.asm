@@ -1,0 +1,7 @@
+EscapeRopeTilesets::
+.DB FOREST
+.DB CEMETERY
+.DB CAVERN
+.DB FACILITY
+.DB INTERIOR
+.DB -1
