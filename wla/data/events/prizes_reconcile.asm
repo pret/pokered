@@ -1,0 +1,107 @@
+PrizeDifferentMenuPtrs::
+.DW PrizeMenuMon1Entries, PrizeMenuMon1Cost
+.DW PrizeMenuMon2Entries, PrizeMenuMon2Cost
+.DW PrizeMenuTMsEntries, PrizeMenuTMsCost
+
+NoThanksText:
+.DB "NO THANKS@"
+
+PrizeMenuMon1Entries:
+.DB ABRA
+.DB CLEFAIRY
+.DB NIDORINA
+.DB "@"
+
+PrizeMenuMon1Cost:
+.DB $0B4
+.DB $01E8
+.DB $04B0
+.DB $04B2
+.DB $04CC
+.DB $04CE
+.DB $04D0
+.DB $04D2
+.DB $04D4
+.DB $04D6
+.DB $04D8
+.DB $04DA
+.DB $04DC
+.DB $04DE
+.DB $04E0
+.DB $04E2
+.DB $04E4
+.DB $04E6
+.DB $04E8
+.DB $04EA
+.DB $04EC
+.DB $04EE
+.DB $04F0
+.DB $04F2
+.DB $04F4
+.DB $04F6
+.DB $04F8
+.DB $04FA
+.DB $04FC
+.DB $04FE
+.DB $0500
+.DB $0502
+.DB $0504
+.DB "@"
+
+PrizeMenuMon2Entries:
+.DB DRATINI
+.DB SCYTHER
+.DB PINSIR
+.DB DRATINI
+.DB PORYGON
+.DB "@"
+
+PrizeMenuMon2Cost:
+.DB $0B1C
+.DB $0B1E
+.DB $0B20
+.DB $0B22
+.DB $0B24
+.DB $0B26
+.DB $0B28
+.DB $0B2A
+.DB $0B2C
+.DB $0B2E
+.DB $0B30
+.DB $0B32
+.DB $0B34
+.DB $0B36
+.DB $0B38
+.DB $0B3A
+.DB $0B3C
+.DB $0B3E
+.DB $0B40
+.DB $0B42
+.DB $0B44
+.DB $0B46
+.DB $0B48
+.DB $0B4A
+.DB $0B4C
+.DB $0B4E
+.DB $0B50
+.DB $0B52
+.DB $0B54
+.DB $0B56
+.DB $0B58
+.DB $0B5A
+.DB $0B5C
+.DB $0B5E
+.DB $0B60
+.DB "@"
+
+PrizeMenuTMsEntries:
+.DB TM_DRAGON_RAGE
+.DB TM_HYPER_BEAM
+.DB TM_SUBSTITUTE
+.DB "@"
+
+PrizeMenuTMsCost:
+.DB $0CC0
+.DB $0D78
+.DB $0DD0
+.DB "@"
