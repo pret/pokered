@@ -21,6 +21,35 @@ wSavedVolume db
 wChannelCommandPointers db
 .ende
 
+; RAM symbols referenced by structured text banks.
+.enum $CD6D export
+wNameBuffer db
+.ende
+
+.enum $CF4B export
+wStringBuffer db
+.ende
+
+.enum $CFDA export
+wEnemyMonNick db
+.ende
+
+.enum $D036 export
+wLearnMoveMonName db
+.ende
+
+.enum $D5A4 export
+wPlayerCoins db
+.ende
+
+.enum $DE06 export
+wBoxMonNicks db
+.ende
+
+.enum $FF9F export
+hMoney db
+.ende
+
 .enum $C012 export
 wChannelCommandPointers_plus_C db
 .ende
@@ -957,4 +986,3 @@ sSpriteBuffer2_plus_187 db
 .define rWY $4A
 .define rWX $4B
 .define rIE $FF
-

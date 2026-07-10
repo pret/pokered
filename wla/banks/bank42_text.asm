@@ -5,8 +5,6 @@
 .DEFINE TX_END $50
 .DEFINE wInGameTradeGiveMonName $CD13
 .DEFINE wInGameTradeReceiveMonName $CD1E
-.DEFINE wNameBuffer $CD6D
-.DEFINE wStringBuffer $CF4B
 .STRINGMAPTABLE pokemon "wla/pokemon.tbl"
 
 _ItemUseText001::

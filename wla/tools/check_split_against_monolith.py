@@ -113,6 +113,80 @@ def main() -> int:
         return 1
     print(f'OK bank42 uses structured Text 11 include: 29 records, end/size assertions, {len(table_lines)} charmap entries')
 
+    bank39_text = Path('wla/banks/bank39_text.asm')
+    bank39_source = banks[39].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank39_text.asm"' not in bank39_source:
+        print('FAIL bank39 is not using its structured Text 8 include')
+        return 1
+    bank39_labels = file_labels(bank39_text)
+    if len(bank39_labels) != 202 or bank39_labels[0] != '_VermilionGymLTSurgePostBattleAdviceText' or bank39_labels[-1] != 'Bank39TextEnd':
+        print(f'FAIL structured bank39 label boundary changed: {len(bank39_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2aa4, $00' not in bank39_source or 'Bank39End::' not in bank39_source:
+        print('FAIL bank39 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank39 uses structured Text 8 include: 201 records, end/size assertions')
+
+    bank40_text = Path('wla/banks/bank40_text.asm')
+    bank40_source = banks[40].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank40_text.asm"' not in bank40_source:
+        print('FAIL bank40 is not using its structured Text 9 include')
+        return 1
+    bank40_labels = file_labels(bank40_text)
+    if len(bank40_labels) != 207 or bank40_labels[0] != '_FuchsiaGymKogaPostBattleAdviceText' or bank40_labels[-1] != 'Bank40TextEnd':
+        print(f'FAIL structured bank40 label boundary changed: {len(bank40_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2a37, $00' not in bank40_source or 'Bank40End::' not in bank40_source:
+        print('FAIL bank40 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank40 uses structured Text 9 include: 206 records, end/size assertions')
+
+    bank41_text = Path('wla/banks/bank41_text.asm')
+    bank41_source = banks[41].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank41_text.asm"' not in bank41_source:
+        print('FAIL bank41 is not using its structured Text 10 include')
+        return 1
+    bank41_labels = file_labels(bank41_text)
+    if len(bank41_labels) != 222 or bank41_labels[0] != '_CableClubNPCPleaseComeAgainText' or bank41_labels[-1] != 'Bank41TextEnd':
+        print(f'FAIL structured bank41 label boundary changed: {len(bank41_labels)} labels')
+        return 1
+    if '.DSB $4000 - $2b94, $00' not in bank41_source or 'Bank41End::' not in bank41_source:
+        print('FAIL bank41 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank41 uses structured Text 10 include: 221 records, end/size assertions')
+
+    bank43_text = Path('wla/banks/bank43_dex_text.asm')
+    bank43_source = banks[43].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank43_dex_text.asm"' not in bank43_source:
+        print('FAIL bank43 is not using its structured Pokédex Text include')
+        return 1
+    bank43_labels = file_labels(bank43_text)
+    if len(bank43_labels) != 152 or bank43_labels[0] != '_RhydonDexEntry' or bank43_labels[-1] != 'Bank43DexTextEnd':
+        print(f'FAIL structured bank43 label boundary changed: {len(bank43_labels)} labels')
+        return 1
+    if '.DSB $4000 - $3838, $00' not in bank43_source or 'Bank43End::' not in bank43_source:
+        print('FAIL bank43 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank43 uses structured Pokédex Text include: 151 records, end/size assertions')
+
+    bank44_names = Path('wla/banks/bank44_move_names.asm')
+    bank44_source = banks[44].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank44_move_names.asm"' not in bank44_source:
+        print('FAIL bank44 is not using its structured Move Names include')
+        return 1
+    bank44_labels = file_labels(bank44_names)
+    if bank44_labels != ['MoveNames', 'Bank44MoveNamesEnd']:
+        print(f'FAIL structured bank44 label boundary changed: {bank44_labels}')
+        return 1
+    move_name_count = bank44_names.read_text(errors='replace').count('.STRINGMAP pokemon,')
+    if move_name_count != 165:
+        print(f'FAIL structured bank44 move-name count changed: {move_name_count}')
+        return 1
+    if '.DSB $4000 - $060f, $00' not in bank44_source or 'Bank44End::' not in bank44_source:
+        print('FAIL bank44 is missing its end-label and linked-size assertion')
+        return 1
+    print('OK bank44 uses structured Move Names include: 165 records, end/size assertions')
+
     if not args.monolith.is_file():
         print(f'FAIL monolith not found: {args.monolith}')
         return 1

@@ -236,6 +236,63 @@ PKRD_MONOLITH ?= /data/pkrd/pkrd-noanon-hram-fixed.asm
 wla-build-dir := wla/build
 wla-reference-dir := wla/reference
 
+bank39-text-sources := \
+	text/VermilionGym_2.asm text/VermilionPidgeyHouse.asm \
+	text/VermilionDock.asm text/VermilionOldRodHouse.asm \
+	text/CeladonMart1F.asm text/CeladonMart2F.asm \
+	text/CeladonMart3F.asm text/CeladonMart4F.asm \
+	text/CeladonMartRoof.asm text/CeladonMansion1F.asm \
+	text/CeladonMansion2F.asm text/CeladonMansion3F.asm \
+	text/CeladonMansionRoof.asm text/CeladonMansionRoofHouse.asm \
+	text/CeladonPokecenter.asm text/CeladonGym.asm text/GameCorner.asm \
+	text/CeladonMart5F.asm text/GameCornerPrizeRoom.asm \
+	text/CeladonDiner.asm text/CeladonChiefHouse.asm text/CeladonHotel.asm \
+	text/FuchsiaMart.asm text/FuchsiaBillsGrandpasHouse.asm \
+	text/FuchsiaPokecenter.asm text/WardensHouse.asm \
+	text/SafariZoneGate.asm text/FuchsiaGym.asm
+
+wla/banks/bank39_text.asm: $(bank39-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank39-text-sources)
+
+bank40-text-sources := \
+	text/FuchsiaGym_2.asm text/FuchsiaMeetingRoom.asm \
+	text/FuchsiaGoodRodHouse.asm text/PokemonMansion1F.asm \
+	text/CinnabarGym.asm text/CinnabarLab.asm \
+	text/CinnabarLabTradeRoom.asm text/CinnabarLabMetronomeRoom.asm \
+	text/CinnabarLabFossilRoom.asm text/CinnabarPokecenter.asm \
+	text/CinnabarMart.asm text/IndigoPlateauLobby.asm \
+	text/CopycatsHouse1F.asm text/CopycatsHouse2F.asm \
+	text/FightingDojo.asm text/SaffronGym.asm \
+	text/SaffronPidgeyHouse.asm text/SaffronMart.asm \
+	text/SilphCo1F.asm text/SaffronPokecenter.asm \
+	text/MrPsychicsHouse.asm data/text/text_4.asm
+
+wla/banks/bank40_text.asm: $(bank40-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank40-text-sources)
+
+bank41-text-sources := \
+	data/text/text_5.asm \
+	text/PalletTown.asm \
+	text/ViridianCity.asm \
+	text/PewterCity.asm \
+	text/CeruleanCity.asm \
+	text/LavenderTown.asm \
+	text/VermilionCity.asm \
+	text/CeladonCity.asm \
+	text/FuchsiaCity.asm \
+	text/CinnabarIsland.asm \
+	text/SaffronCity.asm \
+	data/text/text_6.asm
+
+wla/banks/bank41_text.asm: $(bank41-text-sources) wla/tools/convert_text_bank.py
+	$(PYTHON) wla/tools/convert_text_bank.py $@ $(bank41-text-sources)
+
+wla/banks/bank43_dex_text.asm: data/pokemon/dex_text.asm wla/tools/convert_dex_text.py
+	$(PYTHON) wla/tools/convert_dex_text.py $< $@
+
+wla/banks/bank44_move_names.asm: data/moves/names.asm wla/tools/convert_move_names.py
+	$(PYTHON) wla/tools/convert_move_names.py $< $@
+
 wla-poc:
 	mkdir -p $(wla-build-dir)
 	$(WLA) -v -o $(wla-build-dir)/home_start_poc.o wla/poc/home_start_poc_driver.asm
@@ -248,7 +305,7 @@ wla-unit-poc:
 
 # Build the complete imported WLA-DX split. This is the migration baseline;
 # reconciled wla/data files are not substituted until their audits pass.
-wla-red wla-rom:
+wla-red wla-rom: wla/banks/bank39_text.asm wla/banks/bank40_text.asm wla/banks/bank41_text.asm wla/banks/bank43_dex_text.asm wla/banks/bank44_move_names.asm
 	mkdir -p $(wla-build-dir)
 	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
 	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
