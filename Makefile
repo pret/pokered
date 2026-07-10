@@ -59,6 +59,12 @@ RGBGFXFLAGS  ?= -Weverything
 	blue_vc \
 	wla-poc \
 	wla-unit-poc \
+	wla-red \
+	rgbds-red \
+	wla-check \
+	wla-rom \
+	wla-compare \
+	wla-audit \
 	wla-index-monolith \
 	wla-check-split \
 	wla-report \
@@ -240,12 +246,32 @@ wla-unit-poc:
 	$(WLA) -v -o $(wla-build-dir)/field_move_names_poc.o wla/poc/field_move_names_poc_driver.asm
 	$(WLALINK) -v -s wla/unit_poc.link $(wla-build-dir)/field_move_names_poc.gb
 
+# Build the complete imported WLA-DX split. This is the migration baseline;
+# reconciled wla/data files are not substituted until their audits pass.
+wla-red wla-rom:
+	mkdir -p $(wla-build-dir)
+	$(WLA) -o $(wla-build-dir)/pkrd.o wla/pkrd/main.asm
+	$(WLALINK) -S wla/pkrd.link $(wla-build-dir)/pkrd.gb
+
+rgbds-red: pokered.gbc
+
+wla-compare: rgbds-red wla-red
+	cmp pokered.gbc $(wla-build-dir)/pkrd.gb
+	@echo "WLA-DX ROM matches the verified RGBDS Pokemon Red ROM byte-for-byte."
+
+# One gate for every invariant currently required of the Red migration.
+wla-check: wla-audit wla-check-split wla-compare
+	@echo "WLA-DX Pokemon Red migration checks passed."
+
 wla-index-monolith:
 	mkdir -p $(wla-reference-dir)
 	$(PYTHON) wla/tools/index_monolith.py $(PKRD_MONOLITH) > $(wla-reference-dir)/MONOLITH_INDEX.md
 
 wla-check-split:
 	$(PYTHON) wla/tools/check_split_against_monolith.py $(PKRD_MONOLITH)
+
+wla-audit:
+	$(PYTHON) wla/tools/reconcile_audit.py
 
 wla-report:
 	$(PYTHON) wla/tools/report_split_status.py --monolith $(PKRD_MONOLITH)

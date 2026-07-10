@@ -1320,7 +1320,7 @@ SpriteSets:
 
 ; Pointer Table from 17B27 to 17B2A (2 entries, indexed by wSprite01StateData2ImageBaseOffset)
 SpriteSheetPointerTable:
-.dw RedSprite, $050C
+.dw RedSprite, $05C0
 
 ; Data from 17B2B to 17FFF (1237 bytes)
 .db $00, $43, $C0, $05, $80, $44, $C0, $05, $00, $46, $C0, $05, $80, $47, $C0, $05
@@ -1392,4 +1392,3 @@ SpriteSheetPointerTable:
 .db $E0, $DC, $18, $F1, $3E, $01, $EA, $96, $CF, $F0, $DC, $EA, $92, $CF, $21, $1D
 .db $D3, $C3, $BB, $2B
 .dsb 161, $00
-
