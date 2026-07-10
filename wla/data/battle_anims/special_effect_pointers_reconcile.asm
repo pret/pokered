@@ -2,44 +2,83 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; SpecialEffectPointers:
-.DB SE_DARK_SCREEN_FLASH, AnimationFlashScreen ; $FE
-.DB SE_DARK_SCREEN_PALETTE, AnimationDarkScreenPalette ; $FD
-.DB SE_RESET_SCREEN_PALETTE, AnimationResetScreenPalette ; $FC
-.DB SE_SHAKE_SCREEN, AnimationShakeScreen ; $FB
-.DB SE_WATER_DROPLETS_EVERYWHERE, AnimationWaterDropletsEverywhere ; $FA
-.DB SE_DARKEN_MON_PALETTE, AnimationDarkenMonPalette ; $F9
-.DB SE_FLASH_SCREEN_LONG, AnimationFlashScreenLong ; $F8
-.DB SE_SLIDE_MON_UP, AnimationSlideMonUp ; $F7
-.DB SE_SLIDE_MON_DOWN, AnimationSlideMonDown ; $F6
-.DB SE_FLASH_MON_PIC, AnimationFlashMonPic ; $F5
-.DB SE_SLIDE_MON_OFF, AnimationSlideMonOff ; $F4
-.DB SE_BLINK_MON, AnimationBlinkMon ; $F3
-.DB SE_MOVE_MON_HORIZONTALLY, AnimationMoveMonHorizontally ; $F2
-.DB SE_RESET_MON_POSITION, AnimationResetMonPosition ; $F1
-.DB SE_LIGHT_SCREEN_PALETTE, AnimationLightScreenPalette ; $F0
-.DB SE_HIDE_MON_PIC, AnimationHideMonPic ; $EF
-.DB SE_SQUISH_MON_PIC, AnimationSquishMonPic ; $EE
-.DB SE_SHOOT_BALLS_UPWARD, AnimationShootBallsUpward ; $ED
-.DB SE_SHOOT_MANY_BALLS_UPWARD, AnimationShootManyBallsUpward ; $EC
-.DB SE_BOUNCE_UP_AND_DOWN, AnimationBoundUpAndDown ; $EB
-.DB SE_MINIMIZE_MON, AnimationMinimizeMon ; $EA
-.DB SE_SLIDE_MON_DOWN_AND_HIDE, AnimationSlideMonDownAndHide ; $E9
-.DB SE_TRANSFORM_MON, AnimationTransformMon ; $E8
-.DB SE_LEAVES_FALLING, AnimationLeavesFalling ; $E7
-.DB SE_PETALS_FALLING, AnimationPetalsFalling ; $E6
-.DB SE_SLIDE_MON_HALF_OFF, AnimationSlideMonHalfOff ; $E5
-.DB SE_SHAKE_ENEMY_HUD, AnimationShakeEnemyHUD ; $E4
-.DB SE_SHAKE_ENEMY_HUD_2, AnimationShakeEnemyHUD ; $E3 unused
-.DB SE_SPIRAL_BALLS_INWARD, AnimationSpiralBallsInward ; $E2
-.DB SE_DELAY_ANIMATION_10, AnimationDelay10 ; $E1
-.DB SE_FLASH_ENEMY_MON_PIC, AnimationFlashEnemyMonPic ; $E0 unused
-.DB SE_HIDE_ENEMY_MON_PIC, AnimationHideEnemyMonPic ; $DF
-.DB SE_BLINK_ENEMY_MON, AnimationBlinkEnemyMon ; $DE
-.DB SE_SHOW_MON_PIC, AnimationShowMonPic ; $DD
-.DB SE_SHOW_ENEMY_MON_PIC, AnimationShowEnemyMonPic ; $DC
-.DB SE_SLIDE_ENEMY_MON_OFF, AnimationSlideEnemyMonOff ; $DB
-.DB SE_SHAKE_BACK_AND_FORTH, AnimationShakeBackAndForth ; $DA
-.DB SE_SUBSTITUTE_MON, AnimationSubstitute ; $D9
-.DB SE_WAVY_SCREEN, AnimationWavyScreen ; $D8
+SpecialEffectPointers:
+.DB SE_DARK_SCREEN_FLASH ; $FE
+.DW AnimationFlashScreen
+.DB SE_DARK_SCREEN_PALETTE ; $FD
+.DW AnimationDarkScreenPalette
+.DB SE_RESET_SCREEN_PALETTE ; $FC
+.DW AnimationResetScreenPalette
+.DB SE_SHAKE_SCREEN ; $FB
+.DW AnimationShakeScreen
+.DB SE_WATER_DROPLETS_EVERYWHERE ; $FA
+.DW AnimationWaterDropletsEverywhere
+.DB SE_DARKEN_MON_PALETTE ; $F9
+.DW AnimationDarkenMonPalette
+.DB SE_FLASH_SCREEN_LONG ; $F8
+.DW AnimationFlashScreenLong
+.DB SE_SLIDE_MON_UP ; $F7
+.DW AnimationSlideMonUp
+.DB SE_SLIDE_MON_DOWN ; $F6
+.DW AnimationSlideMonDown
+.DB SE_FLASH_MON_PIC ; $F5
+.DW AnimationFlashMonPic
+.DB SE_SLIDE_MON_OFF ; $F4
+.DW AnimationSlideMonOff
+.DB SE_BLINK_MON ; $F3
+.DW AnimationBlinkMon
+.DB SE_MOVE_MON_HORIZONTALLY ; $F2
+.DW AnimationMoveMonHorizontally
+.DB SE_RESET_MON_POSITION ; $F1
+.DW AnimationResetMonPosition
+.DB SE_LIGHT_SCREEN_PALETTE ; $F0
+.DW AnimationLightScreenPalette
+.DB SE_HIDE_MON_PIC ; $EF
+.DW AnimationHideMonPic
+.DB SE_SQUISH_MON_PIC ; $EE
+.DW AnimationSquishMonPic
+.DB SE_SHOOT_BALLS_UPWARD ; $ED
+.DW AnimationShootBallsUpward
+.DB SE_SHOOT_MANY_BALLS_UPWARD ; $EC
+.DW AnimationShootManyBallsUpward
+.DB SE_BOUNCE_UP_AND_DOWN ; $EB
+.DW AnimationBoundUpAndDown
+.DB SE_MINIMIZE_MON ; $EA
+.DW AnimationMinimizeMon
+.DB SE_SLIDE_MON_DOWN_AND_HIDE ; $E9
+.DW AnimationSlideMonDownAndHide
+.DB SE_TRANSFORM_MON ; $E8
+.DW AnimationTransformMon
+.DB SE_LEAVES_FALLING ; $E7
+.DW AnimationLeavesFalling
+.DB SE_PETALS_FALLING ; $E6
+.DW AnimationPetalsFalling
+.DB SE_SLIDE_MON_HALF_OFF ; $E5
+.DW AnimationSlideMonHalfOff
+.DB SE_SHAKE_ENEMY_HUD ; $E4
+.DW AnimationShakeEnemyHUD
+.DB SE_SHAKE_ENEMY_HUD_2 ; $E3 unused
+.DW AnimationShakeEnemyHUD
+.DB SE_SPIRAL_BALLS_INWARD ; $E2
+.DW AnimationSpiralBallsInward
+.DB SE_DELAY_ANIMATION_10 ; $E1
+.DW AnimationDelay10
+.DB SE_FLASH_ENEMY_MON_PIC ; $E0 unused
+.DW AnimationFlashEnemyMonPic
+.DB SE_HIDE_ENEMY_MON_PIC ; $DF
+.DW AnimationHideEnemyMonPic
+.DB SE_BLINK_ENEMY_MON ; $DE
+.DW AnimationBlinkEnemyMon
+.DB SE_SHOW_MON_PIC ; $DD
+.DW AnimationShowMonPic
+.DB SE_SHOW_ENEMY_MON_PIC ; $DC
+.DW AnimationShowEnemyMonPic
+.DB SE_SLIDE_ENEMY_MON_OFF ; $DB
+.DW AnimationSlideEnemyMonOff
+.DB SE_SHAKE_BACK_AND_FORTH ; $DA
+.DW AnimationShakeBackAndForth
+.DB SE_SUBSTITUTE_MON ; $D9
+.DW AnimationSubstitute
+.DB SE_WAVY_SCREEN ; $D8
+.DW AnimationWavyScreen
 .DB -1 ; end

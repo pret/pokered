@@ -2,7 +2,7 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; MapBadgeFlags:
+MapBadgeFlags:
 ; Flags for gym badges (1 bit per badge)
 .DB PEWTER_GYM, 1 << BIT_BOULDERBADGE
 .DB CERULEAN_GYM, 1 << BIT_CASCADEBADGE

@@ -2,7 +2,7 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; DungeonMaps1:
+DungeonMaps1:
 ; Maps that are dungeon maps
 .DB VIRIDIAN_FOREST
 .DB ROCK_TUNNEL_1F
@@ -10,7 +10,7 @@
 .DB ROCK_TUNNEL_B1F
 .DB -1 ; end
 
-; DungeonMaps2:
+DungeonMaps2:
 ; Map pairs (low, high) — dungeon transition range
 ; all MT_MOON maps
 .DB MT_MOON_1F, MT_MOON_B2F

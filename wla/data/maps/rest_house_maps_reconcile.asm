@@ -2,7 +2,7 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; SafariZoneRestHouses:
+SafariZoneRestHouses:
 .DB SAFARI_ZONE_WEST_REST_HOUSE
 .DB SAFARI_ZONE_EAST_REST_HOUSE
 .DB SAFARI_ZONE_NORTH_REST_HOUSE

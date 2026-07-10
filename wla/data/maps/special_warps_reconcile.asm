@@ -1,51 +1,77 @@
-; Reconciled from master RGBDS source: data/maps/special_warps.asm
-; RGBDS source is untouched.
-; WLA-DX representation for reconciliation only.
+; Format: (size 2 bytes)
+; 00: target map ID
+; 01: which dungeon warp in the source map was used
+DungeonWarpList:
+	.DB SEAFOAM_ISLANDS_B1F, 1
+	.DB SEAFOAM_ISLANDS_B1F, 2
+	.DB SEAFOAM_ISLANDS_B2F, 1
+	.DB SEAFOAM_ISLANDS_B2F, 2
+	.DB SEAFOAM_ISLANDS_B3F, 1
+	.DB SEAFOAM_ISLANDS_B3F, 2
+	.DB SEAFOAM_ISLANDS_B4F, 1
+	.DB SEAFOAM_ISLANDS_B4F, 2
+	.DB VICTORY_ROAD_2F,     2
+	.DB POKEMON_MANSION_1F,  1
+	.DB POKEMON_MANSION_1F,  2
+	.DB POKEMON_MANSION_2F,  3
+	.DB -1 ; end
 
-; DungeonWarpList:
-; (target map, dungeon warp index) pairs
-.DB SEAFOAM_ISLANDS_B1F, 1
-.DB SEAFOAM_ISLANDS_B1F, 2
-.DB SEAFOAM_ISLANDS_B2F, 1
-.DB SEAFOAM_ISLANDS_B2F, 2
-.DB SEAFOAM_ISLANDS_B3F, 1
-.DB SEAFOAM_ISLANDS_B3F, 2
-.DB SEAFOAM_ISLANDS_B4F, 1
-.DB SEAFOAM_ISLANDS_B4F, 2
-.DB VICTORY_ROAD_2F, 2
-.DB POKEMON_MANSION_1F, 1
-.DB POKEMON_MANSION_1F, 2
-.DB POKEMON_MANSION_2F, 3
-.DB -1 ; end
 
-; NewGameWarp:
-; (target map, sub-block Y, sub-block X, target dungeon warp)
-.DB REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
 
-; TradeCenterPlayerWarp:
-.DB TRADE_CENTER, 3, 4, CLUB
+DungeonWarpData:
+	fly_warp SEAFOAM_ISLANDS_B1F, 18,  7
+	fly_warp SEAFOAM_ISLANDS_B1F, 23,  7
+	fly_warp SEAFOAM_ISLANDS_B2F, 19,  7
+	fly_warp SEAFOAM_ISLANDS_B2F, 22,  7
+	fly_warp SEAFOAM_ISLANDS_B3F, 18,  7
+	fly_warp SEAFOAM_ISLANDS_B3F, 19,  7
+	fly_warp SEAFOAM_ISLANDS_B4F,  4, 14
+	fly_warp SEAFOAM_ISLANDS_B4F,  5, 14
+	fly_warp VICTORY_ROAD_2F,     22, 16
+	fly_warp POKEMON_MANSION_1F,  16, 14
+	fly_warp POKEMON_MANSION_1F,  16, 14
+	fly_warp POKEMON_MANSION_2F,  18, 14
 
-; TradeCenterFriendWarp:
-.DB TRADE_CENTER, 6, 4, CLUB
 
-; ColosseumPlayerWarp:
-.DB COLOSSEUM, 3, 4, CLUB
 
-; ColosseumFriendWarp:
-.DB COLOSSEUM, 6, 4, CLUB
+NewGameWarp:
+	special_warp_spec REDS_HOUSE_2F, 3, 6, REDS_HOUSE_2
+TradeCenterPlayerWarp:
+	special_warp_spec TRADE_CENTER,  3, 4, CLUB
+TradeCenterFriendWarp:
+	special_warp_spec TRADE_CENTER,  6, 4, CLUB
+ColosseumPlayerWarp:
+	special_warp_spec COLOSSEUM,     3, 4, CLUB
+ColosseumFriendWarp:
+	special_warp_spec COLOSSEUM,     6, 4, CLUB
 
-; FlyWarpDataPtr:
-; (target map, word pointer) pairs
-.DB PALLET_TOWN, .PalletTown
-.DB VIRIDIAN_CITY, .ViridianCity
-.DB PEWTER_CITY, .PewterCity
-.DB CERULEAN_CITY, .CeruleanCity
-.DB LAVENDER_TOWN, .LavenderTown
-.DB VERMILION_CITY, .VermilionCity
-.DB CELADON_CITY, .CeladonCity
-.DB FUCHSIA_CITY, .FuchsiaCity
-.DB CINNABAR_ISLAND, .CinnabarIsland
-.DB INDIGO_PLATEAU, .IndigoPlateau
-.DB SAFFRON_CITY, .SaffronCity
-.DB ROUTE_4, .Route4
-.DB ROUTE_10, .Route10
+
+
+FlyWarpDataPtr:
+	fly_warp_spec PALLET_TOWN,     .PalletTown
+	fly_warp_spec VIRIDIAN_CITY,   .ViridianCity
+	fly_warp_spec PEWTER_CITY,     .PewterCity
+	fly_warp_spec CERULEAN_CITY,   .CeruleanCity
+	fly_warp_spec LAVENDER_TOWN,   .LavenderTown
+	fly_warp_spec VERMILION_CITY,  .VermilionCity
+	fly_warp_spec CELADON_CITY,    .CeladonCity
+	fly_warp_spec FUCHSIA_CITY,    .FuchsiaCity
+	fly_warp_spec CINNABAR_ISLAND, .CinnabarIsland
+	fly_warp_spec INDIGO_PLATEAU,  .IndigoPlateau
+	fly_warp_spec SAFFRON_CITY,    .SaffronCity
+	fly_warp_spec ROUTE_4,         .Route4
+	fly_warp_spec ROUTE_10,        .Route10
+
+.PalletTown:     fly_warp PALLET_TOWN,      5,  6
+.ViridianCity:   fly_warp VIRIDIAN_CITY,   23, 26
+.PewterCity:     fly_warp PEWTER_CITY,     13, 26
+.CeruleanCity:   fly_warp CERULEAN_CITY,   19, 18
+.LavenderTown:   fly_warp LAVENDER_TOWN,    3,  6
+.VermilionCity:  fly_warp VERMILION_CITY,  11,  4
+.CeladonCity:    fly_warp CELADON_CITY,    41, 10
+.FuchsiaCity:    fly_warp FUCHSIA_CITY,    19, 28
+.CinnabarIsland: fly_warp CINNABAR_ISLAND, 11, 12
+.IndigoPlateau:  fly_warp INDIGO_PLATEAU,   9,  6
+.SaffronCity:    fly_warp SAFFRON_CITY,     9, 30
+.Route4:         fly_warp ROUTE_4,         11,  6
+.Route10:        fly_warp ROUTE_10,        11, 20

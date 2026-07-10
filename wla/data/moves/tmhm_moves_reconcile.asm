@@ -1,15 +1,57 @@
-; Reconciled from master RGBDS source: data/moves/tmhm_moves.asm
-; RGBDS source is untouched.
-; WLA-DX representation for reconciliation only.
-
-; This file is INCLUDEd twice:
-; - for HMMoves in home/names.asm
-; - for HMMoveArray in engine/pokemon/bills_pc.asm
-
-; TechnicalMachines:
-; Table of TM/HM move pointers (RGBDS uses FOR/ENDR, WLA-DX uses explicit .DW)
-; table_width and assert_table_length dropped (RGBDS-only)
-
-; TMs (1-25) — placeholder entries for the TM moves table
-; The actual TM/HM data is referenced through constants defined elsewhere
-; and the RGBDS source uses FOR/ENDR macros which are RGBDS-only
+; Expanded from the RGBDS FOR loops in data/moves/tmhm_moves.asm.
+TechnicalMachines:
+.DB TM01_MOVE
+.DB TM02_MOVE
+.DB TM03_MOVE
+.DB TM04_MOVE
+.DB TM05_MOVE
+.DB TM06_MOVE
+.DB TM07_MOVE
+.DB TM08_MOVE
+.DB TM09_MOVE
+.DB TM10_MOVE
+.DB TM11_MOVE
+.DB TM12_MOVE
+.DB TM13_MOVE
+.DB TM14_MOVE
+.DB TM15_MOVE
+.DB TM16_MOVE
+.DB TM17_MOVE
+.DB TM18_MOVE
+.DB TM19_MOVE
+.DB TM20_MOVE
+.DB TM21_MOVE
+.DB TM22_MOVE
+.DB TM23_MOVE
+.DB TM24_MOVE
+.DB TM25_MOVE
+.DB TM26_MOVE
+.DB TM27_MOVE
+.DB TM28_MOVE
+.DB TM29_MOVE
+.DB TM30_MOVE
+.DB TM31_MOVE
+.DB TM32_MOVE
+.DB TM33_MOVE
+.DB TM34_MOVE
+.DB TM35_MOVE
+.DB TM36_MOVE
+.DB TM37_MOVE
+.DB TM38_MOVE
+.DB TM39_MOVE
+.DB TM40_MOVE
+.DB TM41_MOVE
+.DB TM42_MOVE
+.DB TM43_MOVE
+.DB TM44_MOVE
+.DB TM45_MOVE
+.DB TM46_MOVE
+.DB TM47_MOVE
+.DB TM48_MOVE
+.DB TM49_MOVE
+.DB TM50_MOVE
+.DB HM01_MOVE
+.DB HM02_MOVE
+.DB HM03_MOVE
+.DB HM04_MOVE
+.DB HM05_MOVE

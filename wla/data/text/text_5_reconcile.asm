@@ -1,199 +1,112 @@
-_ItemUseBallText00:
-.DB "It dodged the"
-.DB "thrown BALL!"
-.DB "prompt"
+; Explicit WLA-DX expansion of RGBDS text macros from data/text/text_5.asm.
+_CableClubNPCPleaseComeAgainText::
+	.DB TX_START, "Please come again!"
+	.DB "<DONE>"
 
-_ItemUseBallText01:
-.DB "You missed the"
-.DB "#MON!"
-.DB "prompt"
+_CableClubNPCMakingPreparationsText::
+	.DB TX_START, "We're making"
+	.DB "<LINE>", "preparations."
+	.DB "<CONT>", "Please wait."
+	.DB "<DONE>"
 
-_ItemUseBallText02:
-.DB "Darn! The #MON"
-.DB "broke free!"
-.DB "prompt"
+_UsedStrengthText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " used"
+	.DB "<LINE>", "STRENGTH.@"
+	.DB TX_END
 
-_ItemUseBallText03:
-.DB "Aww! It appeared"
-.DB "to be caught! "
-.DB "prompt"
+_CanMoveBouldersText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " can"
+	.DB "<LINE>", "move boulders."
+	.DB "<PROMPT>"
 
-_ItemUseBallText04:
-.DB "Shoot! It was so"
-.DB "close too!"
-.DB "prompt"
+_CurrentTooFastText::
+	.DB TX_START, "The current is"
+	.DB "<LINE>", "much too fast!"
+	.DB "<PROMPT>"
 
-_ItemUseBallText05:
-.DB "All right!"
-.DB "!"
-.DB " was"
-.DB "caught!@"
-.DB "text_end"
+_CyclingIsFunText::
+	.DB TX_START, "Cycling is fun!"
+	.DB "<LINE>", "Forget SURFing!"
+	.DB "<PROMPT>"
 
-_ItemUseBallText07:
-.DB " was"
-.DB "transferred to"
-.DB "BILL's PC!"
-.DB "prompt"
+_FlashLightsAreaText::
+	.DB TX_START, "A blinding FLASH"
+	.DB "<LINE>", "lights the area!"
+	.DB "<PROMPT>"
 
-_ItemUseBallText08:
-.DB " was"
-.DB "transferred to"
-.DB "someone's PC!"
-.DB "prompt"
+_WarpToLastPokemonCenterText::
+	.DB TX_START, "Warp to the last"
+	.DB "<LINE>", "#MON CENTER."
+	.DB "<DONE>"
 
-_ItemUseBallText06:
-.DB "New #DEX data"
-.DB "will be added for"
-.DB "!"
-.DB "!@"
-.DB "text_end"
+_CannotUseTeleportNowText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " can't"
+	.DB "<LINE>", "use TELEPORT now."
+	.DB "<PROMPT>"
 
-_SurfingGotOnText:
-.DB "<PLAYER> got on"
-.DB "!"
-.DB "prompt"
+_CannotFlyHereText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " can't"
+	.DB "<LINE>", "FLY here."
+	.DB "<PROMPT>"
 
-_SurfingNoPlaceToGetOffText:
-.DB "There's no place"
-.DB "to get off!"
-.DB "prompt"
+_NotHealthyEnoughText::
+	.DB TX_START, "Not healthy"
+	.DB "<LINE>", "enough."
+	.DB "<PROMPT>"
 
-_VitaminStatRoseText:
-.DB "'s"
-.DB "!"
-.DB " rose."
-.DB "prompt"
+_NewBadgeRequiredText::
+	.DB TX_START, "No! A new BADGE"
+	.DB "<LINE>", "is required."
+	.DB "<PROMPT>"
 
-_VitaminNoEffectText:
-.DB "It won't have any"
-.DB "effect."
-.DB "prompt"
+_CannotUseItemsHereText::
+	.DB TX_START, "You can't use items"
+	.DB "<LINE>", "here."
+	.DB "<PROMPT>"
 
-_ThrewBaitText:
-.DB "<PLAYER> threw"
-.DB "some BAIT."
-.DB "done"
+_CannotGetOffHereText::
+	.DB TX_START, "You can't get off"
+	.DB "<LINE>", "here."
+	.DB "<PROMPT>"
 
-_ThrewRockText:
-.DB "<PLAYER> threw a"
-.DB "ROCK."
-.DB "done"
+_GotMonText::
+	.DB TX_START, "<PLAYER> got"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, "!@"
+	.DB TX_END
 
-_PlayedFluteNoEffectText:
-.DB "Played the #"
-.DB "FLUTE."
-.DB "prompt"
+_SentToBoxText::
+	.DB TX_START, "There's no more"
+	.DB "<LINE>", "room for #MON!"
+	.DB "<CONT>", "@"
+	.DB TX_RAM
+	.DW wBoxMonNicks
+	.DB TX_START, " was"
+	.DB "<CONT>", "sent to #MON"
+	.DB "<CONT>", "BOX @"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, " on PC!"
+	.DB "<DONE>"
 
-_FluteWokeUpText:
-.DB "All sleeping"
-.DB "#MON woke up."
-.DB "prompt"
+_BoxIsFullText::
+	.DB TX_START, "There's no more"
+	.DB "<LINE>", "room for #MON!"
 
-_PlayedFluteHadEffectText:
-.DB "<PLAYER> played the"
-.DB "# FLUTE.@"
-.DB "text_end"
+	.DB "<PARA>", "The #MON BOX"
+	.DB "<LINE>", "is full and can't"
+	.DB "<CONT>", "accept any more!"
 
-_CoinCaseNumCoinsText:
-.DB "Coins"
-.DB "!"
-.DB "prompt"
-
-_ItemfinderFoundItemText:
-.DB "Yes! ITEMFINDER"
-.DB "indicates there's"
-.DB "an item nearby."
-.DB "prompt"
-
-_ItemfinderFoundNothingText:
-.DB "Nope! ITEMFINDER"
-.DB "isn't responding."
-.DB "prompt"
-
-_RaisePPWhichTechniqueText:
-.DB "Raise PP of which"
-.DB "technique?"
-.DB "done"
-
-_RestorePPWhichTechniqueText:
-.DB "Restore PP of"
-.DB "which technique?"
-.DB "done"
-
-_PPMaxedOutText:
-.DB "'s PP"
-.DB "is maxed out."
-.DB "prompt"
-
-_PPIncreasedText:
-.DB "'s PP"
-.DB "increased."
-.DB "prompt"
-
-_PPRestoredText:
-.DB "PP was restored."
-.DB "prompt"
-
-_BootedUpTMText:
-.DB "Booted up a TM!"
-.DB "prompt"
-
-_BootedUpHMText:
-.DB "Booted up an HM!"
-.DB "prompt"
-
-_TeachMachineMoveText:
-.DB "It contained"
-.DB "!"
-.DB "!"
-.DB "!"
-
-_MonCannotLearnMachineMoveText:
-.DB " is not"
-.DB "compatible with"
-.DB "!"
-.DB ".\""
-.DB "prompt"
-
-_ItemUseNotTimeText:
-.DB "OAK: <PLAYER>!"
-.DB "This isn't the"
-.DB "time to use that! "
-.DB "prompt"
-
-_ItemUseNotYoursToUseText:
-.DB "This isn't yours"
-.DB "to use!"
-.DB "prompt"
-
-_ItemUseNoEffectText:
-.DB "It won't have any"
-.DB "effect."
-.DB "prompt"
-
-_ThrowBallAtTrainerMonText1:
-.DB "The trainer"
-.DB "blocked the BALL!"
-.DB "prompt"
-
-_ThrowBallAtTrainerMonText2:
-.DB "Don't be a thief!"
-.DB "prompt"
-
-_NoCyclingAllowedHereText:
-.DB "No cycling"
-.DB "allowed here."
-.DB "prompt"
-
-_NoSurfingHereText:
-.DB "No SURFing on"
-.DB "!"
-.DB " here!"
-.DB "prompt"
-
-_BoxFullCannotThrowBallText:
-.DB "The #MON BOX"
-.DB "is full! Can't"
-.DB "use that item!"
-.DB "prompt"
+	.DB "<PARA>", "Change the BOX at"
+	.DB "<LINE>", "a #MON CENTER!"
+	.DB "<DONE>"

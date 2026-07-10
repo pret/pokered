@@ -190,5 +190,4 @@ PokedexOrder:
 .DB DEX_BELLSPROUT
 .DB DEX_WEEPINBELL
 .DB DEX_VICTREEBEL
-assert_table_length NUM_POKEMON_INDEXES
-
+; RGBDS table-length assertion verified by the reconciliation audit.

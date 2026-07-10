@@ -17,7 +17,24 @@ FacilitySpinnerArrows::
 .DB 1
 .DB BANK(SpinnerArrowAnimTiles)
 .DW vTileset tile $31
-.GymSpinnerArrows::
+.DW Facility_GFX tile $20
+.DB 1
+.DB BANK(Facility_GFX)
+.DW vTileset tile $20
+.DW Facility_GFX tile $21
+.DB 1
+.DB BANK(Facility_GFX)
+.DW vTileset tile $21
+.DW Facility_GFX tile $30
+.DB 1
+.DB BANK(Facility_GFX)
+.DW vTileset tile $30
+.DW Facility_GFX tile $31
+.DB 1
+.DB BANK(Facility_GFX)
+.DW vTileset tile $31
+
+GymSpinnerArrows::
 .DW SpinnerArrowAnimTiles tile 1
 .DB 1
 .DB BANK(SpinnerArrowAnimTiles)
@@ -33,4 +50,20 @@ FacilitySpinnerArrows::
 .DW SpinnerArrowAnimTiles tile 2
 .DB 1
 .DB BANK(SpinnerArrowAnimTiles)
+.DW vTileset tile $4D
+.DW Gym_GFX tile $3C
+.DB 1
+.DB BANK(Gym_GFX)
+.DW vTileset tile $3C
+.DW Gym_GFX tile $3D
+.DB 1
+.DB BANK(Gym_GFX)
+.DW vTileset tile $3D
+.DW Gym_GFX tile $4C
+.DB 1
+.DB BANK(Gym_GFX)
+.DW vTileset tile $4C
+.DW Gym_GFX tile $4D
+.DB 1
+.DB BANK(Gym_GFX)
 .DW vTileset tile $4D

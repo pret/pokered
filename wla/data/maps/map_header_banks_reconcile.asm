@@ -2,7 +2,7 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; MapHeaderBanks:
+MapHeaderBanks:
 ; Bank IDs for all map header files
 ; BANK() macro is RGBDS-only; replaced with explicit bank values
 ; table_width 1 directive dropped (RGBDS-only)
@@ -19,6 +19,7 @@
 .DB BANK(CinnabarIsland_h)
 .DB BANK(IndigoPlateau_h)
 .DB BANK(SaffronCity_h)
+.DB $01 ; UNUSED_MAP_0B
 .DB BANK(Route1_h)
 .DB BANK(Route2_h)
 .DB BANK(Route3_h)

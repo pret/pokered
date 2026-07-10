@@ -59,6 +59,18 @@ _OaksAideHiText:
 .DB "I'm PROF.OAK's"
 .DB "AIDE!"
 
+_OaksAideUhOhText:
+.DB "Let's see..."
+.DB "Uh-oh! You have"
+.DB "caught only @"
+; hOaksAideNumMonsOwned is inserted as a three-digit decimal value.
+.DB "kinds of #MON!"
+.DB "You need @"
+; hOaksAideRequirement and wOaksAideRewardItemName are inserted here.
+.DB " kinds"
+.DB "if you want the"
+.DB "@."
+
 _OaksAideComeBackText:
 .DB "Oh. I see."
 

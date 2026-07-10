@@ -1,146 +1,247 @@
-_ItemUseText001:
-.DB "<PLAYER> used@"
-.DB "text_end"
+; Explicit WLA-DX expansion of RGBDS text macros from data/text/text_6.asm.
+_ItemUseBallText00::
+	.DB TX_START, "It dodged the"
+	.DB "<LINE>", "thrown BALL!"
 
-_ItemUseText002:
-.DB "!"
-.DB "done"
+	.DB "<PARA>", "This #MON"
+	.DB "<LINE>", "can't be caught!"
+	.DB "<PROMPT>"
 
-_GotOnBicycleText1:
-.DB "<PLAYER> got on the@"
-.DB "text_end"
+_ItemUseBallText01::
+	.DB TX_START, "You missed the"
+	.DB "<LINE>", "#MON!"
+	.DB "<PROMPT>"
 
-_GotOnBicycleText2:
-.DB "!"
-.DB "prompt"
+_ItemUseBallText02::
+	.DB TX_START, "Darn! The #MON"
+	.DB "<LINE>", "broke free!"
+	.DB "<PROMPT>"
 
-_GotOffBicycleText1:
-.DB "<PLAYER> got off@"
-.DB "text_end"
+_ItemUseBallText03::
+	.DB TX_START, "Aww! It appeared"
+	.DB "<LINE>", "to be caught! "
+	.DB "<PROMPT>"
 
-_GotOffBicycleText2:
-.DB "the @"
-.DB "!"
-.DB "prompt"
+_ItemUseBallText04::
+	.DB TX_START, "Shoot! It was so"
+	.DB "<LINE>", "close too!"
+	.DB "<PROMPT>"
 
-_ThrewAwayItemText:
-.DB "Threw away"
-.DB "!"
-.DB "!"
-.DB "prompt"
+_ItemUseBallText05::
+	.DB TX_START, "All right!"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wEnemyMonNick
+	.DB TX_START, " was"
+	.DB "<CONT>", "caught!@"
+	.DB TX_END
 
-_IsItOKToTossItemText:
-.DB "Is it OK to toss"
-.DB "!"
-.DB "?"
-.DB "prompt"
+_ItemUseBallText07::
+	.DB TX_RAM
+	.DW wBoxMonNicks
+	.DB TX_START, " was"
+	.DB "<LINE>", "transferred to"
+	.DB "<CONT>", "BILL's PC!"
+	.DB "<PROMPT>"
 
-_TooImportantToTossText:
-.DB "That's too impor-"
-.DB "tant to toss!"
-.DB "prompt"
+_ItemUseBallText08::
+	.DB TX_RAM
+	.DW wBoxMonNicks
+	.DB TX_START, " was"
+	.DB "<LINE>", "transferred to"
+	.DB "<CONT>", "someone's PC!"
+	.DB "<PROMPT>"
 
-_AlreadyKnowsText:
-.DB " knows"
-.DB "!"
-.DB "prompt"
+_ItemUseBallText06::
+	.DB TX_START, "New #DEX data"
+	.DB "<LINE>", "will be added for"
+	.DB "<CONT>", "@"
+	.DB TX_RAM
+	.DW wEnemyMonNick
+	.DB TX_START, "!@"
+	.DB TX_END
 
-_ConnectCableText:
-.DB "Okay, connect the"
-.DB "cable like so!"
-.DB "prompt"
+_SurfingGotOnText::
+	.DB TX_START, "<PLAYER> got on"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, "!"
+	.DB "<PROMPT>"
 
-_TradedForText:
-.DB "!"
-.DB "!"
-.DB "!"
+_SurfingNoPlaceToGetOffText::
+	.DB TX_START, "There's no place"
+	.DB "<LINE>", "to get off!"
+	.DB "<PROMPT>"
 
-_WannaTrade1Text:
-.DB "I'm looking for"
-.DB "!"
-.DB "!"
+_VitaminStatRoseText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, "'s"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, " rose."
+	.DB "<PROMPT>"
 
-_NoTrade1Text:
-.DB "Awww!"
-.DB "Oh well..."
-.DB "done"
+_VitaminNoEffectText::
+	.DB TX_START, "It won't have any"
+	.DB "<LINE>", "effect."
+	.DB "<PROMPT>"
 
-_WrongMon1Text:
-.DB "What? That's not"
-.DB "!"
-.DB "prompt"
+_ThrewBaitText::
+	.DB TX_START, "<PLAYER> threw"
+	.DB "<LINE>", "some BAIT."
+	.DB "<DONE>"
 
-_Thanks1Text:
-.DB "Hey thanks!"
-.DB "done"
+_ThrewRockText::
+	.DB TX_START, "<PLAYER> threw a"
+	.DB "<LINE>", "ROCK."
+	.DB "<DONE>"
 
-_AfterTrade1Text:
-.DB "Isn't my old"
-.DB "!"
-.DB "great?"
-.DB "done"
+_PlayedFluteNoEffectText::
+	.DB TX_START, "Played the #"
+	.DB "<LINE>", "FLUTE."
 
-_WannaTrade2Text:
-.DB "Hello there! Do"
-.DB "you want to trade"
-.DB "!"
+	.DB "<PARA>", "Now, that's a"
+	.DB "<LINE>", "catchy tune!"
+	.DB "<PROMPT>"
 
-_NoTrade2Text:
-.DB "Well, if you"
-.DB "don't want to..."
-.DB "done"
+_FluteWokeUpText::
+	.DB TX_START, "All sleeping"
+	.DB "<LINE>", "#MON woke up."
+	.DB "<PROMPT>"
 
-_WrongMon2Text:
-.DB "Hmmm? This isn't"
-.DB "!"
-.DB "prompt"
+_PlayedFluteHadEffectText::
+	.DB TX_START, "<PLAYER> played the"
+	.DB "<LINE>", "# FLUTE.@"
+	.DB TX_END
 
-_Thanks2Text:
-.DB "Thanks!"
-.DB "done"
+_CoinCaseNumCoinsText::
+	.DB TX_START, "Coins"
+	.DB "<LINE>", "@"
+	text_bcd wPlayerCoins, 2 | LEADING_ZEROES | LEFT_ALIGN
+	.DB TX_START, " "
+	.DB "<PROMPT>"
 
-_AfterTrade2Text:
-.DB "The @"
-.DB " you"
-.DB "traded to me"
-.DB "went and evolved!"
-.DB "done"
+_ItemfinderFoundItemText::
+	.DB TX_START, "Yes! ITEMFINDER"
+	.DB "<LINE>", "indicates there's"
+	.DB "<CONT>", "an item nearby."
+	.DB "<PROMPT>"
 
-_WannaTrade3Text:
-.DB "Hi! Do you have"
-.DB "!"
-.DB "!"
+_ItemfinderFoundNothingText::
+	.DB TX_START, "Nope! ITEMFINDER"
+	.DB "<LINE>", "isn't responding."
+	.DB "<PROMPT>"
 
-_NoTrade3Text:
-.DB "That's too bad."
-.DB "done"
+_RaisePPWhichTechniqueText::
+	.DB TX_START, "Raise PP of which"
+	.DB "<LINE>", "technique?"
+	.DB "<DONE>"
 
-_WrongMon3Text:
-.DB "...This is no"
-.DB "!"
-.DB "prompt"
+_RestorePPWhichTechniqueText::
+	.DB TX_START, "Restore PP of"
+	.DB "<LINE>", "which technique?"
+	.DB "<DONE>"
 
-_Thanks3Text:
-.DB "Thanks pal!"
-.DB "done"
+_PPMaxedOutText::
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, "'s PP"
+	.DB "<LINE>", "is maxed out."
+	.DB "<PROMPT>"
 
-_AfterTrade3Text:
-.DB "How is my old"
-.DB "!"
-.DB "!"
-.DB "!"
-.DB "!"
-.DB "!"
-.DB "!"
-.DB "!"
-.DB "!"
+_PPIncreasedText::
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, "'s PP"
+	.DB "<LINE>", "increased."
+	.DB "<PROMPT>"
 
-_NothingToCutText:
-.DB "There isn't"
-.DB "anything to CUT!"
-.DB "prompt"
+_PPRestoredText::
+	.DB TX_START, "PP was restored."
+	.DB "<PROMPT>"
 
-_UsedCutText:
-.DB " hacked"
-.DB "away with CUT!"
-.DB "prompt"
+_BootedUpTMText::
+	.DB TX_START, "Booted up a TM!"
+	.DB "<PROMPT>"
+
+_BootedUpHMText::
+	.DB TX_START, "Booted up an HM!"
+	.DB "<PROMPT>"
+
+_TeachMachineMoveText::
+	.DB TX_START, "It contained"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, "!"
+
+	.DB "<PARA>", "Teach @"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START
+	.DB "<LINE>", "to a #MON?"
+	.DB "<DONE>"
+
+_MonCannotLearnMachineMoveText::
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " is not"
+	.DB "<LINE>", "compatible with"
+	.DB "<CONT>", "@"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, "."
+
+	.DB "<PARA>", "It can't learn"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wStringBuffer
+	.DB TX_START, "."
+	.DB "<PROMPT>"
+
+_ItemUseNotTimeText::
+	.DB TX_START, "OAK: <PLAYER>!"
+	.DB "<LINE>", "This isn't the"
+	.DB "<CONT>", "time to use that! "
+	.DB "<PROMPT>"
+
+_ItemUseNotYoursToUseText::
+	.DB TX_START, "This isn't yours"
+	.DB "<LINE>", "to use!"
+	.DB "<PROMPT>"
+
+_ItemUseNoEffectText::
+	.DB TX_START, "It won't have any"
+	.DB "<LINE>", "effect."
+	.DB "<PROMPT>"
+
+_ThrowBallAtTrainerMonText1::
+	.DB TX_START, "The trainer"
+	.DB "<LINE>", "blocked the BALL!"
+	.DB "<PROMPT>"
+
+_ThrowBallAtTrainerMonText2::
+	.DB TX_START, "Don't be a thief!"
+	.DB "<PROMPT>"
+
+_NoCyclingAllowedHereText::
+	.DB TX_START, "No cycling"
+	.DB "<NEXT>", "allowed here."
+	.DB "<PROMPT>"
+
+_NoSurfingHereText::
+	.DB TX_START, "No SURFing on"
+	.DB "<LINE>", "@"
+	.DB TX_RAM
+	.DW wNameBuffer
+	.DB TX_START, " here!"
+	.DB "<PROMPT>"
+
+_BoxFullCannotThrowBallText::
+	.DB TX_START, "The #MON BOX"
+	.DB "<LINE>", "is full! Can't"
+	.DB "<CONT>", "use that item!"
+	.DB "<PROMPT>"

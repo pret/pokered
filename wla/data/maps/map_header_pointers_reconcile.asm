@@ -2,7 +2,7 @@
 ; RGBDS source is untouched.
 ; WLA-DX representation for reconciliation only.
 
-; MapHeaderPointers:
+MapHeaderPointers:
 ; Word-aligned pointers to map header files
 ; table_width 2 directive dropped (RGBDS-only)
 

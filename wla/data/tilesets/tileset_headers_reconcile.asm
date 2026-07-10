@@ -1,6 +1,6 @@
 Tilesets::
 ; name, 3 counter tiles, grass tile, animations
-table_width 12
+; RGBDS table_width 12 metadata omitted; each entry remains 12 bytes.
 .DB BANK(Overworld_GFX)
 .DW Overworld_Block, Overworld_GFX, Overworld_Coll
 .DB -1, -1, -1
