@@ -6,9 +6,13 @@ from __future__ import annotations
 import argparse
 import re
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from reconcile_audit import audit_reconcile_tree, print_reconcile_audit
 
 BANK_RE = re.compile(r'^\.BANK\s+(\d+)(?:\s+SLOT\s+\d+)?')
-LABEL_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*:\s*($|;|\.)')
+LABEL_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*:{1,2}\s*($|;|\.)')
 INCLUDE_BANK_RE = re.compile(r'^\.INCLUDE\s+"wla/pkrd/bank(\d{2})\.asm"', re.MULTILINE)
 
 
@@ -77,6 +81,38 @@ def main() -> int:
         return 1
     print('OK main.asm references prelude and 64 banks')
 
+    bank42_text = Path('wla/banks/bank42_text.asm')
+    bank42_source = banks[42].read_text(errors='replace')
+    if '.INCLUDE "wla/banks/bank42_text.asm"' not in bank42_source:
+        print('FAIL bank42 is not using its structured Text 11 include')
+        return 1
+    if not bank42_text.is_file():
+        print(f'FAIL structured bank42 include missing: {bank42_text}')
+        return 1
+    bank42_labels = file_labels(bank42_text)
+    if len(bank42_labels) != 30 or bank42_labels[0] != '_ItemUseText001' or bank42_labels[-1] != 'Bank42TextEnd':
+        print(f'FAIL structured bank42 label boundary changed: {len(bank42_labels)} labels')
+        return 1
+    bank42_text_source = bank42_text.read_text(errors='replace')
+    if '.STRINGMAP pokemon,' not in bank42_text_source or '.STRINGMAPTABLE pokemon "wla/pokemon.tbl"' not in bank42_text_source:
+        print('FAIL bank42 Text 11 is not using the Pokemon WLA string map')
+        return 1
+
+    charmap_source = Path('constants/charmap.asm').read_text(errors='replace').splitlines()
+    expected_map: list[str] = []
+    for raw in charmap_source:
+        match = re.search(r'charmap\s+"([^"]*)",\s*\$([0-9a-fA-F]{2})', raw)
+        if match:
+            expected_map.append(f'{match.group(2).lower()}={match.group(1)}')
+    table_lines = [line for line in Path('wla/pokemon.tbl').read_text(errors='replace').splitlines() if line and not line.startswith(';')]
+    if table_lines != expected_map:
+        print('FAIL wla/pokemon.tbl is out of sync with constants/charmap.asm')
+        return 1
+    if '.DSB $4000 - $0330, $00' not in bank42_source or 'Bank42End::' not in bank42_source:
+        print('FAIL bank42 is missing its end-label-derived linked-size assertion')
+        return 1
+    print(f'OK bank42 uses structured Text 11 include: 29 records, end/size assertions, {len(table_lines)} charmap entries')
+
     if not args.monolith.is_file():
         print(f'FAIL monolith not found: {args.monolith}')
         return 1
@@ -104,6 +140,12 @@ def main() -> int:
         return 1
 
     print(f'OK representative monolith labels present in split banks: {total_monolith_labels} monolith labels indexed, {total_split_labels} split labels indexed')
+
+    reconcile_result = audit_reconcile_tree()
+    print_reconcile_audit(reconcile_result)
+    if not reconcile_result.ok:
+        return 1
+
     return 0
 
 

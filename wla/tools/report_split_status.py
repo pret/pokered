@@ -6,6 +6,10 @@ from __future__ import annotations
 import argparse
 import re
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from reconcile_audit import audit_reconcile_tree, print_reconcile_audit
 
 BANK_RE = re.compile(r'^\.BANK\s+(\d+)(?:\s+SLOT\s+\d+)?')
 LABEL_RE = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*:\s*($|;|\.)')
@@ -63,8 +67,13 @@ def main() -> int:
     else:
         print('  missing     : none')
     print(f'  uncovered_label_banks: {", ".join(f"bank{i:02d}" for i in uncovered[:20]) if uncovered else "none"}')
-    print('  next_phase : choose one small master-aligned bank/region and reconcile it without replacing the RGBDS tree.')
-    return 0
+    reconcile_result = audit_reconcile_tree()
+    print_reconcile_audit(reconcile_result, limit=40)
+    if reconcile_result.ok:
+        print('  next_phase : choose one small master-aligned bank/region and reconcile it without replacing the RGBDS tree.')
+    else:
+        print('  next_phase : fix wla/data reconciliation audit failures before adding more reconcile files.')
+    return 0 if reconcile_result.ok else 1
 
 
 if __name__ == '__main__':
