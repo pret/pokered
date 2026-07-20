@@ -5,7 +5,7 @@ These instructions explain how to set up the tools required to build **pokered**
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
 
-## Windows 10
+## Windows 10, 11, or newer
 
 Download and install [**Windows Subsystem for Linux**](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Then open the **WSL terminal**.
 
@@ -27,10 +27,10 @@ cd /mnt/c/Users/<user>/Desktop
 
 If this works, then follow [the instructions for **Linux**](#linux) below for whatever distribution you installed for WSL.
 
-Otherwise, continue reading below for [the older Windows instructions](#windows).
+Otherwise, continue reading below for [the older Windows instructions](#windows-8-or-older).
 
 
-## Windows
+## Windows 8 or older
 
 Download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
 
