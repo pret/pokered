@@ -6,7 +6,7 @@ on:
   pull_request:
 
 env:
-  rgbds_version: v1.0.1
+  rgbds_version: v1.0.2+hotfix
 
 jobs:
   build:
