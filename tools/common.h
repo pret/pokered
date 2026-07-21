@@ -111,7 +111,7 @@ long xfsize(const char *filename, FILE *f) {
 uint8_t *read_stdin(long *size) {
 	uint8_t buffer[0x1000] = {0};
 	*size = 0;
-	uint8_t *data = malloc(0);
+	uint8_t *data = NULL;
 	for (;;) {
 		size_t n = fread(buffer, 1, sizeof(buffer), stdin);
 		if (n == 0) {
