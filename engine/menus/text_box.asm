@@ -112,7 +112,7 @@ GetTextBoxIDText:
 GetAddressOfScreenCoords:
 	push bc
 	hlcoord 0, 0
-	ld bc, 20
+	ld bc, SCREEN_WIDTH
 .loop ; loop to add d rows to the base address
 	ld a, d
 	and a
@@ -266,9 +266,9 @@ DisplayTwoOptionMenu:
 	pop hl
 	ld a, [hli]
 	and a ; put blank line before first menu item?
-	ld bc, 20 + 2
+	ld bc, SCREEN_WIDTH + 2
 	jr z, .noBlankLine
-	ld bc, 2 * 20 + 2
+	ld bc, 2 * SCREEN_WIDTH + 2
 .noBlankLine
 	ld a, [hli]
 	ld e, a
