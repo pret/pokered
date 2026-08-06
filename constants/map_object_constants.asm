@@ -40,7 +40,7 @@ DEF SPRITESTATEDATA2_LENGTH EQU const_value
 
 DEF NUM_SPRITESTATEDATA_STRUCTS EQU 16
 
-	const_def 6
+	bit_const_def 6
 	const BIT_TRAINER ; 6
 	const BIT_ITEM    ; 7
 

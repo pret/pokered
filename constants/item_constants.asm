@@ -5,7 +5,7 @@
 ; - TechnicalMachinePrices (see data/items/tm_prices.asm)
 ; - KeyItemFlags (see data/items/key_items.asm)
 ; - ItemUsePtrTable (see engine/items/item_effects.asm)
-	const_def
+	listable_const_def
 	const NO_ITEM       ; $00
 	const MASTER_BALL   ; $01
 	const ULTRA_BALL    ; $02
