@@ -1,52 +1,62 @@
 MACRO ATTR_BLK
 ; This is a command macro.
 ; Use ATTR_BLK_DATA for data sets.
-	db ($4 << 3) + ((\1 * 6) / 16 + 1)
-	db \1
+	REDEF _attr_blk_count EQUS "_attr_blk_count_\@"
+	sgb_cmd CMD_ATTR_BLK, ({_attr_blk_count} * 6) / 16 + 1
+	db {_attr_blk_count}
+	DEF {_attr_blk_count} = 0
 ENDM
 
 MACRO ATTR_BLK_DATA
+	DEF {_attr_blk_count} += 1
 	db \1 ; which regions are affected
 	db \2 + (\3 << 2) + (\4 << 4) ; palette for each region
 	db \5, \6, \7, \8 ; x1, y1, x2, y2
 ENDM
 
+MACRO ATTR_BLK_END
+	DEF cur_packet_len = ({_attr_blk_count} * 6 + 2) % 16
+	IF cur_packet_len
+		ds 16 - cur_packet_len, 0 ; padding
+	ENDC
+ENDM
+
 MACRO PAL_SET
-	db ($a << 3) + 1
+	sgb_cmd CMD_PAL_SET
 	dw \1, \2, \3, \4
 	ds 7, 0
 ENDM
 
 MACRO PAL_TRN
-	db ($b << 3) + 1
+	sgb_cmd CMD_PAL_TRN
 	ds 15, 0
 ENDM
 
 MACRO MLT_REQ
-	db ($11 << 3) + 1
+	sgb_cmd CMD_MLT_REQ
 	db \1 - 1
 	ds 14, 0
 ENDM
 
 MACRO CHR_TRN
-	db ($13 << 3) + 1
+	sgb_cmd CMD_CHR_TRN
 	db \1 + (\2 << 1)
 	ds 14, 0
 ENDM
 
 MACRO PCT_TRN
-	db ($14 << 3) + 1
+	sgb_cmd CMD_PCT_TRN
 	ds 15, 0
 ENDM
 
 MACRO MASK_EN
-	db ($17 << 3) + 1
+	sgb_cmd CMD_MASK_EN
 	db \1
 	ds 14, 0
 ENDM
 
 MACRO DATA_SND
-	db ($f << 3) + 1
+	sgb_cmd CMD_DATA_SND
 	dw \1 ; address
 	db \2 ; bank
 	db \3 ; length (1-11)
@@ -54,21 +64,22 @@ ENDM
 
 
 BlkPacket_WholeScreen:
-	ATTR_BLK 1
+	ATTR_BLK
 	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,17
-	ds 8, 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,17, $00
 	db $00
 
 BlkPacket_Battle:
-	ATTR_BLK 5
+	ATTR_BLK
 	ATTR_BLK_DATA %111, 2,2,0, 00,12, 19,17 ; message box: pal 2
 	ATTR_BLK_DATA %011, 1,1,0, 01,00, 10,03 ; enemy HP bar: pal 1
 	ATTR_BLK_DATA %011, 0,0,0, 10,07, 19,10 ; player HP bar: pal 0
 	ATTR_BLK_DATA %011, 2,2,0, 00,04, 08,11 ; player mon: pal 2
 	ATTR_BLK_DATA %011, 3,3,0, 11,00, 19,06 ; enemy mon : pal 3
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,11, $00
@@ -80,9 +91,9 @@ BlkPacket_Battle:
 	db $00
 
 BlkPacket_StatusScreen:
-	ATTR_BLK 1
+	ATTR_BLK
 	ATTR_BLK_DATA %111, 1,1,0, 01,00, 07,06 ; mon: pal 1, HP bar: pal 0
-	ds 8, 0
+	ATTR_BLK_END
 
 ; unused
 	db $02, 00,00, 17,00
@@ -92,9 +103,9 @@ BlkPacket_StatusScreen:
 	db $00
 
 BlkPacket_Pokedex:
-	ATTR_BLK 1
+	ATTR_BLK
 	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08 ; mon: pal 1, everything else: pal 0
-	ds 8, 0
+	ATTR_BLK_END
 
 ; unused
 	db $02, 00,00, 17,00
@@ -105,12 +116,13 @@ BlkPacket_Pokedex:
 	db $00
 
 BlkPacket_Slots:
-	ATTR_BLK 5
+	ATTR_BLK
 	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,11 ; "3" rows and top of screen: pal 1
 	ATTR_BLK_DATA %011, 2,2,0, 00,04, 19,09 ; "2" rows: pal 2
 	ATTR_BLK_DATA %010, 3,3,0, 00,06, 19,07 ; "1" row: pal 3
 	ATTR_BLK_DATA %011, 0,0,0, 04,04, 15,09 ; slot reels: pal 0
 	ATTR_BLK_DATA %011, 0,0,0, 00,12, 19,17 ; message box: pal 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,11, $01
@@ -121,11 +133,11 @@ BlkPacket_Slots:
 	db $00
 
 BlkPacket_Titlescreen:
-	ATTR_BLK 3
+	ATTR_BLK
 	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07 ; pokemon logo: pal 0
 	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09 ; version text: pal 1
 	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17 ; player, mon, copyright text: pal 2
-	ds 12, 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,07, $00
@@ -134,11 +146,11 @@ BlkPacket_Titlescreen:
 	db $00
 
 BlkPacket_NidorinoIntro:
-	ATTR_BLK 3
+	ATTR_BLK
 	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,03 ; upper black bar: pal 1
 	ATTR_BLK_DATA %011, 0,0,0, 00,04, 19,13 ; letterbox: pal 0
 	ATTR_BLK_DATA %011, 1,1,0, 00,14, 19,17 ; lower black bar: pal 1
-	ds 12, 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,03, $01
@@ -147,7 +159,7 @@ BlkPacket_NidorinoIntro:
 	db $00
 
 BlkPacket_PartyMenu:
-	ATTR_BLK 7
+	ATTR_BLK
 	ATTR_BLK_DATA %110, 0,0,1, 01,00, 02,12 ; mon sprites: pal 0, everything else: pal 1
 	ATTR_BLK_DATA %010, 0,0,0, 05,01, 11,01 ; HP bar 0: pal set dynamically
 	ATTR_BLK_DATA %010, 0,0,0, 05,03, 11,03 ; HP bar 1: pal set dynamically
@@ -155,7 +167,7 @@ BlkPacket_PartyMenu:
 	ATTR_BLK_DATA %010, 0,0,0, 05,07, 11,07 ; HP bar 3: pal set dynamically
 	ATTR_BLK_DATA %010, 0,0,0, 05,09, 11,09 ; HP bar 4: pal set dynamically
 	ATTR_BLK_DATA %010, 0,0,0, 05,11, 11,11 ; HP bar 5: pal set dynamically
-	ds 4, 0
+	ATTR_BLK_END
 
 ; unused
 	db $02, 00,00, 17,01
@@ -171,7 +183,7 @@ BlkPacket_PartyMenu:
 	db $00
 
 BlkPacket_TrainerCard:
-	ATTR_BLK 10
+	ATTR_BLK
 	ATTR_BLK_DATA %010, 0,0,0, 03,12, 04,13 ; Boulder Badge
 	ATTR_BLK_DATA %010, 1,1,0, 07,12, 08,13 ; Cascade Badge
 	ATTR_BLK_DATA %010, 3,3,0, 11,12, 12,13 ; Thunder Badge
@@ -182,7 +194,7 @@ BlkPacket_TrainerCard:
 	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16 ; Marsh Badge
 	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16 ; Volcano Badge
 	ATTR_BLK_DATA %010, 1,1,0, 15,15, 16,16 ; Earth Badge
-	ds 2, 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 03,12, 04,13, $00
@@ -198,11 +210,11 @@ BlkPacket_TrainerCard:
 	db $00
 
 BlkPacket_GameFreakIntro:
-	ATTR_BLK 3
+	ATTR_BLK
 	ATTR_BLK_DATA %111, 1,1,0, 05,11, 07,13 ; falling stars (left): pal 1, GameFreak logo: pal 0
 	ATTR_BLK_DATA %010, 2,2,0, 08,11, 09,13 ; falling stars (middle): pal 2
 	ATTR_BLK_DATA %011, 3,3,0, 12,11, 14,13 ; falling stars (right): pal 3
-	ds 12, 0
+	ATTR_BLK_END
 
 ; unused
 	db $03, 00,00, 19,10, $00
