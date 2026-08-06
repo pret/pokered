@@ -29,7 +29,7 @@ UpdatePlayerSprite:
 ; check if down
 	bit PLAYER_DIR_BIT_DOWN, a
 	jr z, .checkIfUp
-	xor a ; ld a, SPRITE_FACING_DOWN
+	xor a ; SPRITE_FACING_DOWN
 	jr .next
 .checkIfUp
 	bit PLAYER_DIR_BIT_UP, a

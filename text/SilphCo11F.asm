@@ -75,7 +75,7 @@ _SilphCo11FGiovanniText::
 	line "world of pain!"
 	done
 
-_SilphCo10FGiovanniILostAgainText::
+_SilphCo11FGiovanniILostAgainText::
 	text "Arrgh!!"
 	line "I lost again!?"
 	prompt
@@ -129,7 +129,7 @@ _SilphCo11FRocket2AfterBattleText::
 	cont "#MON tough!"
 	done
 
-_SilphCo10FPorygonText::
+_SilphCo11FPorygonText::
 	text "The monitor has"
 	line "#MON on it!"
 	done

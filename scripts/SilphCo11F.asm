@@ -261,8 +261,8 @@ SilphCo11FGiovanniStartBattleScript:
 	ld hl, wStatusFlags3
 	set BIT_TALKED_TO_TRAINER, [hl]
 	set BIT_PRINT_END_BATTLE_TEXT, [hl]
-	ld hl, SilphCo10FGiovanniILostAgainText
-	ld de, SilphCo10FGiovanniILostAgainText
+	ld hl, SilphCo11FGiovanniILostAgainText
+	ld de, SilphCo11FGiovanniILostAgainText
 	call SaveEndBattleTextPointers
 	ldh a, [hSpriteIndex]
 	ld [wSpriteIndex], a
@@ -338,8 +338,8 @@ SilphCo11FGiovanniText:
 	text_far _SilphCo11FGiovanniText
 	text_end
 
-SilphCo10FGiovanniILostAgainText:
-	text_far _SilphCo10FGiovanniILostAgainText
+SilphCo11FGiovanniILostAgainText:
+	text_far _SilphCo11FGiovanniILostAgainText
 	text_end
 
 SilphCo11FGiovanniYouRuinedOurPlansText:
@@ -382,7 +382,7 @@ SilphCo11FRocket2AfterBattleText:
 	text_far _SilphCo11FRocket2AfterBattleText
 	text_end
 
-SilphCo10FPorygonText: ; unreferenced
+SilphCo11FPorygonText: ; unreferenced
 	text_asm
 	ld hl, .Text
 	call PrintText
@@ -391,5 +391,5 @@ SilphCo10FPorygonText: ; unreferenced
 	jp TextScriptEnd
 
 .Text:
-	text_far _SilphCo10FPorygonText
+	text_far _SilphCo11FPorygonText
 	text_end
