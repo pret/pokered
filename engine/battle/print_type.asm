@@ -28,7 +28,7 @@ EraseType2Text:
 	ld a, ' '
 	ld bc, SCREEN_WIDTH - 1
 	add hl, bc
-	ld bc, 6
+	ld bc, CHARLEN("TYPE2/")
 	jp FillMemory
 
 PrintMoveType:
