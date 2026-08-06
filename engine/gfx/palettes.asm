@@ -514,7 +514,7 @@ CopyGfxToSuperNintendoVRAM:
 	di
 	push de
 	call DisableLCD
-	ld a, $e4
+	ld a, BGP_SGB_TRANSFER
 	ldh [rBGP], a
 	ld de, vChars1
 	ld a, [wCopyingSGBTileData]
