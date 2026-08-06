@@ -36,3 +36,13 @@ MACRO sgb_cmd
 		db (\1) << 3 | 1
 	ENDC
 ENDM
+
+; SGB Multiplayer Joypad (see https://gbdev.io/pandocs/SGB_Command_Multiplayer.html)
+
+DEF SGB_JOYP_ID_MASK = %11
+
+	const_def 3, -1
+	const SGB_PLAYER1 ; %11
+	const SGB_PLAYER2 ; %10
+	const SGB_PLAYER3 ; %01
+	const SGB_PLAYER4 ; %00
