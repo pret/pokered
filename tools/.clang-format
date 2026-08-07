@@ -1,0 +1,45 @@
+BasedOnStyle: LLVM
+
+# Line length limit
+ColumnLimit: 200
+
+# Indentation
+UseTab: AlignWithSpaces
+IndentWidth: 4
+TabWidth: 4
+ContinuationIndentWidth: 4
+IndentCaseLabels: false
+PenaltyIndentedWhitespace: 1
+
+# Whitespace
+MaxEmptyLinesToKeep: 1
+SpaceBeforeParens: ControlStatements
+BreakBeforeTernaryOperators: true
+
+# Braces: keep opening brace on same line
+BraceWrapping:
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: false
+  AfterStruct: false
+  SplitEmptyFunction: false
+
+# Alignment
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Left
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+
+# Single-line short constructs
+AllowShortBlocksOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+
+# Pointer style: "void *data"
+PointerAlignment: Right
+DerivePointerAlignment: false
+
+# Preprocessor
+SortIncludes: false
+AlignEscapedNewlines: DontAlign
