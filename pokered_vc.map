@@ -136,7 +136,6 @@ ROM0 bank #0:
 	         $0a2e = LoadTileBlockMap.rowLoop
 	         $0a32 = LoadTileBlockMap.rowInnerLoop
 	         $0a40 = LoadTileBlockMap.noCarry
-	         $0a43 = LoadTileBlockMap.northConnection
 	         $0a6a = LoadTileBlockMap.southConnection
 	         $0a91 = LoadTileBlockMap.westConnection
 	         $0ab7 = LoadTileBlockMap.eastConnection
@@ -158,7 +157,6 @@ ROM0 bank #0:
 	         $0b64 = IsSpriteOrSignInFrontOfPlayer.counterTilesLoop
 	         $0b6b = IsSpriteInFrontOfPlayer
 	         $0b6d = IsSpriteInFrontOfPlayer2
-	         $0b73 = IsSpriteInFrontOfPlayer2.checkIfPlayerFacingUp
 	         $0b7e = IsSpriteInFrontOfPlayer2.checkIfPlayerFacingDown
 	         $0b89 = IsSpriteInFrontOfPlayer2.checkIfPlayerFacingRight
 	         $0b94 = IsSpriteInFrontOfPlayer2.playerFacingLeft
@@ -190,7 +188,6 @@ ROM0 bank #0:
 	         $0cc6 = LoadCurrentMapView.rowInnerLoop
 	         $0ce4 = LoadCurrentMapView.noCarry
 	         $0cec = LoadCurrentMapView.noCarry2
-	         $0cf5 = LoadCurrentMapView.adjustForYCoordWithinTileBlock
 	         $0cff = LoadCurrentMapView.adjustForXCoordWithinTileBlock
 	         $0d09 = LoadCurrentMapView.copyToVisibleAreaBuffer
 	         $0d0e = LoadCurrentMapView.rowLoop2
@@ -306,7 +303,6 @@ ROM0 bank #0:
 	         $145a = HandlePartyMenuInput
 	         $14a7 = HandlePartyMenuInput.noPokemonChosen
 	         $14ac = HandlePartyMenuInput.swappingPokemon
-	         $14b0 = HandlePartyMenuInput.cancelSwap
 	         $14c4 = HandlePartyMenuInput.handleSwap
 	         $14d4 = DrawPartyMenu
 	         $14d9 = RedrawPartyMenu
@@ -376,11 +372,9 @@ ROM0 bank #0:
 	         $1837 = FarCopyDataDouble.loop
 	         $1848 = CopyVideoData
 	         $1864 = CopyVideoData.loop
-	         $1869 = CopyVideoData.done
 	         $1879 = CopyVideoData.keepgoing
 	         $1886 = CopyVideoDataDouble
 	         $18a2 = CopyVideoDataDouble.loop
-	         $18a7 = CopyVideoDataDouble.done
 	         $18b7 = CopyVideoDataDouble.keepgoing
 	         $18c4 = ClearScreenArea
 	         $18c9 = ClearScreenArea.loopRows
@@ -1667,7 +1661,6 @@ ROMX bank #1:
 	         $6c2d = DisplayPokemartDialogue_.loop
 	         $6c68 = DisplayPokemartDialogue_.sellMenu
 	         $6c89 = DisplayPokemartDialogue_.sellMenuLoop
-	         $6cb1 = DisplayPokemartDialogue_.confirmItemSale
 	         $6cfd = DisplayPokemartDialogue_.skipSettingFlag1
 	         $6d09 = DisplayPokemartDialogue_.unsellableItem
 	         $6d12 = DisplayPokemartDialogue_.bagEmpty
@@ -6076,7 +6069,6 @@ ROMX bank #13:
 	         $7247 = TitleScroll_In
 	         $724f = TitleScroll_Out
 	         $7258 = TitleScroll
-	         $726a = TitleScroll.ok
 	         $726a = _TitleScroll
 	         $7279 = _TitleScroll.loop
 	         $7292 = _TitleScroll.ScrollBetween
@@ -12234,7 +12226,7 @@ ROMX bank #24:
 	         $6321 = SilphCo11FSilphPresidentText.NoRoomText
 	         $6326 = SilphCo11FBeautyText
 	         $632b = SilphCo11FGiovanniText
-	         $6330 = SilphCo10FGiovanniILostAgainText
+	         $6330 = SilphCo11FGiovanniILostAgainText
 	         $6335 = SilphCo11FGiovanniYouRuinedOurPlansText
 	         $633a = SilphCo11FRocket1Text
 	         $6344 = SilphCo11FRocket1BattleText
@@ -12244,8 +12236,8 @@ ROMX bank #24:
 	         $635d = SilphCo11FRocket2BattleText
 	         $6362 = SilphCo11FRocket2EndBattleText
 	         $6367 = SilphCo11FRocket2AfterBattleText
-	         $636c = SilphCo10FPorygonText
-	         $637b = SilphCo10FPorygonText.Text
+	         $636c = SilphCo11FPorygonText
+	         $637b = SilphCo11FPorygonText.Text
 	         $6380 = SilphCo11F_Object
 	         $63c8 = SilphCo11F_Blocks
 	SECTION: $6419-$6529 ($0111 bytes) ["Hidden Events 4"]
@@ -13622,7 +13614,6 @@ ROMX bank #30:
 	         $4053 = DrawFrameBlock.flipHorizontalAndVertical
 	         $4082 = DrawFrameBlock.storeFlags1
 	         $4088 = DrawFrameBlock.flipHorizontalTranslateDown
-	         $40a6 = DrawFrameBlock.enableHorizontalFlip
 	         $40aa = DrawFrameBlock.disableHorizontalFlip
 	         $40ac = DrawFrameBlock.storeFlags2
 	         $40ae = DrawFrameBlock.nextTile
@@ -15434,7 +15425,7 @@ ROMX bank #33:
 	         $5013 = _SilphCo11FSilphPresidentNoRoomText
 	         $502f = _SilphCo11FBeautyText
 	         $5075 = _SilphCo11FGiovanniText
-	         $5119 = _SilphCo10FGiovanniILostAgainText
+	         $5119 = _SilphCo11FGiovanniILostAgainText
 	         $5131 = _SilphCo11FGiovanniYouRuinedOurPlansText
 	         $51d6 = _SilphCo11FRocket1BattleText
 	         $51f8 = _SilphCo11FRocket1EndBattleText
@@ -15442,7 +15433,7 @@ ROMX bank #33:
 	         $5227 = _SilphCo11FRocket2BattleText
 	         $5257 = _SilphCo11FRocket2EndBattleText
 	         $526a = _SilphCo11FRocket2AfterBattleText
-	         $529a = _SilphCo10FPorygonText
+	         $529a = _SilphCo11FPorygonText
 	         $52b7 = _PokemonMansion2FSuperNerdBattleText
 	         $52ea = _PokemonMansion2FSuperNerdEndBattleText
 	         $5302 = _PokemonMansion2FSuperNerdAfterBattleText
