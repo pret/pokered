@@ -280,8 +280,8 @@ CheckForEngagingTrainers::
 	push hl
 	push de
 	push hl
-	xor a ; TRAINER_EVENT_BIT_OFFSET
-	call ReadTrainerHeaderInfo       ; get trainer header pointer
+	xor a ; TRAINER_EVENT_FLAG_BIT
+	call ReadTrainerHeaderInfo
 	inc hl
 	ld a, [hl]                       ; read trainer engage distance
 	pop hl
