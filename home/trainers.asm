@@ -67,7 +67,7 @@ ReadTrainerHeaderInfo::
 	jr z, .readPointer ; read end battle text
 	cp TRAINER_LOST_TEXT_UNUSED_OFFSET
 	jr nz, .done
-	ld a, [hli]        ; read end battle text (2) but override the result afterwards (XXX why, bug?)
+	ld a, [hli] ; lost battle text is overwritten afterwards (XXX why, bug?)
 	ld d, [hl]
 	ld e, a
 	jr .done
