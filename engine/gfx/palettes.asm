@@ -620,7 +620,7 @@ CopySGBBorderTiles:
 	jr nz, .copyLoop
 
 ; Zero bit planes 3 and 4.
-	ld c, 16
+	ld c, TILE_SIZE
 	xor a
 .zeroLoop
 	ld [de], a
