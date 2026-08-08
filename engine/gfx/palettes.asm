@@ -462,20 +462,20 @@ CheckSGB:
 	ei
 	call Wait7000
 	ldh a, [rJOYP]
-	and JOYP_SGB_MLT_REQ
-	cp JOYP_SGB_MLT_REQ
+	and SGB_JOYP_ID_MASK
+	cp SGB_PLAYER1
 	jr nz, .isSGB
-	ld a, JOYP_SGB_ZERO
+	ld a, JOYP_GET_CTRL_PAD
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
 	call Wait7000
 	call Wait7000
-	ld a, JOYP_SGB_FINISH
+	ld a, JOYP_GET_NONE
 	ldh [rJOYP], a
 	call Wait7000
 	call Wait7000
-	ld a, JOYP_SGB_ONE
+	ld a, JOYP_GET_BUTTONS
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
@@ -486,7 +486,7 @@ CheckSGB:
 	call Wait7000
 	vc_hook Unknown_network_reset
 	call Wait7000
-	ld a, JOYP_SGB_FINISH
+	ld a, JOYP_GET_NONE
 	ldh [rJOYP], a
 	ldh a, [rJOYP]
 	ldh a, [rJOYP]
@@ -494,8 +494,8 @@ CheckSGB:
 	call Wait7000
 	call Wait7000
 	ldh a, [rJOYP]
-	and JOYP_SGB_MLT_REQ
-	cp JOYP_SGB_MLT_REQ
+	and SGB_JOYP_ID_MASK
+	cp SGB_PLAYER1
 	jr nz, .isSGB
 	call SendMltReq1Packet
 	and a
@@ -514,7 +514,7 @@ CopyGfxToSuperNintendoVRAM:
 	di
 	push de
 	call DisableLCD
-	ld a, $e4
+	ld a, BGP_SGB_TRANSFER
 	ldh [rBGP], a
 	ld de, vChars1
 	ld a, [wCopyingSGBTileData]
@@ -620,7 +620,7 @@ CopySGBBorderTiles:
 	jr nz, .copyLoop
 
 ; Zero bit planes 3 and 4.
-	ld c, 16
+	ld c, TILE_SIZE
 	xor a
 .zeroLoop
 	ld [de], a
