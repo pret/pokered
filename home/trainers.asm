@@ -257,9 +257,9 @@ SpritePositionBankswitch::
 	jp Bankswitch ; indirect jump to one of the four functions
 
 CheckForEngagingTrainers::
-	xor a ; TRAINER_EVENT_BIT_OFFSET
-	call ReadTrainerHeaderInfo       ; read trainer flag's bit (unused)
-	ld d, h                          ; store trainer header address in de
+	xor a ; TRAINER_EVENT_FLAG_BIT
+	call ReadTrainerHeaderInfo
+	ld d, h
 	ld e, l
 .trainerLoop
 	call StoreTrainerHeaderPointer   ; set trainer header pointer to current trainer
