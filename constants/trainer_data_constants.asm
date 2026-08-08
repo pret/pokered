@@ -1,11 +1,10 @@
-; data format for "trainer" macro that appears in map scripts with basic trainer encounters
-; see \macros\scripts\maps.asm
+; trainer data structure fields (see macros/scripts/maps.asm)
 rsreset
-DEF TRAINER_EVENT_BIT_OFFSET          rb
-DEF TRAINER_VIEW_RANGE_OFFSET         rb
-DEF TRAINER_EVENT_POINTER_OFFSET      rw
-DEF TRAINER_BEFORE_TEXT_OFFSET        rw
-DEF TRAINER_AFTER_TEXT_OFFSET         rw
-DEF TRAINER_END_TEXT_OFFSET           rw
-DEF TRAINER_LOST_TEXT_UNUSED_OFFSET   rw
-DEF TRAINER_STRUCT_SIZE EQU _RS
+DEF TRAINER_EVENT_FLAG_BIT     rb ;  0
+DEF TRAINER_VIEW_RANGE         rb ;  1
+DEF TRAINER_EVENT_FLAG_POINTER rw ;  2
+DEF TRAINER_BEFORE_BATTLE_TEXT rw ;  4
+DEF TRAINER_AFTER_BATTLE_TEXT  rw ;  6
+DEF TRAINER_WON_BATTLE_TEXT    rw ;  8
+DEF TRAINER_LOST_BATTLE_TEXT   rw ; 10
+DEF TRAINER_STRUCT_SIZE EQU _RS   ; 12
