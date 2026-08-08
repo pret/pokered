@@ -268,8 +268,8 @@ CheckForEngagingTrainers::
 	ld [wTrainerHeaderFlagBit], a
 	cp -1
 	ret z
-	ld a, TRAINER_EVENT_POINTER_OFFSET
-	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
+	ld a, TRAINER_EVENT_FLAG_POINTER
+	call ReadTrainerHeaderInfo
 	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
