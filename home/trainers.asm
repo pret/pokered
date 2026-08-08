@@ -91,7 +91,7 @@ TalkToTrainer::
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, FLAG_TEST
-	call TrainerFlagAction      ; read trainer's flag
+	call TrainerFlagAction
 	ld a, TRAINER_AFTER_BATTLE_TEXT
 	call ReadTrainerHeaderInfo
 	jp PrintText
