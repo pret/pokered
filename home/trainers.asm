@@ -92,20 +92,17 @@ TalkToTrainer::
 	ld c, a
 	ld b, FLAG_TEST
 	call TrainerFlagAction      ; read trainer's flag
-	ld a, c
-	and a
-	jr z, .trainerNotYetFought     ; test trainer's flag
-	ld a, TRAINER_AFTER_TEXT_OFFSET
-	call ReadTrainerHeaderInfo     ; print after battle text
+	ld a, TRAINER_AFTER_BATTLE_TEXT
+	call ReadTrainerHeaderInfo
 	jp PrintText
 .trainerNotYetFought
-	ld a, TRAINER_BEFORE_TEXT_OFFSET
-	call ReadTrainerHeaderInfo     ; print before battle text
+	ld a, TRAINER_BEFORE_BATTLE_TEXT
+	call ReadTrainerHeaderInfo
 	call PrintText
-	ld a, TRAINER_LOST_TEXT_UNUSED_OFFSET
-	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
+	ld a, TRAINER_LOST_BATTLE_TEXT
+	call ReadTrainerHeaderInfo
 	push de
-	ld a, TRAINER_END_TEXT_OFFSET
+	ld a, TRAINER_WON_BATTLE_TEXT
 	call ReadTrainerHeaderInfo
 	pop de
 	call SaveEndBattleTextPointers
