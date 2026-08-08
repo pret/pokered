@@ -106,7 +106,7 @@ TalkToTrainer::
 	call ReadTrainerHeaderInfo     ; (?) does nothing apparently (maybe bug in ReadTrainerHeaderInfo)
 	push de
 	ld a, TRAINER_END_TEXT_OFFSET
-	call ReadTrainerHeaderInfo     ; read end battle text
+	call ReadTrainerHeaderInfo
 	pop de
 	call SaveEndBattleTextPointers
 	ld hl, wStatusFlags7
