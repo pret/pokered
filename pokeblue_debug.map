@@ -12263,10 +12263,10 @@ ROMX bank #25:
 	SECTION: $4000-$7fdf ($3fe0 bytes) ["Tilesets 1"]
 	         $4000 = Overworld_GFX
 	         $45e0 = Overworld_Block
-	         $4de0 = RedsHouse1_GFX
 	         $4de0 = RedsHouse2_GFX
-	         $5270 = RedsHouse1_Block
+	         $4de0 = RedsHouse1_GFX
 	         $5270 = RedsHouse2_Block
+	         $5270 = RedsHouse1_Block
 	         $53a0 = House_GFX
 	         $5980 = House_Block
 	         $5bb0 = Mansion_GFX
@@ -12287,8 +12287,8 @@ ROMX bank #26:
 	         $402f = Version_GFX
 	         $406f = Version_GFXEnd
 	SECTION: $406f-$7fee ($3f80 bytes) ["Tilesets 2"]
-	         $406f = Dojo_GFX
 	         $406f = Gym_GFX
+	         $406f = Dojo_GFX
 	         $466f = Gym_Block
 	         $466f = Dojo_Block
 	         $4daf = Pokecenter_GFX
@@ -17683,12 +17683,12 @@ ROMX bank #44:
 VRAM bank #0:
 	SECTION: $8000-$9fff ($2000 bytes) ["VRAM"]
 	         $8000 = vNPCSprites
-	         $8000 = vChars0
 	         $8000 = vSprites
+	         $8000 = vChars0
 	         $8800 = vTitleLogo
 	         $8800 = vNPCSprites2
-	         $8800 = vChars1
 	         $8800 = vFont
+	         $8800 = vChars1
 	         $9000 = vTileset
 	         $9000 = vFrontPic
 	         $9000 = vChars2
