@@ -9077,8 +9077,8 @@ ROMX bank #18:
 	         $5dda = MtMoonB2FMoveSuperNerdScript.continue
 	         $5dea = MtMoonB2FPlayerNearDomeFossilCoords
 	         $5df1 = MtMoonB2FPlayerNearHelixFossilCoords
-	         $5df8 = MtMoon3FSuperNerdMoveRightMovementData
-	         $5df9 = MtMoon3FSuperNerdMoveUpMovementData
+	         $5df8 = MtMoonB2FSuperNerdMoveRightMovementData
+	         $5df9 = MtMoonB2FSuperNerdMoveUpMovementData
 	         $5dfb = MtMoonB2FSuperNerdTakesOtherFossilScript
 	         $5e1d = MtMoonB2FSuperNerdTakesOtherFossilScript.got_dome_fossil
 	         $5e1f = MtMoonB2FSuperNerdTakesOtherFossilScript.continue

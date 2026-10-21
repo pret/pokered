@@ -8931,8 +8931,8 @@
 12:5dda MtMoonB2FMoveSuperNerdScript.continue
 12:5dea MtMoonB2FPlayerNearDomeFossilCoords
 12:5df1 MtMoonB2FPlayerNearHelixFossilCoords
-12:5df8 MtMoon3FSuperNerdMoveRightMovementData
-12:5df9 MtMoon3FSuperNerdMoveUpMovementData
+12:5df8 MtMoonB2FSuperNerdMoveRightMovementData
+12:5df9 MtMoonB2FSuperNerdMoveUpMovementData
 12:5dfb MtMoonB2FSuperNerdTakesOtherFossilScript
 12:5e1d MtMoonB2FSuperNerdTakesOtherFossilScript.got_dome_fossil
 12:5e1f MtMoonB2FSuperNerdTakesOtherFossilScript.continue
