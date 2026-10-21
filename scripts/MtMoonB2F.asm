@@ -97,10 +97,10 @@ MtMoonB2FMoveSuperNerdScript:
 	ld hl, MtMoonB2FPlayerNearHelixFossilCoords
 	call ArePlayerCoordsInArray
 	jp nc, CheckFightingMapTrainers
-	ld de, MtMoon3FSuperNerdMoveUpMovementData
+	ld de, MtMoonB2FSuperNerdMoveUpMovementData
 	jr .continue
 .player_near_dome_fossil
-	ld de, MtMoon3FSuperNerdMoveRightMovementData
+	ld de, MtMoonB2FSuperNerdMoveRightMovementData
 .continue
 	ld a, MTMOONB2F_SUPER_NERD
 	ldh [hSpriteIndex], a
@@ -122,9 +122,9 @@ MtMoonB2FPlayerNearHelixFossilCoords:
 	dbmapcoord 14,  5
 	db -1 ; end
 
-MtMoon3FSuperNerdMoveRightMovementData:
+MtMoonB2FSuperNerdMoveRightMovementData:
 	db NPC_MOVEMENT_RIGHT
-MtMoon3FSuperNerdMoveUpMovementData:
+MtMoonB2FSuperNerdMoveUpMovementData:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
