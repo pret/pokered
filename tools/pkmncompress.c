@@ -7,7 +7,7 @@ void parse_args(int argc, char *argv[], bool *uncomp) {
 	struct option long_options[] = {
 		{"uncompress", no_argument, 0, 'u'},
 		{"help", no_argument, 0, 'h'},
-		{0}
+		{0},
 	};
 	for (int opt; (opt = getopt_long(argc, argv, "uh", long_options)) != -1;) {
 		switch (opt) {
@@ -239,8 +239,10 @@ int read_int(uint8_t *data, int count) {
 
 uint8_t *fill_plane(uint8_t *data, int width) {
 	static int table[0x10] = {
+		// clang-format off
 		0x0001, 0x0003, 0x0007, 0x000F, 0x001F, 0x003F, 0x007F, 0x00FF,
 		0x01FF, 0x03FF, 0x07FF, 0x0FFF, 0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF,
+		// clang-format on
 	};
 	int mode = read_bit(data);
 	int size = width * width * 0x20;
