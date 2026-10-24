@@ -300,7 +300,7 @@ wSerialExchangeNybbleReceiveData:: db
 ; this nybble is sent when using Serial_SyncAndExchangeNybble or Serial_ExchangeNybble
 wSerialExchangeNybbleSendData:: db
 	ds 4
-wUnknownSerialCounter:: dw
+wLinkTimeoutFrames:: dw
 ENDU
 
 ; $00 = player mons
@@ -1326,7 +1326,7 @@ NEXTU
 ; number of hits by player in attacks like Double Slap, etc.
 wPlayerNumHits:: db
 NEXTU
-wUnknownSerialCounter2:: dw
+wLinkByteTimeout:: dw
 ENDU
 
 	ds 2

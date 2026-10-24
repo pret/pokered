@@ -16,10 +16,11 @@ CableClub_DoBattleOrTrade:
 	hlcoord 4, 10
 	ld de, PleaseWaitString
 	call PlaceString
-	ld hl, wPlayerNumHits
+	ld hl, wLinkByteTimeout
+	ASSERT LOW(SERIAL_LINK_BYTE_TIMEOUT) == 0
 	xor a
 	ld [hli], a
-	ld [hl], $50
+	ld [hl], HIGH(SERIAL_LINK_BYTE_TIMEOUT)
 	; fall through
 
 ; This is called after completing a trade.

@@ -18,6 +18,9 @@ DEF SERIAL_PREAMBLE_LENGTH    EQU 6
 DEF SERIAL_RN_PREAMBLE_LENGTH EQU 7
 DEF SERIAL_RNS_LENGTH         EQU 10
 
+; timeout duration after exchanging a byte
+DEF SERIAL_LINK_BYTE_TIMEOUT EQU $5000
+
 DEF LINK_STATE_NONE          EQU $00 ; not using link
 DEF LINK_STATE_IN_CABLE_CLUB EQU $01 ; in a cable club room (Colosseum or Trade Centre)
 DEF LINK_STATE_START_TRADE   EQU $02 ; pre-trade selection screen initialisation
