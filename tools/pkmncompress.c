@@ -270,9 +270,6 @@ uint8_t *fill_plane(uint8_t *data, int width) {
 		}
 		mode ^= 1;
 	}
-	if (len > size) {
-		error_exit("Invalid compressed data");
-	}
 	uint8_t *ram = xmalloc(size);
 	len = 0;
 	for (int y = 0; y < width; y++) {
