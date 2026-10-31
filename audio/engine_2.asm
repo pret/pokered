@@ -1399,7 +1399,7 @@ Audio2_PlaySound::
 	cp MAX_SFX_ID_2
 	jp z, .playSfx
 	jp c, .playSfx
-	cp $fe
+	cp MAX_SONG_ID_2
 	jr z, .playMusic
 	jp nc, .playSfx
 
