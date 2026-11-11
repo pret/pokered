@@ -966,7 +966,7 @@ TwoToFiveAttacksEffect:
 .twineedle
 	ld a, POISON_SIDE_EFFECT1
 	ld [hl], a ; set Twineedle's effect to poison effect
-ASSERT POISON_SIDE_EFFECT1 == 2, "POISON_SIDE_EFFECT1's value is repurposed for the number of hits Twineedle will use."
+	ASSERT POISON_SIDE_EFFECT1 == 2 ; `a` is reused for Twineedle's number of hits
 	jr .saveNumberOfHits
 
 FlinchSideEffect:
