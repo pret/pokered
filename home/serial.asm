@@ -29,8 +29,9 @@ Serial::
 	ld a, $3
 	ldh [rDIV], a
 .waitLoop
-	; bug: Writing $3 to rDIV resets it to $00. The jr nz thus
-	; falls through on the first read without waiting for rDIV to reach $80.
+	; bug: Writing any value to rDIV resets it to $00, so `jr nz, .waitLoop`
+	; falls through on the first read without waiting for rDIV to auto-increment
+	; from $3 to $80.
 	ldh a, [rDIV]
 	bit 7, a
 	jr nz, .waitLoop
