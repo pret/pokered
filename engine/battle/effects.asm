@@ -312,7 +312,7 @@ FrozenText:
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
 	and 1 << FRZ ; are they frozen?
-	ret z ; return if so
+	ret z ; return if not
 	ldh a, [hWhoseTurn]
 	and a
 	jr nz, .opponent
@@ -966,6 +966,7 @@ TwoToFiveAttacksEffect:
 .twineedle
 	ld a, POISON_SIDE_EFFECT1
 	ld [hl], a ; set Twineedle's effect to poison effect
+	ASSERT POISON_SIDE_EFFECT1 == 2 ; `a` is reused for Twineedle's number of hits
 	jr .saveNumberOfHits
 
 FlinchSideEffect:
