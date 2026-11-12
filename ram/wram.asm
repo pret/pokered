@@ -371,7 +371,7 @@ NEXTU
 wTrainerCardBlkPacket:: ds $40
 
 NEXTU
-wHallOfFame:: ds HOF_TEAM
+wHallOfFame:: ds HOF_TEAM + 1
 
 NEXTU
 wNPCMovementDirections:: ds 180
