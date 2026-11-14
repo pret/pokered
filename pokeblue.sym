@@ -20130,7 +20130,7 @@
 00:ffb2 hJoyReleased
 00:ffb3 hJoyPressed
 00:ffb4 hJoyHeld
-00:ffb5 hJoy5
+00:ffb5 hJoyFiltered
 00:ffb6 hJoy6
 00:ffb7 hJoy7
 00:ffb8 hLoadedROMBank

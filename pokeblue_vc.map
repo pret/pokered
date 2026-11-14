@@ -20526,7 +20526,7 @@ HRAM bank #0:
 	         $ffb2 = hJoyReleased
 	         $ffb3 = hJoyPressed
 	         $ffb4 = hJoyHeld
-	         $ffb5 = hJoy5
+	         $ffb5 = hJoyFiltered
 	         $ffb6 = hJoy6
 	         $ffb7 = hJoy7
 	         $ffb8 = hLoadedROMBank
