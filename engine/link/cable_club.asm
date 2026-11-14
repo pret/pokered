@@ -555,7 +555,7 @@ TradeCenter_SelectMon:
 	ldcoord_a 1, 16
 .cancelMenuItem_JoypadLoop
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	and a ; pressed anything?
 	jr z, .cancelMenuItem_JoypadLoop
 	bit B_PAD_A, a
@@ -919,7 +919,7 @@ CableClub_Run:
 	ld [wGrassRate], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
-	ldh [hJoy5], a
+	ldh [hJoyFiltered], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
 	ld a, BANK(Music_Celadon)

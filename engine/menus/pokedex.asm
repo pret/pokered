@@ -573,7 +573,7 @@ ShowPokedexDataInternal:
 	ldh [hClearLetterPrintingDelayFlags], a
 .waitForButtonPress
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	and PAD_A | PAD_B
 	jr z, .waitForButtonPress
 	pop af

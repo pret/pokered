@@ -3,7 +3,7 @@ _Joypad::
 ; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
 
 	ldh a, [hJoyInput]
-	cp PAD_BUTTONS ; soft reset
+	cp PAD_BUTTONS
 	jp z, TrySoftReset
 
 	ld b, a
@@ -50,8 +50,7 @@ DiscardButtonPresses:
 TrySoftReset:
 	call DelayFrame
 
-	; deselect (redundant)
-	ld a, $30
+	ld a, JOYP_GET_NONE ; redundant
 	ldh [rJOYP], a
 
 	ld hl, hSoftReset

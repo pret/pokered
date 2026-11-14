@@ -69,7 +69,7 @@ DisplayTownMap:
 .inputLoop
 	call TownMapSpriteBlinkingAnimation
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	ld b, a
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN
 	jr z, .inputLoop
@@ -191,7 +191,7 @@ LoadTownMap_Fly::
 	push hl
 	call DelayFrame
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	ld b, a
 	pop hl
 	and PAD_A | PAD_B | PAD_UP | PAD_DOWN

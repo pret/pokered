@@ -2404,7 +2404,7 @@ CheckForUserInterruption::
 	cp PAD_UP + PAD_SELECT + PAD_B
 	jr z, .input
 
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 IF DEF(_DEBUG)
 	and PAD_START | PAD_SELECT | PAD_A
 ELSE

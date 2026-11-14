@@ -143,7 +143,7 @@ Evolution_CheckForCancel:
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	pop bc
 	and PAD_B
 	jr nz, .pressedB

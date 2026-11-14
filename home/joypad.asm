@@ -3,30 +3,30 @@ ReadJoypad::
 ; Unlike the hardware register, button
 ; presses are indicated by a set bit.
 
-	ld a, 1 << 5 ; select direction keys
-	ld c, 0
+	ld a, JOYP_GET_CTRL_PAD
+	ld c, LOW(rJOYP) ; unused
 
 	ldh [rJOYP], a
 REPT 6
 	ldh a, [rJOYP]
 ENDR
 	cpl
-	and %1111
+	and JOYP_INPUTS
 	swap a
 	ld b, a
 
-	ld a, 1 << 4 ; select button keys
+	ld a, JOYP_GET_BUTTONS
 	ldh [rJOYP], a
 REPT 10
 	ldh a, [rJOYP]
 ENDR
 	cpl
-	and %1111
+	and JOYP_INPUTS
 	or b
 
 	ldh [hJoyInput], a
 
-	ld a, 1 << 4 + 1 << 5 ; deselect keys
+	ld a, JOYP_GET_NONE
 	ldh [rJOYP], a
 	ret
 
