@@ -1,10 +1,10 @@
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
-; OUTPUT: [hJoy5] = pressed buttons in usual format
+; OUTPUT: [hJoyFiltered] = pressed buttons in usual format
 ; there are two flags that control its functionality, [hJoy6] and [hJoy7]
 ; there are essentially three modes of operation
 ; 1. Get newly pressed buttons only
 ;    ([hJoy7] == 0, [hJoy6] == any)
-;    Just copies [hJoyPressed] to [hJoy5].
+;    Just copies [hJoyPressed] to [hJoyFiltered].
 ; 2. Get currently pressed buttons at low sample rate with delay
 ;    ([hJoy7] == 1, [hJoy6] != 0)
 ;    If the user holds down buttons for more than half a second,
@@ -21,7 +21,7 @@ JoypadLowSensitivity::
 	jr z, .storeButtonState
 	ldh a, [hJoyHeld] ; all currently pressed buttons
 .storeButtonState
-	ldh [hJoy5], a
+	ldh [hJoyFiltered], a
 	ldh a, [hJoyPressed] ; newly pressed buttons
 	and a ; have any buttons been newly pressed since last check?
 	jr z, .noNewlyPressedButtons
@@ -35,7 +35,7 @@ JoypadLowSensitivity::
 	jr z, .delayOver
 ; delay not over
 	xor a
-	ldh [hJoy5], a ; report no buttons as pressed
+	ldh [hJoyFiltered], a ; report no buttons as pressed
 	ret
 .delayOver
 ; if [hJoy6] = 0 and A or B is pressed, report no buttons as pressed
@@ -46,7 +46,7 @@ JoypadLowSensitivity::
 	and a
 	jr nz, .setShortDelay
 	xor a
-	ldh [hJoy5], a
+	ldh [hJoyFiltered], a
 .setShortDelay
 	ld a, 5 ; 1/12 of a second delay
 	ldh [hFrameCounter], a
@@ -73,7 +73,7 @@ WaitForTextScrollButtonPress::
 	pop hl
 	call JoypadLowSensitivity
 	predef CableClub_Run
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	and PAD_A | PAD_B
 	jr z, .loop
 	pop af

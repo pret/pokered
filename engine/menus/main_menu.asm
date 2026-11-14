@@ -328,7 +328,7 @@ SpecialEnterMap::
 	xor a
 	ldh [hJoyPressed], a
 	ldh [hJoyHeld], a
-	ldh [hJoy5], a
+	ldh [hJoyFiltered], a
 	ld [wCableClubDestinationMap], a
 	ld hl, wStatusFlags6
 	set BIT_GAME_TIMER_COUNTING, [hl]
@@ -485,7 +485,7 @@ DisplayOptionMenu:
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	ld b, a
 	and ~PAD_SELECT ; any key besides select pressed?
 	jr z, .getJoypadStateLoop

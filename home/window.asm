@@ -25,7 +25,7 @@ HandleMenuInput_::
 .getJoypadState
 	pop hl
 	call JoypadLowSensitivity
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	and a ; was a key pressed?
 	jr nz, .keyPressed
 	push hl
@@ -48,7 +48,7 @@ HandleMenuInput_::
 .keyPressed
 	xor a
 	ld [wCheckFor180DegreeTurn], a
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	ld b, a
 	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
@@ -90,7 +90,7 @@ HandleMenuInput_::
 	and b ; does the menu care about any of the pressed keys?
 	jp z, .loop1
 .checkIfAButtonOrBButtonPressed
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	and PAD_A | PAD_B
 	jr z, .skipPlayingSound
 ; A or B pressed
@@ -108,7 +108,7 @@ HandleMenuInput_::
 	ldh [hDownArrowBlinkCount1], a ; restore previous values
 	xor a
 	ld [wMenuWrappingEnabled], a ; disable menu wrapping
-	ldh a, [hJoy5]
+	ldh a, [hJoyFiltered]
 	ret
 .noWrappingAround
 	ld a, [wMenuWatchMovingOutOfBounds]
