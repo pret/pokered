@@ -50,8 +50,7 @@ DiscardButtonPresses:
 TrySoftReset:
 	call DelayFrame
 
-	; deselect (redundant)
-	ld a, $30
+	ld a, 1 << 4 + 1 << 5 ; deselect keys (redundant)
 	ldh [rJOYP], a
 
 	ld hl, hSoftReset
