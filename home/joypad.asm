@@ -4,7 +4,7 @@ ReadJoypad::
 ; presses are indicated by a set bit.
 
 	ld a, JOYP_GET_CTRL_PAD
-	ld c, 0 ; unused, was maybe intended to use 'ldh a, [c]' since LOW(rJOYP) = 0
+	ld c, LOW(rJOYP) ; unused
 
 	ldh [rJOYP], a
 REPT 6
