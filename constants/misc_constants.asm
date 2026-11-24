@@ -10,6 +10,3 @@ DEF TRUE  EQU 1
 
 ; input
 DEF NO_INPUT EQU 0
-
-; SGB command MLT_REQ can be used to detect SGB hardware
-DEF JOYP_SGB_MLT_REQ EQU %00000011
