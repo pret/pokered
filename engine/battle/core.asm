@@ -6140,7 +6140,7 @@ LoadEnemyMonData:
 	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	ld a, BASE_STAT_LEVEL
-	ld b, NUM_STAT_MODS ; number of stat mods
+	ld b, NUM_STAT_MODS
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
