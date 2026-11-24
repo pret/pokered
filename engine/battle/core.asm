@@ -1657,7 +1657,7 @@ LoadBattleMonFromParty:
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToPlayer
 	call ApplyBadgeStatBoosts
-	ld a, $7 ; default stat modifier
+	ld a, BASE_STAT_LEVEL
 	ld b, NUM_STAT_MODS
 	ld hl, wPlayerMonAttackMod
 .statModLoop
@@ -1709,7 +1709,7 @@ LoadEnemyMonFromParty:
 	inc de
 	dec b
 	jr nz, .copyBaseStatsLoop
-	ld a, $7 ; default stat modifier
+	ld a, BASE_STAT_LEVEL
 	ld b, NUM_STAT_MODS
 	ld hl, wEnemyMonStatMods
 .statModLoop
@@ -4926,7 +4926,7 @@ HandleBuildingRage:
 	bit USING_RAGE, [hl] ; is the pokemon being attacked under the effect of Rage?
 	ret z ; return if not
 	ld a, [de]
-	cp $0d ; maximum stat modifier value
+	cp MAX_STAT_LEVEL
 	ret z ; return if attack modifier is already maxed
 	ldh a, [hWhoseTurn]
 	xor $01 ; flip turn for the stat modifier raising function
@@ -6139,8 +6139,8 @@ LoadEnemyMonData:
 	ld de, wEnemyMonUnmodifiedLevel
 	ld bc, 1 + NUM_STATS * 2
 	call CopyData
-	ld a, $7 ; default stat mod
-	ld b, NUM_STAT_MODS ; number of stat mods
+	ld a, BASE_STAT_LEVEL
+	ld b, NUM_STAT_MODS
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
